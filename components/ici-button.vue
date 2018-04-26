@@ -18,7 +18,7 @@
 </template>
 
 <script>
-  import iciLoading from './ici-loading.vue'
+
 	export default {
 		name: 'a-button',
 		data() {

@@ -1,8 +1,8 @@
 import iciButton from './components/ici-button.vue'
-import iciLoadin from './components/ici-loading.vue'
+import iciLoading from './components/ici-loading.vue'
 
-const components = {
-    iciButton, iciLoadin
+export const components = {
+    iciButton, iciLoading
 }
 
 const install = function (Vue) {

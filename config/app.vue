@@ -17,8 +17,8 @@
 </template>
 
 <script>
-  import pageButton from '../pages/page-button.vue';
-  import pageLoading from '../pages/page-loading.vue';
+  import pageButton from '../examples/page-button.vue';
+  import pageLoading from '../examples/page-loading.vue';
   var components = {pageButton,pageLoading};
   export default {
     name: 'app',
