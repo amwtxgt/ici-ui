@@ -6,7 +6,13 @@
           按钮 ici-button
         </MenuItem>
         <MenuItem name="pageLoading">
-          加载图标 ici-loading
+          加载 ici-loading
+        </MenuItem>
+        <MenuItem name="pageIcon">
+          图标 ici-icon
+        </MenuItem>
+        <MenuItem name="pageInput">
+          输入 ici-input
         </MenuItem>
       </Menu>
     </div>
@@ -19,12 +25,14 @@
 <script>
   import pageButton from '../examples/page-button.vue';
   import pageLoading from '../examples/page-loading.vue';
-  var components = {pageButton,pageLoading};
+  import pageIcon from '../examples/page-icon.vue';
+  import pageInput from '../examples/page-input.vue';
+  var components = {pageButton,pageLoading,pageIcon,pageInput};
   export default {
     name: 'app',
     data() {
       return {
-        active:'pageLoading'
+        active:'pageInput'
       };
     },
     computed:{

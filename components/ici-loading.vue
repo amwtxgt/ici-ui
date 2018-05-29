@@ -75,7 +75,8 @@
             justify-content: center;
         }
     }
-    svg{
+
+    svg {
         vertical-align: middle;
     }
 
@@ -94,6 +95,7 @@
     .rect-white {
         fill: #fff !important;
     }
+
     .loading-enter-active, .loading-leave-active {
         transition: opacity .3s;
     }
