@@ -1,6 +1,6 @@
 {
   "name": "ici-ui",
-  "version": "0.2.5",
+  "version": "0.3.0",
   "description": "ici通用组件",
   "main": "index.js",
   "scripts": {
