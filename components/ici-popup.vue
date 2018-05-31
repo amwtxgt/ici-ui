@@ -5,7 +5,7 @@
                 <div class="fms-popup-title">
                     <slot name="header">{{title}}</slot>
                 </div>
-                <div class="fms-popup-body">
+                <div class="fms-popup-body" :class="{noscroll:noScroll}">
                     <!--slot-->
                     <slot></slot>
                 </div>
@@ -42,6 +42,7 @@
                 default: ''
             },
             mask:Boolean,
+            noScroll:Boolean, //不出现滚动条
         },
         mounted(){
            if(this._events.confirm){
@@ -115,7 +116,8 @@
         }
         .fms-popup {
             pointer-events: auto;
-            min-width: 700px;
+            max-width: 700px;
+            width:100%;
             align-items: stretch;
             display: flex;
             flex-shrink: 1;
@@ -125,7 +127,6 @@
             background-color: #fff;
             border-radius: 2px;
             box-shadow: 0 12px 15px 0 rgba(0, 0, 0, 0.24);
-            max-width: 24em;
             outline: none;
             max-height: 100%;
             .fms-popup-title {
@@ -154,8 +155,10 @@
             .fms-popup-body {
                 width: 100%;
                 padding: 10px 0;
-                position: relative;
                 overflow: auto;
+                &.noscroll{
+                    overflow:visible;
+                }
             }
 
             @media (min-height: 800px) {

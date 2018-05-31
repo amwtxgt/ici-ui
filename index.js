@@ -5,6 +5,7 @@ import iciInput from './components/ici-input.vue'
 import multipleField from './components/multiple_field.vue'
 import radioField from './components/radio_field.vue'
 import iciPopup from './components/ici-popup.vue'
+import iciMessage from './components/ici-message.vue'
 
 export const components = {
     iciButton, iciLoading, iciIcon, multipleField, radioField, iciInput,iciPopup
@@ -14,8 +15,17 @@ const install = function (Vue) {
     if (install.installed) return;
     Object.keys(components).forEach(function (val) {
         return Vue.component(val, components[val])
-    })
+    });
 
+    var a =new Vue(iciMessage)
+    console.log(a)
+    window.document.body.appendChild(a.$el);
+    setTimeout(()=>{
+        a.open('asdfasdf')
+    },1000)
+    setTimeout(()=>{
+        a.close()
+    },5000)
     // 注册一个全局自定义指令 `v-focus`
     Vue.directive('focus', {
         // 指令的定义

@@ -67,6 +67,8 @@
 					case 'ici':
 						type = 'ici-button-royal';
 						break;
+                    default :
+                        type=this.type
 				}
 				return type;
 			},

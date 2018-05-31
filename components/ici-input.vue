@@ -132,7 +132,7 @@
                     return;
                 }else{
                     this.initValue = this.inputValue = val;
-                    if (this.prefix && this.prefix.value) {
+                    if (val && this.prefix && this.prefix.value) {
                         this.$emit('input',this.prefix.value +  this.inputValue);
                     } else {
                         this.$emit('input', this.inputValue);
