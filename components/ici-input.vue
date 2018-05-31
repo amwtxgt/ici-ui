@@ -123,6 +123,7 @@
                 var val = e.target.value.replace(/(^\s*)|(\s*$)/g, "");
                 if (!val && this.required) {
                     this.inputValue = this.initValue;
+
                     if (this.prefix && this.prefix.value) {
                         this.$emit('input',this.prefix.value +  this.inputValue);
                     } else {
@@ -131,7 +132,11 @@
                     return;
                 }else{
                     this.initValue = this.inputValue = val;
-                    this.$emit('input', this.inputValue);
+                    if (this.prefix && this.prefix.value) {
+                        this.$emit('input',this.prefix.value +  this.inputValue);
+                    } else {
+                        this.$emit('input', this.inputValue);
+                    }
                 }
                 this.$emit('blur');
             },

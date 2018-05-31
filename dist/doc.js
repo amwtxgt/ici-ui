@@ -1145,12 +1145,86 @@ var components = { pageButton: __WEBPACK_IMPORTED_MODULE_0__examples_page_button
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["a"] = ({
 	name: 'page-popup',
 	data() {
 		return {
-			popup1: false
+			popup1: false,
+			popup2: false,
+			popup3: false,
+			popup4: false,
+			popup5: false,
+			popup6: false,
+			popup7: false
 		};
 	},
 	mounted() {},
@@ -3515,11 +3589,14 @@ var render = function() {
       _c(
         "baseComponent",
         {
-          attrs: { title: "基本按钮", html: "<ici-button>你好啊</ici-button>" }
+          attrs: {
+            title: "基本弹窗",
+            html:
+              '<ici-popup v-model="popup1"></ici-popup>\n<ici-button @click="popup1= true">打开弹窗</ici-button>'
+          }
         },
         [
           _c("ici-popup", {
-            attrs: { title: "asdasdas" },
             model: {
               value: _vm.popup1,
               callback: function($$v) {
@@ -3535,6 +3612,310 @@ var render = function() {
               on: {
                 click: function($event) {
                   _vm.popup1 = true
+                }
+              }
+            },
+            [_vm._v("打开弹窗")]
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "baseComponent",
+        {
+          attrs: {
+            title: "添加标题",
+            html:
+              '<ici-popup v-model="popup2" title="我是标题"></ici-popup>\n<ici-button @click="popup2= true">使用title属性</ici-button>\n<ici-popup v-model="popup3">\n    <div slot="header"><ici-icon name="icon-zhongguoditu"></ici-icon> 我是slot标题</div>\n</ici-popup>\n<ici-button @click="popup3= true">使用slot</ici-button>'
+          }
+        },
+        [
+          _c("ici-popup", {
+            attrs: { title: "我是标题11111" },
+            model: {
+              value: _vm.popup2,
+              callback: function($$v) {
+                _vm.popup2 = $$v
+              },
+              expression: "popup2"
+            }
+          }),
+          _vm._v(" "),
+          _c(
+            "ici-button",
+            {
+              on: {
+                click: function($event) {
+                  _vm.popup2 = true
+                }
+              }
+            },
+            [_vm._v("使用title属性")]
+          ),
+          _vm._v(" "),
+          _c(
+            "ici-popup",
+            {
+              model: {
+                value: _vm.popup3,
+                callback: function($$v) {
+                  _vm.popup3 = $$v
+                },
+                expression: "popup3"
+              }
+            },
+            [
+              _c(
+                "div",
+                { attrs: { slot: "header" }, slot: "header" },
+                [
+                  _c("ici-icon", { attrs: { name: "icon-zhongguoditu" } }),
+                  _vm._v(" 我是slot标题")
+                ],
+                1
+              )
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "ici-button",
+            {
+              on: {
+                click: function($event) {
+                  _vm.popup3 = true
+                }
+              }
+            },
+            [_vm._v("使用slot")]
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "baseComponent",
+        {
+          attrs: {
+            title: "添加内容",
+            html:
+              '<ici-popup v-model="popup4" title="我是标题">\n    <div style="padding:10px 20px;">这里是内容这里是内容这里是内容</div>\n</ici-popup>\n<ici-button @click="popup4= true">打开弹窗</ici-button>'
+          }
+        },
+        [
+          _c(
+            "ici-popup",
+            {
+              attrs: { title: "我是标题" },
+              model: {
+                value: _vm.popup4,
+                callback: function($$v) {
+                  _vm.popup4 = $$v
+                },
+                expression: "popup4"
+              }
+            },
+            [
+              _c("div", { staticStyle: { padding: "10px 20px" } }, [
+                _vm._v("这里是内容这里是内容这里是内容")
+              ])
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "ici-button",
+            {
+              on: {
+                click: function($event) {
+                  _vm.popup4 = true
+                }
+              }
+            },
+            [_vm._v("打开弹窗")]
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "baseComponent",
+        {
+          attrs: {
+            title: "添加遮罩 mask",
+            html:
+              '<ici-popup mask v-model="popup7" title="我是标题">\n    <div style="padding:10px 20px;">这里是内容这里是内容这里是内容</div>\n</ici-popup>\n<ici-button @click="popup7= true">打开弹窗</ici-button>'
+          }
+        },
+        [
+          _c(
+            "ici-popup",
+            {
+              attrs: { mask: "", title: "我是标题" },
+              model: {
+                value: _vm.popup7,
+                callback: function($$v) {
+                  _vm.popup7 = $$v
+                },
+                expression: "popup7"
+              }
+            },
+            [
+              _c("div", { staticStyle: { padding: "10px 20px" } }, [
+                _vm._v("这里是内容这里是内容这里是内容")
+              ])
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "ici-button",
+            {
+              on: {
+                click: function($event) {
+                  _vm.popup7 = true
+                }
+              }
+            },
+            [_vm._v("打开弹窗")]
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "baseComponent",
+        {
+          attrs: {
+            title: "添加确认事件 @confirm",
+            html:
+              '<ici-popup v-model="popup5" title="我是标题" @confirm="popup5=false">\n    <div style="padding:10px 20px;">这里是内容这里是内容这里是内容</div>\n</ici-popup>\n<ici-button @click="popup5 = true">打开弹窗</ici-button>'
+          }
+        },
+        [
+          _c("p", [
+            _vm._v(
+              "\n                在属性添加@confirm事件,会自动添加confirm按钮\n            "
+            )
+          ]),
+          _vm._v(" "),
+          _c(
+            "ici-popup",
+            {
+              attrs: { title: "我是标题" },
+              on: {
+                confirm: function($event) {
+                  _vm.popup5 = false
+                }
+              },
+              model: {
+                value: _vm.popup5,
+                callback: function($$v) {
+                  _vm.popup5 = $$v
+                },
+                expression: "popup5"
+              }
+            },
+            [
+              _c("div", { staticStyle: { padding: "10px 20px" } }, [
+                _vm._v("这里是内容这里是内容这里是内容")
+              ])
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "ici-button",
+            {
+              on: {
+                click: function($event) {
+                  _vm.popup5 = true
+                }
+              }
+            },
+            [_vm._v("打开弹窗")]
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "baseComponent",
+        {
+          attrs: {
+            title: "自定义底部",
+            html:
+              '<ici-popup v-model="popup6" title="我是标题" @confirm="popup6=false">\n    <div slot="footer-left">\n        <ici-button type="ici" size="small">左边自定义1</ici-button>\n    </div>\n    <div slot="footer-right">\n        <ici-button type="ici" size="small" @click="popup6=false">右边自定义关闭</ici-button>\n        <ici-button type="ici" size="small" @click="popup6=false">右边自定义2</ici-button>\n    </div>\n</ici-popup>\n<ici-button @click="popup6 = true">打开弹窗</ici-button>'
+          }
+        },
+        [
+          _c(
+            "ici-popup",
+            {
+              attrs: { title: "我是标题" },
+              on: {
+                confirm: function($event) {
+                  _vm.popup6 = false
+                }
+              },
+              model: {
+                value: _vm.popup6,
+                callback: function($$v) {
+                  _vm.popup6 = $$v
+                },
+                expression: "popup6"
+              }
+            },
+            [
+              _c(
+                "div",
+                { attrs: { slot: "footer-left" }, slot: "footer-left" },
+                [
+                  _c("ici-button", { attrs: { type: "ici", size: "small" } }, [
+                    _vm._v("左边自定义1")
+                  ])
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                { attrs: { slot: "footer-right" }, slot: "footer-right" },
+                [
+                  _c(
+                    "ici-button",
+                    {
+                      attrs: { type: "ici", size: "small" },
+                      on: {
+                        click: function($event) {
+                          _vm.popup6 = false
+                        }
+                      }
+                    },
+                    [_vm._v("右边自定义关闭")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "ici-button",
+                    {
+                      attrs: { type: "ici", size: "small" },
+                      on: {
+                        click: function($event) {
+                          _vm.popup6 = false
+                        }
+                      }
+                    },
+                    [_vm._v("右边自定义2")]
+                  )
+                ],
+                1
+              )
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "ici-button",
+            {
+              on: {
+                click: function($event) {
+                  _vm.popup6 = true
                 }
               }
             },
