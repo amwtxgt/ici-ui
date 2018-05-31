@@ -25,8 +25,52 @@
         <br>
         <div class="title">name 值</div>
         <div class="icon-aaa">
+            <ici-icon name="icon-paizhao" size="30px"></ici-icon>
+            <span>icon-paizhao</span>
+        </div>
+        <div class="icon-aaa">
+            <ici-icon name="icon-tupian" size="30px"></ici-icon>
+            <span>icon-tupian</span>
+        </div>
+        <div class="icon-aaa">
+            <ici-icon name="icon-beizhu" size="30px"></ici-icon>
+            <span>icon-beizhu</span>
+        </div>
+        <div class="icon-aaa">
+            <ici-icon name="icon-wangzhi" size="30px"></ici-icon>
+            <span>icon-wangzhi</span>
+        </div>
+
+        <div class="icon-aaa">
+            <ici-icon name="icon-shouye" size="30px"></ici-icon>
+            <span>icon-shouye</span>
+        </div>
+        <div class="icon-aaa">
+            <ici-icon name="icon-erweima" size="30px"></ici-icon>
+            <span>icon-erweima</span>
+        </div>
+        <div class="icon-aaa">
+            <ici-icon name="icon-icon-test" size="30px"></ici-icon>
+            <span>icon-icon-test</span>
+        </div>
+        <div class="icon-aaa">
+            <ici-icon name="icon-quanbu" size="30px"></ici-icon>
+            <span>icon-quanbu</span>
+        </div>
+        <div class="icon-aaa">
+            <ici-icon name="icon-whois" size="30px"></ici-icon>
+            <span>icon-whois</span>
+        </div>
+        <div class="icon-aaa">
+            <ici-icon name="icon-google_plus" size="30px"></ici-icon>
+            <span>icon-google_plus</span>
+        </div>
+
+
+        <div class="icon-aaa">
             <ici-icon name="icon-Cisco" size="30px"></ici-icon>
-            <span>icon-Cisco</span></div>
+            <span>icon-Cisco</span>
+        </div>
         <div class="icon-aaa">
             <ici-icon name="icon-zhongguoditu" size="30px"></ici-icon>
             <span>icon-zhongguoditu</span></div>

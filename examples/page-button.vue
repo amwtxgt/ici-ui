@@ -60,11 +60,11 @@
 
 
         <baseComponent title="空心无边框按钮 borderless"
-                       html='<ici-button type="primary"  plain>你好啊</ici-button>
-<ici-button type="info"  plain>你好啊</ici-button>
-<ici-button type="warning" plain>你好</ici-button>
-<ici-button type="error" plain>你好</ici-button>
-<ici-button type="ici" plain>你好</ici-button>'>
+                       html='<ici-button type="primary"  plain borderless>你好啊</ici-button>
+<ici-button type="info"  plain borderless>你好啊</ici-button>
+<ici-button type="warning" plain borderless>你好</ici-button>
+<ici-button type="error" plain borderless>你好</ici-button>
+<ici-button type="ici" plain borderless>你好</ici-button>'>
             <div style="background:#666">
                 <ici-button type="primary"  plain borderless>你好啊</ici-button>
                 <ici-button type="info"  plain borderless>你好啊</ici-button>
@@ -144,6 +144,17 @@
             </div>
         </baseComponent>
 
+        <baseComponent title="获取焦点 focus"
+                       html='<ici-button type="info" plain :focus="focus">你好啊</ici-button>
+<ici-button @click="focus=true">点击后上面的获得焦点</ici-button>'>
+            <div>
+                <ici-button  type="info"  plain  :focus="focus">你好啊</ici-button>
+                <br>
+                <ici-button @click="focus=true">点击后上面的获得焦点</ici-button>
+
+            </div>
+        </baseComponent>
+
         <baseComponent title="加载中按钮 loading"
                        html='<ici-button type="primary"  relievo longshadow loading>你好啊</ici-button>
 <ici-button type="error" relievo long :loading="loading" @click="loading = true">点我加载</ici-button>'>
@@ -172,7 +183,8 @@
 		name: 'page-button',
 		data() {
 			return {
-				loading:false
+				loading:false,
+                focus:false,
             };
 		},
 		mounted() {

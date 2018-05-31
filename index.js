@@ -4,9 +4,10 @@ import iciIcon from './components/ici-icon.vue'
 import iciInput from './components/ici-input.vue'
 import multipleField from './components/multiple_field.vue'
 import radioField from './components/radio_field.vue'
+import iciPopup from './components/ici-popup.vue'
 
 export const components = {
-    iciButton, iciLoading, iciIcon, multipleField, radioField, iciInput
+    iciButton, iciLoading, iciIcon, multipleField, radioField, iciInput,iciPopup
 }
 
 const install = function (Vue) {
