@@ -13,7 +13,7 @@ export const components = {
 const install = function (Vue) {
     if (install.installed) return;
     Object.keys(components).forEach(function (val) {
-        return Vue.component(val, components[val])
+        return Vue.component(val, components[val]);
     });
 
     var message =new Vue(iciMessage);
