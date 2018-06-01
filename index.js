@@ -10,22 +10,15 @@ import iciMessage from './components/ici-message.vue'
 export const components = {
     iciButton, iciLoading, iciIcon, multipleField, radioField, iciInput,iciPopup
 }
-
 const install = function (Vue) {
     if (install.installed) return;
     Object.keys(components).forEach(function (val) {
         return Vue.component(val, components[val])
     });
 
-    var a =new Vue(iciMessage)
-    console.log(a)
-    window.document.body.appendChild(a.$el);
-    setTimeout(()=>{
-        a.open('asdfasdf')
-    },1000)
-    setTimeout(()=>{
-        a.close()
-    },5000)
+    var message =new Vue(iciMessage);
+    Vue.prototype.$icimsg = message;
+
     // 注册一个全局自定义指令 `v-focus`
     Vue.directive('focus', {
         // 指令的定义

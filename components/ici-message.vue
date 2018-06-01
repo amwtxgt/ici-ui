@@ -1,94 +1,170 @@
 <template>
-	<div class="ici-message" :class="{show:show}">
-		<div>{{message}}</div>
-	</div>
+    <div class="ici-message-wrap" :id="'ici-messages-'+rom">
+        <div class="ici-message" :class="{show:show}">
+            <div class="ici-message-left" v-if="type">
+                <ici-loading v-if="type=='loading'" back-white></ici-loading>
+                <ici-icon v-else-if="type=='success'" size="20px" name="icon-yduigouxuan"></ici-icon>
+                <ici-icon v-else-if="type=='error'" size="20px" name="icon-msnui-alarm-circle"></ici-icon>
+                <ici-icon v-else-if="type=='message'" size="20px" name="icon-tishi"></ici-icon>
+                <ici-icon v-else :name="type" size="20px"></ici-icon>
+            </div>
+            <div class="ici-message-body">{{message}}</div>
+            <div v-show="showClose" class="ici-message-right" @click="close">
+                <ici-icon name="icon-shanchudelete30"></ici-icon>
+            </div>
+        </div>
+    </div>
 </template>
 <script>
-	/*
-	* 提示message组
-	* @v-model {Boolean} 控制弹窗 开或关
-	* @ref open {function(val)} 开打提示，不会自动关闭，直接调用msg或close方法
-	* @ref msg {function(val,msec)} 打开自动关闭提示，val提示内容，msec打开时间毫秒
-	* @ref close {function} 关闭提示
-	*
-	* */
-    var fmsDom = window.document.createElement('div');
-    fmsDom.setAttribute('id', 'ici-messages');
-	export default {
-	    el:fmsDom,
-		name: "ici-message",
-		data: function () {
-			return {
-				message: '',
-				timeout: 0,
-				msec: 2000,
-				show: false,
-			}
-		},
-		methods: {
-			msg(val, msec) {
-				clearTimeout(this.timeout);
-				this.message = val || '';
+    /*
+    * 提示message组
+    * @v-model {Boolean} 控制弹窗 开或关
+    * @ref open {function(val)} 开打提示，不会自动关闭，直接调用msg或close方法
+    * @ref msg {function(val,msec)} 打开自动关闭提示，val提示内容，msec打开时间毫秒
+    * @ref close {function} 关闭提示
+    *
+    * */
 
-				if (this.show) {
-					this.show = false;
-					setTimeout(() => {
-						this.show = true;
-						this.timeout = setTimeout(() => {
-							this.show = false;
-						}, msec || this.msec)
-					}, 100)
-				} else {
-					this.show = true;
-					this.timeout = setTimeout(() => {
-						this.show = false;
-					}, msec || this.msec)
-				}
+    var rom = Math.random();
+    var message = window.document.createElement('div');
+    message.setAttribute('id', 'ici-messages-' + rom);
 
-			},
-			open(val) {
-				clearTimeout(this.timeout)
-				this.message = val || '';
-				if (this.show) {
-					this.show = false;
-					setTimeout(() => {
-						this.show = true;
-					}, 100)
-				} else {
-					this.show = true;
-				}
-			},
-			close() {
-				this.show = false;
-			}
-		}
-	}
+    export default {
+        el: message,
+        name: "ici-message",
+        data: function () {
+            return {
+                rom: rom,
+                message: '',
+                timeout: 0,
+                msec: 2000,
+                show: false,
+                showClose: false,
+                type: '',
+            }
+        },
+
+        mounted() {
+            window.document.addEventListener('DOMContentLoaded', this._append);
+        },
+        methods: {
+            _append() {
+                if (!window.document.getElementById('ici-messages-' + this.rom)) {
+                    window.document.body.appendChild(this.$el);
+                }
+            },
+
+            opens(obj) { //obj = {type:loading|success|error|message,duration:显示时间，showClose:显示关闭按钮,msg:显示内容}
+                this._append();
+                clearTimeout(this.timeout);
+                if (this.show) {
+                    this.show = false;
+                    setTimeout(() => {
+                        this._openOption(obj)
+                    }, 100);
+                } else {
+                    this._openOption(obj)
+                }
+            },
+            _openOption(obj) {
+                this.show = true;
+                this.type = obj.type || '';
+                this.msec = obj.duration || 0;
+                this.showClose = obj.showClose || false;
+                this.message = obj.msg || '';
+
+                if(this.msec){
+                    this.timeout = setTimeout(() => {
+                        this.show = false;
+                    }, this.msec)
+                }
+            },
+            open(val) {
+                this.opens({
+                    type:'error',
+                    duration:0,
+                    msg:val,
+                    showClose:true
+                })
+            },
+            loading(val,msec){
+                this.opens({
+                    type:'loading',
+                    duration:msec || 0,
+                    msg:val,
+                })
+                return this;
+            },
+            success(val,msec){
+                this.opens({
+                    type:'success',
+                    duration:msec || 2000,
+                    msg:val,
+                    showClose:true
+                })
+            },
+            error(val,msec){
+                this.opens({
+                    type:'error',
+                    duration:msec || 2000,
+                    msg:val,
+                    showClose:true
+                })
+            },
+            msg(val, msec) {
+                this.opens({
+                    type:'icon-tishi',
+                    duration:msec || 2000,
+                    msg:val,
+                    showClose:true
+                });
+            },
+            close() {
+                this.show = false;
+            }
+        }
+    }
 </script>
 
 <style scoped lang="less">
-	.ici-message {
-		position: fixed;
-		bottom: 30px;
-		left: 50%;
-		margin-left: -145px;
-		z-index: 99999;
-		background: #000;
-		color: #fff;
-		box-shadow: 0 0 4px grey;
-		transition: all .3s;
-		font-size: 16px;
-		padding: 0 20px;
-		border-radius: 2px 2px 0 0;
-		line-height: 50px;
-		width: 290px;
-		height: 50px;
-		visibility: hidden;
-		opacity: 0;
-		transform: scale(.8);
-		&.show {
-			visibility: visible;
-			opacity: 1;
-			transform: scale(1);
-		}
-	}
+    .ici-message-wrap {
+        position: fixed;
+        display: flex;
+        justify-content: center;
+        left: 20px;
+        right: 40px;
+        bottom: 30px;
+        pointer-events: none;
+        z-index: 99999;
+        .ici-message {
+            display: flex;
+            align-items: center;
+            pointer-events: auto;
+            background: #000;
+            color: #fff;
+            box-shadow: 0 0 4px grey;
+            transition: all .3s;
+            font-size: 16px;
+            padding: 15px 20px;
+            border-radius: 2px 2px 0 0;
+            min-width: 290px;
+            visibility: hidden;
+            opacity: 0;
+            transform: scale(.8);
+            &.show {
+                visibility: visible;
+                opacity: 1;
+                transform: scale(1);
+            }
+            .ici-message-left, ici-message-right {
+                flex: none;
+            }
+
+            .ici-message-body {
+                margin: 0 10px 0 5px;
+                flex: auto;
+            }
+        }
+    }
+
 </style>

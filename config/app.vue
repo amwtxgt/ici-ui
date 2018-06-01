@@ -17,6 +17,9 @@
                 <MenuItem name="pagePopup">
                     弹窗 ici-popup
                 </MenuItem>
+                <MenuItem name="pageMessage">
+                    消息 ici-msg
+                </MenuItem>
             </Menu>
         </div>
         <div class="flex-auto" style="overflow: scroll">
@@ -31,13 +34,14 @@
     import pageIcon from '../examples/page-icon.vue';
     import pageInput from '../examples/page-input.vue';
     import pagePopup from '../examples/page-popup.vue';
+    import pageMessage from '../examples/page-message.vue';
 
-    var components = {pageButton, pageLoading, pageIcon, pageInput, pagePopup};
+    var components = {pageButton, pageLoading, pageIcon, pageInput, pagePopup,pageMessage};
     export default {
         name: 'app',
         data() {
             return {
-                active: 'pagePopup'
+                active: 'pageMessage'
             };
         },
         computed: {
