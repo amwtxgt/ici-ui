@@ -1285,6 +1285,13 @@ var components = { pageButton: __WEBPACK_IMPORTED_MODULE_0__examples_page_button
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["a"] = ({
@@ -1297,7 +1304,13 @@ var components = { pageButton: __WEBPACK_IMPORTED_MODULE_0__examples_page_button
     },
     mounted() {},
     beforeDestroy() {},
-    methods: {}
+    methods: {
+        abc() {
+            console.log('sdfsdf');
+
+            this.$refs['message'].msg('sdfgfsdfsd');
+        }
+    }
 });
 
 /***/ }),
@@ -4274,6 +4287,49 @@ var render = function() {
               }
             },
             [_vm._v("5秒后关闭")]
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "baseComponent",
+        { attrs: { title: "位置 默认为下边", html: "" } },
+        [
+          _c(
+            "ici-button",
+            {
+              on: {
+                click: function($event) {
+                  _vm.$icimsg.msg("我是上边", 5000, "top")
+                }
+              }
+            },
+            [_vm._v("上边")]
+          ),
+          _vm._v(" "),
+          _c(
+            "ici-button",
+            {
+              on: {
+                click: function($event) {
+                  _vm.$icimsg.msg("我是中边", 5000, "center")
+                }
+              }
+            },
+            [_vm._v("中边")]
+          ),
+          _vm._v(" "),
+          _c(
+            "ici-button",
+            {
+              on: {
+                click: function($event) {
+                  _vm.$icimsg.msg("我是下边", 5000)
+                }
+              }
+            },
+            [_vm._v("下边")]
           )
         ],
         1

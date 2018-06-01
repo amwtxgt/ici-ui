@@ -1,5 +1,5 @@
 <template>
-    <div class="ici-message-wrap" :id="'ici-messages-'+rom">
+    <div class="ici-message-wrap" :class="{'message-top':position==='top','message-center':position==='center'}" :id="'ici-messages-'+rom">
         <div class="ici-message" :class="{show:show}">
             <div class="ici-message-left" v-if="type">
                 <ici-loading v-if="type=='loading'" back-white></ici-loading>
@@ -40,6 +40,7 @@
                 msec: 2000,
                 show: false,
                 showClose: false,
+                position:'',
                 type: '',
             }
         },
@@ -62,18 +63,20 @@
                     setTimeout(() => {
                         this._openOption(obj)
                     }, 100);
-                } else {
+                }
+                else {
                     this._openOption(obj)
                 }
             },
             _openOption(obj) {
+                this.position = obj.position || '';
                 this.show = true;
                 this.type = obj.type || '';
                 this.msec = obj.duration || 0;
                 this.showClose = obj.showClose || false;
                 this.message = obj.msg || '';
 
-                if(this.msec){
+                if (this.msec) {
                     this.timeout = setTimeout(() => {
                         this.show = false;
                     }, this.msec)
@@ -81,42 +84,46 @@
             },
             open(val) {
                 this.opens({
-                    type:'error',
-                    duration:0,
-                    msg:val,
-                    showClose:true
+                    type: 'error',
+                    duration: 0,
+                    msg: val,
+                    showClose: true
                 })
             },
-            loading(val,msec){
+            loading(val, msec,pos) {
                 this.opens({
-                    type:'loading',
-                    duration:msec || 0,
-                    msg:val,
+                    type: 'loading',
+                    position:pos,
+                    duration: msec || 0,
+                    msg: val,
                 })
                 return this;
             },
-            success(val,msec){
+            success(val, msec,pos) {
                 this.opens({
-                    type:'success',
-                    duration:msec || 2000,
-                    msg:val,
-                    showClose:true
+                    type: 'success',
+                    duration: msec || 2000,
+                    position:pos,
+                    msg: val,
+                    showClose: true
                 })
             },
-            error(val,msec){
+            error(val, msec,pos) {
                 this.opens({
-                    type:'error',
-                    duration:msec || 2000,
-                    msg:val,
-                    showClose:true
+                    type: 'error',
+                    duration: msec || 2000,
+                    position:pos,
+                    msg: val,
+                    showClose: true
                 })
             },
-            msg(val, msec) {
+            msg(val, msec,pos) {
                 this.opens({
-                    type:'icon-tishi',
-                    duration:msec || 2000,
-                    msg:val,
-                    showClose:true
+                    type: 'icon-tishi',
+                    duration: msec || 2000,
+                    position:pos,
+                    msg: val,
+                    showClose: true
                 });
             },
             close() {
@@ -128,14 +135,24 @@
 
 <style scoped lang="less">
     .ici-message-wrap {
-        position: fixed;
+        position: absolute;
         display: flex;
         justify-content: center;
-        left: 20px;
-        right: 40px;
+        left: 25px;
+        right: 25px;
         bottom: 30px;
         pointer-events: none;
         z-index: 99999;
+        &.message-top {
+            top: 30px;
+            bottom: auto;
+        }
+        &.message-center {
+            top: 50%;
+            height:0;
+            align-items: center;
+            bottom: auto;
+        }
         .ici-message {
             display: flex;
             align-items: center;

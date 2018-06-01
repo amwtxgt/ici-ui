@@ -38,6 +38,13 @@
             <ici-button @click="$icimsg.error('我失败了',5000)">5秒后关闭</ici-button>
         </baseComponent>
 
+        <baseComponent title="位置 默认为下边" html=''>
+
+            <ici-button  @click="$icimsg.msg('我是上边',5000,'top')">上边</ici-button>
+            <ici-button  @click="$icimsg.msg('我是中边',5000,'center')">中边</ici-button>
+            <ici-button  @click="$icimsg.msg('我是下边',5000)">下边</ici-button>
+        </baseComponent>
+
     </div>
 </template>
 
@@ -56,6 +63,11 @@
         beforeDestroy() {
         },
         methods: {
+            abc(){
+                console.log('sdfsdf');
+
+                this.$refs['message'].msg('sdfgfsdfsd')
+            }
         },
     };
 </script>
