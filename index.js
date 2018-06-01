@@ -33,7 +33,7 @@ const install = function (Vue) {
             if (binding.value) {
                 setTimeout(function(){
                     el.focus();
-                }, 150)
+                }, 150);
             }
         }
     })
