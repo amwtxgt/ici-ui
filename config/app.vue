@@ -41,7 +41,7 @@
         name: 'app',
         data() {
             return {
-                active: 'pageMessage'
+                active: 'pageInput'
             };
         },
         computed: {

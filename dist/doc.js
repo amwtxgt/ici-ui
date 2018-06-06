@@ -536,7 +536,7 @@ var components = { pageButton: __WEBPACK_IMPORTED_MODULE_0__examples_page_button
     name: 'app',
     data() {
         return {
-            active: 'pageMessage'
+            active: 'pageInput'
         };
     },
     computed: {
@@ -1038,6 +1038,9 @@ var components = { pageButton: __WEBPACK_IMPORTED_MODULE_0__examples_page_button
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+//
+//
+//
 //
 //
 //
@@ -3269,6 +3272,26 @@ var render = function() {
     "div",
     [
       _c("div", { staticClass: "title" }, [_vm._v("input 单行输入")]),
+      _vm._v(" "),
+      _c("ici-input", {
+        attrs: { hint: [1, 2, 3], label: "密码" },
+        on: { select: _vm.select },
+        scopedSlots: _vm._u([
+          {
+            key: "default",
+            fn: function(list) {
+              return _c("div", {}, [_vm._v(_vm._s(list) + _vm._s(list.item))])
+            }
+          }
+        ]),
+        model: {
+          value: _vm.password,
+          callback: function($$v) {
+            _vm.password = $$v
+          },
+          expression: "password"
+        }
+      }),
       _vm._v(" "),
       _c(
         "baseComponent",

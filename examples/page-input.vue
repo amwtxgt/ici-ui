@@ -1,7 +1,10 @@
 <template>
     <div>
         <div class="title">input 单行输入</div>
+        <ici-input :hint="[1,2,3]" v-model="password" label="密码" @select="select">
 
+            <div slot-scope="list">{{list}}{{list.item}}</div>
+        </ici-input>
         <baseComponent title="基本输入" html='<ici-input></ici-input>'>
             <ici-input></ici-input>
         </baseComponent>

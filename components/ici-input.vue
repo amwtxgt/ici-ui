@@ -5,13 +5,13 @@
             <input @blur="blur" class="fms-input-input" type="text" :type="password?'password':'text'"
                    :value="inputValue" @input="input" v-focus="focus"
                    @keyup.enter="$emit('keyup-enter')"
-                   @keydown.up.down.stop.prevent="keydown" @keyup.enter.stop.prevent="$emit('select',selectIndex)">
+                   @keydown.up.down.stop.prevent="keydown" @keyup.enter.stop.prevent="enter">
             <label class="fms-input-label">{{label}}</label>
             <div class="fms-input-status"></div>
 
             <div v-show="hint" class="fms-input-hint">
                 <!--列表头部-->
-                <div class="fms-input-hint-li fms-input-hint-li-add" @mousedown="select(selectIndex)"
+                <div v-if="showTitle" class="fms-input-hint-li fms-input-hint-li-add" @mousedown="select(selectIndex)"
                      :class="{active:selectIndex==-1}">
                     <slot name="title"></slot>
                 </div>
@@ -54,9 +54,10 @@
         name: "ici-input",
         data() {
             return {
-                selectIndex: -1, //选中的文字提示，-1选中默认，>-1选中的索引
+                selectIndex: -2, //选中的文字提示，-2不选，-1选中默认，>-1选中的索引,
                 inputValue: '',
                 initValue: '',//初始内容
+                showTitle: false,
             }
         },
         props: {
@@ -71,7 +72,7 @@
             password: Boolean, //是否以密码方式
             focus: Boolean,
             required: Boolean,
-            filter:[Boolean,RegExp,String],
+            filter: [Boolean, RegExp, String],
             prefix: [Boolean, Object],//Object 格式为{content:String,value:String},value:真实值
         },
         computed: {
@@ -80,42 +81,52 @@
             }
         },
         mounted() {
-
-            if(this.value){
+            if (this.$slots.title) {
+                this.showTitle = true;
+            }
+            console.log('thisthisthisthis', this);
+            if (this.value) {
                 this.inputValue = this.value;
                 //是否有过滤
-                if(this.filter){
-                    this.inputValue =  this.inputValue.replace(this.filter, '');
+                if (this.filter) {
+                    this.inputValue = this.inputValue.replace(this.filter, '');
                 }
 
-                if (this.prefix && this.prefix.value && this.inputValue.indexOf(this.prefix.value)===0) {
-                    var reg = new RegExp('^'+this.prefix.value,'g');
+                if (this.prefix && this.prefix.value && this.inputValue.indexOf(this.prefix.value) === 0) {
+                    var reg = new RegExp('^' + this.prefix.value, 'g');
                     this.inputValue = this.inputValue.replace(reg, '');
                 }
 
             }
 
             //初始内容
-            this.initValue =this.inputValue;
+            this.initValue = this.inputValue;
 
         },
         methods: {
+            enter: function () {
+                if (this.selectIndex !== -2) {
+                    this.$emit('select', this.selectIndex)
+                }
+
+            },
             input: function (e) {
                 this.inputValue = e.target.value
 
-                if(this.inputValue){
-                    if(this.filter){
+                if (this.inputValue) {
+                    if (this.filter) {
                         this.inputValue = this.inputValue.replace(this.filter, '');
                     }
 
-                    if (this.prefix && this.prefix.value && this.inputValue.indexOf(this.prefix.value)===0) {
-                        this.inputValue = this.inputValue.replace(new RegExp('^'+this.prefix.value,'g'), '');
+                    if (this.prefix && this.prefix.value && this.inputValue.indexOf(this.prefix.value) === 0) {
+                        this.inputValue = this.inputValue.replace(new RegExp('^' + this.prefix.value, 'g'), '');
                     }
                 }
 
-                if(this.inputValue && this.prefix && this.prefix.value){
+                if (this.inputValue && this.prefix && this.prefix.value) {
                     this.$emit('input', this.prefix.value + this.inputValue);
-                }else{
+                }
+                else {
                     this.$emit('input', this.inputValue);
                 }
             },
@@ -125,16 +136,19 @@
                     this.inputValue = this.initValue;
 
                     if (this.prefix && this.prefix.value) {
-                        this.$emit('input',this.prefix.value +  this.inputValue);
-                    } else {
+                        this.$emit('input', this.prefix.value + this.inputValue);
+                    }
+                    else {
                         this.$emit('input', this.inputValue);
                     }
                     return;
-                }else{
+                }
+                else {
                     this.initValue = this.inputValue = val;
                     if (val && this.prefix && this.prefix.value) {
-                        this.$emit('input',this.prefix.value +  this.inputValue);
-                    } else {
+                        this.$emit('input', this.prefix.value + this.inputValue);
+                    }
+                    else {
                         this.$emit('input', this.inputValue);
                     }
                 }
@@ -144,20 +158,31 @@
                 this.$emit('select', index)
             },
             keydown(e) {
+                var min = 0, max = this.hint.length;
+                if (this.showTitle) {
+                    min = -1
+                }
+
                 if (e.key == 'ArrowUp') {
-                    if (this.selectIndex > -1) {
+                    if (this.selectIndex > min) {
                         this.selectIndex--
                     }
                     else {
-                        this.selectIndex = this.hint.length - 1;
+                        this.selectIndex = max - 1;
                     }
                 }
                 else {
-                    if (this.selectIndex < this.hint.length - 1) {
-                        this.selectIndex++
+                    if (this.selectIndex < max - 1) {
+                        if (this.selectIndex == -2 && !this.showTitle) {
+                            this.selectIndex = 0;
+                        }
+                        else {
+                            this.selectIndex++
+                        }
+
                     }
                     else {
-                        this.selectIndex = -1;
+                        this.selectIndex = min;
                     }
                 }
             }
