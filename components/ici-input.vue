@@ -9,9 +9,9 @@
             <label class="fms-input-label">{{label}}</label>
             <div class="fms-input-status"></div>
 
-            <div v-show="hint" class="fms-input-hint">
+            <div v-show="hint" class="fms-input-hint" :class="{hintnone:hint && hint.length===0 && !showTitle}">
                 <!--列表头部-->
-                <div v-if="showTitle" class="fms-input-hint-li fms-input-hint-li-add" @mousedown="select(selectIndex)"
+                <div v-if="showTitle" class="fms-input-hint-li fms-input-hint-li-add" @mousedown="select(-1)"
                      :class="{active:selectIndex==-1}">
                     <slot name="title"></slot>
                 </div>
@@ -31,6 +31,7 @@
                     </div>
                 </div>
             </div>
+
         </div>
     </div>
 </template>
@@ -262,6 +263,10 @@
                 + .fms-input-label + .fms-input-status + .fms-input-hint {
                     visibility: visible;
                     opacity: 1;
+                    &.hintnone{
+                        visibility: hidden;
+                        opacity: 0;
+                    }
                 }
             }
         }

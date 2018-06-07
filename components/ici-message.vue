@@ -1,6 +1,6 @@
 <template>
     <div class="ici-message-wrap" :class="{'message-top':position==='top','message-center':position==='center'}" :id="'ici-messages-'+rom">
-        <div class="ici-message" :class="{show:show}">
+        <div class="ici-message" :class="{'message-show':show}">
             <div class="ici-message-left" v-if="type">
                 <ici-loading v-if="type=='loading'" back-white></ici-loading>
                 <ici-icon v-else-if="type=='success'" size="20px" name="icon-yduigouxuan"></ici-icon>
@@ -135,7 +135,7 @@
 
 <style scoped lang="less">
     .ici-message-wrap {
-        position: absolute;
+        position: fixed !important;
         display: flex;
         justify-content: center;
         left: 25px;
@@ -168,7 +168,7 @@
             visibility: hidden;
             opacity: 0;
             transform: scale(.8);
-            &.show {
+            &.message-show {
                 visibility: visible;
                 opacity: 1;
                 transform: scale(1);

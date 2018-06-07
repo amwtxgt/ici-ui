@@ -99,6 +99,9 @@
     .loading-enter-active, .loading-leave-active {
         transition: opacity .3s;
     }
+    .loading-leave-active{
+        position: absolute !important;
+    }
 
     .loading-enter, .loading-leave-to {
         opacity: 0;
