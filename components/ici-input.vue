@@ -2,7 +2,7 @@
     <div class="fms-input" :class="{substantial:isSubstantial}">
         <div v-if="prefix" class="prefix">{{prefix.content}}</div>
         <div class="input-inner">
-            <input @blur="blur" class="fms-input-input" type="text" :type="password?'password':'text'"
+            <input @blur="blur" class="fms-input-input" :type="password?'password':'text'"
                    :value="inputValue" @input="input" v-focus="focus"
                    @keyup.enter="$emit('keyup-enter')"
                    @keydown.up.down.stop.prevent="keydown" @keyup.enter.stop.prevent="enter">
@@ -85,7 +85,6 @@
             if (this.$slots.title) {
                 this.showTitle = true;
             }
-            console.log('thisthisthisthis', this);
             if (this.value) {
                 this.inputValue = this.value;
                 //是否有过滤
