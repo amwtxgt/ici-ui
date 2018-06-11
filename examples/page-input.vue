@@ -1,10 +1,6 @@
 <template>
     <div>
         <div class="title">input 单行输入</div>
-        <ici-input :hint="[1,2,3]" v-model="password" label="密码" @select="select">
-
-            <div slot-scope="list">{{list}}{{list.item}}</div>
-        </ici-input>
         <baseComponent title="基本输入" html='<ici-input></ici-input>'>
             <ici-input></ici-input>
         </baseComponent>
@@ -65,6 +61,16 @@ data() {
                 <div slot-scope="list">{{list}}{{list.item}}</div>
             </ici-input>
         </baseComponent>
+        <baseComponent title="异步提示" html=''>
+            <ici-input :hint="asyncValue" v-model="ass">
+                <div slot="title">这是提示默认选中项 index为-1</div>
+                <div slot-scope="list">{{list}}{{list.item}}</div>
+            </ici-input>
+            <br><br><br>
+            <br><br><br>
+            <br><br><br>
+
+        </baseComponent>
     </div>
 </template>
 
@@ -73,6 +79,8 @@ data() {
         name: 'page-input',
         data() {
             return {
+                asyncValue:false,
+                ass:'',
                 name: 'asfasda',
                 name2: '',
                 prefix1: '',
@@ -81,7 +89,17 @@ data() {
                 password: '',
                 required: 'aaa',
                 focus: false,
+                timeout:0,
             };
+        },
+        watch:{
+            ass(){
+                clearTimeout(this.timeout)
+                this.asyncValue = true;
+                this.timeout = setTimeout(()=>{
+                    this.asyncValue = [0,4,5,8,4]
+                },3000)
+            }
         },
         mounted() {
 
@@ -89,6 +107,7 @@ data() {
         beforeDestroy() {
         },
         methods: {
+
             getFocus: function () {
                 this.focus = true
                 console.log(this.focus)

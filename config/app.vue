@@ -20,6 +20,9 @@
                 <MenuItem name="pageMessage">
                     消息 ici-msg
                 </MenuItem>
+                <MenuItem name="pageSearch">
+                    搜索 ici-search
+                </MenuItem>
             </Menu>
         </div>
         <div class="flex-auto" style="overflow: scroll">
@@ -35,13 +38,14 @@
     import pageInput from '../examples/page-input.vue';
     import pagePopup from '../examples/page-popup.vue';
     import pageMessage from '../examples/page-message.vue';
+    import pageSearch from '../examples/page-search.vue';
 
-    var components = {pageButton, pageLoading, pageIcon, pageInput, pagePopup,pageMessage};
+    var components = {pageButton, pageLoading, pageIcon, pageInput, pagePopup,pageMessage,pageSearch};
     export default {
         name: 'app',
         data() {
             return {
-                active: 'pageInput'
+                active: 'pageSearch'
             };
         },
         computed: {

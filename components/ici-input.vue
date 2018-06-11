@@ -1,37 +1,30 @@
 <template>
-    <div class="fms-input" :class="{substantial:isSubstantial}">
+    <div class="fms-input">
         <div v-if="prefix" class="prefix">{{prefix.content}}</div>
         <div class="input-inner">
             <input @blur="blur" class="fms-input-input" :type="password?'password':'text'"
-                   :value="inputValue" @input="input" v-focus="focus"
-                   @keyup.enter="$emit('keyup-enter')"
+                   :value="inputValue" @input="input" v-focus="focus" @focus="focusEvent"
                    @keydown.up.down.stop.prevent="keydown" @keyup.enter.stop.prevent="enter">
-            <label class="fms-input-label">{{label}}</label>
-            <div class="fms-input-status"></div>
-
-            <div v-show="hint" class="fms-input-hint" :class="{hintnone:hint && hint.length===0 && !showTitle}">
+            <label class="fms-input-label" :class="{substantial:isSubstantial,'input-label-foucs':hasFocus}">
+                {{label}}
+            </label>
+            <div class="fms-input-status" :class="{'input-status-foucs':hasFocus}"></div>
+            <ici-hint v-model="showHint" :loading="hint===true">
                 <!--列表头部-->
                 <div v-if="showTitle" class="fms-input-hint-li fms-input-hint-li-add" @mousedown="select(-1)"
                      :class="{active:selectIndex==-1}">
                     <slot name="title"></slot>
                 </div>
 
-                <!--加载图标-->
-                <div v-if="hint === true">
-                    <div class="fms-input-hint-loading">
-                        <ici-loading></ici-loading>
-                    </div>
-                </div>
                 <!--列表内容-->
-                <div v-else-if="hint instanceof Array">
+                <div v-if="hint instanceof Array">
                     <!--组件内部不知道，数组内的对象属性，所以需要暴露出去-->
                     <div v-for="(item,index) of hint" @mousedown="select(index)"
                          class="fms-input-hint-li" :class="{active:selectIndex==index}">
                         <slot :item="item" :index="index"></slot>
                     </div>
                 </div>
-            </div>
-
+            </ici-hint>
         </div>
     </div>
 </template>
@@ -59,6 +52,7 @@
                 inputValue: '',
                 initValue: '',//初始内容
                 showTitle: false,
+                hasFocus: false,
             }
         },
         props: {
@@ -77,6 +71,22 @@
             prefix: [Boolean, Object],//Object 格式为{content:String,value:String},value:真实值
         },
         computed: {
+            showHint: function () {
+
+                if (!this.hasFocus || !this.hint) {
+                    return false;
+                }
+                else if (this.hint === true && this.hasFocus) {
+                    return true;
+                }
+                else if (this.hint.length === 0 && !this.showTitle) {
+                    return false
+                }
+                else {
+                    return true;
+                }
+            },
+            //是否有值
             isSubstantial: function () {
                 return Boolean(this.inputValue)
             }
@@ -104,13 +114,16 @@
 
         },
         methods: {
-            enter: function () {
+            enter: function (e) {
                 if (this.selectIndex !== -2) {
                     this.$emit('select', this.selectIndex)
                 }
 
+                e.target.blur()
+                this.$emit('keyup-enter')
             },
             input: function (e) {
+                this.selectIndex = -2;
                 this.inputValue = e.target.value
 
                 if (this.inputValue) {
@@ -130,7 +143,12 @@
                     this.$emit('input', this.inputValue);
                 }
             },
+
+            focusEvent: function () {
+                this.hasFocus = true;
+            },
             blur: function (e) {
+                this.hasFocus = false;
                 var val = e.target.value.replace(/(^\s*)|(\s*$)/g, "");
                 if (!val && this.required) {
                     this.inputValue = this.initValue;
@@ -158,6 +176,8 @@
                 this.$emit('select', index)
             },
             keydown(e) {
+                if (!this.hint.length) return false;
+
                 var min = 0, max = this.hint.length;
                 if (this.showTitle) {
                     min = -1
@@ -179,7 +199,6 @@
                         else {
                             this.selectIndex++
                         }
-
                     }
                     else {
                         this.selectIndex = min;
@@ -199,7 +218,7 @@
         flex-wrap: nowrap;
         width: 100%;
         padding-top: 3px;
-        label {
+        label.fms-input-label {
             text-align: left;
             -webkit-transform-origin: bottom left;
             transform-origin: bottom left;
@@ -215,12 +234,15 @@
             margin-bottom: 0;
             left: 0;
             width: 100%;
-        }
-        &.substantial {
-            label {
+            &.substantial {
+                transform: scale(.75) translateY(-30px);
+            }
+            &.input-label-foucs {
+                color: rgb(193, 39, 71);
                 transform: scale(.75) translateY(-30px);
             }
         }
+
         .prefix {
             flex: none;
             padding-right: 5px;
@@ -249,27 +271,13 @@
             border-radius: 0 !important;
             border: none !important;
             border-bottom: 1px solid rgba(0, 0, 0, 0.2) !important;
-            &:focus {
-                + .fms-input-label {
-                    color: rgb(193, 39, 71);
-                    transform: scale(.75) translateY(-30px);
-                }
-                + .fms-input-label + .fms-input-status {
-                    opacity: 1;
-                    margin-left: 0%;
-                    width: 100%;
-                }
-                + .fms-input-label + .fms-input-status + .fms-input-hint {
-                    visibility: visible;
-                    opacity: 1;
-                    &.hintnone{
-                        visibility: hidden;
-                        opacity: 0;
-                    }
-                }
-            }
         }
         .fms-input-status {
+            &.input-status-foucs {
+                opacity: 1;
+                margin-left: 0%;
+                width: 100%;
+            }
             position: absolute;
             transition: all .3s cubic-bezier(0.4, 0, 0.2, 1);
             opacity: 0;
@@ -280,74 +288,34 @@
             bottom: 0;
             left: 0;
         }
+    }
 
-        .fms-input-hint {
-            position: absolute;
-            top: 30px;
-            left: 0;
-            visibility: hidden;
-            opacity: 0;
-            transition: all .3s;
-            width: 100%;
-            box-sizing: border-box;
-            border: 1px solid rgba(0, 0, 0, .2);
-            background-color: #ffffff;
-            border-radius: 0 0 2px 2px;
-            box-shadow: 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12), 0 5px 5px -3px rgba(0, 0, 0, 0.2);
-            z-index: 1;
-            margin-bottom: 5px;
-            .fms-input-hint-li {
-                cursor: pointer;
-                display: flex;
-                align-items: center;
-                padding: 5px 10px;
-                border-bottom: 1px solid #ddd;
-                &.active {
-                    background: #eee;
-                }
-                &.fms-input-hint-li-add {
-                    display: block;
-                    padding: 10px 10px;
-                    text-align: center;
-                    &:hover {
-                        background: #eee;
-                    }
-                }
-                &:last-child {
-                    border-width: 0px;
-                }
-                .fms-input-hint-icon {
-                    width: 35px;
-                    height: 35px;
-                    flex: none;
-                    background: #eee no-repeat center;
-                    background-size: contain;
-                }
-                .fms-input-hint-name {
-                    padding-left: 10px;
-                    font-size: 14px !important;
-                    flex: auto;
-                    small {
-                        color: #999;
-                    }
-                }
-                .fms-input-hint-content {
-                    border-radius: 5px;
-                    padding: 2px 5px;
-                    margin-left: 10px;
-                    font-size: .8em;
-                    text-align: center;
-                    flex: none;
-                    a {
-                        color: #C12747 !important;
-                    }
-                }
+    .fms-input-hint-li {
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        padding: 5px 10px;
+        border-bottom: 1px solid #ddd;
+        &.active {
+            background: #eee;
+        }
+        &.fms-input-hint-li-add {
+            display: block;
+            padding: 10px 10px;
+            text-align: center;
+            &:hover {
+                background: #eee;
             }
-
-            .fms-input-hint-loading {
-                text-align: center;
-                padding: 5px;
-            }
+        }
+        &:last-child {
+            border-width: 0px;
+        }
+        .fms-input-hint-icon {
+            width: 35px;
+            height: 35px;
+            flex: none;
+            background: #eee no-repeat center;
+            background-size: contain;
         }
     }
 </style>

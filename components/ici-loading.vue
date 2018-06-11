@@ -1,6 +1,6 @@
 <template>
     <transition name="loading">
-        <div :class="['loading',{disabled:disabled},{block:block}]">
+        <div :class="['ici-loading',{'ici-disabled':disabled},{'ici-block':block}]">
             <svg version="1.1" xmlns="http://www.w3.org/2000/svg"  x="0px" y="0px" :width="sizeValue[0]" :height="sizeValue[1]" viewBox="0 0 34 30"  xml:space="preserve">
                 <rect :class="['rect-black',{'rect-white':backWhite}]" x="0" y="0" width="4" height="8">
                     <animateTransform attributeType="xml" attributeName="transform" type="translate" values="0 0; 0 20; 0 0" begin="0" dur="0.6s" repeatCount="indefinite"></animateTransform>
@@ -55,11 +55,11 @@
 </script>
 
 <style scoped lang="less">
-    div.loading {
+    div.ici-loading {
         display: inline-block;
         flex-direction: column;
         justify-content: center;
-        &.block {
+        &.ici-block {
             position: absolute;
             width: 100%;
             height: 100%;
@@ -74,15 +74,16 @@
             flex-direction: row;
             justify-content: center;
         }
+        &.ici-disabled {
+            opacity: 0.5;
+        }
     }
 
     svg {
         vertical-align: middle;
     }
 
-    .disabled {
-        opacity: 0.5;
-    }
+
 
     .rect-red {
         fill: #c01639;

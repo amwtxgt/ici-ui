@@ -6,9 +6,11 @@ import multipleField from './components/multiple_field.vue'
 import radioField from './components/radio_field.vue'
 import iciPopup from './components/ici-popup.vue'
 import iciMessage from './components/ici-message.vue'
+import iciSearch from './components/ici-search.vue'
+import iciHint from './components/ici-hint.vue'
 
 export const components = {
-    iciButton, iciLoading, iciIcon, multipleField, radioField, iciInput,iciPopup
+    iciButton, iciLoading, iciIcon, multipleField, radioField, iciInput,iciPopup,iciSearch,iciHint
 }
 const install = function (Vue) {
     if (install.installed) return;
