@@ -26,11 +26,9 @@
     * */
 
     var rom = Math.random();
-    var message = window.document.createElement('div');
-    message.setAttribute('id', 'ici-messages-' + rom);
 
     export default {
-        el: message,
+
         name: "ici-message",
         data: function () {
             return {
@@ -51,7 +49,10 @@
         methods: {
             _append() {
                 if (!window.document.getElementById('ici-messages-' + this.rom)) {
-                    window.document.body.appendChild(this.$el);
+                    var message = window.document.createElement('div');
+                    message.setAttribute('id', 'ici-messages-' + rom);
+                    window.document.body.appendChild(message);
+                    this.$mount(message);
                 }
             },
 
