@@ -1,10 +1,10 @@
 {
-  "name": "ici-ui2",
+  "name": "ici-ui",
   "description": "ici通用组件",
-  "version": "0.3.33",
+  "version": "0.3.36",
   "author": "amwtxgt <214529161@qq.com>",
   "license": "MIT",
-  "private": true,
+  "private": false,
   "main": "lib/ici-ui.min.js",
   "scripts": {
     "dev": "cross-env NODE_ENV=development webpack-dev-server --hot",

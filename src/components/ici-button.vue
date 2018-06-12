@@ -704,14 +704,12 @@
         border-width: 1px;
         line-height: 38px;
         background: -webkit-gradient(linear, left top, left bottom, from(#f6f6f6), to(#e1e1e1));
-        background: linear-gradient(#f6f6f6, #e1e1e1);
         -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3), 0 1px 2px rgba(0, 0, 0, 0.15);
         box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3), 0 1px 2px rgba(0, 0, 0, 0.15)
     }
 
     .ici-button-raised:hover, .ici-button-raised:focus {
         background: -webkit-gradient(linear, left top, left bottom, from(white), to(gainsboro));
-        background: linear-gradient(top, white, gainsboro)
     }
 
     .ici-button-raised:active, .ici-button-raised.active, .ici-button-raised.is-active {
@@ -723,12 +721,10 @@
     .ici-button-raised.ici-button-primary {
         border-color: #088ef0;
         background: -webkit-gradient(linear, left top, left bottom, from(#34a5f8), to(#088ef0));
-        background: linear-gradient(#34a5f8, #088ef0)
     }
 
     .ici-button-raised.ici-button-primary:hover, .ici-button-raised.ici-button-primary:focus {
         background: -webkit-gradient(linear, left top, left bottom, from(#42abf8), to(#0888e6));
-        background: linear-gradient(top, #42abf8, #0888e6)
     }
 
     .ici-button-raised.ici-button-primary:active, .ici-button-raised.ici-button-primary.active, .ici-button-raised.ici-button-primary.is-active {
@@ -739,12 +735,10 @@
     .ici-button-raised.ici-button-plain {
         border-color: #f2f2f2;
         background: -webkit-gradient(linear, left top, left bottom, from(white), to(#f2f2f2));
-        background: linear-gradient(white, #f2f2f2)
     }
 
     .ici-button-raised.ici-button-plain:hover, .ici-button-raised.ici-button-plain:focus {
         background: -webkit-gradient(linear, left top, left bottom, from(white), to(#ededed));
-        background: linear-gradient(top, white, #ededed)
     }
 
     .ici-button-raised.ici-button-plain:active, .ici-button-raised.ici-button-plain.active, .ici-button-raised.ici-button-plain.is-active {
@@ -755,12 +749,10 @@
     .ici-button-raised.ici-button-inverse {
         border-color: #151515;
         background: -webkit-gradient(linear, left top, left bottom, from(#2f2f2f), to(#151515));
-        background: linear-gradient(#2f2f2f, #151515)
     }
 
     .ici-button-raised.ici-button-inverse:hover, .ici-button-raised.ici-button-inverse:focus {
         background: -webkit-gradient(linear, left top, left bottom, from(#363636), to(#101010));
-        background: linear-gradient(top, #363636, #101010)
     }
 
     .ici-button-raised.ici-button-inverse:active, .ici-button-raised.ici-button-inverse.active, .ici-button-raised.ici-button-inverse.is-active {
@@ -771,12 +763,10 @@
     .ici-button-raised.ici-button-action {
         border-color: #9ad824;
         background: -webkit-gradient(linear, left top, left bottom, from(#afe24d), to(#9ad824));
-        background: linear-gradient(#afe24d, #9ad824)
     }
 
     .ici-button-raised.ici-button-action:hover, .ici-button-raised.ici-button-action:focus {
         background: -webkit-gradient(linear, left top, left bottom, from(#b5e45a), to(#94cf22));
-        background: linear-gradient(top, #b5e45a, #94cf22)
     }
 
     .ici-button-raised.ici-button-action:active, .ici-button-raised.ici-button-action.active, .ici-button-raised.ici-button-action.is-active {
@@ -786,13 +776,11 @@
 
     .ici-button-raised.ici-button-highlight {
         border-color: #fea502;
-        background: -webkit-gradient(linear, left top, left bottom, from(#feb734), to(#fea502));
-        background: linear-gradient(#feb734, #fea502)
+        background: -webkit-gradient(linear, left top, left bottom, from(#feb734), to(#fea502))
     }
 
     .ici-button-raised.ici-button-highlight:hover, .ici-button-raised.ici-button-highlight:focus {
         background: -webkit-gradient(linear, left top, left bottom, from(#febc44), to(#f49f01));
-        background: linear-gradient(top, #febc44, #f49f01)
     }
 
     .ici-button-raised.ici-button-highlight:active, .ici-button-raised.ici-button-highlight.active, .ici-button-raised.ici-button-highlight.is-active {
@@ -803,12 +791,11 @@
     .ici-button-raised.ici-button-caution {
         border-color: #ff2939;
         background: -webkit-gradient(linear, left top, left bottom, from(#ff5c69), to(#ff2939));
-        background: linear-gradient(#ff5c69, #ff2939)
+
     }
 
     .ici-button-raised.ici-button-caution:hover, .ici-button-raised.ici-button-caution:focus {
         background: -webkit-gradient(linear, left top, left bottom, from(#ff6c77), to(#ff1f30));
-        background: linear-gradient(top, #ff6c77, #ff1f30)
     }
 
     .ici-button-raised.ici-button-caution:active, .ici-button-raised.ici-button-caution.active, .ici-button-raised.ici-button-caution.is-active {
@@ -819,12 +806,10 @@
     .ici-button-raised.ici-button-royal {
         border-color: #bf1638;
         background: -webkit-gradient(linear, left top, left bottom, from(#ed3a64), to(#bf1638));
-        background: linear-gradient(#ed3a64, #bf1638)
     }
 
     .ici-button-raised.ici-button-royal:hover, .ici-button-raised.ici-button-royal:focus {
         background: -webkit-gradient(linear, left top, left bottom, from(#f2416b), to(#b22043));
-        background: linear-gradient(top, #f2416b, #b22043)
     }
 
     .ici-button-raised.ici-button-royal:active, .ici-button-raised.ici-button-royal.active, .ici-button-raised.ici-button-royal.is-active {
@@ -1480,7 +1465,6 @@
         display: inline-block;
         padding: 9px;
         background: -webkit-gradient(linear, left top, left bottom, from(#f2f2f2), to(#FFF));
-        background: linear-gradient(#f2f2f2, #FFF);
         border-radius: 200px;
         -webkit-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.04);
         box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.04)
