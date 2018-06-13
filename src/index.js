@@ -8,9 +8,10 @@ import iciPopup from './components/ici-popup.vue'
 import iciMessage from './components/ici-message.vue'
 import iciSearch from './components/ici-search.vue'
 import iciHint from './components/ici-hint.vue'
+import iciHeader from './components/ici-header.vue'
 
 export const components = {
-  iciButton, iciLoading, iciIcon, multipleField, radioField, iciInput, iciPopup, iciSearch, iciHint
+  iciButton, iciLoading, iciIcon, multipleField, radioField, iciInput, iciPopup, iciSearch, iciHint,iciHeader
 }
 const install = function (Vue) {
   if (install.installed) return;

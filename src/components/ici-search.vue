@@ -170,10 +170,9 @@
         position: relative;
         display: flex;
         align-items: center;
-        background: rgba(0, 0, 0, .1);
+        background: rgba(205, 205, 205, .5);
         height: 42px;
         border-radius: 7px;
-
         .ici-font, .ici-delete {
             padding: 0 10px;
             flex: none;

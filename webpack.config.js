@@ -16,7 +16,9 @@ module.exports = {
 
   },
   plugins: [
-    new ExtractTextPlugin("[name].css")
+    new ExtractTextPlugin({
+      filename:"[name].css",
+    })
   ],
   module: {
     rules: [
@@ -34,6 +36,7 @@ module.exports = {
           extractCSS: true,
           loaders: {
             css: ExtractTextPlugin.extract({
+
               use: 'css-loader',
               fallback: 'vue-style-loader' // <- 这是vue-loader的依赖，所以如果使用npm3，则不需要显式安装
             })

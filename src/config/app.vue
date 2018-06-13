@@ -23,9 +23,12 @@
                 <MenuItem name="pageSearch">
                     搜索 ici-search
                 </MenuItem>
+              <MenuItem name="pageHeader">
+                导航头部 ici-header
+              </MenuItem>
             </Menu>
         </div>
-        <div class="flex-auto" style="overflow: scroll">
+        <div class="flex-auto" style="overflow-y: scroll;overflow-x: visible">
             <component v-bind:is="currentView"/>
         </div>
     </div>
@@ -39,13 +42,14 @@
     import pagePopup from '../examples/page-popup.vue';
     import pageMessage from '../examples/page-message.vue';
     import pageSearch from '../examples/page-search.vue';
+    import pageHeader from '../examples/page-header.vue';
 
-    var components = {pageButton, pageLoading, pageIcon, pageInput, pagePopup,pageMessage,pageSearch};
+    var components = {pageButton, pageLoading, pageIcon, pageInput, pagePopup,pageMessage,pageSearch,pageHeader};
     export default {
         name: 'app',
         data() {
             return {
-                active: 'pageSearch'
+                active: 'pageHeader'
             };
         },
         computed: {
