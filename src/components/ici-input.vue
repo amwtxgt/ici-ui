@@ -70,7 +70,13 @@
             filter: [Boolean, RegExp, String],
             prefix: [Boolean, Object],//Object 格式为{content:String,value:String},value:真实值
         },
+        watch:{
+          focus(){
+
+          },
+        },
         computed: {
+
             showHint: function () {
 
                 if (!this.hasFocus || !this.hint) {

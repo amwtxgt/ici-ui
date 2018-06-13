@@ -26,7 +26,7 @@ const install = function (Vue) {
   Vue.directive('focus', {
     // 指令的定义
     update: function (el, binding) {
-      if (binding.value) {
+      if (binding.value && binding.value  !== binding.oldValue) {
         setTimeout(function () {
           el.focus();
         }, 150)

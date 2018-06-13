@@ -2,7 +2,7 @@
     <div>
         <div class="title">input 单行输入</div>
         <baseComponent title="基本输入" html='<ici-input></ici-input>'>
-            <ici-input></ici-input>
+            <ici-input :focus="true"></ici-input>
         </baseComponent>
         <baseComponent title="数据绑定 v-model" html='<ici-input v-model="name"></ici-input>'>
             <ici-input v-model="name"></ici-input>
