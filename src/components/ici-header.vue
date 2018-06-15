@@ -53,11 +53,11 @@
     .ici-header-right {
       text-align: right;
       justify-content: flex-end;
-      flex: auto;
+      flex: none;
       height: 100%;
     }
     .ici-header-center {
-
+      flex: auto;
     }
   }
 
