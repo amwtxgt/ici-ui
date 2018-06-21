@@ -49,7 +49,7 @@
         name: 'app',
         data() {
             return {
-                active: 'pageHeader'
+                active: 'pageIcon'
             };
         },
         computed: {
