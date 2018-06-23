@@ -121,7 +121,7 @@
                 this.$emit('select', index)
             },
             keydown(e) {
-                if (!this.hint.length) return false;
+                if (!this.hint || !this.hint.length) return false;
 
                 var min = 0, max = this.hint.length;
                 if (this.showTitle) {
