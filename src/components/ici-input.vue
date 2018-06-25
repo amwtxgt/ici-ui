@@ -228,7 +228,7 @@
             -webkit-transition-property: color, bottom, transform;
             transition-property: color, bottom, transform;
             color: rgba(0, 0, 0, 0.38);
-            font: 400 16px Roboto, RobotoDraft, Helvetica, Arial, sans-serif;
+            font: 400 16px Roboto,RobotoDraft,Helvetica,Arial,sans-serif,"Microsoft YaHei","微软雅黑";
             pointer-events: none;
             position: absolute;
             bottom: 3px;

@@ -166,7 +166,7 @@
         border-color: #EEE;
         font-weight: 300;
         font-size: 16px;
-        font-family: "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+        font-family: Roboto,RobotoDraft,Helvetica,Arial,sans-serif,"Microsoft YaHei","微软雅黑";
         text-decoration: none;
         text-align: center;
         line-height: 40px;
@@ -1253,7 +1253,7 @@
         border-style: solid;
         border-width: 1px;
         border-color: #d4d4d4;
-        font-family: "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+        font-family: Roboto,RobotoDraft,Helvetica,Arial,sans-serif,"Microsoft YaHei","微软雅黑";
         -webkit-box-shadow: 0 2px 7px rgba(0, 0, 0, 0.2);
         box-shadow: 0 2px 7px rgba(0, 0, 0, 0.2);
         border-radius: 3px;
