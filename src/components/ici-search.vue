@@ -2,7 +2,7 @@
     <div class="ici-search-wrap">
         <div class="ici-search">
             <ici-icon class="ici-font" name="icon-sousuo" size="20px" color="rgba(0, 0, 0, .3)"></ici-icon>
-            <input type="text" :value="inputValue" @blur="blur" @input="input" v-focus="focus" @focus="focusEvent"
+            <input type="text" :value="value" @blur="blur" @input="input" v-focus="focus" @focus="focusEvent"
                    @keydown.up.down.stop.prevent="keydown" @keyup.enter.stop.prevent="enter" :placeholder="label">
             <ici-icon class="ici-delete" :class="{show:value}" name="icon-shanchudelete30" size="18px" @click="reset">
             </ici-icon>
@@ -42,7 +42,6 @@
         data() {
             return {
                 selectIndex: -2, //选中的文字提示，-2不选，-1选中默认，>-1选中的索引,
-                inputValue: '',
                 showTitle: false,
                 hasFocus: false,
             };
@@ -62,30 +61,22 @@
             if (this.$slots.title) {
                 this.showTitle = true;
             }
-            if (this.value) {
-                this.inputValue = this.value;
-            }
-
-
         },
         computed: {
             showHint: function () {
                 if (!this.hasFocus || !this.hint) {
                     return false;
-                }
-                else if (this.hint === true && this.hasFocus) {
+                } else if (this.hint === true && this.hasFocus) {
                     return true;
-                }
-                else if (this.hint.length === 0 && !this.showTitle) {
+                } else if (this.hint.length === 0 && !this.showTitle) {
                     return false
-                }
-                else {
+                } else {
                     return true;
                 }
             },
             //是否有值
             isSubstantial: function () {
-                return Boolean(this.inputValue)
+                return Boolean(this.value)
             }
         },
         methods: {
@@ -99,22 +90,15 @@
             },
             input: function (e) {
                 this.selectIndex = -2;
-                this.inputValue = e.target.value
-
-                this.$emit('input', this.inputValue);
-
+                this.$emit('input', e.target.value);
             },
-
             focusEvent: function () {
                 this.hasFocus = true;
             },
             blur: function (e) {
-
                 this.hasFocus = false;
                 var val = e.target.value.replace(/(^\s*)|(\s*$)/g, "");
-
-                this.inputValue = val;
-                this.$emit('input', this.inputValue);
+                this.$emit('input',val);
                 this.$emit('blur');
             },
             select: function (index) {
@@ -122,7 +106,6 @@
             },
             keydown(e) {
                 if (!this.hint || !this.hint.length) return false;
-
                 var min = 0, max = this.hint.length;
                 if (this.showTitle) {
                     min = -1
@@ -144,7 +127,6 @@
                         else {
                             this.selectIndex++
                         }
-
                     }
                     else {
                         this.selectIndex = min;
@@ -152,11 +134,10 @@
                 }
             },
             reset() {
-                this.inputValue = ''
-                this.$emit('input', this.inputValue)
+                this.$emit('input', '')
+                this.$emit('close');
             }
         },
-        components: {}
     }
 </script>
 
