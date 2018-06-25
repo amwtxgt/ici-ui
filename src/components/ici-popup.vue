@@ -1,7 +1,7 @@
 <template>
     <transition name="ici-popup">
         <div v-if="value" class="fms-popup-layer" :class="{mask:mask}">
-            <div class="fms-popup">
+            <div class="fms-popup" :style="{maxWidth:width+'px'}">
                 <div class="fms-popup-title">
                     <slot name="header">{{title}}</slot>
                 </div>
@@ -44,6 +44,10 @@
             },
             mask:Boolean,
             noScroll:Boolean, //不出现滚动条
+            width:{
+              type:Number,
+              default:700
+            }
         },
         mounted(){
            if(this._events.confirm){
@@ -83,7 +87,7 @@
             pointer-events: auto;
         }
         pointer-events: none;
-        position: absolute;
+        position: fixed;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -117,7 +121,7 @@
         }
         .fms-popup {
             pointer-events: auto;
-            max-width: 700px;
+
             width:100%;
             align-items: stretch;
             display: flex;

@@ -75,6 +75,11 @@
             </ici-popup>
             <ici-button @click="popup6 = true">打开弹窗</ici-button>
         </baseComponent>
+      <baseComponent title="大小" html=' <ici-popup v-model="popup8" :width="300"></ici-popup>
+<ici-button @click="popup8= true">打开弹窗</ici-button>'>
+        <ici-popup v-model="popup8" :width="300"></ici-popup>
+        <ici-button @click="popup8= true">打开弹窗</ici-button>
+      </baseComponent>
     </div>
 </template>
 
@@ -89,7 +94,8 @@
                 popup4:false,
                 popup5:false,
                 popup6:false,
-                popup7:false
+                popup7:false,
+                popup8:false
             };
 		},
 		mounted() {
