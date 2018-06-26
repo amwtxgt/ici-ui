@@ -179,7 +179,6 @@
     input {
       flex: auto;
       background: transparent;
-      font-family: Roboto, RobotoDraft, Helvetica, Arial, sans-serif, "Microsoft YaHei", "微软雅黑";
       display: block;
       width: 100%;
       color: #333;
@@ -188,7 +187,6 @@
       outline: none;
       &::placeholder {
         color: rgba(0, 0, 0, .3) !important;
-        font-family: Roboto, RobotoDraft, Helvetica, Arial, sans-serif, "Microsoft YaHei", "微软雅黑" ;
       }
     }
   }

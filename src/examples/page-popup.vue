@@ -77,7 +77,60 @@
         </baseComponent>
       <baseComponent title="大小" html=' <ici-popup v-model="popup8" :width="300"></ici-popup>
 <ici-button @click="popup8= true">打开弹窗</ici-button>'>
-        <ici-popup v-model="popup8" :width="300"></ici-popup>
+        <ici-popup v-model="popup8" :width="300">
+          <div slot="header">sdf</div>
+          <div>sdfsdfds</div>
+          <div>sdfsdfds</div>
+          <div>sdfsdfds</div>
+          <div>sdfsdfds</div>
+          <div>sdfsdfds</div>
+          <div>sdfsdfds</div>
+          <div>sdfsdfds</div>
+          <div>sdfsdfds</div>
+          <div>sdfsdfds</div>
+          <div>sdfsdfds</div>
+          <div>sdfsdfds</div>
+          <div>sdfsdfds</div>
+          <div>sdfsdfds</div>
+          <div>sdfsdfds</div>
+          <div>sdfsdfds</div>
+          <div>sdfsdfds</div>
+          <div>sdfsdfds</div>
+          <div>sdfsdfds</div>
+          <div>sdfsdfds</div>
+          <div>sdfsdfds</div>
+          <div>sdfsdfds</div>
+          <div>sdfsdfds</div>
+          <div>sdfsdfds</div>
+          <div>sdfsdfds</div>
+          <div>sdfsdfds</div>
+          <div>sdfsdfds</div>
+          <div>sdfsdfds</div>
+          <div>sdfsdfds</div>
+          <div>sdfsdfds</div>
+          <div>sdfsdfds</div>
+          <div>sdfsdfds</div>
+          <div>sdfsdfds</div>
+          <div>sdfsdfds</div>
+          <div>sdfsdfds</div>
+          <div>sdfsdfds</div>
+          <div>sdfsdfds</div>
+          <div>sdfsdfds</div>
+          <div>sdfsdfds</div>
+          <div>sdfsdfds</div>
+          <div>sdfsdfds</div>
+          <div>sdfsdfds</div>
+          <div>sdfsdfds</div>
+          <div>sdfsdfds</div>
+          <div>sdfsdfds</div>
+          <div>sdfsdfds</div>
+          <div>sdfsdfds</div>
+          <div>sdfsdfds</div>
+          <div>sdfsdfds</div>
+          <div>sdfsdfds</div>
+          <div>sdfsdfds</div>
+          <div>sdfsdfds</div>
+        </ici-popup>
         <ici-button @click="popup8= true">打开弹窗</ici-button>
       </baseComponent>
     </div>

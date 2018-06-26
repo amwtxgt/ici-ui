@@ -49,7 +49,7 @@
         name: 'app',
         data() {
             return {
-                active: 'pageIcon'
+                active: 'pagePopup'
             };
         },
         computed: {
