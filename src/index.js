@@ -2,6 +2,7 @@ import iciButton from './components/ici-button.vue'
 import iciLoading from './components/ici-loading.vue'
 import iciIcon from './components/ici-icon.vue'
 import iciInput from './components/ici-input.vue'
+import iciInputGroup from './components/ici-input-group'
 import multipleField from './components/multiple_field.vue'
 import radioField from './components/radio_field.vue'
 import iciPopup from './components/ici-popup.vue'
@@ -11,7 +12,7 @@ import iciHint from './components/ici-hint.vue'
 import iciHeader from './components/ici-header.vue'
 
 export const components = {
-  iciButton, iciLoading, iciIcon, multipleField, radioField, iciInput, iciPopup, iciSearch, iciHint,iciHeader
+  iciButton, iciLoading, iciIcon, multipleField, radioField, iciInput,iciInputGroup, iciPopup, iciSearch, iciHint,iciHeader
 }
 const install = function (Vue) {
   if (install.installed) return;

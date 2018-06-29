@@ -1,7 +1,9 @@
 <template>
     <transition name="ici-popup">
-        <div v-if="value" class="fms-popup-layer" :class="{mask:mask}">
-            <div class="fms-popup" :style="{maxWidth:width+'px'}">
+        <div v-if="value" class="fms-popup-layer" :class="{mask:mask}"
+             v-focus="value" tabindex="0"
+             @click.self="$emit('input',false)" @keydown.esc="esc && $emit('input',false)">
+            <div class="fms-popup" :style="{maxWidth:width+'px'}" >
                 <div class="fms-popup-title">
                     <slot name="header">{{title}}</slot>
                 </div>
@@ -42,6 +44,7 @@
                 type: String,
                 default: ''
             },
+            esc:Boolean,
             mask:Boolean,
             noScroll:Boolean, //不出现滚动条
             width:{
@@ -86,6 +89,7 @@
             background-color:rgba(0,0,0,.2);
             pointer-events: auto;
         }
+        outline: none;
         pointer-events: none;
         position: fixed;
         display: flex;
@@ -179,6 +183,7 @@
                 /*}*/
             /*}*/
             .fms-popup-footer {
+                flex:none;
                 padding: 5px 10px;
                 display: flex;
                 .fms-popup-footer-left {

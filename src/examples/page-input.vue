@@ -38,6 +38,11 @@
             <br>
             <div>name 值：<b>{{name}}</b></div>
         </baseComponent>
+      <baseComponent title="带输入提示 label 有value是隐藏 hidden-label" html='<ici-input v-model="name" label="这是提示输入信息" hidden-label></ici-input>'>
+        <ici-input v-model="name" label="这是提示输入信息" hidden-label></ici-input>
+        <br>
+        <div>name 值：<b>{{name}}</b></div>
+      </baseComponent>
         <baseComponent title="获取焦点 focus和失去焦点事件 @blur" html='<ici-input v-model="name" :focus="focus" @blur="focus=false" label="这是提示输入信息"></ici-input>
 data() {
    return {
@@ -71,6 +76,20 @@ data() {
             <br><br><br>
 
         </baseComponent>
+      <div class="title">input组 ici-input-group</div>
+      <baseComponent title="基本输入" html='<ici-input-group>
+  <ici-icon slot="icon" name="icon-qq"></ici-icon>
+  <ici-input label="asdasd"></ici-input>
+  <ici-icon slot="handle" name="icon-qq"></ici-icon>
+  <ici-icon slot="handle" name="icon-qq"></ici-icon>
+</ici-input-group>'>
+        <ici-input-group>
+          <ici-icon slot="icon" name="icon-qq"></ici-icon>
+          <ici-input label="asdasd"></ici-input>
+          <ici-icon slot="handle" name="icon-qq"></ici-icon>
+          <ici-icon slot="handle" name="icon-qq"></ici-icon>
+        </ici-input-group>
+      </baseComponent>
     </div>
 </template>
 

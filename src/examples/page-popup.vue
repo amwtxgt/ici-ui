@@ -35,11 +35,21 @@
     <div style="padding:10px 20px;">这里是内容这里是内容这里是内容</div>
 </ici-popup>
 <ici-button @click="popup7= true">打开弹窗</ici-button>'>
-            <ici-popup v-model="popup7" mask title="我是标题">
-                <div style="padding:10px 20px;">这里是内容这里是内容这里是内容</div>
-            </ici-popup>
-            <ici-button @click="popup7= true">打开弹窗</ici-button>
-        </baseComponent>
+      <ici-popup v-model="popup7" mask title="我是标题">
+        <div style="padding:10px 20px;">这里是内容这里是内容这里是内容</div>
+      </ici-popup>
+      <ici-button @click="popup7= true">打开弹窗</ici-button>
+    </baseComponent>
+
+      <baseComponent title="esc键关闭 esc" html='<ici-popup mask v-model="popup9" esc title="我是标题">
+    <div style="padding:10px 20px;">这里是内容这里是内容这里是内容</div>
+</ici-popup>
+<ici-button @click="popup9= true">打开弹窗</ici-button>'>
+        <ici-popup v-model="popup9" esc  title="我是标题">
+          <div style="padding:10px 20px;">这里是内容这里是内容这里是内容</div>
+        </ici-popup>
+        <ici-button @click="popup9= true">打开弹窗</ici-button>
+      </baseComponent>
 
         <baseComponent title="添加确认事件 @confirm" html='<ici-popup v-model="popup5" title="我是标题" @confirm="popup5=false">
     <div style="padding:10px 20px;">这里是内容这里是内容这里是内容</div>
@@ -148,7 +158,8 @@
                 popup5:false,
                 popup6:false,
                 popup7:false,
-                popup8:false
+                popup8:false,
+                popup9:false
             };
 		},
 		mounted() {
