@@ -35,7 +35,7 @@
     <div style="padding:10px 20px;">这里是内容这里是内容这里是内容</div>
 </ici-popup>
 <ici-button @click="popup7= true">打开弹窗</ici-button>'>
-      <ici-popup v-model="popup7" mask title="我是标题">
+      <ici-popup markClose v-model="popup7" mask title="我是标题">
         <div style="padding:10px 20px;">这里是内容这里是内容这里是内容</div>
       </ici-popup>
       <ici-button @click="popup7= true">打开弹窗</ici-button>

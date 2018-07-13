@@ -1,9 +1,9 @@
 {
   "name": "ici-ui",
   "description": "ici通用组件",
-  "version": "0.3.87",
-  "author": "amwtxgt <214529161@qq.com>",
-  "license": "MIT",
+  "version": "0.3.116",
+  "author": "huangmin",
+  "license": "ISC",
   "private": false,
   "main": "lib/ici-ui.min.js",
   "scripts": {
@@ -17,8 +17,6 @@
   "keywords": [
     "ici"
   ],
-  "author": "huangmin",
-  "license": "ISC",
   "bugs": {
     "url": "https://github.com/amwtxgt/ici-ui/issues"
   },
@@ -33,16 +31,16 @@
   ],
   "devDependencies": {
     "babel-core": "^6.26.0",
-    "babel-loader": "^7.1.2",
+    "babel-loader": "^7.1.5",
     "babel-preset-env": "^1.6.0",
     "babel-preset-stage-3": "^6.24.1",
-    "cross-env": "^5.0.5",
+    "cross-env": "^5.2.0",
     "css-loader": "^0.28.7",
     "extract-text-webpack-plugin": "^3.0.2",
     "file-loader": "^1.1.4",
     "highlight.js": "^9.12.0",
-    "iview": "^2.14.2",
-    "less": "^3.0.4",
+    "iview": "^2.14.3",
+    "less": "^3.5.3",
     "less-loader": "^4.1.0",
     "vue-loader": "^13.0.5",
     "vue-template-compiler": "^2.4.4",

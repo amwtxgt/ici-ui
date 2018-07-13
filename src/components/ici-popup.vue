@@ -2,8 +2,8 @@
     <transition name="ici-popup">
         <div v-if="value" class="fms-popup-layer" :class="{mask:mask}"
              v-focus="value" tabindex="0"
-             @click.self="$emit('input',false)" @keydown.esc="esc && $emit('input',false)">
-            <div class="fms-popup" :style="{maxWidth:width+'px'}" >
+             @click.self="clickMark" @keydown.esc.stop="esc && $emit('input',false)">
+            <div class="fms-popup" :style="{maxWidth:width+'px'}">
                 <div class="fms-popup-title">
                     <slot name="header">{{title}}</slot>
                 </div>
@@ -47,6 +47,7 @@
             esc:Boolean,
             mask:Boolean,
             noScroll:Boolean, //不出现滚动条
+            markClose:Boolean, //点击遮罩层关闭
             width:{
               type:Number,
               default:700
@@ -58,6 +59,11 @@
            }
         },
         methods: {
+          clickMark(){
+            if(this.markClose){
+              this.close()
+            }
+          },
             close() {
                 this.$emit('input', false)
             }

@@ -8,7 +8,7 @@
                 <ici-icon v-else-if="type=='message'" size="20px" name="icon-tishi"></ici-icon>
                 <ici-icon v-else :name="type" size="20px"></ici-icon>
             </div>
-            <div class="ici-message-body">{{message}}</div>
+            <div class="ici-message-body" v-html="message"></div>
             <div v-show="showClose" class="ici-message-right" @click="close">
                 <ici-icon name="icon-shanchudelete30"></ici-icon>
             </div>

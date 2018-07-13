@@ -4,6 +4,13 @@
         <baseComponent title="基本输入" html='<ici-input></ici-input>'>
             <ici-input :focus="true"></ici-input>
         </baseComponent>
+      <baseComponent title="返白 white" html='<ici-input v-model="name"></ici-input>'>
+        <div  style="background:#000">
+          <ici-input v-model="name" white></ici-input>
+          <br>
+        </div>
+        <div>name 值：<b>{{name}}</b></div>
+      </baseComponent>
         <baseComponent title="数据绑定 v-model" html='<ici-input v-model="name"></ici-input>'>
             <ici-input v-model="name"></ici-input>
             <br>
@@ -61,7 +68,7 @@ data() {
     <div slot-scope="list">\{\{list.item\}\}</div>
     <!--这里的list等于hint传入的值 ，list.item表示hint数组的某一项-->
 </ici-input>'>
-            <ici-input :hint="[1,2,3]" v-model="password" label="密码" @select="select">
+            <ici-input :hint="[1,2,'',3,'',5]" v-model="password" label="密码" @select="select">
                 <div slot="title">这是提示默认选中项 index为-1</div>
                 <div slot-scope="list">{{list}}{{list.item}}</div>
             </ici-input>
