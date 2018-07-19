@@ -2,6 +2,9 @@
     <div class="components flex">
         <div class="flex-none">
             <Menu theme="light" :active-name="active" @on-select="onselect">
+              <MenuItem name="pageImagePreview">
+                图片查看器 ici-image-preview
+              </MenuItem>
                 <MenuItem name="pageButton">
                     按钮 ici-button
                 </MenuItem>
@@ -43,13 +46,14 @@
     import pageMessage from '../examples/page-message.vue';
     import pageSearch from '../examples/page-search.vue';
     import pageHeader from '../examples/page-header.vue';
+    import pageImagePreview from '../examples/page-image-preview.vue'
 
-    var components = {pageButton, pageLoading, pageIcon, pageInput, pagePopup,pageMessage,pageSearch,pageHeader};
+    var components = {pageButton, pageLoading, pageIcon, pageInput, pagePopup,pageMessage,pageSearch,pageHeader,pageImagePreview};
     export default {
         name: 'app',
         data() {
             return {
-                active: 'pagePopup'
+                active: 'pageImagePreview'
             };
         },
         computed: {

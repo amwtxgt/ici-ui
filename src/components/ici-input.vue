@@ -1,6 +1,6 @@
 <template>
-  <div class="fms-input">
-    <div v-if="prefix" class="prefix">{{prefix.content}}</div>
+  <div class="fms-input" :class="{white:white}">
+    <div v-if="prefix" class="prefix" @click="$emit('click-prefix')" :style="prefixStyle">{{prefix.content}}</div>
     <div class="input-inner">
       <input @blur="blur" class="fms-input-input" :type="password?'password':'text'"
              :value="inputValue" @input="input" v-focus="focus" @focus="focusEvent" :placeholder="hiddenLabel?label:''"
@@ -20,7 +20,7 @@
         <div v-if="hint instanceof Array">
           <!--组件内部不知道，数组内的对象属性，所以需要暴露出去-->
           <div v-for="(item,index) of hint" @mousedown="select(index)"
-               class="fms-input-hint-li" :class="{active:selectIndex==index}">
+               class="fms-input-hint-li" :class="{active:selectIndex==index}" v-show="item">
             <slot :item="item" :index="index"></slot>
           </div>
         </div>
@@ -53,7 +53,6 @@
         initValue: '',//初始内容
         showTitle: false,
         hasFocus: false,
-
       }
     },
     props: {
@@ -69,8 +68,19 @@
       focus: Boolean,
       hiddenLabel: Boolean,
       required: Boolean,
+      white:Boolean,
+      prefixStyle:{
+        type:String,
+        default:''
+      },
       filter: [Boolean, RegExp, String],
       prefix: [Boolean, Object],//Object 格式为{content:String,value:String},value:真实值
+    },
+    watch:{
+      prefix(){
+        var e = {target:{value:this.inputValue}}
+        this.input(e)
+      }
     },
     computed: {
 
@@ -95,28 +105,35 @@
       }
     },
     mounted() {
+
       if (this.$slots.title) {
         this.showTitle = true;
       }
-      if (this.value) {
-        this.inputValue = this.value;
-        //是否有过滤
-        if (this.filter) {
-          this.inputValue = this.inputValue.replace(this.filter, '');
-        }
 
-        if (this.prefix && this.prefix.value && this.inputValue.indexOf(this.prefix.value) === 0) {
-          var reg = new RegExp('^' + this.prefix.value, 'g');
-          this.inputValue = this.inputValue.replace(reg, '');
-        }
-
-      }
-
-      //初始内容
-      this.initValue = this.inputValue;
+      this.updateValue(this.value)
 
     },
     methods: {
+      clear(){
+        this.inputValue = '';
+        this.$emit('input', this.inputValue);
+      },
+      updateValue(val){
+        if (val && this.inputValue !==val) {
+          this.inputValue = val;
+          //是否有过滤
+          if (this.filter) {
+            this.inputValue = this.inputValue.replace(this.filter, '');
+          }
+
+          if (this.prefix && this.prefix.value && this.inputValue.indexOf(this.prefix.value) === 0) {
+            var reg = new RegExp('^' + this.prefix.value, 'g');
+            this.inputValue = this.inputValue.replace(reg, '');
+          }
+        }
+        //初始内容
+        this.initValue = this.inputValue;
+      },
       enter: function (e) {
         if (this.selectIndex !== -2) {
           this.$emit('select', this.selectIndex)
@@ -181,26 +198,32 @@
       keydown(e) {
         if (!this.hint.length) return false;
 
-        var min = 0, max = this.hint.length;
+        var min = 0, max = this.hint.length-1;
         if (this.showTitle) {
-          min = -1
+            min = -1
         }
 
         if (e.key == 'ArrowUp') {
           if (this.selectIndex > min) {
             this.selectIndex--
+          } else {
+            this.selectIndex = max;
           }
-          else {
-            this.selectIndex = max - 1;
+          console.log(this.hint[this.selectIndex])
+          if(!this.hint[this.selectIndex] && this.selectIndex!=-1){
+            this.selectIndex = this.selectIndex>min? this.selectIndex-1:max;
           }
         }
         else {
-          if (this.selectIndex < max - 1) {
+          if (this.selectIndex < max) {
             if (this.selectIndex == -2 && !this.showTitle) {
               this.selectIndex = 0;
             }
             else {
               this.selectIndex++
+            }
+            if(!this.hint[this.selectIndex]){
+              this.selectIndex = this.selectIndex<max? this.selectIndex+1:min;
             }
           }
           else {
@@ -221,6 +244,7 @@
     flex-wrap: nowrap;
     width: 100%;
     padding-top: 3px;
+
     label.fms-input-label {
       text-align: left;
       -webkit-transform-origin: bottom left;
@@ -257,7 +281,21 @@
       position: relative;
       flex: auto;
     }
+    &.white{
+      label.fms-input-label{
+        color: rgba(255, 255, 255, 0.38);
+        &.input-label-foucs {
+          color: rgba(255,255,255,.7);
 
+        }
+      }
+      input{
+        color: rgba(255,255,255,.7) !important;
+      }
+      .fms-input-status {
+        background: rgba(255,255,255,.7) !important;
+      }
+    }
     input {
       display: block;
       width: 100%;

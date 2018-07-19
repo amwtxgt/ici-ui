@@ -3,7 +3,7 @@
 		<div class="fms-input-icon">
 			<slot name="icon"></slot>
 		</div>
-		<div class="fms-input-content">
+		<div class="fms-input-content" :style="{height:height=='auto'?'auto':height+'px',overflow:overflow}">
 			<slot></slot>
 		</div>
 		<div class="fms-input-handle">
@@ -15,15 +15,17 @@
 <script>
 	export default {
 		name: "fms-input-group",
-		data() {
-			return {};
-		},
-		mounted() {
-		},
-		beforeDestroy() {
-		},
-		methods: {},
-		components: {}
+		props:{
+		  height:{
+		    type:[Number,String],
+        default:48
+      },
+      overflow:{
+        type:String,
+        default:'hidden'
+      }
+    },
+
 	}
 </script>
 
@@ -33,7 +35,6 @@
 		position: relative;
 		box-sizing: border-box;
 		display: flex;
-		align-items: center;
 		padding-right: 5px;
 		width: 100%;
 		.fms-input-icon-pic {
@@ -47,8 +48,8 @@
 		}
 		.fms-input-icon {
 			width: 40px;
-			height: 40px;
-			margin: 10px 15px 0 20px;
+			height: 30px;
+			margin: 15px 15px 0 20px;
 			font-size: 20px;
 			display: inline-block;
 			flex-shrink: 0;
@@ -63,12 +64,14 @@
 			flex:auto;
 			display: flex;
 			position: relative;
+
 			>*{
 				margin:0 5px;
 			}
 		}
 		.fms-input-handle {
 			position: relative;
+      margin-top:10px;
 			width: 90px;
 			z-index: 0;
 			visibility: hidden;
@@ -76,18 +79,19 @@
 			transition: background .3s;
 			flex-shrink: 0;
 			outline: none;
-			overflow: hidden;
 			text-align: center;
 			color: #999;
+      height: 35px;
 			>*{
 				float:left;
-				height: 45px;
-				width: 45px;
-				line-height: 45px !important;
+				height: 40px;
+				width: 40px;
+
+				line-height: 40px !important;
 				font-size: 20px !important;
 				border: 0;
 				border-radius: 50%;
-				margin-right:-5px;
+
 				cursor: pointer;
 				display: inline-block;
 				&:hover {

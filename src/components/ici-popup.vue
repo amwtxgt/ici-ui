@@ -2,12 +2,12 @@
     <transition name="ici-popup">
         <div v-if="value" class="fms-popup-layer" :class="{mask:mask}"
              v-focus="value" tabindex="0"
-             @click.self="$emit('input',false)" @keydown.esc="esc && $emit('input',false)">
-            <div class="fms-popup" :style="{maxWidth:width+'px'}" >
-                <div class="fms-popup-title">
+             @click.self="clickMark" @keydown.esc.stop="esc && $emit('input',false)">
+            <div class="fms-popup" :style="{maxWidth:width+'px'}">
+                <div class="fms-popup-title" :class="titleClass" >
                     <slot name="header">{{title}}</slot>
                 </div>
-                <div class="fms-popup-body" :class="{noscroll:noScroll}">
+                <div class="fms-popup-body" :class="{noscroll:noScroll}" :style="{'background-color': bgColor}">
                     <!--slot-->
                     <slot></slot>
                 </div>
@@ -44,9 +44,18 @@
                 type: String,
                 default: ''
             },
+            bgColor:{
+              type:String,
+              default:'#fff'
+            },
+            titleClass:{
+              type:String,
+              default:''
+            },
             esc:Boolean,
             mask:Boolean,
             noScroll:Boolean, //不出现滚动条
+            markClose:Boolean, //点击遮罩层关闭
             width:{
               type:Number,
               default:700
@@ -58,6 +67,11 @@
            }
         },
         methods: {
+          clickMark(){
+            if(this.markClose){
+              this.close()
+            }
+          },
             close() {
                 this.$emit('input', false)
             }
@@ -137,7 +151,7 @@
             border-radius: 2px;
             box-shadow: 0 12px 15px 0 rgba(0, 0, 0, 0.24);
             outline: none;
-            max-height: 100%;
+            max-height: 95%;
             .fms-popup-title {
                 &:empty{
                     /*background-color: #eee;*/

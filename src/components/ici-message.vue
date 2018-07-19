@@ -8,7 +8,7 @@
                 <ici-icon v-else-if="type=='message'" size="20px" name="icon-tishi"></ici-icon>
                 <ici-icon v-else :name="type" size="20px"></ici-icon>
             </div>
-            <div class="ici-message-body">{{message}}</div>
+            <div class="ici-message-body" v-html="message"></div>
             <div v-show="showClose" class="ici-message-right" @click="close">
                 <ici-icon name="icon-shanchudelete30"></ici-icon>
             </div>
@@ -28,7 +28,6 @@
     var rom = Math.random();
 
     export default {
-
         name: "ici-message",
         data: function () {
             return {
@@ -48,11 +47,18 @@
         },
         methods: {
             _append() {
+
                 if (!window.document.getElementById('ici-messages-' + this.rom)) {
+                  if(this.$el){
+                    window.document.body.appendChild(this.$el);
+                  }else{
                     var message = window.document.createElement('div');
                     message.setAttribute('id', 'ici-messages-' + rom);
+                    message.setAttribute('class','ici-message-wrap')
                     window.document.body.appendChild(message);
                     this.$mount(message);
+                  }
+
                 }
             },
 
