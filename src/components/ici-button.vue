@@ -159,7 +159,7 @@
     };
 </script>
 
-<style  lang="less">
+<style lang="less">
     .ici-button {
         color: #666;
         background-color: #EEE;

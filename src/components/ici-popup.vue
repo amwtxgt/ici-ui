@@ -1,6 +1,6 @@
 <template>
     <transition name="ici-popup">
-        <div v-if="value" class="fms-popup-layer" :class="{mask:mask}"
+        <div v-if="value" class="fms-popup-layer" :class="{mask:mask}" :style="{position:position}"
              v-focus="value" tabindex="0"
              @click.self="clickMark" @keydown.esc.stop="esc && $emit('input',false)">
             <div class="fms-popup" :style="{maxWidth:width+'px'}">
@@ -51,6 +51,10 @@
             titleClass:{
               type:String,
               default:''
+            },
+            position:{
+              type:String,
+              default:'fixed'
             },
             esc:Boolean,
             mask:Boolean,
@@ -105,7 +109,6 @@
         }
         outline: none;
         pointer-events: none;
-        position: fixed;
         display: flex;
         justify-content: center;
         align-items: center;

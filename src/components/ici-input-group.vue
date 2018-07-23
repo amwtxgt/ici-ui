@@ -6,7 +6,7 @@
 		<div class="fms-input-content" :style="{height:height=='auto'?'auto':height+'px',overflow:overflow}">
 			<slot></slot>
 		</div>
-		<div class="fms-input-handle">
+		<div class="fms-input-handle" :class="{'no-handle':noHandle}">
 			<slot name="handle"></slot>
 		</div>
 	</div>
@@ -23,7 +23,8 @@
       overflow:{
         type:String,
         default:'hidden'
-      }
+      },
+      noHandle:Boolean,
     },
 
 	}
@@ -82,6 +83,9 @@
 			text-align: center;
 			color: #999;
       height: 35px;
+      &.no-handle{
+        width: 20px;
+      }
 			>*{
 				float:left;
 				height: 40px;
@@ -105,6 +109,9 @@
 		&:hover {
 			.fms-input-handle {
 				visibility: visible;
+        &.no-handle{
+          visibility: hidden;
+        }
 			}
 		}
 	}
