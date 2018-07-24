@@ -1,5 +1,6 @@
 <template>
     <div class="ici-message-wrap" :class="{'message-top':position==='top','message-center':position==='center'}" :id="'ici-messages-'+rom">
+      <div class="message-mask" :class="{'show':type=='loading'&& show}"></div>
         <div class="ici-message" :class="{'message-show':show}">
             <div class="ici-message-left" v-if="type">
                 <ici-loading v-if="type=='loading'" back-white></ici-loading>
@@ -190,5 +191,20 @@
             }
         }
     }
+
+  .message-mask{
+    position: fixed;
+    top:0;
+    left:0;
+    bottom:0;
+    right:0;
+    background:rgba(0,0,0,.5);
+    opacity: 0;
+    transition: opacity .333s;
+    &.show{
+      opacity: 1;
+      pointer-events: auto;
+    }
+  }
 
 </style>
