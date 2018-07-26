@@ -106,11 +106,6 @@ const install = function (Vue) {
   Vue.directive('imgpreview', {
     inserted: function (el, binding) {
       el.addEventListener('click', (e) => {
-        var id = el.getAttribute('data-id'),sel = 'img.'+id;
-        if(id){
-             var newel = document.querySelector(sel);
-             el = newel;
-         }
         var width = el.width, height = el.height, x = el.x, y = el.y, nativeWidth = el.naturalWidth,
           nativeHeight = el.naturalHeight;
           previewMain({width, height, x, y, nativeWidth, nativeHeight, src: el.src})
