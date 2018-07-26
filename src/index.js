@@ -87,29 +87,20 @@ const install = function (Vue) {
               height = width/nativeWidth*nativeHeight;
               y =  y+(el.offsetHeight-height)/2
             }
-
-
-
-
             previewMain({width, height, x, y, nativeWidth, nativeHeight, src: imgUrl})
           };
           img.onerror = function (err) {
             console.log('图片错误', err)
-
           }
-
-        }
-
-        function next() {
-
         }
       })
     }
-  })
+  });
+
   Vue.directive('imgpreview', {
     inserted: function (el, binding) {
       el.addEventListener('click', (e) => {
-        var id = el.getAttribute('data-id'),sel = 'img.'+id;
+        var id = el.getAttribute('data-id'), sel = 'img.'+id;
         if(id){
              var newel = document.querySelector(sel);
              el = newel;

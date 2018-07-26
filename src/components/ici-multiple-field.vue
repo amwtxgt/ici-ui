@@ -29,8 +29,8 @@
 
 		created() {
       var v = JSON.parse(JSON.stringify(this.values));
-      console.log(v[0] && v[0][0])
-      if(v[0] && v[0][0]){
+      console.log('asdfsadf',v)
+      if(v[0] && v[0][0] instanceof Array){
         var d = []
         v.forEach((v2)=>{
           v2.forEach((v3)=>{
