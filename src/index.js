@@ -3,8 +3,8 @@ import iciLoading from './components/ici-loading.vue'
 import iciIcon from './components/ici-icon.vue'
 import iciInput from './components/ici-input.vue'
 import iciInputGroup from './components/ici-input-group'
-import multipleField from './components/multiple_field.vue'
-import radioField from './components/radio_field.vue'
+import iciMultipleField from './components/ici-multiple-field'
+import iciRadioField from './components/ici-radio-field'
 import iciPopup from './components/ici-popup.vue'
 import iciMessage from './components/ici-message.vue'
 import iciSearch from './components/ici-search.vue'
@@ -12,12 +12,14 @@ import iciHint from './components/ici-hint.vue'
 import iciHeader from './components/ici-header.vue'
 import iciImagePreview from './components/ici-image-preview.vue'
 
+import * as funs from './assets/functions'
+
 export const components = {
   iciButton,
   iciLoading,
   iciIcon,
-  multipleField,
-  radioField,
+  iciMultipleField,
+  iciRadioField,
   iciInput,
   iciInputGroup,
   iciPopup,
@@ -33,6 +35,7 @@ const install = function (Vue) {
 
   var message = new Vue(iciMessage);
   Vue.prototype.$icimsg = message;
+  Vue.prototype.$funs = funs;
 
   var preview = new Vue(iciImagePreview);
   var previewMain = function (obj) {
