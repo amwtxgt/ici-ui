@@ -14,7 +14,13 @@
       <ici-multiple-field :values="['aaa','bbb','ccc']" editable v-model="multiple" ></ici-multiple-field>
     </baseComponent>
     <baseComponent title="多选 可编辑 可删除" html=' <ici-multiple-field :values="["aaa","bbb","ccc"]" editable remove  v-model="multiple" ></ici-multiple-field>'>
-      <ici-multiple-field :values="['aaa','bbb','ccc']" editable remove v-model="multiple" ></ici-multiple-field>
+      <ici-multiple-field :values="[['aaa','bbb','ccc'],['aaaa']]" editable remove v-model="multiple" ></ici-multiple-field>
+    </baseComponent>
+    <baseComponent title="单选 值映射 （值映射时，编辑删除无效）" html='<ici-radio-field v-model="radio1" :values="[{content:"我是一",value:1},{content:"我是二",value:"sdfs"},{content:"我是三",value:3}]"></ici-radio-field>'>
+      <ici-radio-field v-model="radio1" :values="[{content:'我是一',value:1},{content:'我是二',value:'sdfs'},{content:'我是三',value:3}]"></ici-radio-field>
+    </baseComponent>
+    <baseComponent title="多选 值映射 （值映射时，编辑删除无效）" html=' <ici-multiple-field v-model="multiple" :values="[{content:"我是一",value:1},{content:"我是二",value:"sdfs"},{content:"我是三",value:3}]"></ici-multiple-field>'>
+      <ici-multiple-field v-model="multiple" :values="[{content:'我是一',value:1},{content:'我是二',value:'sdfs'},{content:'我是三',value:3}]"></ici-multiple-field>
     </baseComponent>
   </div>
 </template>

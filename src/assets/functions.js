@@ -72,9 +72,13 @@ export function arrayUnique (arr) {
   var res = [];
   var json = {};
   for (var i = 0; i < arr.length; i++) {
-    if (!json[arr[i]]) {
+    var key = arr[i]
+    if(typeof arr[i] ==='object' && arr[i]!=null){
+      key = JSON.stringify(arr[i])
+    }
+    if (!json[key]) {
       res.push(arr[i]);
-      json[arr[i]] = 1;
+      json[key] = 1;
     }
   }
   return res;

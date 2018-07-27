@@ -1,12 +1,12 @@
 <template>
   <div class="radio_field" v-if="values && values instanceof Array">
-    <div class="radio_field" v-for="(item) of newValue" :key="`radio_field${item.index}${item.value}`">
-			<span :style="{fontSize:size}" :class="{'read-write':editIndex===item.index,'active':item.value==value}"
-            :contenteditable="editIndex===item.index"
-            @blur="blur(item.index,$event)" @keydown.stop.prevent.enter="blur(item.index,$event)"
+    <div class="radio_field" v-for="(item,index) of copyValues" :key="`radio_field${index}${item.value}`">
+			<span :style="{fontSize:size}" :class="{'read-write':editIndex===index ,'active':item.value==value}"
+            :contenteditable="editIndex===index"  @blur="blur(index,$event)"
+            @keydown.stop.prevent.enter="blur(index,$event)"
             @paste="$funs.contenteditable"
-            @dblclick="dblclick(item.index,$event)" v-focus="editIndex==item.index"
-            @click="select(item.value,$event)">{{item.value}}</span>
+            @dblclick="dblclick(index,$event)" v-focus="editIndex==index"
+            @click="select(item.value,$event)">{{item.content}}</span>
     </div>
 
       <ici-button class="radio-btn" shape="circle" type="hollow" size="small"  @click.native="editIndex=-1"
@@ -20,70 +20,18 @@
 </template>
 
 <script>
-
+  import fieldMixin from '../mixins/fieldMixin'
   export default {
     name: "radio_field",
-    data() {
-      return {
-        editIndex: -2,  //编辑位置控制，-2无编辑位置，-1新增编辑 ，>=0编辑位置的索引
-        copyValues: [],
-      }
-    },
-
-    created() {
-      this.copyValues = JSON.parse(JSON.stringify(this.$funs.arrayUnique(this.values)));
-    },
-    computed: {
-      newValue() {
-        var arr = [];
-        if (this.copyValues instanceof Array) {
-          this.copyValues.forEach((val, index) => {
-            if (!arr.some(val2 => val == val2.value)) {
-              if (val) {
-                arr.push({
-                  value: val,
-                  index: index,
-                })
-              }
-            }
-          });
-        }
-        return arr;
-      }
-    },
+    mixins: [fieldMixin],
     props: {
-      values: {
-        type: Array,
-        default() {
-          return []
-        }
-      },
       value: {
-        type: String,
+        type: [String,Number],
         default: ''
       },
-      size:{
-        type:String,
-        default:'14px'
-      },
-      editable: Boolean,
     },
     methods: {
-      //添加时，失去焦点的操作
-      addblur(e) {
-        var v = this.$funs.trim(e.target.innerText)
-        console.log(v)
-        if (v && this.editIndex >= -1 && !this.copyValues.some(val => val === v)) {
-          this.copyValues.push(v)
-          this.blur(this.newValue.length - 1, e)
 
-        }
-        else {
-          console.log('asdfsdf')
-          this.editIndex = -2;
-        }
-
-      },
       select(val) {
         this.$emit('input', val);
       },
@@ -95,17 +43,17 @@
         var v = this.$funs.trim(e.target.innerText);
         if (!v) {
           this.$delete(this.copyValues, index)
-        }
-        else {
-          this.$set(this.copyValues, index, v)
+        } else {
+          this.$set(this.copyValues, index, {content:v,value:v})
         }
         this.editIndex = -2;
         this.$emit('input', v);
       },
 
       dblclick(index, e) {
-        if (this.editable) {
+        if (this.editable && !this.valueMapping) {
           this.editIndex = index
+          this.select(e.target.innerText, true);
         }
       }
     }
@@ -138,7 +86,6 @@
       border: 1px solid #C01639;
 
     }
-
   }
 
   .radio-btn {
