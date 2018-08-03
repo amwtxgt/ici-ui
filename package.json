@@ -1,7 +1,7 @@
 {
   "name": "ici-ui",
   "description": "ici通用组件",
-  "version": "0.3.140",
+  "version": "0.4.5",
   "author": "huangmin",
   "license": "ISC",
   "private": false,
@@ -32,6 +32,7 @@
   "devDependencies": {
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.5",
+    "babel-plugin-import": "^1.8.0",
     "babel-preset-env": "^1.6.0",
     "babel-preset-stage-3": "^6.24.1",
     "cross-env": "^5.2.0",

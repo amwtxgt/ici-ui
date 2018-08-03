@@ -2,8 +2,11 @@
   <div class="components flex">
     <div class="flex-none">
       <Menu theme="light" :active-name="active" @on-select="onselect">
+        <MenuItem name="pageBgImg">
+          背景图 ici-bg-img
+        </MenuItem>
         <MenuItem name="pageField">
-          数据选择 pageField
+          数据选择 ici-Field
         </MenuItem>
         <MenuItem name="pageImagePreview">
           图片查看器 ici-image-preview
@@ -51,6 +54,7 @@
   import pageHeader from '../examples/page-header.vue';
   import pageImagePreview from '../examples/page-image-preview.vue'
   import pageField from '../examples/page-field'
+  import pageBgImg from '../examples/page-bg-image'
 
   var components = {
     pageButton,
@@ -62,13 +66,14 @@
     pageSearch,
     pageHeader,
     pageImagePreview,
-    pageField
+    pageField,
+    pageBgImg
   };
   export default {
     name: 'app',
     data() {
       return {
-        active: 'pageField'
+        active: 'pageBgImg'
       };
     },
     computed: {

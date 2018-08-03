@@ -25,6 +25,7 @@ export default {
   },
   created(){
     var v = JSON.parse(JSON.stringify(this.$funs.arrayUnique(this.values)));
+    console.log(v)
     if(v.every((val)=>val && val.value && val.content)) {
       this.valueMapping = true;
       this.copyValues = v;
@@ -43,7 +44,7 @@ export default {
       })
       this.copyValues = d;
     }else{
-      this.values.forEach((val)=>{
+      v.forEach((val)=>{
         this.copyValues.push({
           content:val,
           value:val,

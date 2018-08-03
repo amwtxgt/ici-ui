@@ -104,7 +104,7 @@
 
     .fms-popup-layer {
         &.mask{
-            background-color:rgba(0,0,0,.2);
+            background-color:rgba(0,0,0,.4);
             pointer-events: auto;
         }
         outline: none;
@@ -142,7 +142,6 @@
         }
         .fms-popup {
             pointer-events: auto;
-
             width:100%;
             align-items: stretch;
             display: flex;

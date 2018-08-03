@@ -76,7 +76,7 @@ export function arrayUnique (arr) {
     if(typeof arr[i] ==='object' && arr[i]!=null){
       key = JSON.stringify(arr[i])
     }
-    if (!json[key]) {
+    if (!json[key] && arr[i]) {
       res.push(arr[i]);
       json[key] = 1;
     }

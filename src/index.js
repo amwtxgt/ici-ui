@@ -11,6 +11,7 @@ import iciSearch from './components/ici-search.vue'
 import iciHint from './components/ici-hint.vue'
 import iciHeader from './components/ici-header.vue'
 import iciImagePreview from './components/ici-image-preview.vue'
+import iciBgimg from './components/ici-bgimg.vue'
 
 import * as funs from './assets/functions'
 
@@ -25,7 +26,8 @@ export const components = {
   iciPopup,
   iciSearch,
   iciHint,
-  iciHeader
+  iciHeader,
+  iciBgimg
 }
 const install = function (Vue) {
   if (install.installed) return;
@@ -65,6 +67,9 @@ const install = function (Vue) {
   }
   Vue.directive('bgpreview', {
     inserted: function (el, binding) {
+      if(binding.value === false){
+        return
+      }
       el.addEventListener('click', (e) => {
         var reg = /url\("(.+)"\)/.exec(el.style.backgroundImage);
         if (reg) {
@@ -99,6 +104,9 @@ const install = function (Vue) {
 
   Vue.directive('imgpreview', {
     inserted: function (el, binding) {
+      if(binding.value === false){
+        return
+      }
       el.addEventListener('click', (e) => {
         var id = el.getAttribute('data-id'), sel = 'img.'+id;
         if(id){

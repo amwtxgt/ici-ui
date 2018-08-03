@@ -5,13 +5,13 @@
       <ici-radio-field v-model="radio1" :values="['1212','AASDF']"></ici-radio-field>
     </baseComponent>
     <baseComponent title="单选 可编辑" html='  <ici-radio-field v-model="radio1" editable :values="["aaa","bbb","ccc"]"></ici-radio-field>'>
-      <ici-radio-field v-model="radio1" editable :values="['EBG','SDGESDF']"></ici-radio-field>
+      <ici-radio-field v-model="radio1" editable :values="['EBG','SDGESDF','']"></ici-radio-field>
     </baseComponent>
     <baseComponent title="多选" html=' <ici-multiple-field :values="["aaa","bbb","ccc"]"  v-model="multiple" ></ici-multiple-field>'>
-      <ici-multiple-field :values="['aaa','bbb','ccc']"  v-model="multiple" ></ici-multiple-field>
+      <ici-multiple-field :values="['aaa','bbb','ccc','']"  v-model="multiple" ></ici-multiple-field>
     </baseComponent>
     <baseComponent title="多选 可编辑" html=' <ici-multiple-field :values="["aaa","bbb","ccc"]" editable v-model="multiple" ></ici-multiple-field>'>
-      <ici-multiple-field :values="['aaa','bbb','ccc']" editable v-model="multiple" ></ici-multiple-field>
+      <ici-multiple-field :values="['aaa','bbb','ccc','ccc']" editable v-model="multiple" ></ici-multiple-field>
     </baseComponent>
     <baseComponent title="多选 可编辑 可删除" html=' <ici-multiple-field :values="["aaa","bbb","ccc"]" editable remove  v-model="multiple" ></ici-multiple-field>'>
       <ici-multiple-field :values="[['aaa','bbb','ccc'],['aaaa']]" editable remove v-model="multiple" ></ici-multiple-field>
