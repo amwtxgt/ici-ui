@@ -1,5 +1,5 @@
 <template>
-    <button tabindex="0" v-focus="focus" :type="htmlType" :disabled="disabled || loading" @click="$emit('click')"
+    <button tabindex="0" v-focus="focus" :type="htmlType" :disabled="disabled || loading" @click="$emit('click',$event)"
             :class="[
     {'ici-button':typeClass},
     {'fms-button':!typeClass},

@@ -34,8 +34,9 @@
       bgColor:{
         type:String,
         default:'#fff'
-      }
-
+      },
+      circle:Boolean,
+      margin:String,
     },
     mounted(){
 
@@ -48,6 +49,12 @@
         style.lineHeight=style.height;
         style.backgroundSize = this.showType;
         style.backgroundColor = this.bgColor;
+        if(this.margin){
+          style.margin = this.margin;
+        }
+        if(this.circle){
+          style.borderRadius = '50%'
+        }
         if(this.url){
           style.backgroundImage = `url(${this.url})`
         }
@@ -62,10 +69,10 @@
 <style scoped lang="less">
   .bg-img{
     vertical-align: middle;
-    margin:5px 5px 0px 0;
     display: inline-block;
     position: relative;
     border-radius: 5px;
+    color:#fff;
     flex:none;
     border:1px solid #eee;
     background: no-repeat center;
@@ -80,7 +87,7 @@
       align-items: center;
       background:rgba(0,0,0,0.5);
       width:100%;
-      height:30px;
+
       padding:5px 0;
       color:#fff;
       max-height:100%;

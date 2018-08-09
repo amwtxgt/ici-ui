@@ -52,6 +52,9 @@
       <ici-bgimg url="http://www.askingdao.com/tianfang/static/temp/la_03.jpg">
         <ici-icon slot="handle" size="14px" name="icon-shouye" click-state></ici-icon>
         <ici-icon slot="handle" size="14px" name="icon-delete" click-state></ici-icon>
+        <ici-icon slot="handle" size="14px" name="icon-delete" click-state></ici-icon>
+        <ici-icon slot="handle" size="14px" name="icon-delete" click-state></ici-icon>
+
       </ici-bgimg>
     </baseComponent>
     <baseComponent title="设置底色 bg-color" html='<ici-bgimg show-type="contain" bg-color="green" url="http://www.askingdao.com/tianfang/static/temp/la_03.jpg" />
@@ -70,12 +73,15 @@
       <ici-bgimg v-bgpreview show-type="contain" bg-color="green" url="http://www.askingdao.com/tianfang/static/temp/la_03.jpg"/>
       <ici-bgimg v-bgpreview  bg-color="green" url="http://www.askingdao.com/tianfang/static/temp/la_03.jpg"/>
     </baseComponent>
+    <baseComponent title="圆形circle" html='<ici-bgimg circle  url="http://www.askingdao.com/tianfang/static/temp/la_03.jpg"/>'>
 
-    <baseComponent title="自定义样式" html='<ici-bgimg style="border-radius: 50%" show-type="contain" bg-color="green" url="http://www.askingdao.com/tianfang/static/temp/la_03.jpg"/>
-<ici-bgimg  style="box-shadow: 1px 1px 5px #000" bg-color="green" url="http://www.askingdao.com/tianfang/static/temp/la_03.jpg"/>'>
-      <ici-bgimg style="border-radius: 50%" show-type="contain" bg-color="green" url="http://www.askingdao.com/tianfang/static/temp/la_03.jpg"/>
+      <ici-bgimg circle  url="http://www.askingdao.com/tianfang/static/temp/la_03.jpg"/>
+    </baseComponent>
+    <baseComponent title="自定义样式" html='<ici-bgimg  style="box-shadow: 1px 1px 5px #000" bg-color="green" url="http://www.askingdao.com/tianfang/static/temp/la_03.jpg"/>'>
+
       <ici-bgimg  style="box-shadow: 1px 1px 5px #000" bg-color="green" url="http://www.askingdao.com/tianfang/static/temp/la_03.jpg"/>
     </baseComponent>
+
 
   </div>
 </template>
