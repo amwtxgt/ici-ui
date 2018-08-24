@@ -164,8 +164,9 @@
         }
       },
 
-      focusEvent: function () {
+      focusEvent: function (e) {
         this.hasFocus = true;
+        this.$emit('focus',e)
       },
       blur: function (e) {
         this.hasFocus = false;

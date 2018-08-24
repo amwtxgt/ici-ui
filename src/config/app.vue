@@ -73,7 +73,7 @@
     name: 'app',
     data() {
       return {
-        active: 'pageBgImg'
+        active: 'pagePopup'
       };
     },
     computed: {
