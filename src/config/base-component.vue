@@ -23,7 +23,6 @@
 			html:String,
         },
 		mounted() {
-            console.log(this.$slots.default[0]);
 		},
 		beforeDestroy() {
 		},

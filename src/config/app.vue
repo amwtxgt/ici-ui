@@ -73,7 +73,7 @@
     name: 'app',
     data() {
       return {
-        active: 'pagePopup'
+        active: 'pageField'
       };
     },
     computed: {

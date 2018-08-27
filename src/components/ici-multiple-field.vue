@@ -187,10 +187,10 @@
     cursor: pointer;
     display: inline-block;
     margin: 5px 5px 5px 0;
-    padding: 5px 15px;
+    padding: 2px 15px;
     outline: none;
-    color: #aaa;
-    border: 1px dashed #ddd;
+    color: #777;
+    border: 1px dashed #bbb;
     border-radius: 50px;
     transition: all 0.3s;
     background: #fff;

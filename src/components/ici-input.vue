@@ -210,7 +210,6 @@
           } else {
             this.selectIndex = max;
           }
-          console.log(this.hint[this.selectIndex])
           if(!this.hint[this.selectIndex] && this.selectIndex!=-1){
             this.selectIndex = this.selectIndex>min? this.selectIndex-1:max;
           }
@@ -315,20 +314,19 @@
       border-bottom: 1px solid rgba(0, 0, 0, 0.2) !important;
     }
     .fms-input-status {
-      &.input-status-foucs {
-        opacity: 1;
-        margin-left: 0%;
-        width: 100%;
-      }
       position: absolute;
       transition: all .3s cubic-bezier(0.4, 0, 0.2, 1);
       opacity: 0;
-      width: 0%;
-      margin-left: 50%;
+      width: 100%;
       height: 2px;
       background: rgb(193, 39, 71);
       bottom: 0;
       left: 0;
+      transform:translate3d(0,0,0) scale(0,1);
+      &.input-status-foucs {
+        opacity: 1;
+        transform:translate3d(0,0,0) scale(1,1);
+      }
     }
   }
 

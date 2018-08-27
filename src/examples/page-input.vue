@@ -136,7 +136,7 @@ data() {
 
             getFocus: function () {
                 this.focus = true
-                console.log(this.focus)
+
             },
             select: function (val) {
                 alert('你选择了第' + val + '条')

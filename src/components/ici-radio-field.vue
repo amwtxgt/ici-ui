@@ -74,9 +74,9 @@
     cursor: pointer;
     display: inline-block;
     margin: 5px 5px 5px 0;
-    padding: 5px 15px;
-    color: #aaa;
-    border: 1px dashed #ddd;
+    padding: 2px 15px;
+    color: #777;
+    border: 1px dashed #bbb;
     border-radius: 50px;
     transition: all .3s;
     background: #fff;

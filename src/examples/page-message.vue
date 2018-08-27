@@ -64,8 +64,6 @@
         },
         methods: {
             abc(){
-                console.log('sdfsdf');
-
                 this.$refs['message'].msg('sdfgfsdfsd')
             }
         },
