@@ -7,9 +7,13 @@
         <div class="fms-popup-title" :class="titleClass">
           <slot name="header">{{title}}</slot>
         </div>
-        <div class="fms-popup-body" :class="{noscroll:noScroll}" :style="{'background-color': bgColor}">
+
+        <div class="fms-popup-body"  :style="{'background-color': bgColor}">
           <!--slot-->
-          <slot></slot>
+          <div class="fms-popup-body-inner" :class="{noscroll:noScroll}">
+            <slot></slot>
+          </div>
+          <ici-loading v-show="loading" block></ici-loading>
         </div>
         <div class="fms-popup-footer">
           <div class="fms-popup-footer-left">
@@ -19,7 +23,7 @@
           <div class="fms-popup-handle">
             <!--slot-->
             <slot name="footer-right">
-              <ici-button v-if="hasConfirm" @click="$emit('confirm')">confirm</ici-button>
+              <ici-button v-if="hasConfirm" :loading="loading" @click="$emit('confirm')">confirm</ici-button>
               <ici-button @click="$emit('input',false)">close</ici-button>
             </slot>
           </div>
@@ -36,10 +40,13 @@
     data() {
       return {
         hasConfirm: false,
+        loading:false,
       }
     },
     props: {
       value: [Boolean, String],
+//      loading:{type:Boolean,default:true},//弹是否属于加载状态
+
       title: {
         type: String,
         default: ''
@@ -158,8 +165,6 @@
       max-height: 95%;
       .fms-popup-title {
         &:empty {
-          /*background-color: #eee;*/
-          /*padding: 0px;*/
           display: none;
         }
         background-color: #f7f7f7;
@@ -181,25 +186,19 @@
       }
 
       .fms-popup-body {
+        position: relative;
         width: 100%;
         padding: 10px 0;
-        overflow: auto;
-        &.noscroll {
-          overflow: visible;
+        overflow: hidden;
+        display: flex;
+        .fms-popup-body-inner{
+          flex:auto;
+          overflow: auto;
+          &.noscroll {
+            overflow: visible;
+          }
         }
       }
-
-      /*@media (min-height: 800px) {*/
-      /*.fms-popup-body {*/
-      /*max-height: 540px;*/
-      /*}*/
-      /*}*/
-
-      /*@media (min-height: 700px) {*/
-      /*.fms-popup-body {*/
-      /*max-height: 440px;*/
-      /*}*/
-      /*}*/
       .fms-popup-footer {
         flex: none;
         padding: 5px 10px;
