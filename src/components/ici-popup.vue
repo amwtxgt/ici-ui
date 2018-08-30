@@ -40,12 +40,11 @@
     data() {
       return {
         hasConfirm: false,
-        loading:false,
       }
     },
     props: {
       value: [Boolean, String],
-//      loading:{type:Boolean,default:true},//弹是否属于加载状态
+      loading:Boolean,//弹是否属于加载状态
 
       title: {
         type: String,
@@ -188,8 +187,6 @@
       .fms-popup-body {
         position: relative;
         width: 100%;
-        padding: 10px 0;
-        overflow: hidden;
         display: flex;
         .fms-popup-body-inner{
           flex:auto;

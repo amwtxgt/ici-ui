@@ -2,7 +2,7 @@
   <div class="fms-input" :class="{white:white}">
     <div v-if="prefix" class="prefix" @click="$emit('click-prefix')" :style="prefixStyle">{{prefix.content}}</div>
     <div class="input-inner">
-      <input @blur="blur" class="fms-input-input" :type="password?'password':'text'"
+      <input @blur="blur" class="fms-input-input" :type="password?'password':'text'" @paste.stop='paste'
              :value="inputValue" @input="input" v-focus="focus" @focus="focusEvent" :placeholder="hiddenLabel?label:''"
              @keydown.up.down.stop.prevent="keydown" @keyup.enter.stop.prevent="enter">
       <label v-show="!hiddenLabel" class="fms-input-label" :class="{substantial:isSubstantial,'input-label-foucs':hasFocus}">
@@ -114,6 +114,7 @@
 
     },
     methods: {
+      paste(){},
       clear(){
         this.inputValue = '';
         this.$emit('input', this.inputValue);
