@@ -2,7 +2,7 @@
   <transition name="ici-popup">
     <div v-show="value" class="fms-popup-layer" :class="{mask:mask}" :style="{position:position}"
          v-focus="value" tabindex="0"
-         @click.self="clickMark" @keydown.esc.stop="esc && $emit('input',false)">
+         @mousedown.self="clickMark" @keydown.esc.stop="esc && $emit('input',false)">
       <div class="fms-popup" :style="{maxWidth:width+'px'}">
         <div class="fms-popup-title" :class="titleClass">
           <slot name="header">{{title}}</slot>
