@@ -74,7 +74,6 @@
     border-radius: 5px;
     color:#fff;
     flex:none;
-    border:1px solid #eee;
     background: no-repeat center;
     background-size: cover;
     text-align: center;
@@ -87,7 +86,6 @@
       align-items: center;
       background:rgba(0,0,0,0.5);
       width:100%;
-
       padding:5px 0;
       color:#fff;
       max-height:100%;

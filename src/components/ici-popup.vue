@@ -16,7 +16,7 @@
           <ici-loading v-show="loading" block></ici-loading>
         </div>
         <div class="fms-popup-footer">
-          <div class="fms-popup-footer-left">
+          <div v-if="$slots['footer-left']" class="fms-popup-footer-left">
             <!--slot-->
             <slot name="footer-left"></slot>
           </div>

@@ -113,7 +113,8 @@ const install = function (Vue) {
              var newel = document.querySelector(sel);
              el = newel;
          }
-        var width = el.width, height = el.height, x = el.x, y = el.y, nativeWidth = el.naturalWidth,
+        var width = el.width, height = el.height,nativeWidth = el.naturalWidth,
+        x = e.x-e.offsetX, y = e.y-e.offsetY,
           nativeHeight = el.naturalHeight;
           previewMain({width, height, x, y, nativeWidth, nativeHeight, src: el.src})
       })
