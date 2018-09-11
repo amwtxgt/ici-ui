@@ -3,7 +3,7 @@
     <div v-show="value" class="fms-popup-layer" :class="{mask:mask}" :style="{position:position}"
          v-focus="value" tabindex="0"
          @mousedown.self="clickMark" @keydown.esc.stop="esc && $emit('input',false)">
-      <div class="fms-popup" :style="{maxWidth:width+'px'}">
+      <div class="fms-popup" :style="{maxWidth:width+'px',maxHeight:maxHeight}">
         <div class="fms-popup-title" :class="titleClass">
           <slot name="header">{{title}}</slot>
         </div>
@@ -67,6 +67,10 @@
       noScroll: Boolean, //不出现滚动条
       markClose: Boolean, //点击遮罩层关闭
       maskClose:Boolean,
+      maxHeight:{ //最大高度
+        type:String,
+        default:'95%'
+      },
       width: {
         type: Number,
         default: 700
@@ -161,7 +165,6 @@
       border-radius: 2px;
       box-shadow: 0 12px 15px 0 rgba(0, 0, 0, 0.24);
       outline: none;
-      max-height: 95%;
       .fms-popup-title {
         &:empty {
           display: none;
