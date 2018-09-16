@@ -17,9 +17,6 @@
       <div>name 值：<b>{{name3}}</b></div>
     </baseComponent>
 
-    <baseComponent title="必填" html='<ici-input required v-model="required"></ici-input>'>
-      <ici-input required v-model="required"></ici-input>
-    </baseComponent>
     <baseComponent title="带前缀 prefix" html='<p style="color:#999">无真实前缀值</p>
 <ici-input :prefix="{content:"我是前缀"}" v-model="prefix2"></ici-input>
 最终值：{\{prefix2}}
@@ -35,7 +32,11 @@
       最终值：{{prefix1}}
       <br><br>
     </baseComponent>
-    <baseComponent title="带前缀 slot='prefix'" html='<ici-input required v-model="required"></ici-input>'>
+    <baseComponent title="带前缀 slot='prefix'" html='<ici-input required v-model="required">
+  <div slot="prefix">
+    <ici-icon name="icon-tianjia"></ici-icon>
+  </div>
+</ici-input>'>
       <ici-input required v-model="required">
         <div slot="prefix">
           <ici-icon name="icon-tianjia"></ici-icon>

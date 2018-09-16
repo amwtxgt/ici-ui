@@ -39,7 +39,6 @@
   * @prop label {string} 输入框标签
   * @prop focus {Boolean} 是否获取焦点
   * @prop password {Boolean} 是否是密码
-  * @prop required {Boolean} 是否是必填
   * @prop prefix {Boolean|Object} 前缀：Object{content:'前缀内容',value:真实值}
   * @prop filter {String|RegExp} 过滤value
   * @prop hint {array|boolean} 提示信息 三种状态 false:不开启提示； true:开启提示并显示正在加载； array提示信息列表
@@ -71,7 +70,6 @@
       password: Boolean, //是否以密码方式
       focus: Boolean,
       hiddenLabel: Boolean,
-      required: Boolean,
       white: Boolean,
       prefixStyle: {
         type: String,
@@ -81,12 +79,10 @@
       prefix: [Boolean, Object],//Object 格式为{content:String,value:String},value:真实值
     },
     watch: {
-      value(v, ov) {
-//        console.log('value值发生变化1', v, ov, this.inputValue)
+      value(v) {
         if (v !== this.inputValue) {
           if (!this.prefix || v !== this.prefix.value + '' + this.inputValue) {
             var e = {target: {value: v}}
-//            console.log('value值发生变化2', v, this.inputValue)
             this.input(e)
           }
         }
@@ -100,7 +96,6 @@
       }
     },
     computed: {
-
       showHint: function () {
 
         if (!this.hasFocus || !this.hint) {
@@ -116,6 +111,7 @@
           return true;
         }
       },
+
       //是否有值
       isSubstantial: function () {
         return Boolean(this.inputValue)
@@ -131,7 +127,6 @@
         this.showPrefix = true
       }
       this.updateValue(this.value)
-
     },
     methods: {
       clear() {
@@ -183,18 +178,7 @@
       blur: function (e) {
         this.hasFocus = false;
         var val = e.target.value.replace(/(^\s*)|(\s*$)/g, "");
-        if (!val && this.required) {
-          this.inputValue = this.initValue;
 
-          if (this.prefix && this.prefix.value) {
-            this.$emit('input', this.prefix.value + this.inputValue);
-          }
-          else {
-            this.$emit('input', this.inputValue);
-          }
-          return;
-        }
-        else {
           this.initValue = this.inputValue = val;
           if (val && this.prefix && this.prefix.value) {
             this.$emit('input', this.prefix.value + this.inputValue);
@@ -202,7 +186,7 @@
           else {
             this.$emit('input', this.inputValue);
           }
-        }
+
         this.$emit('blur');
       },
       select: function (index) {
