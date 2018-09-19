@@ -4,6 +4,26 @@
         <baseComponent title="基本" html='<ici-loading></ici-loading>'>
             <ici-loading></ici-loading>
         </baseComponent>
+      <baseComponent title="类型 type 默认4" html='<ici-loading type="1"></ici-loading>
+<ici-loading type="2"></ici-loading>
+<ici-loading type="3"></ici-loading>
+<ici-loading :type="4"></ici-loading>
+<ici-loading :type="5"></ici-loading>
+<ici-loading :type="6"></ici-loading>'>
+        <ici-loading type="1"></ici-loading>
+        <ici-loading type="2"></ici-loading>
+        <ici-loading type="3"></ici-loading>
+        <ici-loading :type="4"></ici-loading>
+        <ici-loading :type="5"></ici-loading>
+        <ici-loading :type="6"></ici-loading>
+      </baseComponent>
+
+      <baseComponent title="颜色 color 默认#c01639 " html=''>
+        <ici-loading color="green"></ici-loading>
+        <ici-loading color="blue"></ici-loading>
+        <ici-loading color="pink"></ici-loading>
+        <ici-loading color="gray"></ici-loading>
+      </baseComponent>
 
         <baseComponent title="尺寸" html='<ici-loading size="tiny"></ici-loading>
 <ici-loading size="small"></ici-loading>
