@@ -25,10 +25,12 @@
         <ici-loading color="gray"></ici-loading>
       </baseComponent>
 
-        <baseComponent title="尺寸" html='<ici-loading size="tiny"></ici-loading>
+        <baseComponent title="尺寸" html='<ici-loading size="mintiny"></ici-loading>
+<ici-loading size="tiny"></ici-loading>
 <ici-loading size="small"></ici-loading>
 <ici-loading ></ici-loading>
 <ici-loading size="big"></ici-loading>'>
+            <ici-loading size="mintiny"></ici-loading>
             <ici-loading size="tiny"></ici-loading>
             <ici-loading size="small"></ici-loading>
             <ici-loading></ici-loading>

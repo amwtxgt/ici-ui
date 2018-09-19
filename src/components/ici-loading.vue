@@ -119,6 +119,9 @@
       sizeValue() {
         var obj = ['30px', '30px'];
         switch (this.size) {
+          case 'mintiny':
+            obj = ['10px', '10px'];
+            break;
           case 'tiny':
             obj = ['18px', '18px'];
             break;
