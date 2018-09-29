@@ -1,5 +1,6 @@
 var path = require('path');
 var webpack = require('webpack');
+
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 module.exports = {
@@ -18,7 +19,7 @@ module.exports = {
   plugins: [
     new ExtractTextPlugin({
       filename:"[name].css",
-    })
+    }),
   ],
   module: {
     rules: [
@@ -26,7 +27,8 @@ module.exports = {
         test: /\.css$/,
         use: [
           'vue-style-loader',
-          'css-loader'
+          'css-loader',
+          "postcss-loader"
         ],
       },
       {
@@ -36,7 +38,6 @@ module.exports = {
           extractCSS: true,
           loaders: {
             css: ExtractTextPlugin.extract({
-
               use: 'css-loader',
               fallback: 'vue-style-loader' // <- 这是vue-loader的依赖，所以如果使用npm3，则不需要显式安装
             })

@@ -43,7 +43,7 @@
 	};
 </script>
 
-<style  lang="less">
+<style  lang="less" scoped>
     .title {
         font-size: 30px;
         margin-bottom:10px;

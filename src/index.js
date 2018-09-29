@@ -3,27 +3,31 @@ import iciLoading from './components/ici-loading.vue'
 import iciIcon from './components/ici-icon.vue'
 import iciInput from './components/ici-input.vue'
 import iciInputGroup from './components/ici-input-group'
-import multipleField from './components/multiple_field.vue'
-import radioField from './components/radio_field.vue'
+import iciMultipleField from './components/ici-multiple-field'
+import iciRadioField from './components/ici-radio-field'
 import iciPopup from './components/ici-popup.vue'
 import iciMessage from './components/ici-message.vue'
 import iciSearch from './components/ici-search.vue'
 import iciHint from './components/ici-hint.vue'
 import iciHeader from './components/ici-header.vue'
 import iciImagePreview from './components/ici-image-preview.vue'
+import iciBgimg from './components/ici-bgimg.vue'
+
+import * as funs from './assets/functions'
 
 export const components = {
   iciButton,
   iciLoading,
   iciIcon,
-  multipleField,
-  radioField,
+  iciMultipleField,
+  iciRadioField,
   iciInput,
   iciInputGroup,
   iciPopup,
   iciSearch,
   iciHint,
-  iciHeader
+  iciHeader,
+  iciBgimg
 }
 const install = function (Vue) {
   if (install.installed) return;
@@ -33,6 +37,7 @@ const install = function (Vue) {
 
   var message = new Vue(iciMessage);
   Vue.prototype.$icimsg = message;
+  Vue.prototype.$funs = funs;
 
   var preview = new Vue(iciImagePreview);
   var previewMain = function (obj) {
@@ -62,6 +67,9 @@ const install = function (Vue) {
   }
   Vue.directive('bgpreview', {
     inserted: function (el, binding) {
+      if(binding.value === false){
+        return
+      }
       el.addEventListener('click', (e) => {
         var reg = /url\("(.+)"\)/.exec(el.style.backgroundImage);
         if (reg) {
@@ -84,27 +92,21 @@ const install = function (Vue) {
               height = width/nativeWidth*nativeHeight;
               y =  y+(el.offsetHeight-height)/2
             }
-
-
-
-
             previewMain({width, height, x, y, nativeWidth, nativeHeight, src: imgUrl})
           };
           img.onerror = function (err) {
             console.log('图片错误', err)
-
           }
-
-        }
-
-        function next() {
-
         }
       })
     }
-  })
+  });
+
   Vue.directive('imgpreview', {
     inserted: function (el, binding) {
+      if(binding.value === false){
+        return
+      }
       el.addEventListener('click', (e) => {
         var width = el.width, height = el.height, x = el.x, y = el.y, nativeWidth = el.naturalWidth,
           nativeHeight = el.naturalHeight;

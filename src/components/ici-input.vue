@@ -1,11 +1,14 @@
 <template>
   <div class="fms-input" :class="{white:white}">
-    <div v-if="prefix" class="prefix" @click="$emit('click-prefix')" :style="prefixStyle">{{prefix.content}}</div>
+    <div v-if="prefix || showPrefix" class="prefix" @click="$emit('click-prefix')" :style="prefixStyle">
+      <slot name="prefix">{{prefix.content}}</slot>
+    </div>
     <div class="input-inner">
-      <input @blur="blur" class="fms-input-input" :type="password?'password':'text'"
+      <input @blur="blur" class="fms-input-input" :type="password?'password':'text'" @paste.stop=''
              :value="inputValue" @input="input" v-focus="focus" @focus="focusEvent" :placeholder="hiddenLabel?label:''"
              @keydown.up.down.stop.prevent="keydown" @keyup.enter.stop.prevent="enter">
-      <label v-show="!hiddenLabel" class="fms-input-label" :class="{substantial:isSubstantial,'input-label-foucs':hasFocus}">
+      <label v-show="!hiddenLabel" class="fms-input-label"
+             :class="{substantial:isSubstantial,'input-label-foucs':hasFocus}">
         {{label}}
       </label>
       <div class="fms-input-status" :class="{'input-status-foucs':hasFocus}"></div>
@@ -36,7 +39,6 @@
   * @prop label {string} 输入框标签
   * @prop focus {Boolean} 是否获取焦点
   * @prop password {Boolean} 是否是密码
-  * @prop required {Boolean} 是否是必填
   * @prop prefix {Boolean|Object} 前缀：Object{content:'前缀内容',value:真实值}
   * @prop filter {String|RegExp} 过滤value
   * @prop hint {array|boolean} 提示信息 三种状态 false:不开启提示； true:开启提示并显示正在加载； array提示信息列表
@@ -52,6 +54,7 @@
         inputValue: '',
         initValue: '',//初始内容
         showTitle: false,
+        showPrefix: false,
         hasFocus: false,
       }
     },
@@ -67,23 +70,32 @@
       password: Boolean, //是否以密码方式
       focus: Boolean,
       hiddenLabel: Boolean,
-      required: Boolean,
-      white:Boolean,
-      prefixStyle:{
-        type:String,
-        default:''
+      white: Boolean,
+      prefixStyle: {
+        type: String,
+        default: ''
       },
       filter: [Boolean, RegExp, String],
       prefix: [Boolean, Object],//Object 格式为{content:String,value:String},value:真实值
     },
-    watch:{
-      prefix(){
-        var e = {target:{value:this.inputValue}}
-        this.input(e)
+    watch: {
+      value(v) {
+        if (v !== this.inputValue) {
+          if (!this.prefix || v !== this.prefix.value + '' + this.inputValue) {
+            var e = {target: {value: v}}
+            this.input(e)
+          }
+        }
+      },
+      prefix(v, v2) {
+        if (typeof v === 'object' && typeof v2 === 'object' && JSON.stringify(v) !== JSON.stringify(v2)) {
+          var e = {target: {value: this.inputValue}}
+          this.input(e)
+        }
+
       }
     },
     computed: {
-
       showHint: function () {
 
         if (!this.hasFocus || !this.hint) {
@@ -99,6 +111,7 @@
           return true;
         }
       },
+
       //是否有值
       isSubstantial: function () {
         return Boolean(this.inputValue)
@@ -110,78 +123,62 @@
         this.showTitle = true;
       }
 
+      if (this.$slots.prefix) {
+        this.showPrefix = true
+      }
       this.updateValue(this.value)
-
     },
     methods: {
-      clear(){
+      clear() {
         this.inputValue = '';
         this.$emit('input', this.inputValue);
       },
-      updateValue(val){
-        if (val && this.inputValue !==val) {
-          this.inputValue = val;
-          //是否有过滤
-          if (this.filter) {
-            this.inputValue = this.inputValue.replace(this.filter, '');
-          }
-
-          if (this.prefix && this.prefix.value && this.inputValue.indexOf(this.prefix.value) === 0) {
-            var reg = new RegExp('^' + this.prefix.value, 'g');
-            this.inputValue = this.inputValue.replace(reg, '');
-          }
-        }
-        //初始内容
-        this.initValue = this.inputValue;
+      updateValue(val) {
+        var e = {target: {value: val}}
+        this.input(e)
       },
       enter: function (e) {
         if (this.selectIndex !== -2) {
           this.$emit('select', this.selectIndex)
         }
-
         e.target.blur()
         this.$emit('keyup-enter', this.selectIndex)
       },
       input: function (e) {
         this.selectIndex = -2;
-        this.inputValue = e.target.value
+        var v = e.target.value;
 
-        if (this.inputValue) {
+        if (v) {
+
           if (this.filter) {
-            this.inputValue = this.inputValue.replace(this.filter, '');
+            v = v.replace(this.filter, '');
           }
 
-          if (this.prefix && this.prefix.value && this.inputValue.indexOf(this.prefix.value) === 0) {
-            this.inputValue = this.inputValue.replace(new RegExp('^' + this.prefix.value, 'g'), '');
+          if (this.prefix && this.prefix.value && v.indexOf(this.prefix.value) === 0) {
+            v = v.replace(new RegExp('^' + this.prefix.value, 'g'), '');
           }
         }
 
-        if (this.inputValue && this.prefix && this.prefix.value) {
-          this.$emit('input', this.prefix.value + this.inputValue);
+        this.inputValue = v;
+        e.target.value = v
+        if (v && this.prefix && this.prefix.value) {
+          this.$emit('input', this.prefix.value + v);
         }
         else {
-          this.$emit('input', this.inputValue);
+          this.$emit('input', v);
         }
+
+
       },
 
-      focusEvent: function () {
+      focusEvent: function (e) {
         this.hasFocus = true;
+        this.$emit('focus', e)
       },
       blur: function (e) {
         this.hasFocus = false;
         var val = e.target.value.replace(/(^\s*)|(\s*$)/g, "");
-        if (!val && this.required) {
-          this.inputValue = this.initValue;
 
-          if (this.prefix && this.prefix.value) {
-            this.$emit('input', this.prefix.value + this.inputValue);
-          }
-          else {
-            this.$emit('input', this.inputValue);
-          }
-          return;
-        }
-        else {
           this.initValue = this.inputValue = val;
           if (val && this.prefix && this.prefix.value) {
             this.$emit('input', this.prefix.value + this.inputValue);
@@ -189,7 +186,7 @@
           else {
             this.$emit('input', this.inputValue);
           }
-        }
+
         this.$emit('blur');
       },
       select: function (index) {
@@ -198,20 +195,20 @@
       keydown(e) {
         if (!this.hint.length) return false;
 
-        var min = 0, max = this.hint.length-1;
+        var min = 0, max = this.hint.length - 1;
         if (this.showTitle) {
-            min = -1
+          min = -1
         }
 
         if (e.key == 'ArrowUp') {
           if (this.selectIndex > min) {
             this.selectIndex--
-          } else {
+          }
+          else {
             this.selectIndex = max;
           }
-          console.log(this.hint[this.selectIndex])
-          if(!this.hint[this.selectIndex] && this.selectIndex!=-1){
-            this.selectIndex = this.selectIndex>min? this.selectIndex-1:max;
+          if (!this.hint[this.selectIndex] && this.selectIndex != -1) {
+            this.selectIndex = this.selectIndex > min ? this.selectIndex - 1 : max;
           }
         }
         else {
@@ -222,8 +219,8 @@
             else {
               this.selectIndex++
             }
-            if(!this.hint[this.selectIndex]){
-              this.selectIndex = this.selectIndex<max? this.selectIndex+1:min;
+            if (!this.hint[this.selectIndex]) {
+              this.selectIndex = this.selectIndex < max ? this.selectIndex + 1 : min;
             }
           }
           else {
@@ -281,19 +278,19 @@
       position: relative;
       flex: auto;
     }
-    &.white{
-      label.fms-input-label{
+    &.white {
+      label.fms-input-label {
         color: rgba(255, 255, 255, 0.38);
         &.input-label-foucs {
-          color: rgba(255,255,255,.7);
+          color: rgba(255, 255, 255, .7);
 
         }
       }
-      input{
-        color: rgba(255,255,255,.7) !important;
+      input {
+        color: rgba(255, 255, 255, .7) !important;
       }
       .fms-input-status {
-        background: rgba(255,255,255,.7) !important;
+        background: rgba(255, 255, 255, .7) !important;
       }
     }
     input {
@@ -314,20 +311,19 @@
       border-bottom: 1px solid rgba(0, 0, 0, 0.2) !important;
     }
     .fms-input-status {
-      &.input-status-foucs {
-        opacity: 1;
-        margin-left: 0%;
-        width: 100%;
-      }
       position: absolute;
       transition: all .3s cubic-bezier(0.4, 0, 0.2, 1);
       opacity: 0;
-      width: 0%;
-      margin-left: 50%;
+      width: 100%;
       height: 2px;
       background: rgb(193, 39, 71);
       bottom: 0;
       left: 0;
+      transform: translate3d(0, 0, 0) scale(0, 1);
+      &.input-status-foucs {
+        opacity: 1;
+        transform: translate3d(0, 0, 0) scale(1, 1);
+      }
     }
   }
 
