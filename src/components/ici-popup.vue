@@ -1,21 +1,21 @@
 <template>
   <transition name="ici-popup">
-    <div v-show="value" class="fms-popup-layer" :class="{mask:mask}" :style="{position:position}"
+    <div v-show="value" class="fms-popup-layer" :class="{mask:mask}" :style="popupLayer"
          v-focus="value" tabindex="0"
          @mousedown.self="clickMark" @keydown.esc.stop="esc && $emit('input',false)">
-      <div class="fms-popup" :style="{maxWidth:width+'px',maxHeight:maxHeight}">
-        <div class="fms-popup-title" :class="titleClass">
+      <div class="fms-popup" :style="popupStyle">
+        <div ref="header" class="fms-popup-title" :class="titleClass">
           <slot name="header">{{title}}</slot>
         </div>
 
-        <div class="fms-popup-body"  :style="{'background-color': bgColor}">
+        <div class="fms-popup-body" :style="popupBody">
           <!--slot-->
           <div class="fms-popup-body-inner" :class="{noscroll:noScroll}">
             <slot></slot>
           </div>
           <ici-loading v-show="loading" block></ici-loading>
         </div>
-        <div class="fms-popup-footer">
+        <div ref="footer" class="fms-popup-footer" v-if="!footerHide">
           <div v-if="$slots['footer-left']" class="fms-popup-footer-left">
             <!--slot-->
             <slot name="footer-left"></slot>
@@ -44,7 +44,7 @@
     },
     props: {
       value: [Boolean, String],
-      loading:Boolean,//弹是否属于加载状态
+      loading: Boolean,//弹是否属于加载状态
 
       title: {
         type: String,
@@ -66,19 +66,54 @@
       mask: Boolean,
       noScroll: Boolean, //不出现滚动条
       markClose: Boolean, //点击遮罩层关闭
-      maskClose:Boolean,
-      maxHeight:{ //最大高度
-        type:String,
-        default:'95%'
+      maskClose: Boolean,
+      maxHeight: { //最大高度
+        type: String,
+        default: '95%'
       },
       width: {
         type: Number,
         default: 700
+      },
+      fullscreen: {
+        type: Boolean,
+        default: false
+      },
+      footerHide: {
+        type: Boolean,
+        default: false
       }
     },
     mounted() {
       if (this._events.confirm) {
         this.hasConfirm = true;
+      }
+    },
+    computed: {
+      popupStyle() {
+        let css = {maxWidth: this.width + 'px', maxHeight: this.maxHeight}
+        if (this.fullscreen) {
+          css = {width: '100%', height: '100vh'}
+        }
+        return css;
+      },
+      popupLayer() {
+        let css = {position: this.position}
+        if (this.fullscreen) {
+          css.padding = 0;
+        }
+        return css;
+      },
+      popupBody() {
+        let css = {'background-color': this.bgColor}
+        if (this.value) {
+          let hHeight = this.$refs.header ? this.$refs.header.clientHeight : 0,
+            fHeight = this.$refs.footer ? this.$refs.footer.clientHeight : 0
+          if (this.fullscreen) {
+            css.height = 'calc(100vh - ' + (hHeight + fHeight) + 'px)';
+          }
+        }
+        return css;
       }
     },
     methods: {
@@ -118,7 +153,7 @@
       background-color: rgba(0, 0, 0, .4);
       pointer-events: auto;
     }
-    perspective:1000px;
+    perspective: 1000px;
     outline: none;
     pointer-events: none;
     display: flex;
@@ -144,12 +179,12 @@
     }
     &.ici-popup-enter, &.ici-popup-leave-to {
       .fms-popup {
-        transform:  translate3d(0,0,-200px) !important;
+        transform: translate3d(0, 0, -200px) !important;
       }
     }
     &.ici-popup-enter-to {
       .fms-popup {
-        transform:  translate3d(0,0,0) !important;
+        transform: translate3d(0, 0, 0) !important;
       }
     }
     .fms-popup {
@@ -191,8 +226,8 @@
         position: relative;
         width: 100%;
         display: flex;
-        .fms-popup-body-inner{
-          flex:auto;
+        .fms-popup-body-inner {
+          flex: auto;
           overflow: auto;
           &.noscroll {
             overflow: visible;

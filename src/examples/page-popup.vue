@@ -6,7 +6,31 @@
       <ici-popup v-model="popup1"></ici-popup>
       <ici-button @click="popup1= true">打开弹窗</ici-button>
     </baseComponent>
-
+    <div class="title">popup 弹窗</div>
+    <baseComponent title="全屏弹窗" html='  <ici-popup v-model="popup10" :fullscreen="fullScreen">
+        <div slot="header">
+          <div>我是标题</div>
+        </div>
+        <div slot="header">
+            <ici-icon click-state size="16px" :name="fullScreen?"icon-exit-quanping":"icon-quanping"" @click="fullScreen = fullScreen?false:true"/>
+            <ici-icon click-state size="16px" name="icon-shanchudelete30" @click="popup10=false"/>
+        </div>
+  </ici-popup>'>
+      <ici-popup v-model="popup10" :fullscreen="fullScreen" footer-hide>
+        <div slot="header">
+          <div>我是标题</div>
+        </div>
+        <div slot="header">
+          <div>
+            <ici-icon click-state size="16px" :name="fullScreen?'icon-exit-quanping':'icon-quanping'"
+                      @click="fullScreen = fullScreen?false:true"/>
+            <ici-icon click-state size="16px" name="icon-shanchudelete30" @click="popup10=false"/>
+          </div>
+        </div>
+        <div style="padding:10px 20px;">这里是内容这里是内容这里是内容</div>
+      </ici-popup>
+      <ici-button @click="popup10= true">打开弹窗</ici-button>
+    </baseComponent>
     <baseComponent title="添加标题" html='<ici-popup v-model="popup2" title="我是标题"></ici-popup>
 <ici-button @click="popup2= true">使用title属性</ici-button>
 <ici-popup v-model="popup3">
@@ -271,7 +295,9 @@
         popup6: false,
         popup7: false,
         popup8: false,
-        popup9: false
+        popup9: false,
+        popup10:false,
+        fullScreen:false
       };
     },
     mounted() {
