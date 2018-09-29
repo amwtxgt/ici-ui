@@ -108,13 +108,7 @@ const install = function (Vue) {
         return
       }
       el.addEventListener('click', (e) => {
-        var id = el.getAttribute('data-id'), sel = 'img.'+id;
-        if(id){
-             var newel = document.querySelector(sel);
-             el = newel;
-         }
-        var width = el.width, height = el.height,nativeWidth = el.naturalWidth,
-        x = e.x-e.offsetX, y = e.y-e.offsetY,
+        var width = el.width, height = el.height, x = el.x, y = el.y, nativeWidth = el.naturalWidth,
           nativeHeight = el.naturalHeight;
           previewMain({width, height, x, y, nativeWidth, nativeHeight, src: el.src})
       })
