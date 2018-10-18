@@ -201,6 +201,7 @@
       box-shadow: 0 12px 15px 0 rgba(0, 0, 0, 0.24);
       outline: none;
       .fms-popup-title {
+        flex:none;
         &:empty {
           display: none;
         }

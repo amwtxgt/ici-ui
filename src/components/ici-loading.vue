@@ -1,9 +1,8 @@
 <template>
   <transition name="loading">
     <div :class="['ici-loading',{'ici-disabled':disabled},{'ici-block':block}]"
-         :style="{background:block?maskColor:''}">
+         :style="{background:block?maskColor:'',color:backWhite?'#fff':color}">
       <svg version="1.1" xmlns="http://www.w3.org/2000/svg"  x="0px" y="0px" :width="sizeValue[0]" :height="sizeValue[1]" viewBox="0 0 32 32"  :fill="backWhite?'#fff':color"  xml:space="preserve">
-
         <g v-if="type==1">
           <path transform="translate(2)" d="M0 12 V20 H4 V12z">
             <animate attributeName="d" values="M0 12 V20 H4 V12z; M0 4 V28 H4 V4z; M0 12 V20 H4 V12z; M0 12 V20 H4 V12z" dur="1s" repeatCount="indefinite" begin="0" keytimes="0;.2;.5;1" keySplines="0.2 0.2 0.4 0.8;0.2 0.6 0.4 0.8;0.2 0.8 0.4 0.8" calcMode="spline"  />
@@ -105,6 +104,7 @@
           </path>
         </g>
     </svg>
+    <slot></slot>
     </div>
   </transition>
 </template>
@@ -161,6 +161,7 @@
 
 <style scoped lang="less">
   div.ici-loading {
+    text-align: center;
     display: inline-block;
     flex-direction: column;
     justify-content: center;
