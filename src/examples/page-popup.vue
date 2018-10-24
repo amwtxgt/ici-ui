@@ -6,16 +6,15 @@
       <ici-popup v-model="popup1"></ici-popup>
       <ici-button @click="popup1= true">打开弹窗</ici-button>
     </baseComponent>
-    <div class="title">popup 弹窗</div>
-    <baseComponent title="全屏弹窗" html='  <ici-popup v-model="popup10" :fullscreen="fullScreen">
-        <div slot="header">
-          <div>我是标题</div>
-        </div>
-        <div slot="header">
-            <ici-icon click-state size="16px" :name="fullScreen?"icon-exit-quanping":"icon-quanping"" @click="fullScreen = fullScreen?false:true"/>
-            <ici-icon click-state size="16px" name="icon-shanchudelete30" @click="popup10=false"/>
-        </div>
-  </ici-popup>'>
+    <baseComponent title="全屏弹窗" html='<ici-popup v-model="popup10" :fullscreen="fullScreen">
+      <div slot="header">
+        <div>我是标题</div>
+      </div>
+      <div slot="header">
+          <ici-icon click-state size="16px" :name="fullScreen?"icon-exit-quanping":"icon-quanping"" @click="fullScreen = fullScreen?false:true"/>
+          <ici-icon click-state size="16px" name="icon-shanchudelete30" @click="popup10=false"/>
+      </div>
+</ici-popup>'>
       <ici-popup v-model="popup10" :fullscreen="fullScreen" footer-hide>
         <div slot="header">
           <div>我是标题</div>

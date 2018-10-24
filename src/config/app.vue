@@ -35,6 +35,9 @@
         <MenuItem name="pageHeader">
           导航头部 ici-header
         </MenuItem>
+        <MenuItem name="pageFuns">
+          函数库 $funs
+        </MenuItem>
       </Menu>
     </div>
     <div class="flex-auto" style="overflow-y: scroll;overflow-x: visible">
@@ -55,6 +58,7 @@
   import pageImagePreview from '../examples/page-image-preview.vue'
   import pageField from '../examples/page-field'
   import pageBgImg from '../examples/page-bg-image'
+  import pageFuns from '../examples/page-funs.vue'
 
   var components = {
     pageButton,
@@ -67,13 +71,14 @@
     pageHeader,
     pageImagePreview,
     pageField,
-    pageBgImg
+    pageBgImg,
+    pageFuns
   };
   export default {
     name: 'app',
     data() {
       return {
-        active: 'pageImagePreview'
+        active: 'pageFuns'
       };
     },
     computed: {

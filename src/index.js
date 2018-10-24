@@ -29,6 +29,7 @@ export const components = {
   iciHeader,
   iciBgimg
 }
+
 const install = function (Vue) {
   if (install.installed) return;
   Object.keys(components).forEach(function (val) {

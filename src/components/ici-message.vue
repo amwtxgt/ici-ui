@@ -48,7 +48,6 @@
         },
         methods: {
             _append() {
-
                 if (!window.document.getElementById('ici-messages-' + this.rom)) {
                   if(this.$el){
                     window.document.body.appendChild(this.$el);

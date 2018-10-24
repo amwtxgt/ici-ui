@@ -39,6 +39,8 @@
         opacity: 0;
         transition: all .3s;
         width: 100%;
+        max-height: 300px;
+        overflow: auto;
         box-sizing: border-box;
         border: 1px solid rgba(0, 0, 0, .2);
         background-color: #ffffff;

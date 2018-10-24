@@ -77,7 +77,7 @@ data() {
     <div slot-scope="list">\{\{list.item\}\}</div>
     <!--这里的list等于hint传入的值 ，list.item表示hint数组的某一项-->
 </ici-input>'>
-      <ici-input :hint="[1,2,'',3,'',5]" v-model="password" label="密码" @select="select">
+      <ici-input :hint="[1,2,'',3,'',5,'as',1,2,'',3,'',5,'as',1,2,'',3,'',5,'as',1,2,'',3,'',5,'as']" v-model="password" label="密码" @select="select">
         <div slot="title">这是提示默认选中项 index为-1</div>
         <div slot-scope="list">{{list}}{{list.item}}</div>
       </ici-input>
