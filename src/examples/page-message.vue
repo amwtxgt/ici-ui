@@ -47,11 +47,9 @@
             <ici-button  @click="$icimsg.msg('我是下边',{position:'bottom'})">下边</ici-button>
         </baseComponent>
 
-      <baseComponent title="加按钮" html=''>
+      <baseComponent title="加按钮" html='<ici-button  @click="$icimsg.msg(”我是加按键“,{btn:{name:"重试",click:reab}})">上边</ici-button>'>
 
-        <ici-button  @click="$icimsg.msg('我是上边我是上边我是上边我是上边',{
-          btn:{name:'重试',click:reab}
-        })">上边</ici-button>
+        <ici-button  @click="$icimsg.msg('我是加按键',{btn:{name:'重试',click:reab}})">上边</ici-button>
       </baseComponent>
     </div>
 </template>

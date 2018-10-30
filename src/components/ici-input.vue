@@ -69,6 +69,7 @@
       },
       password: Boolean, //是否以密码方式
       focus: Boolean,
+      firstSpace: Boolean, //只保留第一个空格
       hiddenLabel: Boolean,
       white: Boolean,
       prefixStyle: {
@@ -149,18 +150,32 @@
         var v = e.target.value;
 
         if (v) {
-
-          if (this.filter) {
-            v = v.replace(this.filter, '');
-          }
-
           if (this.prefix && this.prefix.value && v.indexOf(this.prefix.value) === 0) {
-            v = v.replace(new RegExp('^' + this.prefix.value, 'g'), '');
+            v = v.replace(this.prefix.value, '');
+            if (this.firstSpace) {
+              v = v.split(/ +/).join('')
+            }
           }
+          else if (this.firstSpace) {
+            var vArr = v.split(/ +/);
+            v = vArr.map((v, index) => {
+              if (index == 1) {
+                return ' ' + v
+              }
+              else {
+                return v;
+              }
+            }).join('')
+          }
+
+        }
+
+        if (this.filter) {
+          v = v.replace(this.filter, '');
         }
 
         this.inputValue = v;
-        e.target.value = v
+        e.target.value = v;
         if (v && this.prefix && this.prefix.value) {
           this.$emit('input', this.prefix.value + v);
         }
@@ -179,13 +194,13 @@
         this.hasFocus = false;
         var val = e.target.value.replace(/(^\s*)|(\s*$)/g, "");
 
-          this.initValue = this.inputValue = val;
-          if (val && this.prefix && this.prefix.value) {
-            this.$emit('input', this.prefix.value + this.inputValue);
-          }
-          else {
-            this.$emit('input', this.inputValue);
-          }
+        this.initValue = this.inputValue = val;
+        if (val && this.prefix && this.prefix.value) {
+          this.$emit('input', this.prefix.value + this.inputValue);
+        }
+        else {
+          this.$emit('input', this.inputValue);
+        }
 
         this.$emit('blur');
       },

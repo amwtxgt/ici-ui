@@ -1,4 +1,5 @@
 import MD5 from 'js-md5'
+
 export const getMd5 = MD5;
 
 /*
@@ -25,6 +26,7 @@ export function trim(str, s) {
 export function ltrim(str, s) {
   if (typeof str == 'string') {
     if (!s) s = '\\s'
+    s = s.replace(/([\(\)\[\]\*\+])/g, '\\$1');
     var reg = new RegExp('^(' + s + ')*')
     return str.replace(reg, '')
   }
@@ -41,6 +43,7 @@ export function ltrim(str, s) {
 export function rtrim(str, s) {
   if (typeof str == 'string') {
     if (!s) s = '\\s'
+    s = s.replace(/([\(\)\[\]\*\+])/g, '\\$1');
     var reg = new RegExp('(' + s + ')*$')
     return str.replace(reg, '')
   }
@@ -76,10 +79,11 @@ export function copyText(string) {
 * 把\r\n换行符转成html的<br>换行符
 * @param {String} string 字符串
 * */
-export function rnTobr(string){
-  if(typeof string ==="string" && string.indexOf('\n')>-1){
-    return string.replace(/\n/g,'<br>')
-  }else{
+export function rnTobr(string) {
+  if (typeof string === "string" && string.indexOf('\n') > -1) {
+    return string.replace(/\n/g, '<br>')
+  }
+  else {
     return string;
   }
 }
@@ -90,8 +94,8 @@ export function rnTobr(string){
 //@param key匹配关键字
 //可选 @param color 匹配关键字的颜色，默认为绿色;
 
-export function boldKey(str, key,color) {
-  if(!color) color = 'rgb(77,200,107)';
+export function boldKey(str, key, color) {
+  if (!color) color = 'rgb(77,200,107)';
   if (typeof str === 'string' && typeof key === 'string') {
     var s = key.replace(/([\(\)\[\]\*])/g, '\\$1').replace(/\+/g, '');
     return str.replace(new RegExp('(' + s + ')', 'ig'), `<b style="color:${color}">$1</b>`)
@@ -106,12 +110,12 @@ export function boldKey(str, key,color) {
 * @param arr {Array}  一维数组
 * @return 去重后的一维数组
 * */
-export function arrayUnique (arr) {
+export function arrayUnique(arr) {
   var res = [];
   var json = {};
   for (var i = 0; i < arr.length; i++) {
     var key = arr[i]
-    if(typeof arr[i] ==='object' && arr[i]!=null){
+    if (typeof arr[i] === 'object' && arr[i] != null) {
       key = JSON.stringify(arr[i])
     }
     if (!json[key] && arr[i]) {
@@ -128,10 +132,11 @@ export function arrayUnique (arr) {
  * @param item 元素
  * @return Boolean
  */
-export function inArray (arr, item) {
-  if(arr && arr.length && item &&  arr.some((v)=>v===item)){
+export function inArray(arr, item) {
+  if (arr && arr.length && item && arr.some((v) => v === item)) {
     return true;
-  }else{
+  }
+  else {
     return false
   }
 }
@@ -142,7 +147,7 @@ export function inArray (arr, item) {
  * @param item 删除项
  * @return Array 如果删除成功，返回被删除的元素，失败返回undefault
  */
-export function removeArrayItem (arr, item) {
+export function removeArrayItem(arr, item) {
   if (arr && arr.length) {
     var index = arr.indexOf(item);
     if (index > -1) {
@@ -158,16 +163,18 @@ export function contenteditable(e) {
   e.preventDefault();
   var text = null;
 
-  if(window.clipboardData && clipboardData.setData) {
+  if (window.clipboardData && clipboardData.setData) {
     // IE
     text = window.clipboardData.getData('text');
-  } else {
+  }
+  else {
     text = (e.originalEvent || e).clipboardData.getData('text/plain') || prompt('Enter the text here!');
   }
   if (document.body.createTextRange) {
     if (document.selection) {
       textRange = document.selection.createRange();
-    } else if (window.getSelection) {
+    }
+    else if (window.getSelection) {
       sel = window.getSelection();
       var range = sel.getRangeAt(0);
 
@@ -183,7 +190,8 @@ export function contenteditable(e) {
     textRange.text = text;
     textRange.collapse(false);
     textRange.select();
-  } else {
+  }
+  else {
     // Chrome之类浏览器
     document.execCommand("insertText", false, text);
   }
@@ -193,7 +201,7 @@ export function contenteditable(e) {
 * 是否是对象
 * @param obj 需要判断的对象
 * */
-export function isObject (obj) {
+export function isObject(obj) {
   return Object.prototype.toString.call(obj) === '[object Object]'
 }
 
@@ -203,7 +211,7 @@ export function isObject (obj) {
 * */
 export function isEmptyObject(obj) {
   //不是对象返回true
-  if(isObject(obj)) {
+  if (isObject(obj)) {
     for (var i in obj) {
       return false;
     }
