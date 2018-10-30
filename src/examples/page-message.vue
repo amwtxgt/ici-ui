@@ -7,13 +7,13 @@
         <baseComponent title="加载中 $icimsg.loading" html='<p>基本，不是自动关闭</p>
     <ici-button @click="$icimsg.loading("我在加载中")">打开加载</ici-button>
 <p>添加超时时间，超时后关闭</p>
-<ici-button @click="$icimsg.loading("我在加载中",5000)">打开加载 5秒后自动关闭</ici-button>
+<ici-button @click="$icimsg.loading("我在加载中",{duration:5000})">打开加载 5秒后自动关闭</ici-button>
 <p>手动关闭加载</p>
 <ici-button @click="$icimsg.close()">关闭加载</ici-button>'>
             <p>基本，不会自动关闭</p>
             <ici-button @click="$icimsg.loading('我在加载中')">打开加载</ici-button>
             <p>添加超时时间，超时后关闭</p>
-            <ici-button @click="$icimsg.loading('我在加载中',5000)">打开加载 5秒后自动关闭</ici-button>
+            <ici-button @click="$icimsg.loading('我在加载中',{duration:5000})">打开加载 5秒后自动关闭</ici-button>
             <p>手动关闭加载</p>
             <ici-button @click="$icimsg.close()">关闭加载</ici-button>
         </baseComponent>
@@ -21,30 +21,38 @@
         <baseComponent title="成功 $icimsg.success" html='<p>基本，默认两秒后关闭</p>
     <ici-button @click="$icimsg.success("我成功了")">打开消息</ici-button>
 <p>自定义关闭时间</p>
-<ici-button @click="$icimsg.success("我成功了",5000)">5秒后关闭</ici-button>'>
+<ici-button @click="$icimsg.success("我成功了",{duration:5000})">5秒后关闭</ici-button>'>
             <p>基本，默认两秒后关闭</p>
             <ici-button @click="$icimsg.success('我成功了')">打开消息</ici-button>
             <p>自定义关闭时间</p>
-            <ici-button @click="$icimsg.success('我成功了',5000)">5秒后关闭</ici-button>
+            <ici-button @click="$icimsg.success('我成功了',{duration:5000})">5秒后关闭</ici-button>
         </baseComponent>
 
         <baseComponent title="失败 $icimsg.error" html='<p>基本，默认两秒后关闭</p>
     <ici-button @click="$icimsg.error("我失败了")">打开消息</ici-button>
 <p>自定义关闭时间</p>
-<ici-button @click="$icimsg.error("我失败了",5000)">5秒后关闭</ici-button>'>
+<ici-button @click="$icimsg.error("我失败了",{duration:5000})">5秒后关闭</ici-button>'>
             <p>基本，默认两秒后关闭</p>
             <ici-button @click="$icimsg.error('我失败了')">打开消息</ici-button>
             <p>自定义关闭时间</p>
-            <ici-button @click="$icimsg.error('我失败了',5000)">5秒后关闭</ici-button>
+            <ici-button @click="$icimsg.error('我失败了',{duration:5000})">5秒后关闭</ici-button>
         </baseComponent>
 
-        <baseComponent title="位置 默认为下边" html=''>
+        <baseComponent title="位置 默认为下边" html='<ici-button  @click="$icimsg.msg("我是上边",{position:"top"})">上边</ici-button>
+<ici-button  @click="$icimsg.msg("我是中边",{position:"center"})">中边</ici-button>
+<ici-button  @click="$icimsg.msg("我是下边",{position:"bottom"})">下边</ici-button>'>
 
-            <ici-button  @click="$icimsg.msg('我是上边',5000,'top')">上边</ici-button>
-            <ici-button  @click="$icimsg.msg('我是中边',5000,'center')">中边</ici-button>
-            <ici-button  @click="$icimsg.msg('我是下边',5000)">下边</ici-button>
+            <ici-button  @click="$icimsg.msg('我是上边',{position:'top'})">上边</ici-button>
+            <ici-button  @click="$icimsg.msg('我是中边',{position:'center'})">中边</ici-button>
+            <ici-button  @click="$icimsg.msg('我是下边',{position:'bottom'})">下边</ici-button>
         </baseComponent>
 
+      <baseComponent title="加按钮" html=''>
+
+        <ici-button  @click="$icimsg.msg('我是上边我是上边我是上边我是上边',{
+          btn:{name:'重试',click:reab}
+        })">上边</ici-button>
+      </baseComponent>
     </div>
 </template>
 
@@ -63,6 +71,9 @@
         beforeDestroy() {
         },
         methods: {
+            reab(){
+              this.$icimsg.msg('你点了重试')
+            },
             abc(){
                 this.$refs['message'].msg('sdfgfsdfsd')
             }
