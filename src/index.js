@@ -6,6 +6,7 @@ import iciInputGroup from './components/ici-input-group'
 import iciMultipleField from './components/ici-multiple-field'
 import iciRadioField from './components/ici-radio-field'
 import iciPopup from './components/ici-popup.vue'
+import iciDrawer from './components/ici-drawer'
 import iciMessage from './components/ici-message.vue'
 import iciSearch from './components/ici-search.vue'
 import iciHint from './components/ici-hint.vue'
@@ -27,7 +28,8 @@ export const components = {
   iciSearch,
   iciHint,
   iciHeader,
-  iciBgimg
+  iciBgimg,
+  iciDrawer
 }
 
 const install = function (Vue) {

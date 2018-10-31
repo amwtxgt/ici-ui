@@ -26,6 +26,9 @@
         <MenuItem name="pagePopup">
           弹窗 ici-popup
         </MenuItem>
+        <MenuItem name="pageDrawer">
+          抽屉弹窗 ici-drawer
+        </MenuItem>
         <MenuItem name="pageMessage">
           消息 ici-msg
         </MenuItem>
@@ -52,6 +55,7 @@
   import pageIcon from '../examples/page-icon.vue';
   import pageInput from '../examples/page-input.vue';
   import pagePopup from '../examples/page-popup.vue';
+  import pageDrawer from '../examples/page-drawer.vue';
   import pageMessage from '../examples/page-message.vue';
   import pageSearch from '../examples/page-search.vue';
   import pageHeader from '../examples/page-header.vue';
@@ -60,12 +64,14 @@
   import pageBgImg from '../examples/page-bg-image'
   import pageFuns from '../examples/page-funs.vue'
 
+
   var components = {
     pageButton,
     pageLoading,
     pageIcon,
     pageInput,
     pagePopup,
+    pageDrawer,
     pageMessage,
     pageSearch,
     pageHeader,
@@ -78,7 +84,7 @@
     name: 'app',
     data() {
       return {
-        active: 'pageFuns'
+        active: 'pageDrawer'
       };
     },
     computed: {
