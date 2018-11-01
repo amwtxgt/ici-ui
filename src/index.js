@@ -13,6 +13,7 @@ import iciHint from './components/ici-hint.vue'
 import iciHeader from './components/ici-header.vue'
 import iciImagePreview from './components/ici-image-preview.vue'
 import iciBgimg from './components/ici-bgimg.vue'
+import iciScroll from './components/ici-scroll.vue'
 
 import * as funs from './assets/functions'
 
@@ -30,7 +31,8 @@ const components = {
   iciHint,
   iciHeader,
   iciBgimg,
-  iciDrawer
+  iciDrawer,
+  iciScroll,
 }
 
 const install = function (Vue) {
