@@ -18,15 +18,14 @@ $funs.trim("baahuangaa","gaa")  //"baahuan"'>
       </code>
     </baseComponent>
 
-    <baseComponent title="生成md5" html='$funs.getMd5("文本")'>
+    <baseComponent title="生成md5" html='$funs.getMd5("sdf") //d9729feb74992cc3482b350163a1a010 '>
 
       <div class="title-funs">$funs.getMd5(string)</div>
-      <div class="funs-msg">复制文本，执行该函数，文本将会写入的粘贴板，后续用户可以进行粘贴操作</div>
+      <div class="funs-msg">生成md5</div>
       <code>
-        @param {String} string 需要复制的文本
+        @param {String} str 需要复制的文本
       </code>
       {{$funs.getMd5('sdf')}}
-      {{trim('    sdf   ')}}
     </baseComponent>
 
     <baseComponent title="复制文本" html='$funs.copyText("复制的文本")'>
