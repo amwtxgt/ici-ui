@@ -144,4 +144,8 @@ if (typeof window !== 'undefined' && window.Vue) {
   install(window.Vue);
 }
 
-export default {install: install,...components,...funs};
+
+export default {install: install};
+export {components,funs}
+
+
