@@ -48,8 +48,21 @@ $funs.boldKey("我叫黄某某","某某","red")
         @param key匹配关键字 <br>
         可选 @param color 匹配关键字的颜色，默认为绿色; <br>
       </code>
+      <br>
       <div v-html="$funs.boldKey('我叫黄某某','某某')"></div>
       <div v-html="$funs.boldKey('我叫黄某某','某某','red')"></div>
+    </baseComponent>
+
+    <baseComponent title="首字母大字" html='$funs.capitalize("abc cde fgi") //Abc cde fgi
+$funs.capitalize("abc cde fgi",true) //Abc Cde Fgi'>
+
+      <div class="title-funs">$funs.capitalize(string[,isWord])</div>
+      <div class="funs-msg">首字母大字</div>
+      <code>
+        @param {String} string 字符串 <br>
+        @param {Boolean} isWord 是否是单词首字母大写
+      </code>
+
     </baseComponent>
     <br>
     <div class="title">数组处理函数</div>
@@ -98,7 +111,7 @@ $funs.isObject({}) //true'>
       </code>
     </baseComponent>
     <baseComponent title="对象是否为空" html='$funs.isEmptyObject({a:12}) //false
-$funs.isEmptyObject({}) //false
+$funs.isEmptyObject({}) //true
 $funs.isEmptyObject("asd") //true'>
       <div class="title-funs">$funs.isEmptyObject(obj)</div>
       <div class="funs-msg">对象是否为空</div>

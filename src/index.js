@@ -16,7 +16,8 @@ import iciBgimg from './components/ici-bgimg.vue'
 
 import * as funs from './assets/functions'
 
-export const components = {
+
+const components = {
   iciButton,
   iciLoading,
   iciIcon,
@@ -143,4 +144,4 @@ if (typeof window !== 'undefined' && window.Vue) {
   install(window.Vue);
 }
 
-export default {install: install};
+export default {install: install,...components,...funs};

@@ -105,6 +105,31 @@ export function boldKey(str, key, color) {
   }
 }
 
+/**
+ *首字母大字
+ * @param {String}str 字符串
+ * @param {Boolean}isWord 是否以单词会分界
+ */
+export function capitalize(str,isWord) {
+
+  if (typeof (str) == 'string') {
+
+    str = str.toLowerCase()
+
+    if(isWord){
+      var arr = str.split(/ +/)
+      return arr.map((n) => {
+        return n.charAt(0).toUpperCase() + n.slice(1)
+      }).join(' ')
+    }else{
+      return str.charAt(0).toUpperCase() + str.slice(1)
+    }
+
+  }
+  return str;
+}
+
+
 /*
 * 一维数组去重
 * @param arr {Array}  一维数组
