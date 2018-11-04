@@ -1,5 +1,5 @@
 <template>
-    <div class="fms-input-hint" :class="{'ici-hint-show':value}">
+    <div class="fms-input-hint" :class="{'ici-hint-show':value}" :style="{maxHeight:maxHeight}">
         <slot></slot>
         <!--加载图标-->
         <div v-show="loading">
@@ -21,6 +21,10 @@
         props:{
             value:Boolean,
             loading:Boolean,
+            maxHeight:{
+              type:String,
+              default:'300px',
+            }
         },
         mounted() {
         },
@@ -39,7 +43,6 @@
         opacity: 0;
         transition: all .3s;
         width: 100%;
-        max-height: 300px;
         overflow: auto;
         box-sizing: border-box;
         border: 1px solid rgba(0, 0, 0, .2);

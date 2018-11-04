@@ -4,10 +4,9 @@
       <ici-icon class="ici-font" name="icon-sousuo" size="20px" color="rgba(0, 0, 0, .3)"></ici-icon>
       <input type="text" :value="value" @blur="blur" @input="input" v-focus="focus" @focus="focusEvent"
              @keydown.up.down.stop.prevent="keydown" @keyup.enter.stop.prevent="enter" :placeholder="label">
-      <ici-icon class="ici-delete" :class="{show:value}" name="icon-shanchudelete30" size="18px" @click="reset">
-      </ici-icon>
+      <ici-icon class="ici-delete" :class="{show:value}" name="icon-shanchudelete30" size="18px" @click="reset" />
     </div>
-    <ici-hint class="ici-hint-addclass" v-model="showHint" :loading="hint===true">
+    <ici-hint class="ici-hint-addclass" v-model="showHint" :loading="hint===true" max-height="600px">
       <!--列表头部-->
       <div v-if="showTitle" class="fms-input-hint-li fms-input-hint-li-add" @mousedown="select(-1)"
            :class="{active:selectIndex==-1}">

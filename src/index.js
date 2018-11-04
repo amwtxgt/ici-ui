@@ -14,6 +14,7 @@ import iciHeader from './components/ici-header.vue'
 import iciImagePreview from './components/ici-image-preview.vue'
 import iciBgimg from './components/ici-bgimg.vue'
 import iciScroll from './components/ici-scroll.vue'
+import iciMenu from './components/ici-menu.vue'
 
 import * as funs from './assets/functions'
 
@@ -33,6 +34,7 @@ const components = {
   iciBgimg,
   iciDrawer,
   iciScroll,
+  iciMenu
 }
 
 const install = function (Vue) {
@@ -73,7 +75,7 @@ const install = function (Vue) {
   }
   Vue.directive('bgpreview', {
     inserted: function (el, binding) {
-      if(binding.value === false){
+      if (binding.value === false) {
         return
       }
       el.addEventListener('click', (e) => {
@@ -87,16 +89,17 @@ const install = function (Vue) {
             var nativeHeight = img.height;
             var width = el.offsetWidth;
             var height = el.offsetHeight;
-            var x = e.x-e.offsetX, y = e.y-e.offsetY
+            var x = e.x - e.offsetX, y = e.y - e.offsetY
 
             if (nativeWidth / nativeHeight > width / height) {
               //取宽
-              width = height/nativeHeight*nativeWidth;
-              x =  x+(el.offsetWidth-width)/2
-            }else{
+              width = height / nativeHeight * nativeWidth;
+              x = x + (el.offsetWidth - width) / 2
+            }
+            else {
               //取高
-              height = width/nativeWidth*nativeHeight;
-              y =  y+(el.offsetHeight-height)/2
+              height = width / nativeWidth * nativeHeight;
+              y = y + (el.offsetHeight - height) / 2
             }
             previewMain({width, height, x, y, nativeWidth, nativeHeight, src: imgUrl})
           };
@@ -110,17 +113,16 @@ const install = function (Vue) {
 
   Vue.directive('imgpreview', {
     inserted: function (el, binding) {
-      if(binding.value === false){
+      if (binding.value === false) {
         return
       }
       el.addEventListener('click', (e) => {
         var width = el.width, height = el.height, x = el.x, y = el.y, nativeWidth = el.naturalWidth,
           nativeHeight = el.naturalHeight;
-          previewMain({width, height, x, y, nativeWidth, nativeHeight, src: el.src})
+        previewMain({width, height, x, y, nativeWidth, nativeHeight, src: el.src})
       })
     }
   })
-
 
   // 注册一个全局自定义指令 `v-focus`
   Vue.directive('focus', {
@@ -140,6 +142,24 @@ const install = function (Vue) {
       }
     }
   })
+
+  //右键菜单
+  var rightMenu = new Vue(iciMenu);
+  Vue.directive('rightmenu', {
+    inserted: function (el, binding) {
+      el.oncontextmenu = (e) => {
+        if(binding.value){
+          if(typeof binding.value ==='function'){
+            rightMenu.open(binding.value(),e)
+          }else if(typeof binding.value instanceof Object){
+            rightMenu.open(binding.value,e)
+          }
+        }
+        window.event.returnValue = false;
+        return false;
+      }
+    }
+  })
 };
 
 if (typeof window !== 'undefined' && window.Vue) {
@@ -148,6 +168,6 @@ if (typeof window !== 'undefined' && window.Vue) {
 
 
 export default {install: install};
-export {components,funs}
+export {components, funs}
 
 

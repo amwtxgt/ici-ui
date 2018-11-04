@@ -32,13 +32,15 @@
         <MenuItem name="pageMessage">
           消息 ici-msg
         </MenuItem>
+        <MenuItem name="pageMenu">
+          右键菜单 ici-menu
+        </MenuItem>
         <MenuItem name="pageScroll">
           滚动 ici-scroll
         </MenuItem>
         <MenuItem name="pageSearch">
           搜索 ici-search
         </MenuItem>
-
         <MenuItem name="pageHeader">
           导航头部 ici-header
         </MenuItem>
@@ -68,7 +70,7 @@
   import pageBgImg from '../examples/page-bg-image'
   import pageFuns from '../examples/page-funs.vue'
   import pageScroll from '../examples/page-scroll.vue'
-
+  import pageMenu from '../examples/page-rightmenu.vue'
   var components = {
     pageButton,
     pageLoading,
@@ -83,13 +85,14 @@
     pageField,
     pageBgImg,
     pageFuns,
-    pageScroll
+    pageScroll,
+    pageMenu
   };
   export default {
     name: 'app',
     data() {
       return {
-        active: 'pageScroll'
+        active: 'pageMenu'
       };
     },
     computed: {
