@@ -33,7 +33,7 @@
           消息 ici-msg
         </MenuItem>
         <MenuItem name="pageMenu">
-          右键菜单 ici-menu
+          左右键菜单 ici-menu
         </MenuItem>
         <MenuItem name="pageScroll">
           滚动 ici-scroll

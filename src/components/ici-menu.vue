@@ -10,22 +10,22 @@
 
         <div v-if="item.btns" class="flex-none">
           <ici-icon click-state v-for="(btn,index) of item.btns" :name="btn.icon" :key="'btn'+index"
-                    @click="click($event,btn.click)" :color="btn.iconColor" />
+                    @click="click($event,btn.click)" :color="btn.iconColor" size="16px" />
         </div>
 
         <!--二级菜单-->
         <template v-if="item.children && item.children.length">
-          <ici-icon name="icon-yduiqianjin"></ici-icon>
+          &nbsp; &nbsp;<ici-icon name="icon-yduiqianjin"></ici-icon>
           <ul class="ici-menu-child" ref="icimenuchild">
             <li v-for="(child,i2) of item.children" :key="'child'+i2" @click="click($event,child.click,child.disabled)"
                 :class="{showline:child.showline,disabled:child.disabled}">
               <div>
-                <ici-icon v-if="child.icon" :name="child.icon" :color="item.iconColor" size="14px"></ici-icon>
+                <ici-icon v-if="child.icon" :name="child.icon" :color="child.iconColor" size="14px"></ici-icon>
               </div>
               <span>{{child.name}}</span>
               <div v-if="item.btns" class="flex-none">
                 <ici-icon click-state v-for="(btn,index) of child.btns" :name="btn.icon" :key="'btn'+index"
-                          @click="click($event,btn.click)" :color="btn.iconColor" />
+                          @click="click($event,btn.click)" :color="btn.iconColor" size="16px" />
               </div>
             </li>
           </ul>
@@ -42,7 +42,6 @@
     name: "ici-right-click-menu",
     data() {
       return {
-
         id: 'ici-menu-' + rom,
         show: false,
         position: {top: '0px', left: '0px'},
