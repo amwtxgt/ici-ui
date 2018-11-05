@@ -1,6 +1,6 @@
 <template>
-  <div :id="id" v-show="show" class="ici-menu-wrap" @mousedown="eventHandle('mousedown',$event)">
-    <ul class="ici-menu" ref="icimenu" v-if="menuList && menuList.length" :style="position" @mousedown.stop="">
+  <div :id="id" v-show="show" class="ici-menu-wrap" @mousedown="eventHandle('mousedown',$event)" @mousewheel.self="mousewheel">
+    <ul class="ici-menu" ref="icimenu" v-if="menuList && menuList.length" :style="position" @mousedown.stop="" >
       <li v-for="(item,i) of menuList" :key="'menu'+i" :class="{showline:item.showline,disabled:item.disabled}"
           @click="click($event,item.click,item.disabled)">
         <div>
@@ -62,6 +62,11 @@
         var ev = document.createEvent("HTMLEvents");
         ev.initEvent('click', false, true);
         el.dispatchEvent(ev);
+      },
+
+      //滚轮
+      mousewheel(e){
+        this.show = false;
       },
 
       eventHandle(eventName, e) {
