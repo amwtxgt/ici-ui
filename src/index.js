@@ -5,7 +5,10 @@ import iciInput from './components/ici-input.vue'
 import iciInputGroup from './components/ici-input-group'
 import iciMultipleField from './components/ici-multiple-field'
 import iciRadioField from './components/ici-radio-field'
+
 import iciPopup from './components/ici-popup.vue'
+import iciModal from './components/ici-modal.vue'
+
 import iciDrawer from './components/ici-drawer'
 import iciMessage from './components/ici-message.vue'
 import iciSearch from './components/ici-search.vue'
@@ -28,6 +31,7 @@ const components = {
   iciInput,
   iciInputGroup,
   iciPopup,
+  iciModal,
   iciSearch,
   iciHint,
   iciHeader,
@@ -46,6 +50,9 @@ const install = function (Vue) {
   var message = new Vue(iciMessage);
   Vue.prototype.$icimsg = message;
   Vue.prototype.$funs = funs;
+
+  var modal  = new Vue(iciModal);
+  Vue.prototype.$popup = modal;
 
   // 注册一个全局自定义指令 `v-focus`
   Vue.directive('focus', {

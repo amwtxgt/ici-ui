@@ -1,6 +1,24 @@
 <template>
   <div>
     <div class="title">popup 弹窗</div>
+    <baseComponent title="函数调用 this.$popup.confirm" html='<ici-button @click="openPopup">this.$popup.confirm</ici-button>
+  methods: {
+      openPopup(){
+        this.$popup.confirm({
+          title:"这是一个弹窗",
+          content:"这是弹窗的内容，可能很长，但很有用",
+          onOk:()=>{
+            console.log(this,"OK了")
+          },
+          onCancel:()=>{
+           console.log(this,"取消了")
+          }
+        })
+    },
+}'>
+      <ici-button @click="openPopup">this.$popup.confirm</ici-button>
+    </baseComponent>
+
     <baseComponent title="基本弹窗" html='<ici-popup v-model="popup1"></ici-popup>
 <ici-button @click="popup1= true">打开弹窗</ici-button>'>
       <ici-popup v-model="popup1"></ici-popup>
@@ -306,7 +324,20 @@
     },
     beforeDestroy() {
     },
-    methods: {},
+    methods: {
+      openPopup(){
+        this.$popup.confirm({
+          title:'这是一个弹窗',
+          content:'这是弹窗的内容，可能很长，但很有用',
+          onOk:()=>{
+            console.log(this,'OK了')
+          },
+          onCancel:()=>{
+            console.log(this,'取消了')
+          }
+        })
+      },
+    },
   };
 </script>
 

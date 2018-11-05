@@ -4,7 +4,7 @@
       <li v-for="(item,i) of menuList" :key="'menu'+i" :class="{showline:item.showline,disabled:item.disabled}"
           @click="click($event,item.click,item.disabled)">
         <div>
-          <ici-icon v-if="item.icon" :name="item.icon" :color="item.iconColor" size="16px"></ici-icon>
+          <ici-icon v-if="item.icon" :name="item.icon" :color="item.iconColor||'#999'" size="17px"></ici-icon>
         </div>
         <span :title="item.name">{{item.name}}</span>
 
@@ -156,7 +156,6 @@
             window.document.body.appendChild(menu);
             this.$mount(menu); //绑定
           }
-
         }
       },
     },
@@ -190,7 +189,8 @@
       color: #444;
       line-height: 20px;
       > :first-child {
-        width: 20px;
+        color:#666;
+        width: 25px;
         flex: none;
       }
       > :nth-child(2) {
@@ -207,7 +207,7 @@
         border-top: 1px solid #eee;
       }
       &:hover {
-        background: #f0f0f0;
+        background: #eee;
         color: #000;
         .ici-menu-child {
           visibility: visible;

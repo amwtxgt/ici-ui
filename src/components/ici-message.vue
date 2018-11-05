@@ -61,8 +61,7 @@
           }
           else {
             var message = window.document.createElement('div');
-            message.setAttribute('id', 'ici-messages-' + rom);
-            message.setAttribute('class', 'ici-message-wrap')
+
             window.document.body.appendChild(message);
             this.$mount(message);
           }
@@ -71,6 +70,7 @@
       },
 
       open(obj) { //obj = {type:loading|success|error|message,duration:显示时间，showClose:显示关闭按钮,msg:显示内容}
+        console.log(this)
         this._append();
         clearTimeout(this.timeout);
         if (this.show) {
