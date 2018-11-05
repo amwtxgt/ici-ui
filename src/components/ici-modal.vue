@@ -10,7 +10,6 @@
     <div slot="footer-right">
       <ici-button type="ici" @click="ok" shape="pill" size="small">{{option.okText||'ok'}}</ici-button>
       <ici-button type="ici" @click="cancel" shape="pill" plain size="small">{{option.cancelText||'no'}}</ici-button>
-
     </div>
   </ici-popup>
 </template>
@@ -43,7 +42,7 @@
         this.show = true;
       },
       ok() {
-
+        if(!this.show) return;
         this.show = false;
         if (typeof this.option.onOk === 'function') {
           this.option.onOk()

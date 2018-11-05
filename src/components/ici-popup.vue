@@ -245,6 +245,7 @@
         }
         .fms-popup-handle {
           flex: auto;
+          padding:5px;
           text-align: right;
         }
       }

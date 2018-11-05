@@ -347,8 +347,4 @@
     margin-bottom: 10px;
   }
 
-  button {
-    margin: 5px !important;
-  }
-
 </style>
