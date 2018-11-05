@@ -266,7 +266,6 @@ methods: {
             iconColor: 'green',
 
             click: (e) => {
-              console.log(this)
               alert('你点了菜单一')
             },
             btns: [{

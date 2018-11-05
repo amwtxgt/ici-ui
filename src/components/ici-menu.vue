@@ -1,10 +1,10 @@
 <template>
-  <div :id="id" v-show="show" class="ici-menu-wrap" @mousedown="eventHandle('mousedown',$event)" @mousewheel.self="mousewheel">
+  <div :id="id" v-show="show" class="ici-menu-wrap" @mousedown="mousedown('mousedown',$event)" @mousewheel.self="mousewheel">
     <ul class="ici-menu" ref="icimenu" v-if="menuList && menuList.length" :style="position" @mousedown.stop="" >
       <li v-for="(item,i) of menuList" :key="'menu'+i" :class="{showline:item.showline,disabled:item.disabled}"
           @click="click($event,item.click,item.disabled)">
         <div>
-          <ici-icon v-if="item.icon" :name="item.icon" :color="item.iconColor||'#999'" size="17px"></ici-icon>
+          <ici-icon v-if="item.icon" :name="item.icon" :color="item.iconColor||'#666'" size="17px"></ici-icon>
         </div>
         <span :title="item.name">{{item.name}}</span>
 
@@ -23,7 +23,7 @@
                 <ici-icon v-if="child.icon" :name="child.icon" :color="child.iconColor" size="14px"></ici-icon>
               </div>
               <span>{{child.name}}</span>
-              <div v-if="item.btns" class="flex-none">
+              <div v-if="child.btns" class="flex-none">
                 <ici-icon click-state v-for="(btn,index) of child.btns" :name="btn.icon" :key="'btn'+index"
                           @click="click($event,btn.click)" :color="btn.iconColor" size="16px" />
               </div>
@@ -48,12 +48,6 @@
         menuList: []
       };
     },
-    mounted() {
-      document.addEventListener('click', this.dispatchEvent)
-    },
-    beforeDestroy() {
-      document.addEventListener('click', this.dispatchEvent)
-    },
     methods: {
       //主动事件
       dispatchEvent(e) {
@@ -62,6 +56,7 @@
         var ev = document.createEvent("HTMLEvents");
         ev.initEvent('click', false, true);
         el.dispatchEvent(ev);
+        document.removeEventListener('click', this.dispatchEvent)
       },
 
       //滚轮
@@ -69,8 +64,9 @@
         this.show = false;
       },
 
-      eventHandle(eventName, e) {
+      mousedown() {
         this.show = false;
+        document.addEventListener('click', this.dispatchEvent)
       },
 
       open(menuList, e) {

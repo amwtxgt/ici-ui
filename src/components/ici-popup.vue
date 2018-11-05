@@ -85,7 +85,6 @@
       }
     },
     mounted() {
-      console.log(this)
       if (this._events.confirm) {
         this.hasConfirm = true;
       }
