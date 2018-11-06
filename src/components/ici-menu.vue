@@ -1,13 +1,12 @@
 <template>
   <div :id="id" v-show="show" class="ici-menu-wrap" @mousedown="mousedown('mousedown',$event)" @mousewheel.self="mousewheel">
     <ul class="ici-menu" ref="icimenu" v-if="menuList && menuList.length" :style="position" @mousedown.stop="" >
-      <li v-for="(item,i) of menuList" :key="'menu'+i" :class="{showline:item.showline,disabled:item.disabled}"
+      <li v-for="(item,i) of menuList" :key="'menu'+i" :class="{topline:item.topLine,bottomline:item.bottomLine,disabled:item.disabled}"
           @click="click($event,item.click,item.disabled)">
         <div>
           <ici-icon v-if="item.icon" :name="item.icon" :color="item.iconColor||'#666'" size="17px"></ici-icon>
         </div>
-        <span :title="item.name">{{item.name}}</span>
-
+        <div :title="item.name" class="menu-name"><span>{{item.name}}</span></div>
         <div v-if="item.btns" class="flex-none">
           <ici-icon click-state v-for="(btn,index) of item.btns" :name="btn.icon" :key="'btn'+index"
                     @click="click($event,btn.click)" :color="btn.iconColor" size="16px" />
@@ -18,11 +17,11 @@
           &nbsp; &nbsp;<ici-icon name="icon-yduiqianjin"></ici-icon>
           <ul class="ici-menu-child" ref="icimenuchild">
             <li v-for="(child,i2) of item.children" :key="'child'+i2" @click="click($event,child.click,child.disabled)"
-                :class="{showline:child.showline,disabled:child.disabled}">
+                :class="{topline:child.topLine,bottomline:child.bottomLine,disabled:child.disabled}">
               <div>
                 <ici-icon v-if="child.icon" :name="child.icon" :color="child.iconColor" size="14px"></ici-icon>
               </div>
-              <span>{{child.name}}</span>
+              <div class="menu-name"><span>{{child.name}}</span></div>
               <div v-if="child.btns" class="flex-none">
                 <ici-icon click-state v-for="(btn,index) of child.btns" :name="btn.icon" :key="'btn'+index"
                           @click="click($event,btn.click)" :color="btn.iconColor" size="16px" />
@@ -194,18 +193,25 @@
         width: 25px;
         flex: none;
       }
-      > :nth-child(2) {
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        max-width: 250px;
+      .menu-name{
         flex: auto;
+        >span{
+          display: block;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          max-width: 250px;
+        }
       }
-      > :last-child {
-        flex: none
+
+      >i{
+        flex:none;
       }
-      &.showline {
+      &.topline {
         border-top: 1px solid #eee;
+      }
+      &.bottomline {
+        border-bottom: 1px solid #eee;
       }
       &:hover {
         background: #eee;

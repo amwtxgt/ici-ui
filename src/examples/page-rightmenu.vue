@@ -157,6 +157,125 @@ methods: {
 
     </baseComponent>
 
+
+
+    <baseComponent title="上划线 topLine:true,下划线 bottomLine:true,不可用disabled:true" html='<div class="rightmenu" v-rightmenu="menu1">
+  右键点我
+</div>
+
+methods: {
+     menu() {
+        return [
+          {
+            name: "我是菜单一",
+            icon: "icon-qq",
+            iconColor: "green",
+            bottomLine:true,
+            click: (e) => {
+              alert("你点了菜单一")
+            },
+            btns: [{
+              icon: "icon-tianjia",
+              iconColor: "red",
+              click() {
+                console.log("你点击了一个btn")
+              },
+            }, {
+              topLine:true,
+              icon: "icon-tianjia",
+              iconColor: "red",
+              click() {
+                console.log("你点击了一个btn")
+              },
+            }]
+          },
+          {
+            name: "我是菜单二sdf asdf awerf frawaef ",
+
+            icon: "icon-wangzhi",
+            click: (e) => {
+              alert("你点了菜单二")
+            }
+          },
+          {
+            disabled: true,
+            name: "我是菜单三",
+            children: [
+              {
+                disabled: true,
+                name: "我是菜单三的第一个",
+                click: (e) => {
+                  alert("我是菜单三的第一个")
+                }
+              },
+              {
+                name: "我是菜单三的第二个",
+                icon: "icon-erweima",
+                click: (e) => {
+                  alert("我是菜单三的第二个")
+                }
+              },
+            ],
+          },
+          {
+            name: "我是菜单四",
+            icon: "icon-sousuo",
+            click: (e) => {
+              alert("你点了菜单四")
+            },
+            btns: [{
+              icon: "icon-tianjia",
+              iconColor: "red",
+              click() {
+                console.log("你点击了一个btn")
+              },
+            }, {
+              icon: "icon-tianjia",
+              iconColor: "red",
+              click() {
+                console.log("你点击了一个btn")
+              },
+            }],
+            children: [
+              {
+                name: "我是菜单三的第一个我是菜单三的第一个我是菜单三的第一个",
+                click: (e) => {
+                  alert("我是菜单三的第一个")
+                },
+                btns: [{
+                  icon: "icon-tianjia",
+                  iconColor: "red",
+                  click() {
+                    console.log("你点击了一个btn")
+                  },
+                }, {
+                  icon: "icon-tianjia",
+                  iconColor: "red",
+                  click() {
+                    console.log("你点击了一个btn")
+                  },
+                }]
+              },
+              {
+                name: "我是菜单三的第二个",
+                icon: "icon-erweima",
+                click: (e) => {
+                  alert("我是菜单三的第二个")
+                }
+              },
+            ],
+
+          },
+        ]
+      },
+}'>
+
+      <div class="rightmenu" v-rightmenu="menu">
+        右键点我
+      </div>
+
+    </baseComponent>
+
   </div>
 </template>
 
@@ -261,99 +380,101 @@ methods: {
       menu() {
         return [
           {
-            name: '我是菜单一',
-            icon: 'icon-qq',
-            iconColor: 'green',
-
+            name: "我是菜单一",
+            icon: "icon-qq",
+            iconColor: "green",
+            bottomLine:true,
             click: (e) => {
-              alert('你点了菜单一')
+              alert("你点了菜单一")
             },
             btns: [{
-              icon: 'icon-tianjia',
-              iconColor: 'red',
+              icon: "icon-tianjia",
+              iconColor: "red",
               click() {
-                console.log('你点击了一个btn')
+                console.log("你点击了一个btn")
               },
             }, {
-              icon: 'icon-tianjia',
-              iconColor: 'red',
+              topLine:true,
+              icon: "icon-tianjia",
+              iconColor: "red",
               click() {
-                console.log('你点击了一个btn')
+                console.log("你点击了一个btn")
               },
             }]
           },
           {
-            name: '我是菜单二sdf asdf awerf frawaef ',
-            disabled: true,
-            icon: 'icon-wangzhi',
+            name: "我是菜单二sdf asdf awerf frawaef ",
+
+            icon: "icon-wangzhi",
             click: (e) => {
-              alert('你点了菜单二')
+              alert("你点了菜单二")
             }
           },
           {
             showline: true,
-            name: '我是菜单三',
+            name: "我是菜单三",
+            disabled: true,
             children: [
               {
                 disabled: true,
-                name: '我是菜单三的第一个',
+                name: "我是菜单三的第一个",
                 click: (e) => {
-                  alert('我是菜单三的第一个')
+                  alert("我是菜单三的第一个")
                 }
               },
               {
-                name: '我是菜单三的第二个',
-                icon: 'icon-erweima',
+                name: "我是菜单三的第二个",
+                icon: "icon-erweima",
                 click: (e) => {
-                  alert('我是菜单三的第二个')
+                  alert("我是菜单三的第二个")
                 }
               },
             ],
           },
           {
-            name: '我是菜单四',
-            icon: 'icon-sousuo',
+            name: "我是菜单四",
+            icon: "icon-sousuo",
             click: (e) => {
-              alert('你点了菜单四')
+              alert("你点了菜单四")
             },
             btns: [{
-              icon: 'icon-tianjia',
-              iconColor: 'red',
+              icon: "icon-tianjia",
+              iconColor: "red",
               click() {
-                console.log('你点击了一个btn')
+                console.log("你点击了一个btn")
               },
             }, {
-              icon: 'icon-tianjia',
-              iconColor: 'red',
+              icon: "icon-tianjia",
+              iconColor: "red",
               click() {
-                console.log('你点击了一个btn')
+                console.log("你点击了一个btn")
               },
             }],
             children: [
               {
-                name: '我是菜单三的第一个我是菜单三的第一个我是菜单三的第一个',
+                name: "我是菜单三的第一个我是菜单三的第一个我是菜单三的第一个",
                 click: (e) => {
-                  alert('我是菜单三的第一个')
+                  alert("我是菜单三的第一个")
                 },
                 btns: [{
-                  icon: 'icon-tianjia',
-                  iconColor: 'red',
+                  icon: "icon-tianjia",
+                  iconColor: "red",
                   click() {
-                    console.log('你点击了一个btn')
+                    console.log("你点击了一个btn")
                   },
                 }, {
-                  icon: 'icon-tianjia',
-                  iconColor: 'red',
+                  icon: "icon-tianjia",
+                  iconColor: "red",
                   click() {
-                    console.log('你点击了一个btn')
+                    console.log("你点击了一个btn")
                   },
                 }]
               },
               {
-                name: '我是菜单三的第二个',
-                icon: 'icon-erweima',
+                name: "我是菜单三的第二个",
+                icon: "icon-erweima",
                 click: (e) => {
-                  alert('我是菜单三的第二个')
+                  alert("我是菜单三的第二个")
                 }
               },
             ],
