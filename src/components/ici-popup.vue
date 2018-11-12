@@ -67,6 +67,7 @@
       noScroll: Boolean, //不出现滚动条
       markClose: Boolean, //点击遮罩层关闭
       maskClose: Boolean,
+
       maxHeight: { //最大高度
         type: String,
         default: '95%'
@@ -75,6 +76,7 @@
         type: Number,
         default: 700
       },
+      height:[String,Number],
       fullscreen: {
         type: Boolean,
         default: false
@@ -92,6 +94,9 @@
     computed: {
       popupStyle() {
         let css = {maxWidth: this.width + 'px', maxHeight: this.maxHeight}
+        if(this.height){
+          css.height =/[%a-zA-Z]/.test(this.height)?this.height:this.height+'px'
+        }
         if (this.fullscreen) {
           css = {width: '100%', height: '100vh'}
         }
@@ -226,6 +231,7 @@
       .fms-popup-body {
         position: relative;
         width: 100%;
+        flex:auto;
         display: flex;
         .fms-popup-body-inner {
           flex: auto;

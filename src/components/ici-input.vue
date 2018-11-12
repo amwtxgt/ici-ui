@@ -5,9 +5,10 @@
     </div>
     <div class="input-inner">
       <input @blur="blur" class="fms-input-input" :type="password?'password':'text'" @paste.stop=''
-             :value="inputValue" @input="input" v-focus="focus" @focus="focusEvent" :placeholder="hiddenLabel?label:''"
+            :style="{fontSize:fontSize+'px',lineHeight:(fontSize+10)+'px'}"
+             :value="inputValue" @input="input" v-focus="focus" @focus="focusEvent" :placeholder="hiddenLabel || fontSize!==14?label:''"
              @keydown.up.down.stop.prevent="keydown" @keyup.enter.stop.prevent="enter">
-      <label v-show="!hiddenLabel" class="fms-input-label"
+      <label v-if="!hiddenLabel && fontSize===14" class="fms-input-label"
              :class="{substantial:isSubstantial,'input-label-foucs':hasFocus}">
         {{label}}
       </label>
@@ -37,6 +38,7 @@
   * 输入框组件
   * @v-model {string} 输入框值
   * @prop label {string} 输入框标签
+  * @prop fontsize {string} 文字大小
   * @prop focus {Boolean} 是否获取焦点
   * @prop password {Boolean} 是否是密码
   * @prop prefix {Boolean|Object} 前缀：Object{content:'前缀内容',value:真实值}
@@ -72,6 +74,10 @@
       firstSpace: Boolean, //只保留第一个空格
       hiddenLabel: Boolean,
       white: Boolean,
+      fontSize:{
+        type:Number,
+        default:20
+      },
       prefixStyle: {
         type: String,
         default: ''
@@ -311,8 +317,7 @@
     input {
       display: block;
       width: 100%;
-      height: 26px !important;
-      font-size: 14px !important;
+
       flex-grow: 1;
       flex-shrink: 1;
       background-color: transparent;
