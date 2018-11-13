@@ -5,10 +5,10 @@
     </div>
     <div class="input-inner">
       <input @blur="blur" class="fms-input-input" :type="password?'password':'text'" @paste.stop=''
-            :style="{fontSize:fontSize+'px',lineHeight:(fontSize+10)+'px'}"
-             :value="inputValue" @input="input" v-focus="focus" @focus="focusEvent" :placeholder="hiddenLabel || fontSize!==14?label:''"
+            :style="inputStyle"
+             :value="inputValue" @input="input" v-focus="focus" @focus="focusEvent" :placeholder="hiddenLabel?label:''"
              @keydown.up.down.stop.prevent="keydown" @keyup.enter.stop.prevent="enter">
-      <label v-if="!hiddenLabel && fontSize===14" class="fms-input-label"
+      <label v-if="!hiddenLabel" class="fms-input-label"
              :class="{substantial:isSubstantial,'input-label-foucs':hasFocus}">
         {{label}}
       </label>
@@ -74,10 +74,7 @@
       firstSpace: Boolean, //只保留第一个空格
       hiddenLabel: Boolean,
       white: Boolean,
-      fontSize:{
-        type:Number,
-        default:20
-      },
+      inputStyle:String,
       prefixStyle: {
         type: String,
         default: ''
@@ -258,7 +255,7 @@
   .fms-input {
     position: relative;
     display: flex;
-    align-items: flex-end;
+    align-items: center;
     flex-wrap: nowrap;
     width: 100%;
     padding-top: 3px;
@@ -317,7 +314,8 @@
     input {
       display: block;
       width: 100%;
-
+      font-size:14px;
+      line-height: 25px;
       flex-grow: 1;
       flex-shrink: 1;
       background-color: transparent;
