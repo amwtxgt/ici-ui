@@ -92,7 +92,7 @@
     name: 'app',
     data() {
       return {
-        active: 'pageInput'
+        active: 'pageMenu'
       };
     },
     computed: {

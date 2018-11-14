@@ -1,7 +1,9 @@
 <template>
-  <div :id="id" v-show="show" class="ici-menu-wrap" @mousedown="mousedown('mousedown',$event)" @mousewheel.self="mousewheel">
-    <ul class="ici-menu" ref="icimenu" v-if="menuList && menuList.length" :style="position" @mousedown.stop="" >
-      <li v-for="(item,i) of menuList" :key="'menu'+i" :class="{topline:item.topLine,bottomline:item.bottomLine,disabled:item.disabled}"
+  <div :id="id" v-show="show" class="ici-menu-wrap" @mousedown="mousedown('mousedown',$event)"
+       @mousewheel.self="mousewheel">
+    <ul class="ici-menu" ref="icimenu" v-if="menuList && menuList.length" :style="position" @mousedown.stop="">
+      <li v-for="(item,i) of menuList" :key="'menu'+i"
+          :class="{topline:item.topLine,bottomline:item.bottomLine,disabled:item.disabled}"
           @click="click($event,item.click,item.disabled)">
         <div>
           <ici-icon v-if="item.icon" :name="item.icon" :color="item.iconColor||'#666'" size="17px"></ici-icon>
@@ -9,7 +11,7 @@
         <div :title="item.name" class="menu-name"><span>{{item.name}}</span></div>
         <div v-if="item.btns" class="flex-none">
           <ici-icon click-state v-for="(btn,index) of item.btns" :name="btn.icon" :key="'btn'+index"
-                    @click="click($event,btn.click)" :color="btn.iconColor" size="16px" />
+                    @click="click($event,btn.click)" :color="btn.iconColor" size="16px"/>
         </div>
 
         <!--二级菜单-->
@@ -24,7 +26,7 @@
               <div class="menu-name"><span>{{child.name}}</span></div>
               <div v-if="child.btns" class="flex-none">
                 <ici-icon click-state v-for="(btn,index) of child.btns" :name="btn.icon" :key="'btn'+index"
-                          @click="click($event,btn.click)" :color="btn.iconColor" size="16px" />
+                          @click="click($event,btn.click)" :color="btn.iconColor" size="16px"/>
               </div>
             </li>
           </ul>
@@ -59,7 +61,7 @@
       },
 
       //滚轮
-      mousewheel(e){
+      mousewheel(e) {
         this.show = false;
       },
 
@@ -69,74 +71,79 @@
       },
 
       open(menuList, e) {
-
         this._append()
         if (menuList) {
           this.menuList = menuList;
-          this.setPosition(e);
           this.show = true;
+          this.$nextTick(() => {
+            if (!this.$refs['icimenu']) return;
+            this.setPosition(e);
+
+          })
         }
       },
 
       setPosition(e) {
+
         var clientX = e.clientX,
           clientY = e.clientY,
           innerWidth = window.innerWidth,
           innerHeight = window.innerHeight
 
-        this.$nextTick(() => {
-          var width = this.$refs['icimenu'].offsetWidth,
-            height = this.$refs['icimenu'].offsetHeight
+        var width = this.$refs['icimenu'].offsetWidth,
+          height = this.$refs['icimenu'].offsetHeight
+          console.log([this.$refs['icimenu']])
+
+        //x坐标的位置,超过右边界时，移动刚好右边界
+        var rightMargin = innerWidth - (clientX + width);
+        if (rightMargin < 0) {
+          clientX = clientX + rightMargin;
+        }
+
+        //y坐标的位置，超过下边界时，向上显示
+        var bottomMargin = innerHeight - (clientY + height)
+        if (bottomMargin < 0) {
+          clientY = clientY - height;
+        }
+
+        this.position = {left: clientX + 'px', top: clientY + 'px'}
 
 
-          //x坐标的位置,超过右边界时，移动刚好右边界
-          var rightMargin = innerWidth - (clientX + width);
-          if (rightMargin < 0) {
-            clientX = clientX + rightMargin;
-          }
+        //计算二级菜单
+        if (this.$refs['icimenuchild']) {
+          console.log(this.$refs['icimenuchild'])
+          this.$refs['icimenuchild'].forEach((el) => {
+            var parent = el.parentNode
 
-          //y坐标的位置，超过下边界时，向上显示
-          var bottomMargin = innerHeight - (clientY + height)
-          if (bottomMargin < 0) {
-            clientY = clientY - height;
-          }
+            var left, top;
+            console.log(rightMargin, el.offsetWidth)
+            if (rightMargin - el.offsetWidth < 0) {
 
-          this.position = {left: clientX + 'px', top: clientY + 'px'}
+              //二级菜单移动到左边
+              left = -el.offsetWidth + 'px'
+            }
+            else {
+              console.log('右边',width)
+              //移动到右边
+              left = (width - 1) + 'px';
+            }
 
+            if (innerHeight - clientY - parent.offsetTop - el.offsetHeight < 0) {
+              //二级菜单移动到上边
+              top = (parent.offsetHeight - el.offsetHeight + 1) + 'px'
+            }
+            else {
+              //移动到下边
+              top = '-1px';
+            }
 
-          //计算二级菜单
-          if (this.$refs['icimenuchild']) {
-            this.$refs['icimenuchild'].forEach((el) => {
-              var parent = el.parentNode
+            el.style.cssText = `left:${left};top:${top}`
+          })
+        }
 
-              var left, top;
-
-              if (rightMargin - el.offsetWidth < 0) {
-                //二级菜单移动到左边
-                left = -el.offsetWidth + 'px'
-              }
-              else {
-                //移动到右边
-                left = (width - 1) + 'px';
-              }
-
-              if (innerHeight - clientY - parent.offsetTop - el.offsetHeight < 0) {
-                //二级菜单移动到上边
-                top = (parent.offsetHeight - el.offsetHeight + 1) + 'px'
-              }
-              else {
-                //移动到下边
-                top = '-1px';
-              }
-
-              el.style.cssText = `left:${left};top:${top}`
-            })
-          }
-
-        })
 
       },
-      click(e, click,disabled) {
+      click(e, click, disabled) {
         e.preventDefault()
         e.stopPropagation()
         if (click && !disabled) {
@@ -189,13 +196,13 @@
       color: #444;
       line-height: 20px;
       > :first-child {
-        color:#666;
+        color: #666;
         width: 25px;
         flex: none;
       }
-      .menu-name{
+      .menu-name {
         flex: auto;
-        >span{
+        > span {
           display: block;
           white-space: nowrap;
           overflow: hidden;
@@ -204,8 +211,8 @@
         }
       }
 
-      >i{
-        flex:none;
+      > i {
+        flex: none;
       }
       &.topline {
         border-top: 1px solid #eee;
@@ -220,8 +227,8 @@
           visibility: visible;
         }
       }
-      &.disabled{
-        color:#666;
+      &.disabled {
+        color: #666;
         background: #f5f5f5;
       }
     }

@@ -24,7 +24,8 @@ export default function (Vue){
   Vue.directive('leftmenu', {
     inserted: function (el, binding) {
 
-      el.addEventListener('click',(e) => {
+      el.addEventListener('mouseup',(e) => {
+        if(e.button !==0) return;
         if (binding.value) {
           if (typeof binding.value === 'function') {
             rightMenu.open(binding.value(), e)
