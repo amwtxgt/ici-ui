@@ -12,7 +12,7 @@
       </div>
       <div class="ici-message-body" v-html="message"></div>
       <template v-if="btns && btns instanceof Array">
-        <ici-button class="flex-none" v-for="(btn,index) of btns" :key="btn.name+''+index" :type="btn.type||'error'"
+        <ici-button class="ici-msg-btns flex-none" v-for="(btn,index) of btns" :key="btn.name+''+index" :type="btn.type||'error'"
                     size="small" shape="pill" @click="clickBtn(index)">
           <ici-icon v-if="btn.icon" :name="btn.icon"></ici-icon>
           {{btn.name}}
@@ -234,5 +234,8 @@
       opacity: 1;
       pointer-events: auto;
     }
+  }
+  .ici-msg-btns{
+    margin-left:5px;
   }
 </style>

@@ -50,7 +50,7 @@
     <baseComponent title="加按钮"
                    html='<ici-button  @click="$icimsg.msg(”我是加按键“,btns:[{name:"重试",click:reab,icon:"icon-tianjia",type:"error"}]})">上边</ici-button>'>
 
-      <ici-button @click="$icimsg.msg('我是加按键我是加按键我是加按键我是加按键我是加按键我是加按键我是加按键我是加按键我是加按键我是加按键我是加按键我是加按键我是加按键我是加按键我是加按键我是加按键我是加按键我是加按键我是加按键我是加按键我是加按键我是加按键我是加按键我是加按键',{btns:[{name:'重试',click:reab,icon:'icon-tianjia',type:'error'},{name:'重试',click:reab,icon:'icon-tianjia',type:'error'}]})">
+      <ici-button @click="$icimsg.msg('按键我是加按键我是加键我是加按键',{btns:[{name:'重试',click:reab,icon:'icon-tianjia',type:'error'},{name:'重试',click:reab,icon:'icon-tianjia',type:'error'}]})">
         上边
       </ici-button>
     </baseComponent>
