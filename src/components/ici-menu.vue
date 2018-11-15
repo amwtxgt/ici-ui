@@ -78,7 +78,6 @@
           this.$nextTick(() => {
             if (!this.$refs['icimenu']) return;
             this.setPosition(e);
-
           })
         }
       },

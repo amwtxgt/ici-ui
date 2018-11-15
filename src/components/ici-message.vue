@@ -11,7 +11,14 @@
         <ici-icon v-else :name="type" size="20px"></ici-icon>
       </div>
       <div class="ici-message-body" v-html="message"></div>
-      <ici-button v-if="btn" plain size="small" borderless shape="pill" @click="clickBtn">{{btn.name}}</ici-button>
+      <template v-if="btns && btns instanceof Array">
+        <ici-button class="flex-none" v-for="(btn,index) of btns" :key="btn.name+''+index" :type="btn.type||'error'"
+                    size="small" shape="pill" @click="clickBtn(index)">
+          <ici-icon v-if="btn.icon" :name="btn.icon"></ici-icon>
+          {{btn.name}}
+        </ici-button>
+      </template>
+
       <div v-show="showClose" class="ici-message-right" @click="close">
         <ici-icon name="icon-shanchudelete30" click-state></ici-icon>
       </div>
@@ -40,7 +47,7 @@
         msec: 2000,
         show: false,
         showClose: false,
-        btn: null, //按钮
+        btns: null, //按钮
         position: '',
         type: '',
       }
@@ -50,9 +57,9 @@
       window.document.addEventListener('DOMContentLoaded', this._append);
     },
     methods: {
-      clickBtn(){
+      clickBtn(index) {
         this.close();
-        this.btn.click();
+        this.btns[index].click();
       },
       _append() {
         if (!window.document.getElementById('ici-messages-' + this.rom)) {
@@ -89,19 +96,19 @@
         this.msec = obj.duration || 0;
         this.showClose = obj.showClose || false;
         this.message = obj.msg || '';
-        this.btn = obj.btn || null;
+        this.btns = obj.btns || null;
         if (this.msec) {
           this.timeout = setTimeout(() => {
             this.show = false
           }, this.msec)
         }
       },
-      mouseover(){
+      mouseover() {
         if (this.msec) {
           clearTimeout(this.timeout);
         }
       },
-      mouseout(){
+      mouseout() {
         if (this.msec) {
           this.timeout = setTimeout(() => {
             this.show = false
@@ -116,7 +123,7 @@
           duration: opt && opt.duration,
           msg: val,
           showClose: showClose,
-          btn: opt && opt.btn,
+          btns: opt && opt.btns,
         })
         return this;
       },
@@ -129,7 +136,7 @@
           position: opt && opt.position,
           msg: val,
           showClose: showClose,
-          btn: opt && opt.btn
+          btns: opt && opt.btns
         })
       },
 
@@ -141,7 +148,7 @@
           position: opt && opt.position,
           msg: val,
           showClose: showClose,
-          btn: opt && opt.btn
+          btns: opt && opt.btns
         })
       },
 
@@ -153,7 +160,7 @@
           position: opt && opt.position,
           msg: val,
           showClose: showClose,
-          btn: opt && opt.btn
+          btns: opt && opt.btns
         });
       },
       close() {
