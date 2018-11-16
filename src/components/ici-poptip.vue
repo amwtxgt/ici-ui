@@ -42,8 +42,9 @@
 
       this.el = el;
       if (this.trigger === 'hover') {
-        this.el.addEventListener('mouseover', this.open, {capture: true})
-        this.el.addEventListener('mouseout', this.close)
+        this.el.addEventListener('mouseover', this.open, {capture: true});
+        this.el.addEventListener('mouseout', this.close);
+        this.el.addEventListener('mousedown',this.toggle)
       }
     },
     beforeDestroy() {
@@ -51,9 +52,17 @@
       if (this.trigger === 'hover') {
         this.el.removeEventListener('mouseover', this.open)
         this.el.removeEventListener('mouseout', this.close)
+        this.el.removeEventListener('mousedown',this.toggle)
       }
     },
     methods: {
+      toggle(e){
+        if(this.__icipoptip.showtip){
+            this.close(e)
+        }else{
+            this.open(e)
+        }
+      },
       open(e) {
 
         var positions = this.getPosition(e);
@@ -67,8 +76,6 @@
 
       //位置 {left, right, top, bottom} 左右上下的位置，
       getPosition(e) {
-
-
 
         //提取 transform 带来的偏移量
         var transform = /matrix\(1, 0, 0, 1, (\d+), (\d+)\)/.exec(window.getComputedStyle(this.el).transform);
