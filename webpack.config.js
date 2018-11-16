@@ -1,7 +1,12 @@
 var path = require('path');
 var webpack = require('webpack');
-
+const {VueLoaderPlugin} = require('vue-loader');
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
+
+//单独打包css
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+
+const isDev = process.env.NODE_ENV === 'development'
 
 module.exports = {
   entry: {
@@ -17,31 +22,27 @@ module.exports = {
 
   },
   plugins: [
-    new ExtractTextPlugin({
-      filename:"[name].css",
-    }),
+    new VueLoaderPlugin(),
   ],
   module: {
     rules: [
       {
         test: /\.css$/,
-        use: [
-          'vue-style-loader',
-          'css-loader',
-          "postcss-loader"
-        ],
+        use: [isDev?'style-loader':{
+          loader: MiniCssExtractPlugin.loader,
+        }, "css-loader",'postcss-loader']
+      },
+      {
+        test: /\.less$/,
+        use: [isDev?'style-loader':{
+          loader: MiniCssExtractPlugin.loader,
+        }, "css-loader",'postcss-loader', "less-loader"]
       },
       {
         test: /\.vue$/,
         loader: 'vue-loader',
         options: {
-          extractCSS: true,
-          loaders: {
-            css: ExtractTextPlugin.extract({
-              use: 'css-loader',
-              fallback: 'vue-style-loader' // <- 这是vue-loader的依赖，所以如果使用npm3，则不需要显式安装
-            })
-          }
+          loaders: {},
           // other vue-loader options go here
         }
       },
@@ -76,23 +77,23 @@ module.exports = {
   devtool: '#eval-source-map'
 }
 
-if (process.env.NODE_ENV === 'production') {
+if (!isDev) {
   module.exports.devtool = '#source-map'
+  module.exports.mode = 'production'
   // http://vue-loader.vuejs.org/en/workflow/production.html
   module.exports.plugins = (module.exports.plugins || []).concat([
+    new MiniCssExtractPlugin({
+      filename: "[name].css",
+    }),
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: '"production"'
-      }
-    }),
-    new webpack.optimize.UglifyJsPlugin({
-      sourceMap: false,
-      compress: {
-        warnings: false
       }
     }),
     new webpack.LoaderOptionsPlugin({
       minimize: true
     })
   ])
+}else{
+  module.exports.mode = 'development'
 }

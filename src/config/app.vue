@@ -44,6 +44,9 @@
         <MenuItem name="pageHeader">
           导航头部 ici-header
         </MenuItem>
+        <MenuItem name="pagePoptip">
+          函数库 ici-poptip
+        </MenuItem>
         <MenuItem name="pageFuns">
           函数库 $funs
         </MenuItem>
@@ -71,6 +74,7 @@
   import pageFuns from '../examples/page-funs.vue'
   import pageScroll from '../examples/page-scroll.vue'
   import pageMenu from '../examples/page-rightmenu.vue'
+  import pagePoptip from '../examples/page-poptip'
   var components = {
     pageButton,
     pageLoading,
@@ -86,13 +90,14 @@
     pageBgImg,
     pageFuns,
     pageScroll,
+    pagePoptip,
     pageMenu
   };
   export default {
     name: 'app',
     data() {
       return {
-        active: 'pageMessage'
+        active: 'pagePoptip'
       };
     },
     computed: {

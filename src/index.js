@@ -22,6 +22,10 @@ import * as funs from './assets/functions'
 import menuDirective from './assets/menu-directive'
 import imgViewDirective from './assets/imgView-directive'
 
+//悬浮窗
+import iciPoptip from './components/ici-poptip'
+import iciPoptipView from './components/ici-poptip-view'
+
 const components = {
   iciButton,
   iciLoading,
@@ -38,6 +42,7 @@ const components = {
   iciBgimg,
   iciDrawer,
   iciScroll,
+  iciPoptip,
 }
 
 const install = function (Vue) {
@@ -50,6 +55,10 @@ const install = function (Vue) {
   var message = new Vue(iciMessage);
   Vue.prototype.$icimsg = message;
   Vue.prototype.$funs = funs;
+
+  //悬浮窗
+  var iciPoptip  = new Vue(iciPoptipView);
+  Vue.prototype.__icipoptip = iciPoptip;
 
   var modal  = new Vue(iciModal);
   Vue.prototype.$popup = modal;
