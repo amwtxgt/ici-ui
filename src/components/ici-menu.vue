@@ -67,7 +67,7 @@
 
       mousedown() {
         this.show = false;
-        document.addEventListener('click', this.dispatchEvent)
+        document.addEventListener('click', this.dispatchEvent);
       },
 
       open(menuList, e) {
@@ -106,7 +106,6 @@
         }
 
         this.position = {left: clientX + 'px', top: clientY + 'px'}
-
 
         //计算二级菜单
         if (this.$refs['icimenuchild']) {
