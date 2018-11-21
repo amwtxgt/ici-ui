@@ -25,6 +25,10 @@
         type: [Number],
         default: 1,
       },
+      zIndex:{
+        type:[Number,String],
+        default:10
+      }
     },
     mounted() {
 
@@ -42,9 +46,11 @@
 
       this.el = el;
       if (this.trigger === 'hover') {
-        this.el.addEventListener('mouseover', this.open, {capture: true});
+        this.el.addEventListener('mouseover', this.open);
         this.el.addEventListener('mouseout', this.close);
-        this.el.addEventListener('mousedown',this.toggle)
+        this.el.addEventListener('mousewheel', this.close);
+        this.el.addEventListener('click', this.toggle);
+        this.el.addEventListener('mousemove', this.mousemove)
       }
     },
     beforeDestroy() {
@@ -52,60 +58,46 @@
       if (this.trigger === 'hover') {
         this.el.removeEventListener('mouseover', this.open)
         this.el.removeEventListener('mouseout', this.close)
-        this.el.removeEventListener('mousedown',this.toggle)
+        this.el.removeEventListener('mousewheel', this.close);
+        this.el.removeEventListener('click', this.toggle)
       }
     },
     methods: {
-      toggle(e){
-        if(this.__icipoptip.showtip){
-            this.close(e)
-        }else{
-            this.open(e)
+      mousemove(e) {
+        if (e.buttons > 0) {
+          this.__icipoptip.showtip = false;
+        }
+      },
+      toggle(e) {
+        if (this.__icipoptip.showtip) {
+          this.close(e)
+        }
+        else {
+          this.open(e)
         }
       },
       open(e) {
 
-        var positions = this.getPosition(e);
+        if (e.buttons > 0 && e.type == 'mouseover') {
+          return;
+        }
+
+
+        var positions = this.el.getBoundingClientRect();
+        positions =JSON.parse(JSON.stringify(positions))
+        //计算上角的点
+        positions.top -= this.offset;
+        //计算左下角的点
+        positions.bottom += this.offset;
 
         this.__icipoptip.open({
           slots: this.$slots.default,
           positions: positions,
+          zIndex:this.zIndex,
         });
 
       },
 
-      //位置 {left, right, top, bottom} 左右上下的位置，
-      getPosition(e) {
-
-        //提取 transform 带来的偏移量
-        var transform = /matrix\(1, 0, 0, 1, (\d+), (\d+)\)/.exec(window.getComputedStyle(this.el).transform);
-
-        if (!transform) {
-          transform = [0, 0, 0]
-        }
-
-        //鼠标在元素的位置
-        var offsetX = e.layerX - transform[1],
-          offsetY = e.layerY - transform[2],
-
-          //鼠标在屏幕的位置
-          clientX = e.clientX,
-          clientY = e.clientY,
-
-          //元素大小
-          width = this.el.offsetWidth,
-          height = this.el.offsetHeight;
-
-        //计算左边位置
-        var left = clientX - offsetX;
-        var right = left + width;
-
-        //计算上角的点
-        var top = clientY - offsetY - this.offset;
-        //计算左下角的点
-        var bottom = top + height + this.offset * 2;
-        return {left, right, top, bottom};
-      },
       close(e) {
         this.__icipoptip.close();
       },

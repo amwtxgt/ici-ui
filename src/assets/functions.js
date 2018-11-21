@@ -26,7 +26,7 @@ export function trim(str, s) {
 export function ltrim(str, s) {
   if (typeof str == 'string') {
     if (!s) s = '\\s'
-    s = s.replace(/([\(\)\[\]\*\+])/g, '\\$1');
+    else s = s.replace(/([\(\)\[\]\*\+\\])/g, '\\$1');
     var reg = new RegExp('^(' + s + ')*')
     return str.replace(reg, '')
   }
@@ -43,7 +43,7 @@ export function ltrim(str, s) {
 export function rtrim(str, s) {
   if (typeof str == 'string') {
     if (!s) s = '\\s'
-    s = s.replace(/([\(\)\[\]\*\+])/g, '\\$1');
+    else s = s.replace(/([\(\)\[\]\*\+\\])/g, '\\$1');
     var reg = new RegExp('(' + s + ')*$')
     return str.replace(reg, '')
   }
@@ -97,7 +97,7 @@ export function rnTobr(string) {
 export function boldKey(str, key, color) {
   if (!color) color = 'rgb(77,200,107)';
   if (typeof str === 'string' && typeof key === 'string') {
-    var s = key.replace(/([\(\)\[\]\*])/g, '\\$1').replace(/\+/g, '');
+    var s = key.replace(/([\(\)\[\]\*\\])/g, '\\$1').replace(/\+/g, '');
     return str.replace(new RegExp('(' + s + ')', 'ig'), `<b style="color:${color}">$1</b>`)
   }
   else {

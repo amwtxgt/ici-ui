@@ -45,19 +45,20 @@ const components = {
   iciPoptip,
 }
 
-const install = function (Vue) {
+const install = function (Vue,options) {
 
   if (install.installed) return;
   Object.keys(components).forEach(function (val) {
     return Vue.component(val, components[val]);
   });
 
-  var message = new Vue(iciMessage);
+  var message = new Vue({...iciMessage,...options});
+
   Vue.prototype.$icimsg = message;
   Vue.prototype.$funs = funs;
 
   //悬浮窗
-  var iciPoptip  = new Vue(iciPoptipView);
+  var iciPoptip  = new Vue({...iciPoptipView,...options});
   Vue.prototype.__icipoptip = iciPoptip;
 
   var modal  = new Vue(iciModal);

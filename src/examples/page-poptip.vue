@@ -1,7 +1,17 @@
 <template>
     <div>
-      <div class="abc" style="border:1px solid #ddd;width:50px;height:50px;position: absolute;right:400px">
-        <ici-poptip>
+      <div class="abc" style="border:1px solid #ddd;width:50px;height:50px;position: absolute;right:100px">
+        <div style="display: flex;flex-direction: column">
+          <div style="background:#eee;">1111</div>
+          <div style="flex:none;">
+              <div style="display: flex">
+                  <div style="flex:auto">sdfsdfsdfsdf</div>
+                  <div style="flex:none">ss</div>
+              </div>
+          </div>
+
+        </div>
+        <ici-poptip z-index="999999">
           <ici-bgimg url="https://ss2.baidu.com/6ONYsjip0QIZ8tyhnq/it/u=4277559698,2554476952&fm=173&app=49&f=JPEG?w=218&h=146&s=F664D44EC8E02D36FB4E8DA80300E019"></ici-bgimg>
           <ici-bgimg url="https://ss2.baidu.com/6ONYsjip0QIZ8tyhnq/it/u=4277559698,2554476952&fm=173&app=49&f=JPEG?w=218&h=146&s=F664D44EC8E02D36FB4E8DA80300E019"></ici-bgimg>
           <ici-bgimg url="https://ss2.baidu.com/6ONYsjip0QIZ8tyhnq/it/u=4277559698,2554476952&fm=173&app=49&f=JPEG?w=218&h=146&s=F664D44EC8E02D36FB4E8DA80300E019"></ici-bgimg>
@@ -12,12 +22,17 @@
         <br><br><br><br><br><br><br><br><br><br><br>
         <br><br><br><br><br><br><br><br><br><br><br>
         <br><br><br><br><br><br><br><br><br><br><br>
+        <br><br><br><br><br><br><br><br><br><br><br>
+        <br><br><br><br><br><br><br><br><br><br><br>
+        <br><br><br><br><br><br><br><br><br><br><br>
+        <br><br><br><br><br><br><br><br><br><br><br>
+        <br><br><br><br><br><br><br><br><br><br><br>
 
 
         <baseComponent title="基本" html='<ici-loading></ici-loading>'>
             <ici-button>
               asd
-              <ici-poptip :layer="3">
+              <ici-poptip :layer="3"  z-index="999999">
                 <ici-button @click="abc">abc</ici-button>
                 asdfasfdawwaef
                 <br><br><br><br><br><br><br><br><br><br><br>
@@ -30,12 +45,12 @@
             </ici-button>
           <div class="abc">
             sdfs
-            <ici-poptip>
+            <ici-poptip  z-index="999999">
               <ici-button @click="abc">azfasfa</ici-button>
             </ici-poptip>
           </div>
           <div class="abc" style="border:1px solid #ddd;width:50px;height:50px;transform: translate3d(50px,50px,0)">
-            <ici-poptip>
+            <ici-poptip  z-index="999999">
               <ici-bgimg url="https://ss2.baidu.com/6ONYsjip0QIZ8tyhnq/it/u=4277559698,2554476952&fm=173&app=49&f=JPEG?w=218&h=146&s=F664D44EC8E02D36FB4E8DA80300E019"></ici-bgimg>
             </ici-poptip>
           </div>
