@@ -179,6 +179,7 @@
   }
 
   .ici-menu, .ici-menu-child {
+
     position: absolute;
     font-size: 13px;
     background: #fff;

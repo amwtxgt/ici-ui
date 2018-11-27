@@ -97,7 +97,7 @@
     name: 'app',
     data() {
       return {
-        active: 'pagePoptip'
+        active: 'pageMenu'
       };
     },
     computed: {

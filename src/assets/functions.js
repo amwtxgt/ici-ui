@@ -158,7 +158,7 @@ export function arrayUnique(arr) {
  * @return Boolean
  */
 export function inArray(arr, item) {
-  if (arr && arr.length && item && arr.some((v) => v === item)) {
+  if (arr && arr.length && item!==undefined && arr.some((v) => v === item)) {
     return true;
   }
   else {
