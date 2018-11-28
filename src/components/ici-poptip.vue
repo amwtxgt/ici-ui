@@ -28,6 +28,10 @@
       zIndex:{
         type:[Number,String],
         default:10
+      },
+      arrows:{
+        type:Boolean,
+        default:true,
       }
     },
     mounted() {
@@ -47,20 +51,21 @@
       this.el = el;
       if (this.trigger === 'hover') {
         this.el.addEventListener('mouseover', this.open);
-        this.el.addEventListener('mouseout', this.close);
-        this.el.addEventListener('mousewheel', this.close);
-        this.el.addEventListener('click', this.toggle);
-        this.el.addEventListener('mousemove', this.mousemove)
       }
+      this.el.addEventListener('mouseout', this.close);
+      this.el.addEventListener('mousewheel', this.close);
+      this.el.addEventListener('click', this.toggle);
+      this.el.addEventListener('mousemove', this.mousemove)
     },
     beforeDestroy() {
 
       if (this.trigger === 'hover') {
         this.el.removeEventListener('mouseover', this.open)
-        this.el.removeEventListener('mouseout', this.close)
-        this.el.removeEventListener('mousewheel', this.close);
-        this.el.removeEventListener('click', this.toggle)
       }
+      this.el.removeEventListener('mouseout', this.close)
+      this.el.removeEventListener('mousewheel', this.close);
+      this.el.removeEventListener('click', this.toggle)
+      this.el.removeEventListener('mousemove', this.mousemove)
     },
     methods: {
       mousemove(e) {
@@ -94,6 +99,7 @@
           slots: this.$slots.default,
           positions: positions,
           zIndex:this.zIndex,
+          arrows:this.arrows,
         });
 
       },

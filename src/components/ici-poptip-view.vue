@@ -1,7 +1,7 @@
 <template>
   <transition name="poptip">
     <div class="ici-poptip-wrap" v-show="showtip" ref="poptip" @mouseover="mouseover" @mouseout="mouseout">
-      <div class="poptip-arrows" ref="arrows"></div>
+      <div class="poptip-arrows" ref="arrows" v-show="arrows"></div>
       <div class="ici-poptip-view">
         <slot></slot>
       </div>
@@ -20,6 +20,7 @@
         timeout: 1,
         openTimeout: 1,
         zIndex: 10,
+        arrows:false,
       };
     },
 
@@ -33,7 +34,7 @@
         }, 50)
       },
       show(isRefresh) {
-        clearTimeout(this.timeout)
+        clearTimeout(this.timeout);
         if (isRefresh && this.showtip) {
           this.showtip = false;
           this.$nextTick(() => {
@@ -60,6 +61,7 @@
           if (opt.zIndex) {
             this.zIndex = opt.zIndex;
           }
+          this.arrows = opt.arrows;
           this.show(def !== opt.slots);
           var el = this.$refs.poptip;
           el.style.cssText = '';
@@ -70,11 +72,13 @@
           }
       },
       setPosition(pos) {
+
         //浏览器大小
         let innerWidth = window.innerWidth,
           innerHeight = window.innerHeight;
 
         var el = this.$refs.poptip;
+        //浮窗大小
         var width = el.offsetWidth;
         var height = el.offsetHeight;
 
@@ -119,9 +123,11 @@
         }
 
         //箭头位置
+        if(this.arrows){
+          let arrows = this.$refs.arrows;
+          arrows.style.cssText = weiyi;
+        }
 
-        let arrows = this.$refs.arrows;
-        arrows.style.cssText = weiyi;
         el.style.cssText = cssText;
       },
 

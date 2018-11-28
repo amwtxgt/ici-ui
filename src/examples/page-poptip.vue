@@ -19,14 +19,19 @@
         </ici-poptip>
       </div>
         <div class="title">loading 加载中</div>
-        <br><br><br><br><br><br><br><br><br><br><br>
-        <br><br><br><br><br><br><br><br><br><br><br>
-        <br><br><br><br><br><br><br><br><br><br><br>
-        <br><br><br><br><br><br><br><br><br><br><br>
-        <br><br><br><br><br><br><br><br><br><br><br>
-        <br><br><br><br><br><br><br><br><br><br><br>
-        <br><br><br><br><br><br><br><br><br><br><br>
-        <br><br><br><br><br><br><br><br><br><br><br>
+        <br><br><br><br><br><br>
+        <div style="width:20px;height:20px;background:#2db7f5">
+          <ici-poptip z-index="999999" :arrows="false" :offset="0" trigger="click">
+            这是一个<br>
+            这是一个<br>
+            这是一个<br>
+            这是一个<br>
+            这是一个<br>
+          </ici-poptip>
+        </div>
+
+      <br><br><br><br><br>
+
 
 
         <baseComponent title="基本" html='<ici-loading></ici-loading>'>
@@ -50,7 +55,7 @@
             </ici-poptip>
           </div>
           <div class="abc" style="border:1px solid #ddd;width:50px;height:50px;transform: translate3d(50px,50px,0)">
-            <ici-poptip  z-index="999999">
+            <ici-poptip trigger="click" z-index="999999">
               <ici-bgimg url="https://ss2.baidu.com/6ONYsjip0QIZ8tyhnq/it/u=4277559698,2554476952&fm=173&app=49&f=JPEG?w=218&h=146&s=F664D44EC8E02D36FB4E8DA80300E019"></ici-bgimg>
             </ici-poptip>
           </div>
