@@ -75,6 +75,7 @@
   import pageScroll from '../examples/page-scroll.vue'
   import pageMenu from '../examples/page-rightmenu.vue'
   import pagePoptip from '../examples/page-poptip'
+  import pageTitle from '../examples/page-title'
   var components = {
     pageButton,
     pageLoading,
@@ -91,13 +92,14 @@
     pageFuns,
     pageScroll,
     pagePoptip,
+    pageTitle,
     pageMenu
   };
   export default {
     name: 'app',
     data() {
       return {
-        active: 'pagePoptip'
+        active: 'pageTitle'
       };
     },
     computed: {

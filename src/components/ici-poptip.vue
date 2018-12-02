@@ -8,7 +8,8 @@
     name: "ici-poptip",
     data() {
       return {
-        el: null
+        el: null,
+        timeout:0
       };
     },
     props: {
@@ -50,7 +51,7 @@
 
       this.el = el;
       if (this.trigger === 'hover') {
-        this.el.addEventListener('mouseover', this.open);
+        this.el.addEventListener('mouseover', this.delayOpen);
       }
       this.el.addEventListener('mouseout', this.close);
       this.el.addEventListener('mousewheel', this.close);
@@ -60,7 +61,7 @@
     beforeDestroy() {
 
       if (this.trigger === 'hover') {
-        this.el.removeEventListener('mouseover', this.open)
+        this.el.removeEventListener('mouseover', this.delayOpen)
       }
       this.el.removeEventListener('mouseout', this.close)
       this.el.removeEventListener('mousewheel', this.close);
@@ -80,6 +81,11 @@
         else {
           this.open(e)
         }
+      },
+      delayOpen(e){
+        this.timeout = setTimeout((event)=>{
+          this.open(event)
+        },200,e)
       },
       open(e) {
 
@@ -105,6 +111,7 @@
       },
 
       close(e) {
+        clearTimeout(this.timeout)
         this.__icipoptip.close();
       },
     },

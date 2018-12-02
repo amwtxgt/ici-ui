@@ -21,10 +21,13 @@ import iciScroll from './components/ici-scroll.vue'
 import * as funs from './assets/functions'
 import menuDirective from './assets/menu-directive'
 import imgViewDirective from './assets/imgView-directive'
+import tooltipDirective from './assets/tooltip-directive'
 
 //悬浮窗
-import iciPoptip from './components/ici-poptip'
-import iciPoptipView from './components/ici-poptip-view'
+import iciPoptip from './components/ici-poptip';
+import iciPoptipView from './components/ici-poptip-view';
+
+
 
 const components = {
   iciButton,
@@ -52,10 +55,14 @@ const install = function (Vue,options) {
     return Vue.component(val, components[val]);
   });
 
+  Vue.prototype.$funs = funs;
+
   var message = new Vue({...iciMessage,...options});
 
   Vue.prototype.$icimsg = message;
-  Vue.prototype.$funs = funs;
+
+
+
 
   //悬浮窗
   var iciPoptip  = new Vue({...iciPoptipView,...options});
@@ -88,6 +95,11 @@ const install = function (Vue,options) {
 
   //右键菜单
   menuDirective(Vue);
+
+  //提示窗
+  tooltipDirective(Vue);
+
+
 };
 
 if (typeof window !== 'undefined' && window.Vue) {

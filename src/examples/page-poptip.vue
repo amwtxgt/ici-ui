@@ -1,16 +1,7 @@
 <template>
     <div>
       <div class="abc" style="border:1px solid #ddd;width:50px;height:50px;position: absolute;right:100px">
-        <div style="display: flex;flex-direction: column">
-          <div style="background:#eee;">1111</div>
-          <div style="flex:none;">
-              <div style="display: flex">
-                  <div style="flex:auto">sdfsdfsdfsdf</div>
-                  <div style="flex:none">ss</div>
-              </div>
-          </div>
 
-        </div>
         <ici-poptip z-index="999999">
           <ici-bgimg url="https://ss2.baidu.com/6ONYsjip0QIZ8tyhnq/it/u=4277559698,2554476952&fm=173&app=49&f=JPEG?w=218&h=146&s=F664D44EC8E02D36FB4E8DA80300E019"></ici-bgimg>
           <ici-bgimg url="https://ss2.baidu.com/6ONYsjip0QIZ8tyhnq/it/u=4277559698,2554476952&fm=173&app=49&f=JPEG?w=218&h=146&s=F664D44EC8E02D36FB4E8DA80300E019"></ici-bgimg>
@@ -19,9 +10,9 @@
         </ici-poptip>
       </div>
         <div class="title">loading 加载中</div>
-        <br><br><br><br><br><br>
-        <div style="width:20px;height:20px;background:#2db7f5">
-          <ici-poptip z-index="999999" :arrows="false" :offset="0" trigger="click">
+
+        <div style="width:50px;height:50px;background:#2db7f5;display: inline-block">
+          <ici-poptip z-index="999999" :arrows="false" :offset="0">
             这是一个<br>
             这是一个<br>
             这是一个<br>
@@ -29,6 +20,34 @@
             这是一个<br>
           </ici-poptip>
         </div>
+      <div style="width:50px;height:50px;background:#2db7f5;display: inline-block">
+        <ici-poptip z-index="999999" :arrows="false" :offset="0">
+          这是一个<br>
+          这是一个<br>
+          这是一个<br>
+          这是一个<br>
+          这是一个<br>
+        </ici-poptip>
+      </div>
+      <div style="width:50px;height:50px;background:#2db7f5;display: inline-block">
+        <ici-poptip z-index="999999" :arrows="false" :offset="0">
+          这是一个<br>
+          这是一个<br>
+          这是一个<br>
+          这是一个<br>
+          这是一个<br>
+        </ici-poptip>
+      </div>
+      <div style="width:50px;height:50px;background:#2db7f5;display: inline-block">
+        <ici-poptip z-index="999999" :arrows="false" :offset="0">
+          这是一个<br>
+          这是一个<br>
+          这是一个<br>
+          这是一个<br>
+          这是一个<br>
+        </ici-poptip>
+      </div>
+
 
       <br><br><br><br><br>
 
