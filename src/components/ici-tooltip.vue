@@ -10,6 +10,7 @@
       return {
         id: 'ici-tooltip-' + Math.random(),
         show: false,
+        offset:23,
         content: ''
       };
     },
@@ -41,11 +42,11 @@
           }else{
             left = obj.x-width/3
           }
-          if (height + obj.y + 20 > innerHeight) {
-            top = obj.y - height - 20
+          if (height + obj.y + this.offset > innerHeight) {
+            top = obj.y - height - this.offset
           }
           else {
-            top = obj.y + 20
+            top = obj.y + this.offset
           }
 
           cssText += `top:${top}px;`
@@ -82,12 +83,13 @@
     z-index: 9999999;
     pointer-events: none;
     position: fixed;
-    padding: 2px 5px;
-    background: #000;
+    padding: 5px 8px;
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 4px 0px;
+    background: #444;
     color: #fff;
-    border-radius: 2px;
+    border-radius: 5px;
     opacity: 0;
-    transition: opacity .2s;
+    transition: opacity .3s;
     &.show {
       opacity: 1;
     }

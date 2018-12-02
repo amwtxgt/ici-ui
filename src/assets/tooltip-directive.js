@@ -2,18 +2,22 @@ import iciTooltip from '../components/ici-tooltip'
 
 
 function Events(el, content) {
-
+  var timeout = 0
   this.mouseout = (e) => {
+    clearTimeout(timeout)
     el.close();
   }
 
   this.mousemove = (e) => {
-
+    clearTimeout(timeout)
     if(content){
       if (e.buttons > 0) {
         el.close();
       }else{
-        el.open({content: content, x: e.clientX, y: e.clientY})
+        timeout = setTimeout(()=>{
+          el.open({content: content, x: e.clientX, y: e.clientY})
+        },50)
+
       }
 
     }
