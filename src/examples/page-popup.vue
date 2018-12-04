@@ -6,6 +6,7 @@
       openPopup(){
         this.$popup.confirm({
           title:"这是一个弹窗",
+          showClose:true,
           content:"这是弹窗的内容，可能很长，但很有用",
           onOk:()=>{
             console.log(this,"OK了")
@@ -329,6 +330,7 @@
         this.$popup.confirm({
           title:'这是一个弹窗',
           content:'这是弹窗的内容，可能很长，但很有用',
+          showClose:true,
           onOk:()=>{
             console.log(this,'OK了')
           },

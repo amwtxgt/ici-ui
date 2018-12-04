@@ -159,5 +159,16 @@
         height: 50px;
       }
     }
+    &::-webkit-scrollbar{
+      width:6px;
+      height:10px;
+    }
+    &::-webkit-scrollbar-thumb, &::-webkit-scrollbar-thumb{
+      background-color: #888;
+    }
+    &::-webkit-scrollbar-track, &::-webkit-scrollbar-track{
+      background-color: #f0f0f0;
+    }
   }
+
 </style>

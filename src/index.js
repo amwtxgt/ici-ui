@@ -27,8 +27,6 @@ import tooltipDirective from './assets/tooltip-directive'
 import iciPoptip from './components/ici-poptip';
 import iciPoptipView from './components/ici-poptip-view';
 
-
-
 const components = {
   iciButton,
   iciLoading,
@@ -60,9 +58,6 @@ const install = function (Vue,options) {
   var message = new Vue({...iciMessage,...options});
 
   Vue.prototype.$icimsg = message;
-
-
-
 
   //悬浮窗
   var iciPoptip  = new Vue({...iciPoptipView,...options});
