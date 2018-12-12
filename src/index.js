@@ -93,8 +93,6 @@ const install = function (Vue,options) {
 
   //提示窗
   tooltipDirective(Vue);
-
-
 };
 
 if (typeof window !== 'undefined' && window.Vue) {

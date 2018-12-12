@@ -1,21 +1,22 @@
 <template>
   <transition name="ici-popup">
-    <div v-show="value" class="fms-popup-layer" :class="{mask:mask}" :style="popupLayer"
-         v-focus="value" tabindex="0"
-         @mousedown.self="clickMark" @keydown.esc.stop="esc && $emit('input',false)">
-      <div class="fms-popup" :style="popupStyle">
-        <div ref="header" class="fms-popup-title" :class="titleClass">
+    <div v-show="value" class="fms-popup-layer" :style="popupLayer" v-focus="value" tabindex="0"
+         @keydown.esc.stop="esc && $emit('input',false)">
+      <transition name="ici-mask">
+        <div class="mark" v-if="value && mask" @click.self="clickMark"></div>
+      </transition>
+      <div class="fms-popup" :style="popupStyle" ref="fmsPopup">
+        <div ref="header" class="fms-popup-title" :class="titleClass" :style="titleStyle" @mousedown="mousedown">
           <slot name="header">{{title}}</slot>
         </div>
-
-        <div class="fms-popup-body" :style="popupBody">
+        <div class="fms-popup-body" :style="popupBody" @mousedown="bodyMousedown">
           <!--slot-->
           <div class="fms-popup-body-inner" :class="{noscroll:noScroll}">
             <slot></slot>
           </div>
           <ici-loading v-show="loading" block></ici-loading>
         </div>
-        <div ref="footer" class="fms-popup-footer" v-if="!footerHide">
+        <div ref="footer" class="fms-popup-footer" v-if="!footerHide"  @mousedown="mousedown">
           <div v-if="$slots['footer-left']" class="fms-popup-footer-left">
             <!--slot-->
             <slot name="footer-left"></slot>
@@ -29,6 +30,7 @@
           </div>
         </div>
       </div>
+
     </div>
   </transition>
 </template>
@@ -40,12 +42,39 @@
     data() {
       return {
         hasConfirm: false,
+        drag: {
+          open: false,
+          x: 0,
+          y: 0,
+          left: 0,
+          top: 0,
+        }
       }
+    },
+    watch: {
+      value(v) {
+        if (!v) {
+          document.body.removeEventListener('mousemove',this.mousemove)
+          document.body.removeEventListener('mouseup',this.mouseup)
+          document.body.removeEventListener('mouseleave',this.mouseup)
+          setTimeout(() => {
+            var el = this.$refs.fmsPopup;
+            el.style.left = '0px'
+            el.style.top = '0px'
+          }, 300)
+          this.drag.open = false;
+        }else{
+
+          document.body.addEventListener('mousemove',this.mousemove)
+          document.body.addEventListener('mouseup',this.mouseup)
+          document.body.addEventListener('mouseleave',this.mouseup)
+        }
+      },
     },
     props: {
       value: [Boolean, String],
       loading: Boolean,//弹是否属于加载状态
-
+      fullDrag:Boolean, //是否全窗口可拖拽
       title: {
         type: String,
         default: ''
@@ -55,6 +84,10 @@
         default: '#fff'
       },
       titleClass: {
+        type: String,
+        default: ''
+      },
+      titleStyle:{
         type: String,
         default: ''
       },
@@ -70,13 +103,14 @@
 
       maxHeight: { //最大高度
         type: String,
-        default: '95%'
+        default: '100%'
       },
       width: {
         type: Number,
         default: 700
       },
-      height:[String,Number],
+
+      height: [String, Number],
       fullscreen: {
         type: Boolean,
         default: false
@@ -86,19 +120,24 @@
         default: false
       }
     },
+
     mounted() {
       if (this._events.confirm) {
         this.hasConfirm = true;
       }
+
     },
     computed: {
       popupStyle() {
         let css = {maxWidth: this.width + 'px', maxHeight: this.maxHeight}
-        if(this.height){
-          css.height =/[%a-zA-Z]/.test(this.height)?this.height:this.height+'px'
+        if (this.height) {
+          css.height = /[%a-zA-Z]/.test(this.height) ? this.height : this.height + 'px'
         }
         if (this.fullscreen) {
           css = {width: '100%', height: '100vh'}
+          var el = this.$refs.fmsPopup;
+          el.style.left = '0px'
+          el.style.top = '0px'
         }
         return css;
       },
@@ -116,12 +155,44 @@
             fHeight = this.$refs.footer ? this.$refs.footer.clientHeight : 0
           if (this.fullscreen) {
             css.height = 'calc(100vh - ' + (hHeight + fHeight) + 'px)';
+
           }
         }
         return css;
       }
     },
     methods: {
+      bodyMousedown(e){
+        if(this.fullDrag){
+          this.mousedown(e)
+        }
+      },
+      mousedown(e) {
+        if(this.fullscreen) return
+        var el = this.$refs.fmsPopup;
+        var styles = window.getComputedStyle(el);
+
+        this.drag = {
+          open: true,
+          x: e.clientX,
+          y: e.clientY,
+          left: parseFloat(styles.left),
+          top: parseFloat(styles.top)
+        };
+
+      },
+      mouseup() {
+        this.drag.open = false;
+      },
+      mousemove(e) {
+        var el = this.$refs.fmsPopup;
+        let d = this.drag;
+        if (this.drag.open) {
+          let x = e.clientX, y = e.clientY;
+          el.style.left = d.left + (x - d.x) + 'px'
+          el.style.top = d.top + (y - d.y) + 'px'
+        }
+      },
       clickMark() {
         if (this.markClose || this.maskClose) {
           this.close()
@@ -136,82 +207,83 @@
 
 <style scoped lang="less">
 
-  .ici-popup-enter-active {
-    transition: all .3s cubic-bezier(.8, 0.0, 0.2, 1) !important;
+  .ici-popup-enter-active, .ici-mask-enter-active {
+    transition: all .7s !important;
   }
 
-  .ici-popup-leave-active {
-    transition: all .3s cubic-bezier(.8, 0.0, 0.2, 1) .05s !important;
+  .ici-popup-leave-active, .ici-mask-leave-active {
+    transition: all .5s !important;
   }
 
-  .ici-popup-enter, .ici-popup-leave-to {
+  .ici-mask-enter, .ici-mask-leave-to {
     opacity: 0 !important;
   }
 
-  .ici-popup-enter-to {
+  .ici-mask-enter-to {
     opacity: 1 !important;
-
   }
 
   .fms-popup-layer {
-    &.mask {
-      background-color: rgba(0, 0, 0, .4);
-      pointer-events: auto;
-    }
-    perspective: 1000px;
-    outline: none;
-    pointer-events: none;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    backface-visibility: hidden;
     bottom: 0;
     left: 0;
     right: 0;
     top: 0;
     z-index: 999;
-    padding: 0 5%;
-    &.ici-popup-enter-active {
-      .fms-popup {
-        .ici-popup-leave-active;
-      }
+    padding: 5%;
+    display: flex;
+    perspective: 1000px;
+    transform-origin: 0 0 100px;
+    outline: none;
+    pointer-events: none;
+    align-items: center;
+    flex-direction: column;
+    backface-visibility: hidden;
+
+    .mark {
+      background-color: rgba(0, 0, 0, .45);
+      pointer-events: auto;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      top: 0;
     }
-    &.ici-popup-leave-active {
-      .fms-popup {
-        .ici-popup-enter-active;
-      }
-    }
+
     &.ici-popup-enter, &.ici-popup-leave-to {
       .fms-popup {
-        transform: translate3d(0, 0, -200px) !important;
+        opacity: 0;
+        transform: translate3d(-0px, -50px, -100px) !important;
       }
     }
     &.ici-popup-enter-to {
       .fms-popup {
+        opacity: 1;
         transform: translate3d(0, 0, 0) !important;
       }
     }
     .fms-popup {
+      min-height:200px;
       pointer-events: auto;
       width: 100%;
       align-items: stretch;
       display: flex;
       flex-shrink: 1;
       flex-direction: column;
-      transition: transform .3s cubic-bezier(.8, 0.0, 0.2, 1) !important;
+      transition: transform .3s cubic-bezier(.5, 0.0, 0.2, 1), opacity .3s cubic-bezier(.5, 0.0, 0.2, 1) !important;
       position: relative;
       background-color: #fff;
       border-radius: 2px;
       box-shadow: 0 12px 15px 0 rgba(0, 0, 0, 0.24);
       outline: none;
       .fms-popup-title {
-        flex:none;
+        cursor: move;
+        user-select: none;
+        flex: none;
         &:empty {
           display: none;
         }
         background-color: #f7f7f7;
-        padding: 20px;
+        padding:15px 20px;
         font-size: 20px;
         align-items: center;
         display: flex;
@@ -231,7 +303,7 @@
       .fms-popup-body {
         position: relative;
         width: 100%;
-        flex:auto;
+        flex: auto;
         display: flex;
         .fms-popup-body-inner {
           flex: auto;
@@ -250,7 +322,7 @@
         }
         .fms-popup-handle {
           flex: auto;
-          padding:5px;
+          padding: 5px;
           text-align: right;
         }
       }

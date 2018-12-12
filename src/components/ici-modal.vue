@@ -1,5 +1,5 @@
 <template>
-  <ici-popup class="ici-modal" :value="show" @input="close" :width="450" mask :esc="option.showClose"
+  <ici-popup :id="id" class="ici-modal" :value="show" @input="close" :width="450" mask :esc="option.showClose"
              :mask-close="option.showClose" titleClass="ici-modal-title">
 
     <div slot="header">
@@ -61,10 +61,7 @@
       _append() {
         if (!window.document.getElementById(this.id)) {
 
-          if (this.$el) {
-            window.document.body.appendChild(this.$el);
-          }
-          else {
+          if (!this.$el) {
             var menu = window.document.createElement('div');
             window.document.body.appendChild(menu);
             this.$mount(menu); //绑定
