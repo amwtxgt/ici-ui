@@ -16,7 +16,7 @@
           </div>
           <ici-loading v-show="loading" block></ici-loading>
         </div>
-        <div ref="footer" class="fms-popup-footer" v-if="!footerHide"  @mousedown="mousedown">
+        <div ref="footer" class="fms-popup-footer" v-if="!footerHide" @mousedown="mousedown">
           <div v-if="$slots['footer-left']" class="fms-popup-footer-left">
             <!--slot-->
             <slot name="footer-left"></slot>
@@ -54,27 +54,28 @@
     watch: {
       value(v) {
         if (!v) {
-          document.body.removeEventListener('mousemove',this.mousemove)
-          document.body.removeEventListener('mouseup',this.mouseup)
-          document.body.removeEventListener('mouseleave',this.mouseup)
+          document.body.removeEventListener('mousemove', this.mousemove)
+          document.body.removeEventListener('mouseup', this.mouseup)
+          document.body.removeEventListener('mouseleave', this.mouseup)
           setTimeout(() => {
             var el = this.$refs.fmsPopup;
             el.style.left = '0px'
             el.style.top = '0px'
           }, 300)
           this.drag.open = false;
-        }else{
+        }
+        else {
 
-          document.body.addEventListener('mousemove',this.mousemove)
-          document.body.addEventListener('mouseup',this.mouseup)
-          document.body.addEventListener('mouseleave',this.mouseup)
+          document.body.addEventListener('mousemove', this.mousemove)
+          document.body.addEventListener('mouseup', this.mouseup)
+          document.body.addEventListener('mouseleave', this.mouseup)
         }
       },
     },
     props: {
       value: [Boolean, String],
       loading: Boolean,//弹是否属于加载状态
-      fullDrag:Boolean, //是否全窗口可拖拽
+      fullDrag: Boolean, //是否全窗口可拖拽
       title: {
         type: String,
         default: ''
@@ -87,7 +88,7 @@
         type: String,
         default: ''
       },
-      titleStyle:{
+      titleStyle: {
         type: String,
         default: ''
       },
@@ -162,13 +163,13 @@
       }
     },
     methods: {
-      bodyMousedown(e){
-        if(this.fullDrag){
+      bodyMousedown(e) {
+        if (this.fullDrag) {
           this.mousedown(e)
         }
       },
       mousedown(e) {
-        if(this.fullscreen) return
+        if (this.fullscreen) return
         var el = this.$refs.fmsPopup;
         var styles = window.getComputedStyle(el);
 
@@ -262,14 +263,14 @@
       }
     }
     .fms-popup {
-      min-height:200px;
+      min-height: 200px;
       pointer-events: auto;
       width: 100%;
       align-items: stretch;
       display: flex;
       flex-shrink: 1;
       flex-direction: column;
-      transition: transform .3s cubic-bezier(.5, 0.0, 0.2, 1), opacity .3s cubic-bezier(.5, 0.0, 0.2, 1) !important;
+      transition: transform .3s cubic-bezier(.5, 0.0, 0.2, 1), opacity .3s, max-width .2s, width .2s !important;
       position: relative;
       background-color: #fff;
       border-radius: 2px;
@@ -283,7 +284,7 @@
           display: none;
         }
         background-color: #f7f7f7;
-        padding:15px 20px;
+        padding: 15px 20px;
         font-size: 20px;
         align-items: center;
         display: flex;
