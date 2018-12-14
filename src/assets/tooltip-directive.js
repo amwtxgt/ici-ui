@@ -40,18 +40,16 @@ export default function (Vue) {
 
     inserted: function (el, binding) {
 
-      if (typeof binding.value === 'string' || typeof binding.value === 'number') {
-        el.dataset.__title = binding.value
+      if (binding.value && (typeof binding.value === 'string' || typeof binding.value === 'number')) {
+        el.dataset.__title = binding.value;
+        el.addEventListener('mousemove', events.mousemove);
+        el.addEventListener('mouseout', events.mouseout);
+        el.addEventListener('mousewheel', events.mouseout);
+        el.addEventListener('mousedown', events.mouseout);
       }
-
-      el.addEventListener('mousemove', events.mousemove);
-      el.addEventListener('mouseout', events.mouseout);
-      el.addEventListener('mousewheel', events.mouseout);
-      el.addEventListener('mousedown', events.mouseout);
     },
     update: function (el, binding){
-      if (typeof binding.value === 'string' || typeof binding.value === 'number') {
-
+      if (binding.value && (typeof binding.value === 'string' || typeof binding.value === 'number')) {
         el.dataset.__title = binding.value
       }
     },

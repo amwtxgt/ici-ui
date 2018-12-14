@@ -1,6 +1,6 @@
 <template>
   <ici-popup :id="id" class="ici-modal" :value="show" @input="close" :width="450" mask :esc="option.showClose"
-             :mask-close="option.showClose" titleClass="ici-modal-title">
+             :position="option.position" :mask-close="option.showClose" titleClass="ici-modal-title">
 
     <div slot="header">
       <ici-icon name="icon-msnui-alarm-circle" color="#C01639" size="22px" @></ici-icon>
@@ -29,6 +29,7 @@
           title: '',
           okText: "yes",
           showClose:false,
+          position:'fixed',
           cancelText: "no",
           content: '',
           onOk: void 0,
@@ -37,9 +38,21 @@
       };
     },
     methods: {
+      initOption(){
+        return {
+          title: '',
+          okText: "yes",
+          showClose:false,
+          position:'fixed',
+          cancelText: "no",
+          content: '',
+          onOk: void 0,
+          onCancel: void 0
+        }
+      },
       confirm(option) {
         this._append();
-        this.option = option;
+        this.option = Object.assign(this.initOption(),option);
         this.show = true;
       },
       ok() {

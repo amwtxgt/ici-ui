@@ -1,7 +1,9 @@
 <template>
   <div class="ici-message-wrap" :class="{'message-top':position==='top','message-center':position==='center'}"
        :id="'ici-messages-'+rom">
-    <div class="message-mask" :class="{'show':type=='loading'&& show}"></div>
+    <transition name="ici-mask">
+      <div class="message-mask"  v-if="type=='loading' && show"></div>
+    </transition>
     <div class="ici-message" :class="{'message-show':show}" @mouseover="mouseover" @mouseout="mouseout">
       <div class="ici-message-left" v-if="type">
         <ici-loading v-if="type=='loading'" back-white></ici-loading>
@@ -171,6 +173,21 @@
 </script>
 
 <style scoped lang="less">
+  .ici-mask-enter-active {
+    transition: all .3s !important;
+  }
+
+  .ici-mask-leave-active {
+    transition: all .3s !important;
+  }
+
+  .ici-mask-enter, .ici-mask-leave-to {
+    opacity: 0 !important;
+  }
+
+  .ici-mask-enter-to {
+    opacity: 1 !important;
+  }
   .ici-message-wrap {
     position: fixed !important;
     display: flex;
@@ -228,12 +245,8 @@
     bottom: 0;
     right: 0;
     background: rgba(0, 0, 0, .5);
-    opacity: 0;
-    transition: opacity .333s;
-    &.show {
-      opacity: 1;
-      pointer-events: auto;
-    }
+
+    pointer-events: auto;
   }
   .ici-msg-btns{
     margin-left:5px;
