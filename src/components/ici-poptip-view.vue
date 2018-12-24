@@ -2,7 +2,7 @@
   <transition name="poptip">
     <div :id="id" class="ici-poptip-wrap" v-show="showtip" ref="poptip" @mouseover="mouseover" @mouseout="mouseout">
       <div class="poptip-arrows" ref="arrows" v-show="arrows"></div>
-      <div class="ici-poptip-view">
+      <div class="ici-poptip-view" :style="{backgroundColor:bgColor}">
         <slot></slot>
       </div>
     </div>
@@ -20,7 +20,8 @@
         timeout: 1,
         openTimeout: 1,
         zIndex: 10,
-        arrows:false,
+        arrows: false,
+        bgColor: '#fff',
       };
     },
 
@@ -54,22 +55,25 @@
 
       open(opt) {
 
-          let def = this.$slots.default;
-          if (opt.slots) {
-            this.$slots.default = opt.slots
-          }
-          if (opt.zIndex) {
-            this.zIndex = opt.zIndex;
-          }
-          this.arrows = opt.arrows;
-          this.show(def !== opt.slots);
-          var el = this.$refs.poptip;
-          el.style.cssText = '';
-          if (opt.positions) {
-            this.$nextTick(() => {
-              this.setPosition(opt.positions)
-            })
-          }
+        let def = this.$slots.default;
+        if (opt.slots) {
+          this.$slots.default = opt.slots
+        }
+        if (opt.zIndex) {
+          this.zIndex = opt.zIndex;
+        }
+        if (opt.bgColor) {
+          this.bgColor = opt.bgColor
+        }
+        this.arrows = opt.arrows;
+        this.show(def !== opt.slots);
+        var el = this.$refs.poptip;
+        el.style.cssText = '';
+        if (opt.positions) {
+          this.$nextTick(() => {
+            this.setPosition(opt.positions)
+          })
+        }
       },
       setPosition(pos) {
 
@@ -123,7 +127,7 @@
         }
 
         //箭头位置
-        if(this.arrows){
+        if (this.arrows) {
           let arrows = this.$refs.arrows;
           arrows.style.cssText = weiyi;
         }
@@ -170,7 +174,6 @@
       width: 100%;
       max-height: 100%;
       border-radius: 4px;
-      background: #fff;
       box-shadow: 0 1px 8px rgba(0, 0, 0, .3);
     }
 

@@ -9,7 +9,7 @@
     data() {
       return {
         el: null,
-        timeout:0
+        timeout: 0
       };
     },
     props: {
@@ -26,14 +26,18 @@
         type: [Number],
         default: 1,
       },
-      zIndex:{
-        type:[Number,String],
-        default:10
+      zIndex: {
+        type: [Number, String],
+        default: 10
       },
-      arrows:{
-        type:Boolean,
-        default:true,
-      }
+      arrows: {
+        type: Boolean,
+        default: true,
+      },
+      bgColor:{
+        type:String,
+        default:'#fff'
+      },
     },
     mounted() {
 
@@ -82,10 +86,10 @@
           this.open(e)
         }
       },
-      delayOpen(e){
-        this.timeout = setTimeout((event)=>{
+      delayOpen(e) {
+        this.timeout = setTimeout((event) => {
           this.open(event)
-        },200,e)
+        }, 200, e)
       },
       open(e) {
 
@@ -93,9 +97,8 @@
           return;
         }
 
-
         var positions = this.el.getBoundingClientRect();
-        positions =JSON.parse(JSON.stringify(positions))
+        positions = JSON.parse(JSON.stringify(positions));
         //计算上角的点
         positions.top -= this.offset;
         //计算左下角的点
@@ -104,8 +107,9 @@
         this.__icipoptip.open({
           slots: this.$slots.default,
           positions: positions,
-          zIndex:this.zIndex,
-          arrows:this.arrows,
+          zIndex: this.zIndex,
+          arrows: this.arrows,
+          bgColor:this.bgColor,
         });
 
       },
