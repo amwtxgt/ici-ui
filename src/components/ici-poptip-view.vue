@@ -1,7 +1,7 @@
 <template>
   <transition name="poptip">
     <div :id="id" class="ici-poptip-wrap" v-show="showtip" ref="poptip" @mouseover="mouseover" @mouseout="mouseout">
-      <div class="poptip-arrows" ref="arrows" v-show="arrows"></div>
+      <div class="poptip-arrows" ref="arrows" v-show="arrows" ></div>
       <div class="ici-poptip-view" :style="{backgroundColor:bgColor}">
         <slot></slot>
       </div>
@@ -87,7 +87,7 @@
         var height = el.offsetHeight;
 
         var x, y, maxWidth, maxHeight, cssText = `z-index:${this.zIndex};`;
-        var weiyi = ''; //箭头位移
+        var weiyi = `border-left-color:${this.bgColor};border-top-color:${this.bgColor};`; //箭头位移
 
         //计算下部分的高度
         var h2 = innerHeight - pos.bottom + (pos.bottom - pos.top) / 2
@@ -97,7 +97,7 @@
           cssText += `top:${pos.bottom}px;max-height:${maxHeight}px;`
         }
         else {
-          weiyi = `bottom:-5px;top:auto; transform: rotate(225deg);`
+          weiyi += `bottom:-5px;top:auto; transform: rotate(225deg);`
           cssText += `bottom:${innerHeight - pos.top}px;max-height:${pos.top - 5}px;`
         }
 
@@ -108,7 +108,6 @@
         if (innerWidth > width + pos.left || innerWidth / 2 < w2) {
           maxWidth = innerWidth - pos.left - 5
           cssText += `left:${pos.left}px;max-width:${maxWidth}px;`
-
         }
         else {
           let maxWidth;
@@ -121,8 +120,8 @@
           if (pos.right - width < 5) x = 5;
           else x = pos.right - width;
           cssText += `left:${innerWidth - width - 5}px;max-width:${maxWidth}px;`
-
-          weiyi = `left:${(pos.left + (pos.right - pos.left) / 2) - (innerWidth - width)}px;`
+          console.log('weeeewae')
+          weiyi += `left:${(pos.left + (pos.right - pos.left) / 2) - (innerWidth - width)}px;`
 
         }
 
