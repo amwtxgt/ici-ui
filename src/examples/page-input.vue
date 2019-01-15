@@ -2,7 +2,7 @@
   <div>
     <div class="title">input 单行输入</div>
     <baseComponent title="基本输入" html='<ici-input></ici-input>'>
-      <ici-input :focus="true"></ici-input>
+      <ici-input @change="abc" :focus="true"></ici-input>
     </baseComponent>
     <baseComponent title="返白 white" html='<ici-input v-model="name"></ici-input>'>
       <div style="background:#000">
@@ -146,7 +146,9 @@ data() {
     beforeDestroy() {
     },
     methods: {
-
+      abc(e){
+        console.log(e)
+      },
       getFocus: function () {
         this.focus = true
 

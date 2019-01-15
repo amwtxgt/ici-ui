@@ -5,7 +5,7 @@
     </div>
     <div class="input-inner">
       <input @blur="blur" class="fms-input-input" :type="password?'password':'text'" @paste.stop=''
-            :style="inputStyle"
+            :style="inputStyle" @change="$emit('change',$event)"
              :value="inputValue" @input="input" v-focus="focus" @focus="focusEvent" :placeholder="hiddenLabel?label:''"
              @keydown.up.down.stop.prevent="keydown" @keyup.enter.stop.prevent="enter">
       <label v-if="!hiddenLabel" class="fms-input-label"
