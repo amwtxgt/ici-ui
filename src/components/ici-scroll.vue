@@ -1,6 +1,6 @@
 <template>
   <div ref="scrollLoading" v-observe="_self" class="scroll-loading" @scroll.passive="onScroll"
-       @mousewheel="mousewheel" @DOMMouseScroll="mousewheel">
+       @mousewheel.passive="mousewheel" @DOMMouseScroll.passive="mousewheel">
     <div class="scroll-loading-icon" :class="{toploading:loading && hasTop}">
       <ici-loading size="small" disabled></ici-loading>
     </div>

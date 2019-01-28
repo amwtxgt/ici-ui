@@ -150,7 +150,7 @@
       },
       input: function (e) {
         this.selectIndex = -2;
-        var v = e.target.value;
+        let v = e.target.value;
 
         if (v) {
           if (this.prefix && this.prefix.value && v.indexOf(this.prefix.value) === 0) {
@@ -160,14 +160,10 @@
             }
           }
           else if (this.firstSpace) {
-            var vArr = v.split(/ +/);
+            let vArr = v.split(/ +/);
             v = vArr.map((v, index) => {
-              if (index == 1) {
-                return ' ' + v
-              }
-              else {
-                return v;
-              }
+              if (index == 1) return ' ' + v
+              else return v;
             }).join('')
           }
 

@@ -44,7 +44,7 @@ export default function (Vue) {
         el.dataset.__title = binding.value;
         el.addEventListener('mousemove', events.mousemove);
         el.addEventListener('mouseout', events.mouseout);
-        el.addEventListener('mousewheel', events.mouseout);
+        el.addEventListener('mousewheel', events.mouseout,{passive: true});
         el.addEventListener('mousedown', events.mouseout);
       }
     },
@@ -56,7 +56,7 @@ export default function (Vue) {
     unbind:function(el){
       el.removeEventListener('mousemove', events.mousemove);
       el.removeEventListener('mouseout', events.mouseout);
-      el.removeEventListener('mousewheel', events.mouseout);
+      el.removeEventListener('mousewheel', events.mouseout,{passive: true});
       el.removeEventListener('mousedown', events.mouseout);
     }
   })

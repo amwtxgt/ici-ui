@@ -32,7 +32,6 @@
       bodyStyle() {
         var style = {
           width: `${this.width}px`,
-
         }
 
         return style

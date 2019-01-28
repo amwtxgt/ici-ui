@@ -1,7 +1,7 @@
 <template>
   <transition name="poptip">
     <div :id="id" class="ici-poptip-wrap" v-show="showtip" ref="poptip" @mouseover="mouseover" @mouseout="mouseout">
-      <div class="poptip-arrows" ref="arrows" v-show="arrows" ></div>
+      <div class="poptip-arrows" ref="arrows" v-show="arrows"></div>
       <div class="ici-poptip-view" :style="{backgroundColor:bgColor}">
         <slot></slot>
       </div>

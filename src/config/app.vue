@@ -99,7 +99,7 @@
     name: 'app',
     data() {
       return {
-        active: 'pagePopup'
+        active: 'pagePoptip'
       };
     },
     computed: {

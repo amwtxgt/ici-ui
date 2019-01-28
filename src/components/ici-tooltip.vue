@@ -27,7 +27,6 @@
           let innerWidth = window.innerWidth,
             innerHeight = window.innerHeight;
 
-
           //浮窗大小
           var width = el.offsetWidth;
           var height = el.offsetHeight;
@@ -88,6 +87,7 @@
     background: #444;
     color: #fff;
     border-radius: 5px;
+    font-size:12px;
     opacity: 0;
     transition: opacity .3s;
     &.show {
