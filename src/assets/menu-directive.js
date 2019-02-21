@@ -2,13 +2,14 @@ import iciMenu from '../components/ici-menu.vue'
 
 export default function (Vue){
   //右键菜单
-  var rightMenu = new Vue(iciMenu);
+  let rightMenu = new Vue(iciMenu);
   Vue.directive('rightmenu', {
     inserted: function (el, binding) {
       el.oncontextmenu = (e) => {
 
         if (binding.value) {
           if (typeof binding.value === 'function') {
+
             rightMenu.open(binding.value(), e)
           }
           else if (binding.value instanceof Array) {

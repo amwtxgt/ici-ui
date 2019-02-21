@@ -153,7 +153,7 @@
   };
 </script>
 
-<style lang="less">
+<style lang="less" scoped>
   .ici-btn {
     -webkit-user-select: none;
     -moz-user-select: none;

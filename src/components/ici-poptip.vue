@@ -60,9 +60,10 @@
       if(this.trigger === 'hover') {
         this.el.addEventListener('mouseover', this.delayOpen);
       }
-      else if(this.trigger !== 'custom') {
-        this.el.addEventListener('mouseout', this.close);
-        this.el.addEventListener('mousewheel', this.close,{passive: true});
+
+      if(this.trigger !== 'custom') {
+        this.el.addEventListener('mouseout', this.close, {passive: true});
+        this.el.addEventListener('mousewheel', this.close, {passive: true});
         this.el.addEventListener('click', this.toggle);
         this.el.addEventListener('mousemove', this.mousemove)
       }
@@ -73,7 +74,8 @@
       if(this.trigger === 'hover') {
         this.el.removeEventListener('mouseover', this.delayOpen)
       }
-      else if(this.trigger !== 'custom') {
+
+      if(this.trigger !== 'custom') {
         this.el.removeEventListener('mouseout', this.close)
         this.el.removeEventListener('mousewheel', this.close);
         this.el.removeEventListener('click', this.toggle)
@@ -100,14 +102,14 @@
         }, 200, e)
       },
       open(e) {
-        if(e){
+        if(e) {
           if(e.buttons > 0 && e.type == 'mouseover') {
             return;
           }
         }
 
 
-        var positions = this.el.getBoundingClientRect();
+        let positions = this.el.getBoundingClientRect();
         positions = JSON.parse(JSON.stringify(positions));
         //计算上角的点
         positions.top -= this.offset;

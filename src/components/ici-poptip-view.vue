@@ -67,7 +67,7 @@
         }
         this.arrows = opt.arrows;
         this.show(def !== opt.slots);
-        var el = this.$refs.poptip;
+        let el = this.$refs.poptip;
         el.style.cssText = '';
         if (opt.positions) {
           this.$nextTick(() => {

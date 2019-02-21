@@ -97,7 +97,7 @@
         if (e.deltaY < 0) {
 
           if (this.hasTop) {
-            console.log('向上')
+//            console.log('向上')
             this.startLoad('top');
           }
         }
@@ -105,7 +105,7 @@
 
           if (this.hasBottom) {
             this.startLoad('bottom');
-            console.log('向下')
+//            console.log('向下')
           }
         }
       },
