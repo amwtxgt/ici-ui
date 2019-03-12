@@ -22,13 +22,13 @@
   },
   "homepage": "https://github.com/amwtxgt/ici-ui#readme",
   "dependencies": {
-    "autoprefixer": "^9.3.1",
+    "autoprefixer": "^9.4.10",
     "autoprefixer-loader": "^3.2.0",
     "js-md5": "^0.7.3",
     "loading-svg": "^1.0.0",
-    "postcss": "^7.0.5",
+    "postcss": "^7.0.14",
     "postcss-loader": "^3.0.0",
-    "vue": "^2.5.17"
+    "vue": "^2.6.8"
   },
   "browserslist": [
     "> 1%",
@@ -45,16 +45,16 @@
     "css-loader": "^0.28.7",
     "extract-text-webpack-plugin": "^3.0.2",
     "file-loader": "^1.1.4",
-    "highlight.js": "^9.13.1",
+    "highlight.js": "^9.15.6",
     "iview": "^2.14.3",
-    "less": "^3.8.1",
+    "less": "^3.9.0",
     "less-loader": "^4.1.0",
-    "mini-css-extract-plugin": "^0.4.4",
+    "mini-css-extract-plugin": "^0.4.5",
     "style-loader": "^0.23.1",
-    "vue-loader": "^15.4.2",
-    "vue-template-compiler": "^2.5.17",
-    "webpack": "^4.25.1",
-    "webpack-cli": "^3.1.2",
-    "webpack-dev-server": "^3.1.10"
+    "vue-loader": "^15.7.0",
+    "vue-template-compiler": "^2.6.8",
+    "webpack": "^4.29.6",
+    "webpack-cli": "^3.2.3",
+    "webpack-dev-server": "^3.2.1"
   }
 }
