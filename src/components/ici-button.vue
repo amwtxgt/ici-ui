@@ -191,7 +191,8 @@
   .ici-btn:hover, .ici-btn:focus {
     background-color: #f6f6f6;
     text-decoration: none;
-    outline: 0
+    outline: 0;
+    box-shadow: 0 0 0 3px rgba(0,0,0,.2);
   }
 
   .ici-btn:active, .ici-btn.active, .ici-btn.is-active {
@@ -203,7 +204,8 @@
     -webkit-transition-duration: 0s;
     transition-duration: 0s;
     -webkit-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2);
-    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2)
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2);
+
   }
 
   .ici-btn.disabled, .ici-btn.is-disabled, .ici-btn:disabled {
@@ -303,13 +305,14 @@
   .ici-btn-primary:hover, .ici-btn-primary:focus, .ici-btn-primary-flat:hover, .ici-btn-primary-flat:focus {
     background-color: #4cb0f9;
     border-color: #4cb0f9;
-    color: #FFF
+    color: #FFF;
   }
 
   .ici-btn-primary:active, .ici-btn-primary.active, .ici-btn-primary.is-active, .ici-btn-primary-flat:active, .ici-btn-primary-flat.active, .ici-btn-primary-flat.is-active {
     background-color: #2798eb;
-    border-color: #2798eb;
-    color: #0880d7
+    border-color: #42b983;
+    color: #0880d7;
+
   }
 
   .ici-btn-action, .ici-btn-action-flat {

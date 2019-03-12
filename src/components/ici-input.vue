@@ -1,6 +1,6 @@
 <template>
   <div class="fms-input" :class="{white:white}">
-    <div v-if="prefix || showPrefix" class="prefix" @click="$emit('click-prefix')" :style="prefixStyle">
+    <div v-if="prefix || showPrefix" class="prefix" @click.stop.prevent="$emit('click-prefix')" :style="prefixStyle">
       <slot name="prefix">{{prefix.content}}</slot>
     </div>
     <div class="input-inner">
