@@ -20,6 +20,9 @@
         <MenuItem name="pageIcon">
           图标 ici-icon
         </MenuItem>
+        <MenuItem name="pageColorIcon">
+          图标 ici-color-icon
+        </MenuItem>
         <MenuItem name="pageInput">
           输入 ici-input
         </MenuItem>
@@ -76,6 +79,7 @@
   import pageMenu from '../examples/page-rightmenu.vue'
   import pagePoptip from '../examples/page-poptip'
   import pageTitle from '../examples/page-title'
+  import pageColorIcon from '../examples/page-color-icon'
   var components = {
     pageButton,
     pageLoading,
@@ -93,13 +97,14 @@
     pageScroll,
     pagePoptip,
     pageTitle,
-    pageMenu
+    pageMenu,
+    pageColorIcon
   };
   export default {
     name: 'app',
     data() {
       return {
-        active: 'pagePoptip'
+        active: 'pageColorIcon'
       };
     },
     computed: {

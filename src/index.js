@@ -17,6 +17,7 @@ import iciHeader from './components/ici-header.vue'
 
 import iciBgimg from './components/ici-bgimg.vue'
 import iciScroll from './components/ici-scroll.vue'
+import iciColorIcon from './components/ici-color-icon'
 
 import * as funs from './assets/functions'
 import menuDirective from './assets/menu-directive'
@@ -44,6 +45,7 @@ const components = {
   iciDrawer,
   iciScroll,
   iciPoptip,
+  iciColorIcon,
 }
 
 const install = function (Vue,options) {
