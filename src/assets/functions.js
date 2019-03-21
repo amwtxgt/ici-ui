@@ -186,8 +186,8 @@ export function removeArrayItem(arr, item) {
 export function contenteditable(e) {
 
   e.preventDefault();
-  var text = null;
-
+  let text = null;
+  let textRange;
   if (window.clipboardData && clipboardData.setData) {
     // IE
     text = window.clipboardData.getData('text');
@@ -200,11 +200,11 @@ export function contenteditable(e) {
       textRange = document.selection.createRange();
     }
     else if (window.getSelection) {
-      sel = window.getSelection();
-      var range = sel.getRangeAt(0);
+      let sel = window.getSelection();
+      let range = sel.getRangeAt(0);
 
       // 创建临时元素，使得TextRange可以移动到正确的位置
-      var tempEl = document.createElement("span");
+      let tempEl = document.createElement("span");
       tempEl.innerHTML = "&#FEFF;";
       range.deleteContents();
       range.insertNode(tempEl);

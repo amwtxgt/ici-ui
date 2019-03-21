@@ -39,7 +39,7 @@
     top: 0;
     left: 0;
     right: 0;
-    height: 60px;
+    height: 50px;
     padding: 0 20px 0 20px;
     background: #fff;
     z-index: 80;

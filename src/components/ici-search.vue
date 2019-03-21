@@ -154,7 +154,7 @@
     display: flex;
     align-items: center;
     background: rgba(205, 205, 205, .5);
-    height: 42px;
+    height: 38px;
     border-radius: 7px;
     .ici-font, .ici-delete {
       padding: 0 10px;
