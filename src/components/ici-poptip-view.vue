@@ -22,6 +22,7 @@
         zIndex: 10,
         arrows: false,
         bgColor: '#fff',
+        mouseoutClose:true,
       };
     },
 
@@ -50,7 +51,10 @@
         this.show();
       },
       mouseout() {
-        this.close()
+        if(this.mouseoutClose){
+          this.close()
+        }
+
       },
 
       open(opt) {
@@ -65,6 +69,7 @@
         if (opt.bgColor) {
           this.bgColor = opt.bgColor
         }
+        this.mouseoutClose = opt.mouseoutClose,
         this.arrows = opt.arrows;
         this.show(def !== opt.slots);
         let el = this.$refs.poptip;

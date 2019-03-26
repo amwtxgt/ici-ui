@@ -63,7 +63,7 @@ const install = function (Vue,options) {
 
   //悬浮窗
   var iciPoptip  = new Vue({...iciPoptipView,...options});
-  Vue.prototype.__icipoptip = iciPoptip;
+  Vue.prototype.$icitip = iciPoptip;
 
   var modal  = new Vue(iciModal);
   Vue.prototype.$popup = modal;

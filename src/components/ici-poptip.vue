@@ -40,6 +40,10 @@
         type: String,
         default: '#fff'
       },
+      mouseoutClose:{
+          type:String,
+          default:true,
+      }
     },
 
     mounted() {
@@ -85,11 +89,11 @@
     methods: {
       mousemove(e) {
         if(e.buttons > 0) {
-          this.__icipoptip.showtip = false;
+          this.$icitip.showtip = false;
         }
       },
       toggle(e) {
-        if(this.__icipoptip.showtip) {
+        if(this.$icitip.showtip) {
           this.close(e)
         }
         else {
@@ -116,19 +120,20 @@
         //计算左下角的点
         positions.bottom += this.offset;
 
-        this.__icipoptip.open({
+        this.$icitip.open({
           slots: this.$slots.default,
           positions: positions,
           zIndex: this.zIndex,
           arrows: this.arrows,
           bgColor: this.bgColor,
+          mouseoutClose:this.mouseoutClose,
         });
 
       },
 
       close(e) {
         clearTimeout(this.timeout)
-        this.__icipoptip.close();
+        this.$icitip.close();
       },
     },
   }
