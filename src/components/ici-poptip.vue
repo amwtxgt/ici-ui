@@ -41,7 +41,7 @@
         default: '#fff'
       },
       mouseoutClose:{
-          type:String,
+          type:Boolean,
           default:true,
       }
     },
