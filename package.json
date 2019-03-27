@@ -1,8 +1,7 @@
 {
   "name": "ici-ui",
   "description": "ici通用组件",
-  "version": "0.5.79",
-
+  "version": "0.5.80",
   "author": "huangmin",
   "license": "ISC",
   "private": false,

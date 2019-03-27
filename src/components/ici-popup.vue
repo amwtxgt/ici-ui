@@ -309,6 +309,7 @@
         .fms-popup-body-inner {
           flex: auto;
           overflow: auto;
+          max-height: 100%;
           &.noscroll {
             overflow: visible;
           }

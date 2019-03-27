@@ -21,7 +21,7 @@
           图标 ici-icon
         </MenuItem>
         <MenuItem name="pageColorIcon">
-          图标 ici-color-icon
+          彩色图标 ici-color-icon
         </MenuItem>
         <MenuItem name="pageInput">
           输入 ici-input
