@@ -31,6 +31,11 @@
       offset: {
         type: Number,
         default: 50,
+      },
+      //首屏加载
+      autoReach: {
+        type: [String, Boolean],
+        default: false,
       }
     },
     directives: {
@@ -48,11 +53,11 @@
             var top = 0
             mutations.forEach(function (record) {
 
-              if (record.type == 'childList') {
+              if(record.type == 'childList') {
                 //监听结构发生变化
-                if (record.addedNodes && record.addedNodes.length) {
+                if(record.addedNodes && record.addedNodes.length) {
                   record.addedNodes.forEach(v => {
-                    if (v.clientHeight) {
+                    if(v.clientHeight) {
                       top += v.clientHeight
                     }
                   })
@@ -61,7 +66,7 @@
               }
             });
 
-            if (_this.scrollTop == 0) {
+            if(_this.scrollTop == 0) {
               top = top + 100
               el.scrollTop += top;
             }
@@ -71,9 +76,18 @@
       }
     },
     created() {
-      if (this.onReachTop) {
+      if(this.onReachTop) {
         this.hasTop = true;
         this.scrollTop = 0;
+      }
+    },
+    mounted(){
+      if(this.autoReach) {
+        if(this.autoReach === 'top'){
+          this.startLoad('top')
+        }else{
+          this.startLoad('bottom')
+        }
       }
     },
     methods: {
@@ -86,24 +100,25 @@
       },
       mousewheel(e) {
 
-        if (e.deltaY < 0) {
+        if(e.deltaY < 0) {
           this.onScroll('top')
-        } else {
+        }
+        else {
           this.onScroll('bottom')
         }
 
-        if (this.loading || this.disabled || (!this.hasTop && !this.hasBottom)) return;
+        if(this.loading || this.disabled || (!this.hasTop && !this.hasBottom)) return;
 
-        if (e.deltaY < 0) {
+        if(e.deltaY < 0) {
 
-          if (this.hasTop) {
+          if(this.hasTop) {
 //            console.log('向上')
             this.startLoad('top');
           }
         }
         else {
 
-          if (this.hasBottom) {
+          if(this.hasBottom) {
             this.startLoad('bottom');
 //            console.log('向下')
           }
@@ -112,7 +127,7 @@
       //顶部加载
       startLoad(type) {
         var reachFun = type == 'top' ? this.onReachTop : this.onReachBottom;
-        if (reachFun) {
+        if(reachFun) {
           this.loading = true
           reachFun(() => {
             this.loading = false;
@@ -123,13 +138,13 @@
       },
       onScroll(direction) {
 
-        if (this.loading) {
+        if(this.loading) {
           return false;
         }
 
         var t = this.$refs.scrollLoading;
 
-        if (!t) {
+        if(!t) {
           return;
         }
 
@@ -138,9 +153,9 @@
         this.scrollHeight = t.scrollHeight
         this.height = parseInt(tStyle.height);
         this.scrollTop = t.scrollTop;
-        if (direction === 'top') {
+        if(direction === 'top') {
 
-          if (this.scrollTop <= this.offset) {
+          if(this.scrollTop <= this.offset) {
             this.hasTop = true
             this.hasBottom = false;
             return
@@ -148,7 +163,7 @@
         }
         else {
 
-          if (this.scrollHeight <= this.height + this.scrollTop + this.offset) {
+          if(this.scrollHeight <= this.height + this.scrollTop + this.offset) {
             this.hasTop = false
             this.hasBottom = true
             return
@@ -170,25 +185,30 @@
     height: 100%;
     overflow-x: hidden;
     overflow-y: auto !important;
+
     .scroll-loading-icon {
       line-height: 50px;
       height: 0;
       text-align: center;
       transform: scale(0);
       transition: none;
+
       &.toploading {
         transition: all .5s;
         transform: scale(1);
         height: 50px;
       }
     }
+
     &::-webkit-scrollbar {
       width: 6px;
       height: 10px;
     }
+
     &::-webkit-scrollbar-thumb, &::-webkit-scrollbar-thumb {
       background-color: #888;
     }
+
     &::-webkit-scrollbar-track, &::-webkit-scrollbar-track {
       background-color: #f0f0f0;
     }

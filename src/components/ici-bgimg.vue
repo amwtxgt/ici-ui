@@ -1,6 +1,8 @@
 <template>
   <div class="bg-img" :style="style">
-    <slot></slot>
+    <div class="bg-img-inner">
+      <slot></slot>
+    </div>
     <div class="handle-img" v-if="$slots.handle" @click.stop="stop">
       <slot name="handle"></slot>
     </div>
@@ -46,7 +48,6 @@
         var style = {}
         style.width = this.width;
         style.height = this.height ? this.height : this.width;
-        style.lineHeight=style.height;
         style.backgroundSize = this.showType;
         style.backgroundColor = this.bgColor;
         if(this.margin){
@@ -77,6 +78,13 @@
     background: no-repeat center;
     background-size: cover;
     text-align: center;
+    .bg-img-inner{
+      display: flex;
+      align-items:center;
+      justify-content: center;
+      width:100%;
+      height:100%;
+    }
     .handle-img{
       line-height: 1em;
       position: absolute;
