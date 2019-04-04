@@ -19,13 +19,17 @@ export default function (Vue){
         window.event.returnValue = false;
         return false;
       }
-    }
+    },
+    unbind(el){
+      el.oncontextmenu = null;
+    },
   })
+
 
   Vue.directive('leftmenu', {
     inserted: function (el, binding) {
 
-      el.addEventListener('mouseup',(e) => {
+      el.onmouseup = (e) => {
         if(e.button !==0) return;
         if (binding.value) {
           if (typeof binding.value === 'function') {
@@ -37,7 +41,10 @@ export default function (Vue){
         }
         window.event.returnValue = false;
         return false;
-      })
-    }
+      }
+    },
+    unbind(el){
+      el.onmouseup = null;
+    },
   })
 }

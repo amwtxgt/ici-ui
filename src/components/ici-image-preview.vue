@@ -40,6 +40,9 @@
     mounted() {
       window.document.addEventListener('DOMContentLoaded', this._append);
     },
+    beforeDestroy(){
+      window.document.removeEventListener('DOMContentLoaded', this._append);
+    },
     methods: {
       _append() {
         if (!window.document.getElementById('ici-image-preview')) {

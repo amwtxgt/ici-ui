@@ -1,5 +1,5 @@
 <template>
-  <div ref="scrollLoading" v-observe="_self" class="scroll-loading" @scroll.passive="onScroll"
+  <div ref="scrollLoading" v-observe="_self" class="scroll-loading" @scroll.passive="onScroll" :style="{overflowY:overflow}"
        @mousewheel.passive="mousewheel" @DOMMouseScroll.passive="mousewheel">
     <div class="scroll-loading-icon" :class="{toploading:loading && hasTop}">
       <ici-loading size="small" disabled></ici-loading>
@@ -18,6 +18,7 @@
       return {
         scrollHeight: 0, //滚动区域总高度
         scrollTop: 1, //滚动距离上面的位置
+        direction: 'bottom', //top ,bottom
         height: 0, //窗体高度
         hasTop: false,//是否触顶，
         hasBottom: false,//是否触底
@@ -36,6 +37,10 @@
       autoReach: {
         type: [String, Boolean],
         default: false,
+      },
+      overflow:{
+        type:String,
+        default:'auto'
       }
     },
     directives: {
@@ -51,22 +56,22 @@
 
           var observer = new MutationObserver(function (mutations) {//构造函数回调
             var top = 0
-            mutations.forEach(function (record) {
+            if(_this.scrollTop == 0 && _this.direction == 'top' ) {
+              mutations.forEach(function (record) {
 
-              if(record.type == 'childList') {
-                //监听结构发生变化
-                if(record.addedNodes && record.addedNodes.length) {
-                  record.addedNodes.forEach(v => {
-                    if(v.clientHeight) {
-                      top += v.clientHeight
-                    }
-                  })
+                if(record.type == 'childList') {
+                  //监听结构发生变化
+                  if(record.addedNodes && record.addedNodes.length) {
+                    record.addedNodes.forEach(v => {
+                      if(v.clientHeight) {
+                        top += v.clientHeight
+                      }
+                    })
+                  }
+                  //do any code`
                 }
-                //do any code
-              }
-            });
+              });
 
-            if(_this.scrollTop == 0) {
               top = top + 100
               el.scrollTop += top;
             }
@@ -81,11 +86,12 @@
         this.scrollTop = 0;
       }
     },
-    mounted(){
+    mounted() {
       if(this.autoReach) {
-        if(this.autoReach === 'top'){
+        if(this.autoReach === 'top') {
           this.startLoad('top')
-        }else{
+        }
+        else {
           this.startLoad('bottom')
         }
       }
@@ -126,7 +132,8 @@
       },
       //顶部加载
       startLoad(type) {
-        var reachFun = type == 'top' ? this.onReachTop : this.onReachBottom;
+        this.direction = type;
+        let reachFun = type == 'top' ? this.onReachTop : this.onReachBottom;
         if(reachFun) {
           this.loading = true
           reachFun(() => {
@@ -169,11 +176,8 @@
             return
           }
         }
-
         this.hasTop = false
         this.hasBottom = false;
-
-
       },
     },
   }
@@ -184,7 +188,6 @@
     position: relative;
     height: 100%;
     overflow-x: hidden;
-    overflow-y: auto !important;
 
     .scroll-loading-icon {
       line-height: 50px;

@@ -27,7 +27,7 @@
         default: '',
       },
       url:{
-        type:String,
+        type:[String,null],
       },
       showType:{
         type:String,

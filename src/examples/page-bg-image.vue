@@ -1,9 +1,9 @@
 <template>
   <div>
     <div class="title">背景图 ici-bgimg</div>
-    <baseComponent title="默认" html='<ici-bgimg />'>
+    <baseComponent title="默认" html='<ici-bgimg />' >
       <p>默认是一个正方形</p>
-      <ici-bgimg/>
+      <ici-bgimg :url="null"/>
     </baseComponent>
     <baseComponent title="图片 url" html='<ici-bgimg url="http://www.askingdao.com/tianfang/static/temp/la_03.jpg" />'>
 

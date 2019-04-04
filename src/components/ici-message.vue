@@ -58,6 +58,9 @@
     mounted() {
       window.document.addEventListener('DOMContentLoaded', this._append);
     },
+    beforeDestroy(){
+      window.document.removeEventListener('DOMContentLoaded', this._append);
+    },
     methods: {
       clickBtn(index) {
         this.close();

@@ -1448,7 +1448,9 @@
   }
 
   .ici-btn-group .ici-btn, .ici-btn-group .ici-btn-dropdown {
-    float: left
+    padding:0 !important;
+    box-shadow: none;
+    float: left;
   }
 
   .ici-btn-group .ici-btn:not(:first-child):not(:last-child), .ici-btn-group .ici-btn-dropdown:not(:first-child):not(:last-child) {
@@ -1641,7 +1643,7 @@
 
   .ici-btn-block {
     width: 100%;
+    padding:0 !important;
   }
-
 
 </style>
