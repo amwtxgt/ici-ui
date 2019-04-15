@@ -1,7 +1,9 @@
 <template>
   <div>
-    <div class="rightmenu" v-rightmenu="[]">
-      右键点我
+    <div style="float:right">
+      <div class="rightmenu" v-rightmenu="[{name: '我是菜单一'},{name: '我是菜单二'}]">
+        右键点我
+      </div>
     </div>
     <br><br>
     <div class="title">左右键菜单 v-rightmenu v-leftmenu</div>

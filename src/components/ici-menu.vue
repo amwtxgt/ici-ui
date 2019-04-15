@@ -91,12 +91,11 @@
 
         var width = this.$refs['icimenu'].offsetWidth,
           height = this.$refs['icimenu'].offsetHeight
-          console.log([this.$refs['icimenu']])
 
         //x坐标的位置,超过右边界时，移动刚好右边界
         var rightMargin = innerWidth - (clientX + width);
-        if (rightMargin < 0) {
-          clientX = clientX + rightMargin;
+        if (rightMargin < 15) {
+          clientX = clientX + rightMargin-15;
         }
 
         //y坐标的位置，超过下边界时，向上显示
@@ -109,19 +108,16 @@
 
         //计算二级菜单
         if (this.$refs['icimenuchild']) {
-          console.log(this.$refs['icimenuchild'])
           this.$refs['icimenuchild'].forEach((el) => {
             var parent = el.parentNode
 
             var left, top;
-            console.log(rightMargin, el.offsetWidth)
-            if (rightMargin - el.offsetWidth < 0) {
+            if (rightMargin - el.offsetWidth < 15) {
 
               //二级菜单移动到左边
               left = -el.offsetWidth + 'px'
             }
             else {
-              console.log('右边',width)
               //移动到右边
               left = (width - 1) + 'px';
             }
