@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-img" :style="style">
+  <div class="bg-img" :style="style" @click="abc">
     <div class="bg-img-inner">
       <slot></slot>
     </div>
@@ -62,7 +62,12 @@
         return style;
       },
     },
-    methods: {stop(){},},
+    methods: {stop(e){
+
+      },
+      abc(){
+      console.log('abcdf')
+      },},
     components: {}
   }
 </script>

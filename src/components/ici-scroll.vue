@@ -33,14 +33,10 @@
         type: Number,
         default: 50,
       },
-      //首屏加载
-      autoReach: {
-        type: [String, Boolean],
-        default: false,
-      },
-      overflow:{
-        type:String,
-        default:'auto'
+
+      overflow: {
+        type: String,
+        default: 'auto'
       }
     },
     directives: {
@@ -56,7 +52,7 @@
 
           var observer = new MutationObserver(function (mutations) {//构造函数回调
             var top = 0
-            if(_this.scrollTop == 0 && _this.direction == 'top' ) {
+            if(_this.scrollTop == 0 && _this.direction == 'top') {
               mutations.forEach(function (record) {
 
                 if(record.type == 'childList') {
@@ -86,16 +82,6 @@
         this.scrollTop = 0;
       }
     },
-    mounted() {
-      if(this.autoReach) {
-        if(this.autoReach === 'top') {
-          this.startLoad('top')
-        }
-        else {
-          this.startLoad('bottom')
-        }
-      }
-    },
     methods: {
       rollTop() {
         this.$refs['scrollLoading'].scrollTop = 0
@@ -104,6 +90,17 @@
       rollBottom() {
         this.$refs['scrollLoading'].scrollTop = 5000000;
       },
+
+      //手动触发向上
+      reachTop(){
+        this.startLoad('top')
+      },
+
+      //手动触发向下
+      reachBottom(){
+        this.startLoad('bottom')
+      },
+
       mousewheel(e) {
 
         if(e.deltaY < 0) {

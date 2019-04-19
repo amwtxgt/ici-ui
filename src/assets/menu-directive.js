@@ -2,7 +2,8 @@ import iciMenu from '../components/ici-menu.vue'
 
 export default function (Vue){
   //右键菜单
-  Vue.$rightMenu = new Vue(iciMenu);
+  let rightMenu = new Vue(iciMenu);
+  Vue.prototype.$rightMenu = rightMenu;
   Vue.directive('rightmenu', {
     inserted: function (el, binding) {
       el.oncontextmenu = (e) => {
@@ -10,10 +11,10 @@ export default function (Vue){
         if (binding.value) {
           if (typeof binding.value === 'function') {
 
-            Vue.$rightMenu.open(binding.value(), e)
+            rightMenu.open(binding.value(), e)
           }
           else if (binding.value instanceof Array) {
-            Vue.$rightMenu.open(binding.value, e)
+            rightMenu.open(binding.value, e)
           }
         }
         window.event.returnValue = false;
@@ -33,10 +34,10 @@ export default function (Vue){
         if(e.button !==0) return;
         if (binding.value) {
           if (typeof binding.value === 'function') {
-            Vue.$rightMenu.open(binding.value(), e)
+            rightMenu.open(binding.value(), e)
           }
           else if (binding.value instanceof Array) {
-            Vue.$rightMenu.open(binding.value, e)
+            rightMenu.open(binding.value, e)
           }
         }
         window.event.returnValue = false;

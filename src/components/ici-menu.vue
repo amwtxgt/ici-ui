@@ -1,6 +1,6 @@
 <template>
-  <div :id="id" v-show="show" class="ici-menu-wrap" @mousedown="mousedown('mousedown',$event)"
-       @mousewheel.passive.self="mousewheel">
+  <div :id="id" v-show="show" class="ici-menu-wrap" @mousedown="mousedown('mousedown',$event)" ref="menuwrap"
+       @mousewheel.passive.self="mousewheel" @contextmenu.stop.prevent>
     <ul class="ici-menu" ref="icimenu" v-if="menuList && menuList.length" :style="position" @mousedown.stop="">
       <li v-for="(item,i) of menuList" :key="'menu'+i"
           :class="{topline:item.topLine,bottomline:item.bottomLine,disabled:item.disabled}"
@@ -49,6 +49,7 @@
         menuList: []
       };
     },
+
     methods: {
       //主动事件
       dispatchEvent(e) {

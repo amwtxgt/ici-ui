@@ -1,15 +1,12 @@
 <template>
   <ici-popup :id="id" class="ici-modal" :value="show" @input="close" :width="450" mask :esc="option.showClose"
              :position="option.position" :mask-close="option.showClose" titleClass="ici-modal-title">
-
     <div slot="header">
       <ici-icon name="icon-msnui-alarm-circle" color="#C01639" size="22px" @></ici-icon>
       {{option.title?option.title:'Prompt'}}
     </div>
     <ici-icon v-if="option.showClose" slot="header" @click="close" color="#666" name="icon-shanchudelete30" size="20px" click-state />
-    <div class="ici-modal-msg">
-      {{option.content}}
-    </div>
+    <div class="ici-modal-msg" v-html="option.content"></div>
     <div slot="footer-right">
       <ici-button type="ici" @click="ok" shape="pill" size="small">{{option.okText||'ok'}}</ici-button>
       <ici-button type="ici" @click="cancel" shape="pill" plain size="small">{{option.cancelText||'no'}}</ici-button>

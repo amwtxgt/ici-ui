@@ -68,7 +68,7 @@ export default function (Vue) {
       if(binding.value === false) {
         return
       }
-      el.addEventListener('click', bgpreview,true )
+      el.addEventListener('click', bgpreview)
     },
     unbind(el, binding) {
       el.removeEventListener('click', bgpreview)

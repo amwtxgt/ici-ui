@@ -70,7 +70,9 @@
     </baseComponent>
     <baseComponent title="图片预览" html='<ici-bgimg v-bgpreview show-type="contain" bg-color="green" url="http://www.askingdao.com/tianfang/static/temp/la_03.jpg"/>
 <ici-bgimg v-bgpreview  bg-color="green" url="http://www.askingdao.com/tianfang/static/temp/la_03.jpg"/>'>
-      <ici-bgimg v-bgpreview show-type="contain" bg-color="green" url="http://www.askingdao.com/tianfang/static/temp/la_03.jpg"/>
+      <ici-bgimg v-bgpreview show-type="contain" bg-color="green" url="http://www.askingdao.com/tianfang/static/temp/la_03.jpg">
+        <ici-icon slot="handle" size="14px" name="icon-delete" click-state></ici-icon>
+      </ici-bgimg>
       <ici-bgimg v-bgpreview  bg-color="green" url="http://www.askingdao.com/tianfang/static/temp/la_03.jpg"/>
     </baseComponent>
     <baseComponent title="圆形circle" html='<ici-bgimg circle  url="http://www.askingdao.com/tianfang/static/temp/la_03.jpg"/>'>
