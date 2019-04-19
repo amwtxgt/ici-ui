@@ -47,7 +47,34 @@ reachBottom(cb){
           <p style="padding:10px 5px;">我是一行</p>
           <p style="padding:10px 5px;">我是一行</p>
         </ici-scroll>
+
       </div>
+    </baseComponent>
+
+    <baseComponent title="主动下拉/上拉刷新" html='<div style="height:150px;border:1px solid #eee;">
+  <ici-scroll :onReachBottom="reachBottom" :onReachTop="reachTop" ref="reach">
+    <p style="padding:10px 5px;">我是一行</p>
+    <p style="padding:10px 5px;">我是一行</p>
+    <p style="padding:10px 5px;">我是一行</p>
+    <p style="padding:10px 5px;">我是一行</p>
+    <p style="padding:10px 5px;">我是一行</p>
+  </ici-scroll>
+</div>
+<ici-button @click="$refs.reach.reachBottom()">主动底部刷新 </ici-button>
+<ici-button @click="$refs.reach.reachTop()">主动项部刷新</ici-button>'>
+      <code>onReachBottom/onReachTop 属性接收一个函数，函数的第一个参数为callback，函数执行成功后，必须调用callback </code>
+      <br><br>
+      <div style="height:150px;border:1px solid #eee;">
+        <ici-scroll :onReachBottom="reachBottom" :onReachTop="reachTop" ref="reach">
+          <p style="padding:10px 5px;">我是一行</p>
+          <p style="padding:10px 5px;">我是一行</p>
+          <p style="padding:10px 5px;">我是一行</p>
+          <p style="padding:10px 5px;">我是一行</p>
+          <p style="padding:10px 5px;">我是一行</p>
+        </ici-scroll>
+      </div>
+      <ici-button @click="$refs.reach.reachBottom()">主动底部刷新 </ici-button>
+      <ici-button @click="$refs.reach.reachTop()">主动项部刷新</ici-button>
     </baseComponent>
 
     <baseComponent title="顶部监听 :onReachTop='监听函数'" html='<ici-scroll :onReachTop="reachTop">
@@ -158,6 +185,7 @@ reachTop(cb){
           cb()
         },3000)
       },
+
       reachTop(cb){
         setTimeout(()=>{
           //等待3秒

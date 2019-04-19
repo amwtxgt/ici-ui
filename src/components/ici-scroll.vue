@@ -3,11 +3,11 @@
        @mousewheel.passive="mousewheel" @DOMMouseScroll.passive="mousewheel">
     <div class="scroll-inner" v-observe="_self">
       <div class="scroll-loading-icon loading-top" :class="{toploading:loading && hasTop}">
-        <ici-loading  class="scroll-loading-inner" size="small" ></ici-loading>
+        <ici-loading class="scroll-loading-inner" size="small"></ici-loading>
       </div>
       <slot></slot>
       <div class="scroll-loading-icon loading-bottom" :class="{toploading:loading && hasBottom}">
-        <ici-loading class="scroll-loading-inner"  size="small" ></ici-loading>
+        <ici-loading class="scroll-loading-inner" size="small"></ici-loading>
 
       </div>
     </div>
@@ -133,7 +133,19 @@
       //顶部加载
       startLoad(type) {
         this.direction = type;
-        let reachFun = type == 'top' ? this.onReachTop : this.onReachBottom;
+        let reachFun;
+
+        if(type == 'top') {
+          this.hasTop = true;
+          this.hasBottom = false;
+          reachFun = this.onReachTop;
+        }
+        else {
+          this.hasTop = false;
+          this.hasBottom = true;
+          reachFun = this.onReachBottom;
+        }
+
         if(reachFun) {
           this.loading = true
           reachFun(() => {
@@ -141,7 +153,13 @@
             this.hasTop = false;
             this.hasBottom = false;
           });
+        }else{
+          this.loading = false;
+          this.hasTop = false;
+          this.hasBottom = false;
         }
+
+
       },
       onScroll(direction) {
 
@@ -188,20 +206,25 @@
     position: relative;
     height: 100%;
     overflow-x: hidden;
-
+    display: flex;
+    flex-direction: column;
     .scroll-inner {
+      flex-grow:1;
+      flex-shrink:0;
       position: relative;
     }
 
     .scroll-loading-icon {
+      z-index: 50;
       width: 100%;
       position: absolute;
       text-align: center;
       transform: scale(0) translate(0, 0px);
-      transition: all .5s;
+      transition: all .3s;
 
       &.loading-top {
         top: 0px;
+
         &.toploading {
           transform: scale(1) translate(0, 20px);
         }
@@ -209,6 +232,7 @@
 
       &.loading-bottom {
         bottom: 0px;
+
         &.toploading {
           transform: scale(1) translate(0, -20px);
         }
@@ -217,7 +241,7 @@
       .scroll-loading-inner {
         border-radius: 50%;
         padding: 4px;
-        background: rgba(255, 255, 255, .5);
+        background: rgba(255, 255, 255, .9);
         box-shadow: 1px 1px 5px 0 rgba(50, 50, 50, .3);
       }
 
