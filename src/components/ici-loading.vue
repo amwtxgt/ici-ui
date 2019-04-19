@@ -145,7 +145,7 @@
       block: Boolean,
       color:{
         type:String,
-        default:'#c01639'
+        default:'#f45a12'
       },
       maskColor: {
         type: String,

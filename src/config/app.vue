@@ -104,7 +104,7 @@
     name: 'app',
     data() {
       return {
-        active: 'pageColorIcon'
+        active: 'pageScroll'
       };
     },
     computed: {

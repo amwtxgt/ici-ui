@@ -1,12 +1,15 @@
 <template>
-  <div ref="scrollLoading" v-observe="_self" class="scroll-loading" @scroll.passive="onScroll" :style="{overflowY:overflow}"
+  <div ref="scrollLoading" class="scroll-loading" @scroll.passive="onScroll" :style="{overflowY:overflow}"
        @mousewheel.passive="mousewheel" @DOMMouseScroll.passive="mousewheel">
-    <div class="scroll-loading-icon" :class="{toploading:loading && hasTop}">
-      <ici-loading size="small" disabled></ici-loading>
-    </div>
-    <slot></slot>
-    <div class="scroll-loading-icon" :class="{toploading:loading && hasBottom}">
-      <ici-loading size="small" disabled></ici-loading>
+    <div class="scroll-inner" v-observe="_self">
+      <div class="scroll-loading-icon loading-top" :class="{toploading:loading && hasTop}">
+        <ici-loading  class="scroll-loading-inner" size="small" ></ici-loading>
+      </div>
+      <slot></slot>
+      <div class="scroll-loading-icon loading-bottom" :class="{toploading:loading && hasBottom}">
+        <ici-loading class="scroll-loading-inner"  size="small" ></ici-loading>
+
+      </div>
     </div>
   </div>
 </template>
@@ -92,12 +95,12 @@
       },
 
       //手动触发向上
-      reachTop(){
+      reachTop() {
         this.startLoad('top')
       },
 
       //手动触发向下
-      reachBottom(){
+      reachBottom() {
         this.startLoad('bottom')
       },
 
@@ -186,18 +189,39 @@
     height: 100%;
     overflow-x: hidden;
 
-    .scroll-loading-icon {
-      line-height: 50px;
-      height: 0;
-      text-align: center;
-      transform: scale(0);
-      transition: none;
+    .scroll-inner {
+      position: relative;
+    }
 
-      &.toploading {
-        transition: all .5s;
-        transform: scale(1);
-        height: 50px;
+    .scroll-loading-icon {
+      width: 100%;
+      position: absolute;
+      text-align: center;
+      transform: scale(0) translate(0, 0px);
+      transition: all .5s;
+
+      &.loading-top {
+        top: 0px;
+        &.toploading {
+          transform: scale(1) translate(0, 20px);
+        }
       }
+
+      &.loading-bottom {
+        bottom: 0px;
+        &.toploading {
+          transform: scale(1) translate(0, -20px);
+        }
+      }
+
+      .scroll-loading-inner {
+        border-radius: 50%;
+        padding: 4px;
+        background: rgba(255, 255, 255, .5);
+        box-shadow: 1px 1px 5px 0 rgba(50, 50, 50, .3);
+      }
+
+
     }
 
     &::-webkit-scrollbar {
