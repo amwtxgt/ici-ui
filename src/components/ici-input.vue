@@ -133,17 +133,16 @@
         if(this.filter) {
           if(this.filter instanceof RegExp || typeof this.filter === "string") {
             v = v.replace(this.filter, '');
-          }else if(typeof this.filter === "function"){
+          }
+          else if(typeof this.filter === "function") {
             v = this.filter(v) || '';
           }
         }
-        console.log(v === this.value,v , this.value)
+
         if(v === this.value) {
           e.target.value = v;
         }
-        else {
-          this.$emit('input', v);
-        }
+        this.$emit('input', v)
       },
 
       focusEvent: function (e) {
