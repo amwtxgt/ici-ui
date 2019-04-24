@@ -4,14 +4,16 @@
       <ici-icon class="ici-font" name="icon-sousuo" size="20px" color="rgba(0, 0, 0, .3)"></ici-icon>
       <input type="text" :value="value" @blur="blur" @input="input" v-focus="focus" @focus="focusEvent"
              @keydown.up.down.stop.prevent="keydown" @keyup.enter.stop.prevent="enter" :placeholder="label">
-      <ici-icon class="ici-delete" :class="{show:value}" name="icon-shanchudelete30" size="18px" @click="reset" />
+      <ici-icon class="ici-delete" :class="{show:value}" name="icon-shanchudelete30" size="18px" @click="reset"/>
     </div>
+
     <ici-hint class="ici-hint-addclass" v-model="showHint" :loading="hint===true" max-height="600px">
       <!--列表头部-->
-      <div v-if="showTitle" class="fms-input-hint-li fms-input-hint-li-add" @mousedown="select(-1)"
-           :class="{active:selectIndex==-1}">
-        <slot name="title"></slot>
-      </div>
+
+        <div v-if="showTitle" class="fms-input-hint-li fms-input-hint-li-add" @mousedown="select(-1)"
+             :class="{active:selectIndex==-1}">
+          <slot name="title"></slot>
+        </div>
 
       <!--列表内容-->
       <div v-if="hint instanceof Array">
@@ -22,6 +24,7 @@
         </div>
       </div>
     </ici-hint>
+
   </div>
 </template>
 
@@ -57,19 +60,19 @@
       focus: Boolean,
     },
     mounted() {
-      if (this.$slots.title) {
+      if(this.$slots.title) {
         this.showTitle = true;
       }
     },
     computed: {
       showHint: function () {
-        if (!this.hasFocus || !this.hint) {
+        if(!this.hasFocus || !this.hint) {
           return false;
         }
-        else if (this.hint === true && this.hasFocus) {
+        else if(this.hint === true && this.hasFocus) {
           return true;
         }
-        else if (this.hint.length === 0 && !this.showTitle) {
+        else if(this.hint.length === 0 && !this.showTitle) {
           return false
         }
         else {
@@ -83,7 +86,7 @@
     },
     methods: {
       enter: function (e) {
-        if (this.selectIndex !== -2) {
+        if(this.selectIndex !== -2) {
           this.$emit('select', this.selectIndex);
         }
         e.target.blur()
@@ -107,14 +110,14 @@
         this.$emit('select', index)
       },
       keydown(e) {
-        if (!this.hint || !this.hint.length) return false;
+        if(!this.hint || !this.hint.length) return false;
         var min = 0, max = this.hint.length;
-        if (this.showTitle) {
+        if(this.showTitle) {
           min = -1
         }
 
-        if (e.key == 'ArrowUp') {
-          if (this.selectIndex > min) {
+        if(e.key == 'ArrowUp') {
+          if(this.selectIndex > min) {
             this.selectIndex--
           }
           else {
@@ -122,8 +125,8 @@
           }
         }
         else {
-          if (this.selectIndex < max - 1) {
-            if (this.selectIndex == -2 && !this.showTitle) {
+          if(this.selectIndex < max - 1) {
+            if(this.selectIndex == -2 && !this.showTitle) {
               this.selectIndex = 0;
             }
             else {
@@ -156,6 +159,7 @@
     background: rgba(205, 205, 205, .5);
     height: 38px;
     border-radius: 7px;
+
     .ici-font, .ici-delete {
       padding: 0 10px;
       flex: none;
@@ -163,18 +167,22 @@
 
     .ici-delete {
       visibility: hidden;
+
       &.show {
         cursor: pointer;
         visibility: visible;
         color: #aaa !important;
+
         &:hover {
           color: #888 !important;
         }
+
         &:active {
           color: #666 !important;
         }
       }
     }
+
     input {
       flex: auto;
       background: transparent;
@@ -184,6 +192,7 @@
       border: none;
       font-size: 18px;
       outline: none;
+
       &::placeholder {
         color: rgba(0, 0, 0, .3) !important;
       }
@@ -196,20 +205,25 @@
     align-items: center;
     padding: 8px 10px;
     border-bottom: 1px solid #eee;
+
     &.active, &:hover {
       background: #eee;
     }
+
     &.fms-input-hint-li-add {
       display: block;
       padding: 10px 10px;
       text-align: center;
+
       &:hover {
         background: #eee;
       }
     }
+
     &:last-child {
       border-width: 0px;
     }
+
     .fms-input-hint-icon {
       width: 35px;
       height: 35px;
@@ -223,4 +237,5 @@
     border-radius: 5px !important;
     overflow: hidden;
   }
+
 </style>

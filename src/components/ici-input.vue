@@ -1,18 +1,17 @@
 <template>
   <div class="fms-input" :class="{white:white}">
-    <div v-if="prefix || showPrefix" class="prefix" @click.stop.prevent="$emit('click-prefix')" :style="prefixStyle">
-      <slot name="prefix">{{prefix.content}}</slot>
+    <div v-if="showPrefix" class="prefix" :style="prefixStyle">
+      <slot name="prefix"></slot>
     </div>
     <div class="input-inner">
-      <input @blur="blur" class="fms-input-input" :type="password?'password':'text'" @paste.stop=''
-            :style="inputStyle" @change="$emit('change',$event)"
-             :value="inputValue" @input="input" v-focus="focus" @focus="focusEvent" :placeholder="hiddenLabel?label:''"
-             @keydown.up.down.stop.prevent="keydown" @keyup.enter.stop.prevent="enter">
+      <input @blur="blur" class="fms-input-input" :type="password?'password':'text'" @paste.stop='' :style="inputStyle"
+             @change="$emit('change',$event)" :value="value" @input="input" v-focus="focus" @focus="focusEvent"
+             :placeholder="hiddenLabel?label:''" @keydown.up.down.stop.prevent="keydown" @keyup.enter.stop.prevent="enter">
       <label v-if="!hiddenLabel" class="fms-input-label" :class="{substantial:isSubstantial,'input-label-foucs':hasFocus}">
         {{label}}
       </label>
       <div class="fms-input-status" :class="{'input-status-foucs':hasFocus}"></div>
-      <ici-hint v-model="showHint" :loading="hint===true">
+      <ici-hint  v-model="showHint" :loading="hint===true">
         <!--列表头部-->
         <div v-if="showTitle" class="fms-input-hint-li fms-input-hint-li-add" @mousedown="select(-1)"
              :class="{active:selectIndex==-1}">
@@ -40,7 +39,6 @@
   * @prop fontsize {string} 文字大小
   * @prop focus {Boolean} 是否获取焦点
   * @prop password {Boolean} 是否是密码
-  * @prop prefix {Boolean|Object} 前缀：Object{content:'前缀内容',value:真实值}
   * @prop filter {String|RegExp} 过滤value
   * @prop hint {array|boolean} 提示信息 三种状态 false:不开启提示； true:开启提示并显示正在加载； array提示信息列表
   * @slot-scope props.item {Array} props.list等于hint
@@ -52,15 +50,13 @@
     data() {
       return {
         selectIndex: -2, //选中的文字提示，-2不选，-1选中默认，>-1选中的索引,
-        inputValue: '',
-        initValue: '',//初始内容
         showTitle: false,
         showPrefix: false,
         hasFocus: false,
       }
     },
     props: {
-      value: [String,Number],
+      value: [String, Number],
       label: {
         type: String,
         default: ''
@@ -70,44 +66,26 @@
       },
       password: Boolean, //是否以密码方式
       focus: Boolean,
-      firstSpace: Boolean, //只保留第一个空格
       hiddenLabel: Boolean,
       white: Boolean,
-      inputStyle:String,
+      inputStyle: String,
       prefixStyle: {
         type: String,
         default: ''
       },
       filter: [Boolean, RegExp, String],
-      prefix: [Boolean, Object],//Object 格式为{content:String,value:String},value:真实值
     },
-    watch: {
-      value(v) {
-        if (v !== this.inputValue) {
-          if (!this.prefix || v !== this.prefix.value + '' + this.inputValue) {
-            var e = {target: {value: v}}
-            this.input(e)
-          }
-        }
-      },
-      prefix(v, v2) {
-        if (typeof v === 'object' && typeof v2 === 'object' && JSON.stringify(v) !== JSON.stringify(v2)) {
-          var e = {target: {value: this.inputValue}}
-          this.input(e)
-        }
-
-      }
-    },
+    watch: {},
     computed: {
       showHint: function () {
 
-        if (!this.hasFocus || !this.hint) {
+        if(!this.hasFocus || !this.hint) {
           return false;
         }
-        else if (this.hint === true && this.hasFocus) {
+        else if(this.hint === true && this.hasFocus) {
           return true;
         }
-        else if (this.hint.length === 0 && !this.showTitle) {
+        else if(this.hint.length === 0 && !this.showTitle) {
           return false
         }
         else {
@@ -117,122 +95,98 @@
 
       //是否有值
       isSubstantial: function () {
-        return Boolean(this.inputValue)
+        return Boolean(this.value)
       }
     },
     mounted() {
 
-      if (this.$slots.title) {
+      if(this.$slots.title) {
         this.showTitle = true;
       }
 
-      if (this.$slots.prefix) {
+      if(this.$slots.prefix) {
         this.showPrefix = true
       }
-      this.updateValue(this.value)
+
     },
     methods: {
       clear() {
-        this.inputValue = '';
-        this.$emit('input', this.inputValue);
+        this.$emit('input', '');
       },
       updateValue(val) {
-        var e = {target: {value: val}}
+        let e = {target: {value: val}}
         this.input(e)
       },
+
       enter: function (e) {
-        if (this.selectIndex !== -2) {
+        if(this.selectIndex !== -2) {
           this.$emit('select', this.selectIndex)
         }
         e.target.blur()
         this.$emit('keyup-enter', this.selectIndex)
       },
+
       input: function (e) {
         this.selectIndex = -2;
         let v = e.target.value;
 
-        if (v) {
-          if (this.prefix && this.prefix.value && v.indexOf(this.prefix.value) === 0) {
-            v = v.replace(this.prefix.value, '');
-            if (this.firstSpace) {
-              v = v.split(/ +/).join('')
-            }
-          }
-          else if (this.firstSpace) {
-            let vArr = v.split(/ +/);
-            v = vArr.map((v, index) => {
-              if (index == 1) return ' ' + v
-              else return v;
-            }).join('')
-          }
-
-        }
-
-        if (this.filter) {
+        if(this.filter) {
           v = v.replace(this.filter, '');
         }
 
-        this.inputValue = v;
-        e.target.value = v;
-        if (v && this.prefix && this.prefix.value) {
-          this.$emit('input', this.prefix.value + v);
-        }
-        else {
+        if(v === this.value) {
+          e.target.value = v;
+        } else {
           this.$emit('input', v);
         }
-
-
       },
 
       focusEvent: function (e) {
         this.hasFocus = true;
         this.$emit('focus', e)
       },
+
       blur: function (e) {
         this.hasFocus = false;
-        var val = e.target.value.replace(/(^\s*)|(\s*$)/g, "");
+        //去除前面和后面的空白字符
+        let val = e.target.value.replace(/(^\s*)|(\s*$)/g, "");
 
-        this.initValue = this.inputValue = val;
-        if (val && this.prefix && this.prefix.value) {
-          this.$emit('input', this.prefix.value + this.inputValue);
-        }
-        else {
-          this.$emit('input', this.inputValue);
-        }
+        this.$emit('input', val);
 
         this.$emit('blur');
       },
       select: function (index) {
         this.$emit('select', index)
       },
+
       keydown(e) {
-        if (!this.hint.length) return false;
+        if(!this.hint.length) return false;
 
         var min = 0, max = this.hint.length - 1;
-        if (this.showTitle) {
+        if(this.showTitle) {
           min = -1
         }
 
-        if (e.key == 'ArrowUp') {
-          if (this.selectIndex > min) {
+        if(e.key == 'ArrowUp') {
+          if(this.selectIndex > min) {
             this.selectIndex--
           }
           else {
             this.selectIndex = max;
           }
-          if (!this.hint[this.selectIndex] && this.selectIndex != -1) {
+          if(!this.hint[this.selectIndex] && this.selectIndex != -1) {
             this.selectIndex = this.selectIndex > min ? this.selectIndex - 1 : max;
           }
         }
         else {
-          if (this.selectIndex < max) {
-            if (this.selectIndex == -2 && !this.showTitle) {
+          if(this.selectIndex < max) {
+            if(this.selectIndex == -2 && !this.showTitle) {
               this.selectIndex = 0;
             }
             else {
               this.selectIndex++
             }
-            if (!this.hint[this.selectIndex]) {
+            if(!this.hint[this.selectIndex]) {
               this.selectIndex = this.selectIndex < max ? this.selectIndex + 1 : min;
             }
           }
@@ -271,9 +225,11 @@
       margin-bottom: 0;
       left: 0;
       width: 100%;
+
       &.substantial {
         transform: scale(.75) translateY(-30px);
       }
+
       &.input-label-foucs {
         color: rgb(193, 39, 71);
         transform: scale(.75) translateY(-30px);
@@ -287,29 +243,35 @@
       color: #666 !important;
       font-size: 14px !important;
     }
+
     .input-inner {
       position: relative;
       flex: auto;
     }
+
     &.white {
       label.fms-input-label {
         color: rgba(255, 255, 255, 0.38);
+
         &.input-label-foucs {
           color: rgba(255, 255, 255, .7);
 
         }
       }
+
       input {
         color: rgba(255, 255, 255, .7) !important;
       }
+
       .fms-input-status {
         background: rgba(255, 255, 255, .7) !important;
       }
     }
+
     input {
       display: block;
       width: 100%;
-      font-size:14px;
+      font-size: 14px;
       line-height: 25px;
       flex-grow: 1;
       flex-shrink: 1;
@@ -323,6 +285,7 @@
       border: none !important;
       border-bottom: 1px solid rgba(0, 0, 0, 0.2) !important;
     }
+
     .fms-input-status {
       position: absolute;
       transition: all .3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -333,6 +296,7 @@
       bottom: 0;
       left: 0;
       transform: translate3d(0, 0, 0) scale(0, 1);
+
       &.input-status-foucs {
         opacity: 1;
         transform: translate3d(0, 0, 0) scale(1, 1);
@@ -346,20 +310,25 @@
     align-items: center;
     padding: 5px 10px;
     border-bottom: 1px solid #ddd;
+
     &.active {
       background: #eee;
     }
+
     &.fms-input-hint-li-add {
       display: block;
       padding: 10px 10px;
       text-align: center;
+
       &:hover {
         background: #eee;
       }
     }
+
     &:last-child {
       border-width: 0px;
     }
+
     .fms-input-hint-icon {
       width: 35px;
       height: 35px;

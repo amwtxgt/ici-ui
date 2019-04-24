@@ -17,21 +17,6 @@
       <div>name 值：<b>{{name3}}</b></div>
     </baseComponent>
 
-    <baseComponent title="带前缀 prefix" html='<p style="color:#999">无真实前缀值</p>
-<ici-input :prefix="{content:"我是前缀"}" v-model="prefix2"></ici-input>
-最终值：{\{prefix2}}
-<p style="color:#999">有真实前缀值,value,真实值最终会添加在真实value前面</p>
-<ici-input :prefix="{content:"我是前缀值显示值",value:"我是前缀真实值"}" v-model="prefix1"></ici-input>
-最终值：{\{prefix1}}'>
-      <p style="color:#999">无真实前缀值</p>
-      <ici-input :prefix="{content:'我是前缀'}" v-model="prefix2"></ici-input>
-      最终值：{{prefix2}}
-      <br><br>
-      <p style="color:#999">有真实前缀值,value,真实值最终会添加在真实value前面</p>
-      <ici-input :prefix="pre" v-model="prefix1"></ici-input>
-      最终值：{{prefix1}}
-      <br><br>
-    </baseComponent>
     <baseComponent title="带前缀 slot='prefix'" html='<ici-input required v-model="required">
   <div slot="prefix">
     <ici-icon name="icon-tianjia"></ici-icon>
@@ -88,8 +73,7 @@ data() {
         <div slot-scope="list">{{list}}{{list.item}}</div>
       </ici-input>
       <br><br><br>
-      <br><br><br>
-      <br><br><br>
+
 
     </baseComponent>
     <div class="title">input组 ici-input-group</div>
