@@ -11,7 +11,7 @@
         {{label}}
       </label>
       <div class="fms-input-status" :class="{'input-status-foucs':hasFocus}"></div>
-      <ici-hint  v-model="showHint" :loading="hint===true">
+      <ici-hint v-model="showHint" :loading="hint===true">
         <!--列表头部-->
         <div v-if="showTitle" class="fms-input-hint-li fms-input-hint-li-add" @mousedown="select(-1)"
              :class="{active:selectIndex==-1}">
@@ -39,7 +39,7 @@
   * @prop fontsize {string} 文字大小
   * @prop focus {Boolean} 是否获取焦点
   * @prop password {Boolean} 是否是密码
-  * @prop filter {String|RegExp} 过滤value
+  * @prop filter {String|RegExp|function} 过滤value, 当filter是一个函数时，函数的第一个参数为input的value值，函数需要return 一个新值
   * @prop hint {array|boolean} 提示信息 三种状态 false:不开启提示； true:开启提示并显示正在加载； array提示信息列表
   * @slot-scope props.item {Array} props.list等于hint
   * @emit select {function(index)} 当提示信息存在时，用户选中事件，index表示用户选中第几个
@@ -73,7 +73,7 @@
         type: String,
         default: ''
       },
-      filter: [Boolean, RegExp, String],
+      filter: [Boolean, RegExp, String, Function],
     },
     watch: {},
     computed: {
@@ -131,12 +131,17 @@
         let v = e.target.value;
 
         if(this.filter) {
-          v = v.replace(this.filter, '');
+          if(this.filter instanceof RegExp || typeof this.filter === "string") {
+            v = v.replace(this.filter, '');
+          }else if(typeof this.filter === "function"){
+            v = this.filter(v) || '';
+          }
         }
-
+        console.log(v === this.value,v , this.value)
         if(v === this.value) {
           e.target.value = v;
-        } else {
+        }
+        else {
           this.$emit('input', v);
         }
       },

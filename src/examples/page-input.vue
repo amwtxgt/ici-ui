@@ -12,9 +12,20 @@
       <div>name 值：<b>{{name}}</b></div>
     </baseComponent>
     <baseComponent title="数据绑定 v-model" html='<ici-input v-model="name"></ici-input>'>
-      <ici-input v-model="name3" :filter="/[^0-9 \.\+]+/"></ici-input>
+      <ici-input v-model="name3" ></ici-input>
       <br>
       <div>name 值：<b>{{name3}}</b></div>
+    </baseComponent>
+    <baseComponent title="添加筛选条件 filter = RegExp|String|Function" html='<ici-input v-model="name3" filter="abc"  label="过滤字符串 abc,当输入abc时自动过滤掉"></ici-input>
+<ici-input v-model="name31" :filter="/[^0-9]+/" label="过滤非数字内容"></ici-input>
+<ici-input v-model="name32" :filter="function(v){return v.replace(/[^0-9]/g,"").replace("abc","")}" label="函数过滤法"></ici-input>'>
+
+      <ici-input v-model="name3" filter="abc"  label="过滤字符串 abc,当输入abc时自动过滤掉"></ici-input>
+      <br>
+      <ici-input v-model="name31" :filter="/[^0-9]+/" label="过滤非数字内容"></ici-input>
+      <br>
+      <ici-input v-model="name32" :filter="function(v){return v.replace(/[^0-9]/g,'').replace('abc','')}" label="函数过滤法"></ici-input>
+
     </baseComponent>
 
     <baseComponent title="带前缀 slot='prefix'" html='<ici-input required v-model="required">
@@ -28,11 +39,7 @@
         </div>
       </ici-input>
     </baseComponent>
-    <baseComponent title="过滤 filter" html='<ici-input :filter="/abc/" v-model="filter"></ici-input>'>
-      <p style="color:#999">例子中，会自动过滤abc,请尝试写入abc</p>
-      <ici-input :filter="/abc/g" v-model="filter"></ici-input>
-      <div>name 值：<b>{{filter}}</b></div>
-    </baseComponent>
+
     <baseComponent title="带输入提示 label（需要数据绑定后有效）" html='<ici-input v-model="name4" label="这是提示输入信息"></ici-input>'>
       <ici-input v-model="name4" label="这是提示输入信息"></ici-input>
       <br>
@@ -104,6 +111,8 @@ data() {
         name: 'asfasda',
         name2: '',
         name3: '',
+        name31: '',
+        name32: '',
         name4:'',
         name5:'',
         prefix1: '',
