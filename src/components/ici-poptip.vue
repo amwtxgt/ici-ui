@@ -13,6 +13,7 @@
       };
     },
     props: {
+      //触发弹窗机制，hover,click,custom
       trigger: {
         type: String,
         default: 'hover'
@@ -32,17 +33,24 @@
         type: [Number, String],
         default: 10
       },
+      //是否显示箭头
       arrows: {
         type: Boolean,
         default: true,
       },
+      //背景颜色
       bgColor: {
         type: String,
         default: '#fff'
       },
+      //
       mouseoutClose:{
           type:Boolean,
           default:true,
+      },
+      overflow:{
+        type:String,
+        default:'auto'
       }
     },
 
@@ -126,6 +134,7 @@
           zIndex: this.zIndex,
           arrows: this.arrows,
           bgColor: this.bgColor,
+          overflow:this.overflow,
           mouseoutClose:this.mouseoutClose,
         });
 
@@ -140,5 +149,7 @@
 </script>
 
 <style scoped>
-
+  .s{
+    overflow: visible;
+  }
 </style>

@@ -104,7 +104,7 @@
     name: 'app',
     data() {
       return {
-        active: 'pageScroll'
+        active: 'pageInput'
       };
     },
     computed: {

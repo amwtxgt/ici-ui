@@ -8,8 +8,7 @@
             :style="inputStyle" @change="$emit('change',$event)"
              :value="inputValue" @input="input" v-focus="focus" @focus="focusEvent" :placeholder="hiddenLabel?label:''"
              @keydown.up.down.stop.prevent="keydown" @keyup.enter.stop.prevent="enter">
-      <label v-if="!hiddenLabel" class="fms-input-label"
-             :class="{substantial:isSubstantial,'input-label-foucs':hasFocus}">
+      <label v-if="!hiddenLabel" class="fms-input-label" :class="{substantial:isSubstantial,'input-label-foucs':hasFocus}">
         {{label}}
       </label>
       <div class="fms-input-status" :class="{'input-status-foucs':hasFocus}"></div>
