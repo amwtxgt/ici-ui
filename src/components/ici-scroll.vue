@@ -7,10 +7,8 @@
 
     </div>
     <div ref="scrollLoading" class="scroll-loading" @scroll.passive="onScroll" :style="{overflowY:overflow}"
-         @mousewheel.passive="mousewheel" @DOMMouseScroll.passive="mousewheel">
-      <div class="scroll-inner" v-observe="_self">
-        <slot></slot>
-      </div>
+         @mousewheel.passive="mousewheel" @DOMMouseScroll.passive="mousewheel" v-observe="_self">
+      <slot></slot>
     </div>
     <div class="scroll-loading-icon loading-bottom" :class="{toploading:loading && hasBottom}">
       <ici-loading class="scroll-loading-inner" size="small">
@@ -223,19 +221,17 @@
   .scroll-loading-wrap {
     position: relative;
     height: 100%;
+    overflow:hidden;
+    display: flex;
+    flex-direction: column;
   }
 
   .scroll-loading {
-    height: 100%;
     overflow-x: hidden;
-    display: flex;
-    flex-direction: column;
-
-    .scroll-inner {
-      flex-grow: 1;
-      flex-shrink: 0;
-      position: relative;
-    }
+    flex-grow: 1;
+    flex-shrink: 0;
+    height:1px;
+    position: relative;
 
     &::-webkit-scrollbar {
       width: 6px;
@@ -256,13 +252,16 @@
     width: 100%;
     position: absolute;
     text-align: center;
-    transform: scale(0) translate(0, 0px);
-    transition: all .3s;
-
+    transform: scale(.2) translate(0, 0px);
+    transition: all .3s .2s;
+    opacity: 0;
+    pointer-events: none;
     &.loading-top {
       top: 0px;
 
       &.toploading {
+        transition: all .5s;
+        opacity: 1;
         transform: scale(1) translate(0, 20px);
       }
     }
@@ -271,6 +270,8 @@
       bottom: 0px;
 
       &.toploading {
+        transition: all .5s ease-in;
+        opacity: 1;
         transform: scale(1) translate(0, -20px);
       }
     }

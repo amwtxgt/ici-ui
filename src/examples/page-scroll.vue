@@ -23,7 +23,7 @@
       </div>
     </baseComponent>
 
-    <baseComponent title="底部监听 :onReachBottom='监听函数'" html='<ici-scroll :onReachBottom="reachBottom">
+    <baseComponent title="底部监听 :onReachBottom='监听函数'" html='<ici-scroll :onReachBottom="reachBottom"  bottom-text="正在加载中...">
   <p style="padding:10px 5px;">我是一行</p>
   <p style="padding:10px 5px;">我是一行</p>
   <p style="padding:10px 5px;">我是一行</p>
