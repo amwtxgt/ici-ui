@@ -52,7 +52,7 @@
 		.fms-input-icon {
 			width: 40px;
 			height: 30px;
-			margin: 15px 15px 0 20px;
+			margin: 10px 15px 0 20px;
 			font-size: 20px;
 			display: inline-block;
 			flex-shrink: 0;

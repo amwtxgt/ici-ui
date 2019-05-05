@@ -35,7 +35,7 @@
 </ici-input>'>
       <ici-input required v-model="required">
         <div slot="prefix">
-          <ici-icon name="icon-tianjia"></ici-icon>
+          <ici-icon name="icon-tianjia" size="20px"></ici-icon>NB
         </div>
       </ici-input>
     </baseComponent>
@@ -93,6 +93,17 @@ data() {
       <ici-input-group>
         <ici-icon slot="icon" name="icon-qq"></ici-icon>
         <ici-input label="asdasd"></ici-input>
+        <ici-icon slot="handle" name="icon-qq"></ici-icon>
+        <ici-icon slot="handle" name="icon-qq"></ici-icon>
+      </ici-input-group>
+      <ici-input-group  height="auto" overflow="unset">
+        <ici-icon slot="icon" name="icon-qq"></ici-icon>
+        <ici-input label="asdasd"></ici-input>
+
+      </ici-input-group>
+      <ici-input-group>
+        <ici-icon slot="icon" name="icon-qq"></ici-icon>
+        <ici-input label="asdasd" hidden-label></ici-input>
         <ici-icon slot="handle" name="icon-qq"></ici-icon>
         <ici-icon slot="handle" name="icon-qq"></ici-icon>
       </ici-input-group>

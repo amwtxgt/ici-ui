@@ -40,7 +40,7 @@ reachBottom(cb){
       <code>onReachBottom 属性接收一个函数，函数的第一个参数为callback，函数执行成功后，必须调用callback </code>
       <br><br>
       <div style="height:150px;border:1px solid #eee;">
-        <ici-scroll :onReachBottom="reachBottom">
+        <ici-scroll :onReachBottom="reachBottom" bottom-text="正在加载中...">
           <p style="padding:10px 5px;">我是一行</p>
           <p style="padding:10px 5px;">我是一行</p>
           <p style="padding:10px 5px;">我是一行</p>

@@ -68,9 +68,9 @@
       focus: Boolean,
       hiddenLabel: Boolean,
       white: Boolean,
-      inputStyle: String,
+      inputStyle: [String, Object],
       prefixStyle: {
-        type: String,
+        type: [String, Object],
         default: ''
       },
       filter: [Boolean, RegExp, String, Function],
@@ -119,11 +119,12 @@
       },
 
       enter: function (e) {
+        e.target.blur()
+        this.$emit('keyup-enter', this.selectIndex)
         if(this.selectIndex !== -2) {
           this.$emit('select', this.selectIndex)
         }
-        e.target.blur()
-        this.$emit('keyup-enter', this.selectIndex)
+
       },
 
       input: function (e) {
@@ -131,17 +132,12 @@
         let v = e.target.value;
 
         if(this.filter) {
-          if(this.filter instanceof RegExp || typeof this.filter === "string") {
-            v = v.replace(this.filter, '');
-          }
-          else if(typeof this.filter === "function") {
-            v = this.filter(v) || '';
-          }
+          if(this.filter instanceof RegExp || typeof this.filter === "string") v = v.replace(this.filter, '');
+          else if(typeof this.filter === "function") v = this.filter(v);
         }
 
-        if(v === this.value) {
-          e.target.value = v;
-        }
+        if(v === this.value) e.target.value = v;
+
         this.$emit('input', v)
       },
 
@@ -161,6 +157,8 @@
       },
       select: function (index) {
         this.$emit('select', index)
+
+
       },
 
       keydown(e) {
@@ -211,6 +209,7 @@
     align-items: center;
     flex-wrap: nowrap;
     width: 100%;
+    min-height: 48px;
     padding-top: 3px;
 
     label.fms-input-label {
@@ -225,7 +224,7 @@
       font: 400 16px Roboto, RobotoDraft, Helvetica, Arial, sans-serif, "Microsoft YaHei", "微软雅黑";
       pointer-events: none;
       position: absolute;
-      bottom: 3px;
+      bottom: 6px;
       margin-bottom: 0;
       left: 0;
       width: 100%;
@@ -243,12 +242,21 @@
     .prefix {
       flex: none;
       padding-right: 5px;
-      height: 22px !important;
+
+      &:empty {
+        padding-right: 0px;
+      }
+
       color: #666 !important;
       font-size: 14px !important;
+
+      * {
+        vertical-align: middle;
+      }
     }
 
     .input-inner {
+
       position: relative;
       flex: auto;
     }
@@ -275,8 +283,8 @@
     input {
       display: block;
       width: 100%;
-      font-size: 14px;
-      line-height: 25px;
+      font-size: 16px;
+      line-height: 30px;
       flex-grow: 1;
       flex-shrink: 1;
       background-color: transparent;
@@ -288,6 +296,12 @@
       border-radius: 0 !important;
       border: none !important;
       border-bottom: 1px solid rgba(0, 0, 0, 0.2) !important;
+
+      &::placeholder {
+        color: #aaa;
+        font-size: 16px;
+        font-weight: 100;
+      }
     }
 
     .fms-input-status {

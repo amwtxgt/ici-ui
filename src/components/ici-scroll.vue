@@ -1,15 +1,22 @@
 <template>
-  <div ref="scrollLoading" class="scroll-loading" @scroll.passive="onScroll" :style="{overflowY:overflow}"
-       @mousewheel.passive="mousewheel" @DOMMouseScroll.passive="mousewheel">
-    <div class="scroll-inner" v-observe="_self">
-      <div class="scroll-loading-icon loading-top" :class="{toploading:loading && hasTop}">
-        <ici-loading class="scroll-loading-inner" size="small"></ici-loading>
-      </div>
-      <slot></slot>
-      <div class="scroll-loading-icon loading-bottom" :class="{toploading:loading && hasBottom}">
-        <ici-loading class="scroll-loading-inner" size="small"></ici-loading>
+  <div class="scroll-loading-wrap">
+    <div class="scroll-loading-icon loading-top" :class="{toploading:loading && hasTop}">
+      <ici-loading class="scroll-loading-inner" size="small">
+        <span class="loading-Text" v-if="topText">{{topText}}</span>
+      </ici-loading>
 
+    </div>
+    <div ref="scrollLoading" class="scroll-loading" @scroll.passive="onScroll" :style="{overflowY:overflow}"
+         @mousewheel.passive="mousewheel" @DOMMouseScroll.passive="mousewheel">
+      <div class="scroll-inner" v-observe="_self">
+        <slot></slot>
       </div>
+    </div>
+    <div class="scroll-loading-icon loading-bottom" :class="{toploading:loading && hasBottom}">
+      <ici-loading class="scroll-loading-inner" size="small">
+        <span class="loading-Text" v-if="bottomText">{{bottomText}}</span>
+      </ici-loading>
+
     </div>
   </div>
 </template>
@@ -32,8 +39,10 @@
       disabled: Boolean,
       onReachTop: Function, //触发顶部
       onReachBottom: Function, //触发底部
-      offset: {
-        type: Number,
+      bottomText: String,
+      topText: String,
+      offset: { //距离顶/底部指定距离时触发，当为数组时，分别指定[顶部,底部]
+        type: [Number, Array],
         default: 50,
       },
 
@@ -118,7 +127,7 @@
         if(e.deltaY < 0) {
 
           if(this.hasTop) {
-//            console.log('向上')
+
             this.startLoad('top');
           }
         }
@@ -126,7 +135,6 @@
 
           if(this.hasBottom) {
             this.startLoad('bottom');
-//            console.log('向下')
           }
         }
       },
@@ -153,7 +161,8 @@
             this.hasTop = false;
             this.hasBottom = false;
           });
-        }else{
+        }
+        else {
           this.loading = false;
           this.hasTop = false;
           this.hasBottom = false;
@@ -167,7 +176,7 @@
           return false;
         }
 
-        var t = this.$refs.scrollLoading;
+        let t = this.$refs.scrollLoading;
 
         if(!t) {
           return;
@@ -178,9 +187,18 @@
         this.scrollHeight = t.scrollHeight
         this.height = parseInt(tStyle.height);
         this.scrollTop = t.scrollTop;
+        let offsetTop, offsetBottom
+        if(this.offset instanceof Array && this.offset.length >= 2) {
+          offsetTop = ~~this.offset[0];
+          offsetBottom = ~~this.offset[2];
+        }
+        else {
+          offsetTop = ~~this.offset;
+          offsetBottom = ~~this.offset;
+        }
         if(direction === 'top') {
 
-          if(this.scrollTop <= this.offset) {
+          if(this.scrollTop <= offsetTop) {
             this.hasTop = true
             this.hasBottom = false;
             return
@@ -188,7 +206,7 @@
         }
         else {
 
-          if(this.scrollHeight <= this.height + this.scrollTop + this.offset) {
+          if(this.scrollHeight <= this.height + this.scrollTop + offsetBottom) {
             this.hasTop = false
             this.hasBottom = true
             return
@@ -202,50 +220,21 @@
 </script>
 
 <style scoped lang="less">
-  .scroll-loading {
+  .scroll-loading-wrap {
     position: relative;
+    height: 100%;
+  }
+
+  .scroll-loading {
     height: 100%;
     overflow-x: hidden;
     display: flex;
     flex-direction: column;
+
     .scroll-inner {
-      flex-grow:1;
-      flex-shrink:0;
+      flex-grow: 1;
+      flex-shrink: 0;
       position: relative;
-    }
-
-    .scroll-loading-icon {
-      z-index: 50;
-      width: 100%;
-      position: absolute;
-      text-align: center;
-      transform: scale(0) translate(0, 0px);
-      transition: all .3s;
-
-      &.loading-top {
-        top: 0px;
-
-        &.toploading {
-          transform: scale(1) translate(0, 20px);
-        }
-      }
-
-      &.loading-bottom {
-        bottom: 0px;
-
-        &.toploading {
-          transform: scale(1) translate(0, -20px);
-        }
-      }
-
-      .scroll-loading-inner {
-        border-radius: 50%;
-        padding: 4px;
-        background: rgba(255, 255, 255, .9);
-        box-shadow: 1px 1px 5px 0 rgba(50, 50, 50, .3);
-      }
-
-
     }
 
     &::-webkit-scrollbar {
@@ -261,5 +250,43 @@
       background-color: #f0f0f0;
     }
   }
+
+  .scroll-loading-icon {
+    z-index: 50;
+    width: 100%;
+    position: absolute;
+    text-align: center;
+    transform: scale(0) translate(0, 0px);
+    transition: all .3s;
+
+    &.loading-top {
+      top: 0px;
+
+      &.toploading {
+        transform: scale(1) translate(0, 20px);
+      }
+    }
+
+    &.loading-bottom {
+      bottom: 0px;
+
+      &.toploading {
+        transform: scale(1) translate(0, -20px);
+      }
+    }
+
+    .scroll-loading-inner {
+      border-radius: 40px;
+      padding: 4px;
+      background: rgba(255, 255, 255, .9);
+      box-shadow: 1px 1px 5px 0 rgba(50, 50, 50, .3);
+    }
+
+    .loading-Text {
+      vertical-align: middle;
+      padding: 0 7px 0 0px;
+    }
+  }
+
 
 </style>
