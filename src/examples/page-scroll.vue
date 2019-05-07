@@ -95,11 +95,8 @@ reachTop(cb){
       <br><br>
       <div style="height:150px;border:1px solid #eee;">
         <ici-scroll :onReachTop="reachTop">
-          <p style="padding:10px 5px;">我是一行</p>
-          <p style="padding:10px 5px;">我是一行</p>
-          <p style="padding:10px 5px;">我是一行</p>
-          <p style="padding:10px 5px;">我是一行</p>
-          <p style="padding:10px 5px;">我是一行</p>
+          <p v-for="(v,index) of data" :key="index" style="padding:10px 5px;">{{v}}</p>
+
         </ici-scroll>
       </div>
     </baseComponent>
@@ -169,6 +166,7 @@ reachTop(cb){
     name: 'page-popup',
     data() {
       return {
+        data:['我是一行','我是一行','我是一行','我是一行','我是一行','我是一行','我是一行','我是一行','我是一行','我是一行','我是一行']
       };
     },
     mounted() {
@@ -189,6 +187,7 @@ reachTop(cb){
       reachTop(cb){
         setTimeout(()=>{
           //等待3秒
+          this.data.unshift(...this.data)
           cb()
         },3000)
       },

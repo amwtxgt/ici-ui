@@ -4,9 +4,8 @@
       <ici-loading class="scroll-loading-inner" size="small">
         <span class="loading-Text" v-if="topText">{{topText}}</span>
       </ici-loading>
-
     </div>
-    <div ref="scrollLoading" class="scroll-loading" @scroll.passive="onScroll" :style="{overflowY:overflow}"
+    <div ref="scrollLoading" class="scroll-loading" :style="{overflowY:overflow}"
          @mousewheel.passive="mousewheel" @DOMMouseScroll.passive="mousewheel" v-observe="_self">
       <slot></slot>
     </div>
@@ -20,6 +19,38 @@
 </template>
 
 <script>
+  //超时执行操作,
+  // @param time {number} 超时时间，单位毫秒
+  // @callback 超过指定的时间后返回cb
+  export function timeoutPerform(time) {
+    let timeoutId = 0;
+    return function (cb) {
+      return new Promise((resolve, reject) => {
+        clearTimeout(timeoutId);
+
+        timeoutId = setTimeout(() => {
+          if(typeof cb == 'function') {
+            let cbs = cb();
+            //执行cb后可能有promise的返回值
+            if(cbs instanceof Promise) {
+              cbs.then((d) => {
+                resolve(d);
+              }).catch(reject)
+              return
+            }
+            resolve();
+
+          }
+          else {
+            resolve()
+          }
+
+        }, time)
+
+      })
+    }
+  }
+  let timeout = timeoutPerform(60)
   export default {
     name: "scroll-loading",
     data() {
@@ -53,16 +84,16 @@
       observe: {
         // 指令的定义
         inserted: function (el, binding) {
-          var _this = binding.value;
+          let _this = binding.value;
 
           //浏览器兼容
-          var MutationObserver = window.MutationObserver || window.WebKitMutationObserver || window.MozMutationObserver;
+          let MutationObserver = window.MutationObserver || window.WebKitMutationObserver || window.MozMutationObserver;
 
-          var config = {childList: true, 'subtree': true}//配置对象
+          let config = {childList: true, 'subtree': true}//配置对象
 
-          var observer = new MutationObserver(function (mutations) {//构造函数回调
-            var top = 0
-            if(_this.scrollTop == 0 && _this.direction == 'top') {
+          let observer = new MutationObserver(function (mutations) {//构造函数回调
+            let top = 0
+            if(_this.direction == 'top') {
               mutations.forEach(function (record) {
 
                 if(record.type == 'childList') {
@@ -78,8 +109,8 @@
                 }
               });
 
-              top = top + 100
               el.scrollTop += top;
+              _this.direction = 'bottom'
             }
           });
           observer.observe(el, config);
@@ -91,7 +122,6 @@
         this.hasTop = true;
         this.scrollTop = 0;
       }
-      console.log(this)
     },
     methods: {
       rollTop() {
@@ -113,31 +143,33 @@
       },
 
       mousewheel(e) {
-
-        if(e.deltaY < 0) {
-          this.onScroll('top')
-        }
-        else {
-          this.onScroll('bottom')
-        }
-
-        if(this.loading || this.disabled || (!this.hasTop && !this.hasBottom)) return;
-
-        if(e.deltaY < 0) {
-
-          if(this.hasTop) {
-
-            this.startLoad('top');
+        timeout(()=>{
+          if(e.deltaY < 0) {
+            this.onScroll('top')
           }
-        }
-        else {
-
-          if(this.hasBottom) {
-            this.startLoad('bottom');
+          else {
+            this.onScroll('bottom')
           }
-        }
+
+          if(this.loading || this.disabled || (!this.hasTop && !this.hasBottom)) return;
+
+          if(e.deltaY < 0) {
+
+            if(this.hasTop) {
+
+              this.startLoad('top');
+            }
+          }
+          else {
+
+            if(this.hasBottom) {
+              this.startLoad('bottom');
+            }
+          }
+        })
+
       },
-      //顶部加载
+      //加载
       startLoad(type) {
         this.direction = type;
         let reachFun;
@@ -171,21 +203,18 @@
       },
       onScroll(direction) {
 
-        if(this.loading) {
-          return false;
-        }
+        if(this.loading) return false;
 
         let t = this.$refs.scrollLoading;
 
-        if(!t) {
-          return;
-        }
+        if(!t) return;
 
-        var tStyle = window.getComputedStyle(t)
+        let tStyle = window.getComputedStyle(t)
 
-        this.scrollHeight = t.scrollHeight
+        this.scrollHeight = t.scrollHeight;
         this.height = parseInt(tStyle.height);
         this.scrollTop = t.scrollTop;
+
         let offsetTop, offsetBottom
         if(this.offset instanceof Array && this.offset.length >= 2) {
           offsetTop = ~~this.offset[0];
@@ -202,6 +231,7 @@
             this.hasBottom = false;
             return
           }
+
         }
         else {
 
@@ -211,6 +241,7 @@
             return
           }
         }
+
         this.hasTop = false
         this.hasBottom = false;
       },
@@ -222,7 +253,7 @@
   .scroll-loading-wrap {
     position: relative;
     height: 100%;
-    overflow:hidden;
+    overflow: hidden;
     display: flex;
     flex-direction: column;
   }
@@ -231,6 +262,7 @@
     height: 100%;
     overflow-x: hidden;
     position: relative;
+
     &::-webkit-scrollbar {
       width: 6px;
       height: 10px;
@@ -254,6 +286,7 @@
     transition: all .3s .2s;
     opacity: 0;
     pointer-events: none;
+
     &.loading-top {
       top: 0px;
 
