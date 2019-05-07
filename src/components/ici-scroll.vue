@@ -91,6 +91,7 @@
         this.hasTop = true;
         this.scrollTop = 0;
       }
+      console.log(this)
     },
     methods: {
       rollTop() {
@@ -188,7 +189,7 @@
         let offsetTop, offsetBottom
         if(this.offset instanceof Array && this.offset.length >= 2) {
           offsetTop = ~~this.offset[0];
-          offsetBottom = ~~this.offset[2];
+          offsetBottom = ~~this.offset[1];
         }
         else {
           offsetTop = ~~this.offset;
@@ -227,12 +228,9 @@
   }
 
   .scroll-loading {
+    height: 100%;
     overflow-x: hidden;
-    flex-grow: 1;
-    flex-shrink: 0;
-    height:1px;
     position: relative;
-
     &::-webkit-scrollbar {
       width: 6px;
       height: 10px;

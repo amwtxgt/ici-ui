@@ -13,7 +13,7 @@
       <h4>ici-scroll的高度为100%，所以要放在一个指定高度的盒子里</h4>
       <br>
       <div style="height:100px;border:1px solid #eee;">
-        <ici-scroll>
+        <ici-scroll style="padding:10px;">
           <p style="padding:10px 5px;">我是一行</p>
           <p style="padding:10px 5px;">我是一行</p>
           <p style="padding:10px 5px;">我是一行</p>
