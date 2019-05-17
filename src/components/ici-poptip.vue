@@ -63,7 +63,7 @@
         }
       }
 
-      var position = window.getComputedStyle(el).position
+      let position = window.getComputedStyle(el).position
       if(position === 'static') {
         el.style.position = 'relative'
       }
@@ -113,15 +113,19 @@
           this.open(event)
         }, 200, e)
       },
-      open(e) {
+
+      open(e,positions) {
         if(e) {
+          //鼠标移动并被按下
           if(e.buttons > 0 && e.type == 'mouseover') {
             return;
           }
         }
 
+        if(!positions){
+          positions = this.el.getBoundingClientRect();
+        }
 
-        let positions = this.el.getBoundingClientRect();
         positions = JSON.parse(JSON.stringify(positions));
         //计算上角的点
         positions.top -= this.offset;

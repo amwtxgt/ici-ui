@@ -110,7 +110,7 @@
               });
 
               el.scrollTop += top;
-              _this.direction = 'bottom'
+
             }
           });
           observer.observe(el, config);
