@@ -32,9 +32,12 @@
     },
     methods: {
       close() {
-        this.timeout = setTimeout(() => {
-          this.showtip = false;
-        }, 50)
+        if(this.showtip){
+          this.timeout = setTimeout(() => {
+            this.showtip = false;
+          }, 50);
+        }
+
       },
       show(isRefresh) {
         clearTimeout(this.timeout);
