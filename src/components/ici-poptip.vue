@@ -74,7 +74,7 @@
       }
 
       if(this.trigger !== 'custom') {
-        this.el.addEventListener('mouseout', this.close, {passive: true});
+        this.el.addEventListener('mouseout', this.delayClose, {passive: true});
         this.el.addEventListener('mousewheel', this.close, {passive: true});
         this.el.addEventListener('click', this.toggle);
         this.el.addEventListener('mousemove', this.mousemove)
@@ -88,7 +88,7 @@
       }
 
       if(this.trigger !== 'custom') {
-        this.el.removeEventListener('mouseout', this.close)
+        this.el.removeEventListener('mouseout', this.delayClose)
         this.el.removeEventListener('mousewheel', this.close);
         this.el.removeEventListener('click', this.toggle)
         this.el.removeEventListener('mousemove', this.mousemove)
@@ -147,6 +147,10 @@
       close(e) {
         clearTimeout(this.timeout)
         this.$icitip.close();
+      },
+      delayClose(e) {
+        clearTimeout(this.timeout)
+        this.$icitip.delayClose();
       },
     },
   }

@@ -33,36 +33,39 @@
     methods: {
       close() {
         if(this.showtip){
+          this.showtip = false;
+        }
+
+      },
+      delayClose(){
+        if(this.showtip){
           this.timeout = setTimeout(() => {
             this.showtip = false;
           }, 50);
         }
-
       },
-      show(isRefresh) {
+      show(refresh) {
         clearTimeout(this.timeout);
-        if(isRefresh && this.showtip) {
-          this.showtip = false;
-          this.$nextTick(() => {
-            this.showtip = true;
-          })
+        if(refresh){
+          this.$forceUpdate()
         }
-        else {
-          this.showtip = true;
-        }
+        this.showtip = true;
       },
-      mouseover() {
-        this.show();
+      mouseover(e) {
+        if(!e.buttons){
+          this.show();
+        }
+
       },
       mouseout() {
         if(this.mouseoutClose) {
-          this.close()
+          this.delayClose()
         }
 
       },
 
       open(opt) {
-
+        let isam = this.showtip; //是否开启过渡动画
         let def = this.$slots.default;
         if(opt.slots) this.$slots.default = opt.slots
         if(opt.zIndex) this.zIndex = opt.zIndex;
@@ -74,13 +77,14 @@
         this.show(def !== opt.slots);
         let el = this.$refs.poptip;
         el.style.cssText = '';
+
         if(opt.positions) {
           this.$nextTick(() => {
-            this.setPosition(opt.positions)
+            this.setPosition(opt.positions,isam)
           })
         }
       },
-      setPosition(pos) {
+      setPosition(pos,isam) {
 
         //浏览器大小
         let innerWidth = window.innerWidth,
@@ -102,13 +106,13 @@
           cssText += `top:${pos.bottom}px;max-height:${maxHeight}px;`
         }
         else {
-          weiyi += `bottom:-5px;top:auto; transform: rotate(225deg);`
+          weiyi += `bottom:-5px;transform: rotate(225deg);`
           cssText += `bottom:${innerHeight - pos.top}px;max-height:${pos.top - 5}px;`
         }
 
 
         //计算右部分宽度
-        var w2 = innerWidth - pos.left + (pos.right - pos.left) / 2
+        let w2 = innerWidth - pos.left + (pos.right - pos.left) / 2;
 
         if(innerWidth > width + pos.left || innerWidth / 2 < w2) {
           maxWidth = innerWidth - pos.left - 5
@@ -125,7 +129,7 @@
           if(pos.right - width < 5) x = 5;
           else x = pos.right - width;
           cssText += `left:${innerWidth - width - 5}px;max-width:${maxWidth}px;`
-          console.log('weeeewae')
+
           weiyi += `left:${(pos.left + (pos.right - pos.left) / 2) - (innerWidth - width)}px;`
 
         }
@@ -135,7 +139,10 @@
           let arrows = this.$refs.arrows;
           arrows.style.cssText = weiyi;
         }
-
+        if(!isam){
+//          console.log('关闭动画')
+          cssText+='transition: none'
+        }
         el.style.cssText = cssText;
       },
 
@@ -167,12 +174,15 @@
   .ici-poptip-wrap {
     max-width: 95%;
     max-height: 95%;
+    left: 0px;
     position: fixed;
     z-index: 10;
     display: flex;
     flex-direction: column;
+    transition: all .2s;
 
     .ici-poptip-view {
+      transition: all .2s;
       padding: 5px;
       flex: auto;
       width: 100%;
