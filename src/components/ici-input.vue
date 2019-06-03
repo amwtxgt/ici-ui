@@ -120,11 +120,13 @@
 
       enter: function (e) {
         e.target.blur()
-        this.$emit('keyup-enter', this.selectIndex)
+
         if(this.selectIndex !== -2) {
-          this.$emit('select', this.selectIndex)
+          this.$emit('select', this.selectIndex);
+          return;
         }
 
+        this.$emit('keyup-enter', this.selectIndex)
       },
 
       input: function (e) {
