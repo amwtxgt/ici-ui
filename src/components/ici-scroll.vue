@@ -85,6 +85,8 @@
         // 指令的定义
         inserted: function (el, binding) {
           let _this = binding.value;
+          if(!_this.onReachTop) return;
+
 
           //浏览器兼容
           let MutationObserver = window.MutationObserver || window.WebKitMutationObserver || window.MozMutationObserver;

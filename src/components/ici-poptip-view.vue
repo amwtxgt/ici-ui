@@ -1,6 +1,7 @@
 <template>
   <transition name="poptip">
-    <div :id="id" class="ici-poptip-wrap" v-show="showtip" ref="poptip" @mouseover="mouseover" @mouseout="mouseout">
+    <div :id="id" class="ici-poptip-wrap" :style="style" v-show="showtip" ref="poptip" @mouseover="mouseover"
+         @mouseout="mouseout">
       <div class="poptip-arrows" ref="arrows" v-show="arrows"></div>
       <div class="ici-poptip-view" :style="{backgroundColor:bgColor,overflow:overflow}">
         <slot></slot>
@@ -23,6 +24,7 @@
         arrows: false,
         bgColor: '#fff',
         overflow: 'auto',
+        style: '',
         mouseoutClose: true,
       };
     },
@@ -32,13 +34,12 @@
     },
     methods: {
       close() {
-        if(this.showtip){
+        if(this.showtip) {
           this.showtip = false;
         }
-
       },
-      delayClose(){
-        if(this.showtip){
+      delayClose() {
+        if(this.showtip) {
           this.timeout = setTimeout(() => {
             this.showtip = false;
           }, 50);
@@ -46,13 +47,14 @@
       },
       show(refresh) {
         clearTimeout(this.timeout);
-        if(refresh){
+        if(refresh) {
           this.$forceUpdate()
         }
+
         this.showtip = true;
       },
       mouseover(e) {
-        if(!e.buttons){
+        if(!e.buttons) {
           this.show();
         }
 
@@ -61,7 +63,6 @@
         if(this.mouseoutClose) {
           this.delayClose()
         }
-
       },
 
       open(opt) {
@@ -75,16 +76,15 @@
         this.mouseoutClose = opt.mouseoutClose,
           this.arrows = opt.arrows;
         this.show(def !== opt.slots);
-        let el = this.$refs.poptip;
-        el.style.cssText = '';
+        this.style = ''
 
         if(opt.positions) {
           this.$nextTick(() => {
-            this.setPosition(opt.positions,isam)
+            this.setPosition(opt.positions, isam)
           })
         }
       },
-      setPosition(pos,isam) {
+      setPosition(pos, isam) {
 
         //浏览器大小
         let innerWidth = window.innerWidth,
@@ -139,11 +139,12 @@
           let arrows = this.$refs.arrows;
           arrows.style.cssText = weiyi;
         }
-        if(!isam){
+        if(!isam) {
 //          console.log('关闭动画')
-          cssText+='transition: none'
+          cssText += 'transition: none'
         }
-        el.style.cssText = cssText;
+
+        this.style = cssText;
       },
 
       _append() {

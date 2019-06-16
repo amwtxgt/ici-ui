@@ -5,7 +5,7 @@
     </div>
     <div class="input-inner">
       <input @blur="blur" class="fms-input-input" :type="password?'password':'text'" @paste.stop='' :style="inputStyle"
-             @change="$emit('change',$event)" :value="value" @input="input" v-focus="focus" @focus="focusEvent"
+             @change="$emit('change',$event)" :value="value" @input="input" v-focus="focus" @focus="focusEvent" ref="inputs"
              :placeholder="hiddenLabel?label:''" @keydown.up.down.stop.prevent="keydown" @keyup.enter.stop.prevent="enter">
       <label v-if="!hiddenLabel" class="fms-input-label" :class="{substantial:isSubstantial,'input-label-foucs':hasFocus}">
         {{label}}
@@ -107,8 +107,10 @@
       if(this.$slots.prefix) {
         this.showPrefix = true
       }
-
+      let e = {target: this.$refs.inputs}
+      this.input(e)
     },
+
     methods: {
       clear() {
         this.$emit('input', '');
@@ -159,8 +161,6 @@
       },
       select: function (index) {
         this.$emit('select', index)
-
-
       },
 
       keydown(e) {
