@@ -1,5 +1,5 @@
 <template>
-  <div ref="tooltip" :id="id" :class="['ici-tooltip',{show:show}]">{{content}}</div>
+  <div ref="tooltip" :id="id" :class="['ici-tooltip',{show:show}]" v-html="content"></div>
 </template>
 
 <script>
