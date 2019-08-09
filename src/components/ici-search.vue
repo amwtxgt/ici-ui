@@ -2,14 +2,13 @@
   <div class="ici-search-wrap">
     <div class="ici-search">
       <ici-icon class="ici-font" name="icon-sousuo" size="20px" color="rgba(0, 0, 0, .3)"></ici-icon>
-      <input type="text" :value="value" @blur="blur" @input="input" v-focus="focus" @focus="focusEvent"
+      <input type="text" :value="value" @blur="blur" @input="input" v-focus="focus" @focus="focusEvent" @paste="paste"
              @keydown.up.down.stop.prevent="keydown" @keyup.enter.stop.prevent="enter" :placeholder="label">
       <ici-icon class="ici-delete" :class="{show:value}" name="icon-shanchudelete30" size="18px" @click="reset"/>
     </div>
 
     <ici-hint class="ici-hint-addclass" v-model="showHint" :loading="hint===true" max-height="600px">
       <!--列表头部-->
-
         <div v-if="showTitle" class="fms-input-hint-li fms-input-hint-li-add" @mousedown="select(-1)"
              :class="{active:selectIndex==-1}">
           <slot name="title"></slot>
@@ -85,11 +84,24 @@
       }
     },
     methods: {
+      paste(e){
+//        let pastedText = e.clipboardData.getData('text/plain');
+//
+//        if(pastedText) {
+//          //有文本时，触发文本事件    
+//          this.$emit('input',this.$funs.trim(pastedText))
+//        }
+       setTimeout(()=>{
+         this.$emit('input',this.$funs.trim(this.value));
+       },10)
+      },
       enter: function (e) {
+
         if(this.selectIndex !== -2) {
           this.$emit('select', this.selectIndex);
         }
-        e.target.blur()
+
+        e.target.blur();
         this.$emit('enter', this.selectIndex);
 
       },

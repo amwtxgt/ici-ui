@@ -6,6 +6,7 @@
         <div class="mark" v-if="value && mask" @click.self="clickMark"></div>
       </transition>
       <div class="fms-popup" :style="popupStyle" ref="fmsPopup">
+
         <div ref="header" class="fms-popup-title" :class="titleClass" :style="titleStyle" @mousedown="mousedown">
           <slot name="header">{{title}}</slot>
         </div>
@@ -304,6 +305,7 @@
       .fms-popup-body {
         position: relative;
         width: 100%;
+        height: 100%;
         flex: auto;
         display: flex;
         .fms-popup-body-inner {
