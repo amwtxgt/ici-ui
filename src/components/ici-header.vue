@@ -1,5 +1,5 @@
 <template>
-  <header class="ici-header" :style="{'background-color':color}" :class="{'ici-header-fixed':fixed}">
+  <header class="ici-header" :style="{'background-color':color,position:position}" :class="{'ici-header-fixed':fixed}">
     <div class="ici-header-left">
       <slot name="left"><h2>slot=left</h2></slot>
     </div>
@@ -22,6 +22,10 @@
       color: {
         type: String,
         default: '#fff'
+      },
+      position:{
+        type:String,
+        default:'absolute'
       },
       fixed:Boolean,
     },
