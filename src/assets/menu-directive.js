@@ -6,6 +6,22 @@ export default function (Vue){
   Vue.prototype.$rightMenu = rightMenu;
   Vue.directive('rightmenu', {
     inserted: function (el, binding) {
+
+      el.oncontextmenu = (e) => {
+        if (binding.value) {
+          if (typeof binding.value === 'function') {
+
+            rightMenu.open(binding.value(), e)
+          }
+          else if (binding.value instanceof Array) {
+            rightMenu.open(binding.value, e)
+          }
+        }
+        window.event.returnValue = false;
+        return false;
+      }
+    },
+    componentUpdated:function (el, binding) {
       el.oncontextmenu = (e) => {
 
         if (binding.value) {
@@ -29,6 +45,22 @@ export default function (Vue){
 
   Vue.directive('leftmenu', {
     inserted: function (el, binding) {
+
+      el.onmouseup = (e) => {
+        if(e.button !==0) return;
+        if (binding.value) {
+          if (typeof binding.value === 'function') {
+            rightMenu.open(binding.value(), e)
+          }
+          else if (binding.value instanceof Array) {
+            rightMenu.open(binding.value, e)
+          }
+        }
+        window.event.returnValue = false;
+        return false;
+      }
+    },
+    componentUpdated: function (el, binding) {
 
       el.onmouseup = (e) => {
         if(e.button !==0) return;
