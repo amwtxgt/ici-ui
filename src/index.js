@@ -72,7 +72,7 @@ const install = function (Vue,options) {
   Vue.directive('focus', {
     // 指令的定义
     update: function (el, binding) {
-      if (binding.value && binding.value !== binding.oldValue) {
+      if (binding.value) {
         setTimeout(function () {
           el.focus();
         }, 150)
