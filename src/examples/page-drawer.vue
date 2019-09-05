@@ -9,6 +9,10 @@
       <ici-drawer v-model="popup2" width="200"></ici-drawer>
       <ici-button @click="popup2= true">打开弹窗</ici-button>
     </baseComponent>
+    <baseComponent title="设置方向 direction=left" html='<ici-drawer direction="left" v-model="popup3" width="500"></ici-drawer>'>
+      <ici-drawer direction="left" v-model="popup3" width="500"></ici-drawer>
+      <ici-button @click="popup3= true">打开弹窗</ici-button>
+    </baseComponent>
   </div>
 </template>
 
