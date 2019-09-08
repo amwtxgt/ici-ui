@@ -168,7 +168,7 @@
 
   .ici-menu-wrap {
     position: fixed;
-    z-index: 99999;
+    z-index: 99999999;
     top: 0;
     bottom: 0;
     left: 0;
