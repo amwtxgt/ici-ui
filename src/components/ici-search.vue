@@ -21,6 +21,15 @@
              class="fms-input-hint-li" :class="{active:selectIndex==index}">
           <slot :item="item" :index="index"></slot>
         </div>
+        <div v-if="!hint.length" class="text-center">
+          <slot name="no-data">
+            <div style="font-size:16px">
+              <ici-icon name="icon-sousuo" size="20px" color="#aaa"></ici-icon>
+              <span class="text-999">No data found</span>
+            </div>
+          </slot>
+        </div>
+
       </div>
     </ici-hint>
 
@@ -71,9 +80,6 @@
         else if(this.hint === true && this.hasFocus) {
           return true;
         }
-        else if(this.hint.length === 0 && !this.showTitle) {
-          return false
-        }
         else {
           return true;
         }
@@ -88,7 +94,7 @@
 //        let pastedText = e.clipboardData.getData('text/plain');
 //
 //        if(pastedText) {
-//          //有文本时，触发文本事件    
+//          //有文本时，触发文本事件
 //          this.$emit('input',this.$funs.trim(pastedText))
 //        }
        setTimeout(()=>{
