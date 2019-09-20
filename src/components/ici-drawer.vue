@@ -72,11 +72,11 @@
     }
 
     .drawer-right {
-      transform: translate3d(100%, 0, 0) !important;
+      transform: translate(100%, 0) !important;
     }
 
     .drawer-left {
-      transform: translate3d(-100%, 0, 0) !important;
+      transform: translate(-100%, 0) !important;
     }
   }
 
@@ -92,7 +92,7 @@
       width: 100%;
       height: 100%;
       background-color: rgba(0, 0, 0, 0.5);
-      transform: translate3d(0, 0, 0);
+      transform: translate(0, 0);
       transition: opacity 333ms cubic-bezier(.4, 0, .22, 1);
     }
 
@@ -104,7 +104,7 @@
       z-index: 11;
       top: 0;
       background: #eee;
-      transform: translate3d(0, 0, 0);
+      transform: translate(0, 0);
       transition: all 333ms cubic-bezier(.4, 0, .22, 1);
       &.drawer-left{
         left: 0;
