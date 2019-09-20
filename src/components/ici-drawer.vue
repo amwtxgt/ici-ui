@@ -1,8 +1,8 @@
 <template>
   <transition name="drawer">
     <div class="drawer-popup" :style="{'z-index': zIndex}" v-show="value">
-      <div class="drawer-popup-mask"  @click.self="close"></div>
-      <div class="drawer-popup-body"  :class="direction=='left'?'drawer-left':'drawer-right'" :style="bodyStyle">
+      <div class="drawer-popup-mask" @click.self="close"></div>
+      <div class="drawer-popup-body" :class="direction=='left'?'drawer-left':'drawer-right'" :style="bodyStyle">
         <slot></slot>
       </div>
     </div>
@@ -72,11 +72,11 @@
     }
 
     .drawer-right {
-      transform: translate(100%, 0) !important;
+      transform: translate(100%, 0, 0) !important;
     }
 
     .drawer-left {
-      transform: translate(-100%, 0) !important;
+      transform: translate(-100%, 0, 0) !important;
     }
   }
 
@@ -87,12 +87,13 @@
     bottom: 0;
     left: 0;
     z-index: 999;
+
     .drawer-popup-mask {
       position: absolute;
       width: 100%;
       height: 100%;
       background-color: rgba(0, 0, 0, 0.5);
-      transform: translate(0, 0);
+      transform: translate3d(0);
       transition: opacity 333ms cubic-bezier(.4, 0, .22, 1);
     }
 
@@ -104,12 +105,14 @@
       z-index: 11;
       top: 0;
       background: #eee;
-      transform: translate(0, 0);
+      transform: translate3d(0);
       transition: all 333ms cubic-bezier(.4, 0, .22, 1);
-      &.drawer-left{
+
+      &.drawer-left {
         left: 0;
       }
-      &.drawer-right{
+
+      &.drawer-right {
         right: 0;
       }
     }
