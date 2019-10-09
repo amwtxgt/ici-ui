@@ -81,7 +81,8 @@
     border-radius: 5px;
     color:#fff;
     flex:none;
-    background: no-repeat center;
+    background-repeat: no-repeat ;
+    background-position: center;
     background-size: cover;
     text-align: center;
     .bg-img-inner{
