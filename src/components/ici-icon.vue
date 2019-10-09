@@ -10,11 +10,14 @@
     name: "ici-icon",
     computed: {
       style() {
-        return {
-          fontSize: this.size,
+        let style = {
           lineHeight: this.size,
-          color: this.color
         }
+
+        if(this.size) style.fontSize = this.size
+        if(this.color) style.color = this.color
+
+        return style
       }
     },
     props: {
@@ -24,12 +27,12 @@
       },
       size: {
         type: String,
-        default: 'inherit'
+        default: ''
       },
 
       color: {
         type: String,
-        default: 'inherit'
+        default: ''
       },
       clickState: Boolean,
       active: Boolean,

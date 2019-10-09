@@ -23,13 +23,18 @@
           default:String,
           default:'inherit'
         },
+        color: {
+          type: String,
+          default: ''
+        },
         clickState: Boolean,
       },
       computed:{
         style(){
-          return{
-            fontSize:this.size,
-          }
+          let style = {}
+          if(this.size) style.fontSize = this.size
+          if(this.color) style.color = this.color
+          return style
         }
       },
       methods: {},
