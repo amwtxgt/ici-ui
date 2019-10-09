@@ -35,7 +35,7 @@
       },
       bgColor:{
         type:String,
-        default:'#fff'
+        default:''
       },
       circle:Boolean,
       margin:String,
@@ -49,7 +49,11 @@
         style.width = this.width;
         style.height = this.height ? this.height : this.width;
         style.backgroundSize = this.showType;
-        style.backgroundColor = this.bgColor;
+
+        if(this.bgColor){
+          style.backgroundColor = this.bgColor;
+        }
+
         if(this.margin){
           style.margin = this.margin;
         }
