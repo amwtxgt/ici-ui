@@ -45,7 +45,7 @@
     vertical-align: middle;
     cursor: pointer;
     padding: 5px;
-    border-radius: 50%;
+    border-radius: 100px;
     background: rgba(0, 0, 0, 0);
     /*transition: all .2s;*/
     box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);

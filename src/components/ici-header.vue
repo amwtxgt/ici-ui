@@ -1,5 +1,5 @@
 <template>
-  <header class="ici-header" :style="{'background-color':color,position:position}" :class="{'ici-header-fixed':fixed}">
+  <header class="ici-header" :style="style" :class="{'ici-header-fixed':fixed}">
     <div class="ici-header-left">
       <slot name="left"><h2>slot=left</h2></slot>
     </div>
@@ -21,7 +21,7 @@
     props: {
       color: {
         type: String,
-        default: '#fff'
+        default: ''
       },
       position:{
         type:String,
@@ -29,6 +29,16 @@
       },
       fixed:Boolean,
     },
+    computed:{
+
+      style(){
+        let style = {position:this.position}
+        if(this.color){
+          style.backgroundColor = this.color;
+        }
+        return style;
+      },
+    }
   }
 </script>
 
@@ -45,7 +55,6 @@
     right: 0;
     height: 50px;
     padding: 0 20px 0 20px;
-    background: #fff;
     z-index: 80;
     box-shadow: 0 1px 8px rgba(0, 0, 0, .3);
     &.ici-header-fixed{
