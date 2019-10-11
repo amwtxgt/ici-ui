@@ -1,10 +1,10 @@
 <template>
-  <div class="fms-input" :class="{white:white}">
+  <div class="fms-input">
     <div v-if="showPrefix" class="prefix" :style="prefixStyle">
       <slot name="prefix"></slot>
     </div>
     <div class="input-inner">
-      <input @blur="blur" class="fms-input-input" :type="password?'password':'text'" @paste.stop='' :style="inputStyle"
+      <input @blur="blur" class="fms-input-input" :class="borderClass" :type="password?'password':'text'" @paste.stop='' :style="inputStyle"
              @change="$emit('change',$event)" :value="value" @input="input" v-focus="focus" @focus="focusEvent" ref="inputs"
              :placeholder="hiddenLabel?label:''" @keydown.up.down.stop.prevent="keydown" @keyup.enter.stop.prevent="enter">
       <label v-if="!hiddenLabel" class="fms-input-label" :class="{substantial:isSubstantial,'input-label-foucs':hasFocus}">
@@ -67,11 +67,14 @@
       password: Boolean, //是否以密码方式
       focus: Boolean,
       hiddenLabel: Boolean,
-      white: Boolean,
       inputStyle: [String, Object],
       prefixStyle: {
         type: [String, Object],
         default: ''
+      },
+      borderClass:{
+        type:String,
+        default:'default-border-color'
       },
       filter: [Boolean, RegExp, String, Function],
     },
@@ -216,11 +219,8 @@
 
     label.fms-input-label {
       text-align: left;
-      -webkit-transform-origin: bottom left;
       transform-origin: bottom left;
-      -webkit-transition: all .3s cubic-bezier(0.4, 0, 0.2, 1);
       transition: all .3s cubic-bezier(0.4, 0, 0.2, 1);
-      -webkit-transition-property: color, bottom, transform;
       transition-property: color, bottom, transform;
       color: rgba(0, 0, 0, 0.38);
       font: 400 16px Roboto, RobotoDraft, Helvetica, Arial, sans-serif, "Microsoft YaHei", "微软雅黑";
@@ -236,7 +236,7 @@
       }
 
       &.input-label-foucs {
-        color: rgb(193, 39, 71);
+        color: #ff7306;
         transform: scale(.75) translateY(-30px);
       }
     }
@@ -263,24 +263,6 @@
       flex: auto;
     }
 
-    &.white {
-      label.fms-input-label {
-        color: rgba(255, 255, 255, 0.38);
-
-        &.input-label-foucs {
-          color: rgba(255, 255, 255, .7);
-
-        }
-      }
-
-      input {
-        color: rgba(255, 255, 255, .7) !important;
-      }
-
-      .fms-input-status {
-        background: rgba(255, 255, 255, .7) !important;
-      }
-    }
 
     input {
       display: block;
@@ -293,16 +275,16 @@
       margin: 0 !important;
       outline: none;
       padding: 0 !important;
-      color: #666 !important;
       box-shadow: none !important;
       border-radius: 0 !important;
-      border: none !important;
-      border-bottom: 1px solid rgba(0, 0, 0, 0.2) !important;
+      border-top: none !important;
+      border-left: none !important;
+      border-right: none !important;
+      border-width:1px !important;
+      border-bottom-style: solid !important;
 
-      &::placeholder {
-        color: #aaa;
-        font-size: 16px;
-        font-weight: 100;
+      &.default-border-color{
+        border-bottom-color:rgba(0, 0, 0, 0.2) !important
       }
     }
 
@@ -312,7 +294,7 @@
       opacity: 0;
       width: 100%;
       height: 2px;
-      background: rgb(193, 39, 71);
+      background: #ff7306;
       bottom: 0;
       left: 0;
       transform: translate3d(0, 0, 0) scale(0, 1);

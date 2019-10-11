@@ -57,7 +57,7 @@
 <ici-button @click="popup3= true">使用slot</ici-button>'>
       <ici-popup v-model="popup2" title="我是标题11111"></ici-popup>
       <ici-button @click="popup2= true">使用title属性</ici-button>
-      <ici-popup v-model="popup3">
+      <ici-popup v-model="popup3" title-class="header" body-class="body">
         <div slot="header">
           <ici-icon name="icon-zhongguoditu"></ici-icon>
           我是slot标题
@@ -329,6 +329,8 @@
       openPopup(){
         this.$popup.confirm({
           title:'这是一个弹窗',
+          titleClass:'header',
+          bodyClass:'body',
           content:'这是弹窗的内容，可能很长，但很有用',
           showClose:true,
           onOk:()=>{
@@ -343,10 +345,15 @@
   };
 </script>
 
-<style lang="less" scoped>
+<style lang="less">
   .title {
     font-size: 30px;
     margin-bottom: 10px;
   }
-
+  .header{
+    background:#444444 !important;
+  }
+  .body{
+    background:#000000
+  }
 </style>

@@ -13,6 +13,7 @@
       };
     },
     props: {
+      bodyClass:String,
       //触发弹窗机制，hover,click,custom
       trigger: {
         type: String,
@@ -41,7 +42,7 @@
       //背景颜色
       bgColor: {
         type: String,
-        default: '#fff'
+        default: ''
       },
       //
       mouseoutClose:{
@@ -138,6 +139,7 @@
           zIndex: this.zIndex,
           arrows: this.arrows,
           bgColor: this.bgColor,
+          bodyClass:this.bodyClass,
           overflow:this.overflow,
           mouseoutClose:this.mouseoutClose,
         });

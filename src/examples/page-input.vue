@@ -2,14 +2,7 @@
   <div>
     <div class="title">input 单行输入</div>
     <baseComponent title="基本输入" html='<ici-input></ici-input>'>
-      <ici-input @change="abc" :focus="true"></ici-input>
-    </baseComponent>
-    <baseComponent title="返白 white" html='<ici-input v-model="name"></ici-input>'>
-      <div style="background:#000">
-        <ici-input v-model="name" white></ici-input>
-        <br>
-      </div>
-      <div>name 值：<b>{{name}}</b></div>
+      <ici-input @change="abc" :focus="true" border-class="border-aaa"></ici-input>
     </baseComponent>
     <baseComponent title="数据绑定 v-model" html='<ici-input v-model="name"></ici-input>'>
       <ici-input v-model="name3" ></ici-input>
@@ -163,7 +156,11 @@ data() {
     },
   };
 </script>
-
+<style>
+  .border-aaa{
+    border-color: #2db7f5!important;
+  }
+</style>
 <style lang="less" scoped>
   .title {
     font-size: 30px;

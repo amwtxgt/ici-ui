@@ -14,7 +14,7 @@
       <ici-button type="info">你好啊</ici-button>
       <ici-button type="warning">你好啊</ici-button>
       <ici-button type="error">你好啊</ici-button>
-      <ici-button type="ici">你好啊</ici-button>
+      <ici-button type="inverse">你好啊</ici-button>
     </baseComponent>
 
     <baseComponent title="按钮形状 shape"
@@ -27,7 +27,7 @@
       <ici-button type="info" shape="pill">你好啊</ici-button>
       <ici-button type="warning" shape="square">你好</ici-button>
       <ici-button type="error" shape="box">你好</ici-button>
-      <ici-button type="ici" shape="circle">你好</ici-button>
+      <ici-button type="inverse" shape="circle">你好</ici-button>
     </baseComponent>
 
     <baseComponent title="按钮大小 size"
@@ -40,7 +40,7 @@
       <ici-button type="info" size="small">你好啊</ici-button>
       <ici-button type="warning" size="large">你好</ici-button>
       <ici-button type="error" size="jumbo">你好</ici-button>
-      <ici-button type="ici" size="giant">你好</ici-button>
+      <ici-button type="inverse" size="giant">你好</ici-button>
     </baseComponent>
 
     <baseComponent title="空心按钮 plain"
@@ -54,25 +54,10 @@
       <ici-button type="info" plain>你好啊</ici-button>
       <ici-button type="warning" plain>你好</ici-button>
       <ici-button type="error" plain>你好</ici-button>
-      <ici-button type="ici" plain>你好</ici-button>
+      <ici-button type="inverse" plain>你好</ici-button>
 
     </baseComponent>
 
-
-    <baseComponent title="空心无边框按钮 borderless"
-                   html='<ici-button type="primary"  plain borderless>你好啊</ici-button>
-<ici-button type="info"  plain borderless>你好啊</ici-button>
-<ici-button type="warning" plain borderless>你好</ici-button>
-<ici-button type="error" plain borderless>你好</ici-button>
-<ici-button type="ici" plain borderless>你好</ici-button>'>
-
-      <ici-button type="primary" plain borderless>你好啊</ici-button>
-      <ici-button type="info" plain borderless>你好啊</ici-button>
-      <ici-button type="warning" plain borderless>你好</ici-button>
-      <ici-button type="error" plain borderless>你好</ici-button>
-      <ici-button type="ici" plain borderless>你好</ici-button>
-
-    </baseComponent>
 
     <baseComponent title="立体按钮 relievo"
                    html='<ici-button type="primary"  relievo>你好啊</ici-button>
@@ -85,25 +70,9 @@
         <ici-button type="info" relievo>你好啊</ici-button>
         <ici-button type="warning" relievo>你好</ici-button>
         <ici-button type="error" relievo>你好</ici-button>
-        <ici-button type="ici" relievo>你好</ici-button>
+        <ici-button type="inverse" relievo>你好</ici-button>
       </div>
     </baseComponent>
-
-    <baseComponent title="3D按钮 open3d"
-                   html='<ici-button type="primary"  open3d>你好啊</ici-button>
-<ici-button type="info"   open3d>你好啊</ici-button>
-<ici-button type="warning" open3d>你好</ici-button>
-<ici-button type="error" open3d>你好</ici-button>
-<ici-button type="ici" open3d>你好</ici-button>'>
-      <div>
-        <ici-button type="primary" open3d>你好啊</ici-button>
-        <ici-button type="info" open3d>你好啊</ici-button>
-        <ici-button type="warning" open3d>你好</ici-button>
-        <ici-button type="error" open3d>你好</ici-button>
-        <ici-button type="ici" open3d>你好</ici-button>
-      </div>
-    </baseComponent>
-
     <baseComponent title="长按钮 long"
                    html='<ici-button type="primary"  relievo long>你好啊</ici-button>
 <ici-button type="info"   relievo long>你好啊</ici-button>
@@ -115,22 +84,7 @@
         <ici-button type="info" relievo long>你好啊</ici-button>
         <ici-button type="warning" relievo long>你好</ici-button>
         <ici-button type="error" relievo long>你好</ici-button>
-        <ici-button type="ici" relievo long>你好</ici-button>
-      </div>
-    </baseComponent>
-
-    <baseComponent title="文字阴影 longshadow"
-                   html='<ici-button type="primary"  relievo longshadow>你好啊</ici-button>
-<ici-button type="info"   relievo longshadow="left">你好啊</ici-button>
-<ici-button type="warning" relievo longshadow="right">你好</ici-button>
-<ici-button type="error" relievo long longshadow="left">你好</ici-button>
-<ici-button type="ici" relievo long longshadow="right">你好</ici-button>'>
-      <div>
-        <ici-button type="primary" relievo longshadow>你好啊</ici-button>
-        <ici-button type="info" relievo longshadow="left">你好啊</ici-button>
-        <ici-button type="warning" relievo longshadow="right">你好</ici-button>
-        <ici-button type="error" relievo long longshadow="left">你好</ici-button>
-        <ici-button type="ici" relievo long longshadow="right">你好</ici-button>
+        <ici-button type="inverse" relievo long>你好</ici-button>
       </div>
     </baseComponent>
 
@@ -172,6 +126,7 @@
         <ici-button type="primary" html-type="submit">你好啊</ici-button>
         <ici-button type="info" html-type="reset">你好啊</ici-button>
         <ici-button type="error" html-type="button">你好啊</ici-button>
+        <ici-button type="inverse" html-type="button">你好啊</ici-button>
       </div>
     </baseComponent>
 

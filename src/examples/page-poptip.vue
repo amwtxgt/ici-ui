@@ -10,7 +10,7 @@
 </ici-poptip>'>
       <ici-button>
         鼠标移到我这
-        <ici-poptip :layer="3" z-index="999999">
+        <ici-poptip :layer="3" z-index="999999" body-class="bg-back">
           asdfasfdawwaef
           asdfasfdawwaef
           asdfasfdawwaef
@@ -99,12 +99,15 @@
   };
 </script>
 
-<style scoped>
+<style>
   .title {
     font-size: 30px;
     margin-bottom: 10px;
   }
-
+  .bg-back{
+    background:#2db7f5;
+    border-color:#2db7f5 !important;
+  }
   .abc {
     position: relative;
   }

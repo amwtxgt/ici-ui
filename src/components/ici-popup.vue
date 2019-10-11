@@ -7,17 +7,17 @@
       </transition>
       <div class="fms-popup" :style="popupStyle" ref="fmsPopup">
 
-        <div ref="header" class="fms-popup-title" :class="titleClass" :style="titleStyle" @mousedown="mousedown">
+        <div ref="header" class="fms-popup-title" :class="titleClass||'title-bg-color'" @mousedown="mousedown">
           <slot name="header">{{title}}</slot>
         </div>
-        <div class="fms-popup-body" :style="popupBody" @mousedown="bodyMousedown">
+        <div class="fms-popup-body" :style="popupBody" :class="bodyClass" @mousedown="bodyMousedown">
           <!--slot-->
           <div class="fms-popup-body-inner" :class="{noscroll:noScroll}">
             <slot></slot>
           </div>
           <ici-loading v-show="loading" block></ici-loading>
         </div>
-        <div ref="footer" class="fms-popup-footer" v-if="!footerHide" @mousedown="mousedown">
+        <div ref="footer" class="fms-popup-footer" :class="bodyClass" v-if="!footerHide" @mousedown="mousedown">
           <div v-if="$slots['footer-left']" class="fms-popup-footer-left">
             <!--slot-->
             <slot name="footer-left"></slot>
@@ -81,15 +81,11 @@
         type: String,
         default: ''
       },
-      bgColor: {
-        type: String,
-        default: '#fff'
-      },
       titleClass: {
         type: String,
         default: ''
       },
-      titleStyle: {
+      bodyClass:{
         type: String,
         default: ''
       },
@@ -151,7 +147,7 @@
         return css;
       },
       popupBody() {
-        let css = {'background-color': this.bgColor}
+        let css = {}
         if (this.value) {
           let hHeight = this.$refs.header ? this.$refs.header.clientHeight : 0,
             fHeight = this.$refs.footer ? this.$refs.footer.clientHeight : 0
@@ -277,6 +273,9 @@
       border-radius: 2px;
       box-shadow: 0 12px 15px 0 rgba(0, 0, 0, 0.24);
       outline: none;
+      &.title-bg-color{
+        background-color: #f7f7f7;
+      }
       .fms-popup-title {
         cursor: move;
         user-select: none;
@@ -284,7 +283,7 @@
         &:empty {
           display: none;
         }
-        background-color: #f7f7f7;
+
         padding: 15px 20px;
         font-size: 20px;
         align-items: center;

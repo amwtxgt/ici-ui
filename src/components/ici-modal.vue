@@ -1,8 +1,8 @@
 <template>
-  <ici-popup :id="id" class="ici-modal" :value="show" @input="close" :width="450" mask :esc="option.showClose"
-             :position="option.position" :mask-close="option.showClose" titleClass="ici-modal-title">
+  <ici-popup :id="id" class="ici-modal" :value="show" @input="close" :width="450" mask :esc="option.showClose" :body-class="option.bodyClass"
+             :position="option.position" :mask-close="option.showClose" :title-class="option.titleClass||'ici-modal-title'">
     <div slot="header">
-      <ici-icon name="icon-msnui-alarm-circle" color="#C01639" size="22px" @></ici-icon>
+      <ici-icon name="icon-msnui-alarm-circle" size="22px" @></ici-icon>
       {{option.title?option.title:'Prompt'}}
     </div>
     <ici-icon v-if="option.showClose" slot="header" @click="close" color="#666" name="icon-shanchudelete30" size="20px" click-state />
@@ -24,6 +24,8 @@
         show: false,
         option: {
           title: '',
+          titleClass:'',
+          bodyClass:'',
           okText: "yes",
           showClose:false,
           position:'fixed',
@@ -42,6 +44,8 @@
           showClose:false,
           position:'fixed',
           cancelText: "no",
+          titleClass:'',
+          bodyClass:'',
           content: '',
           onOk: void 0,
           onCancel: void 0
@@ -49,6 +53,7 @@
       },
       confirm(option) {
         this._append();
+        console.log(option);
         this.option = Object.assign(this.initOption(),option);
         this.show = true;
       },

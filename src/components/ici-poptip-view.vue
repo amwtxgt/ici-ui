@@ -2,8 +2,8 @@
   <transition name="poptip">
     <div :id="id" class="ici-poptip-wrap" :style="style" v-show="showtip" ref="poptip" @mouseover="mouseover"
          @mouseout="mouseout">
-      <div class="poptip-arrows" ref="arrows" v-show="arrows"></div>
-      <div class="ici-poptip-view" :style="{backgroundColor:bgColor,overflow:overflow}">
+      <div class="poptip-arrows" :class="bodyClass" ref="arrows" v-show="arrows"></div>
+      <div class="ici-poptip-view" :class="bodyClass" :style="bodyStyle">
         <slot></slot>
       </div>
     </div>
@@ -22,24 +22,31 @@
         openTimeout: 1,
         zIndex: 10,
         arrows: false,
-        bgColor: '#fff',
+
         overflow: 'auto',
+        bodyClass: '',
         style: '',
         mouseoutClose: true,
       };
     },
-
+    computed: {
+      bodyStyle() {
+        let style = {overflow: this.overflow}
+        if (this.bgColor) style.backgroundColor = this.bgColor;
+        return style;
+      },
+    },
     created() {
       this._append();
     },
     methods: {
       close() {
-        if(this.showtip) {
+        if (this.showtip) {
           this.showtip = false;
         }
       },
       delayClose() {
-        if(this.showtip) {
+        if (this.showtip) {
           this.timeout = setTimeout(() => {
             this.showtip = false;
           }, 50);
@@ -47,20 +54,20 @@
       },
       show(refresh) {
         clearTimeout(this.timeout);
-        if(refresh) {
+        if (refresh) {
           this.$forceUpdate()
         }
 
         this.showtip = true;
       },
       mouseover(e) {
-        if(!e.buttons) {
+        if (!e.buttons) {
           this.show();
         }
 
       },
       mouseout() {
-        if(this.mouseoutClose) {
+        if (this.mouseoutClose) {
           this.delayClose()
         }
       },
@@ -68,17 +75,18 @@
       open(opt) {
         let isam = this.showtip; //是否开启过渡动画
         let def = this.$slots.default;
-        if(opt.slots) this.$slots.default = opt.slots
-        if(opt.zIndex) this.zIndex = opt.zIndex;
-        if(opt.bgColor) this.bgColor = opt.bgColor
-        if(opt.overflow) this.overflow = opt.overflow;
+        if (opt.slots) this.$slots.default = opt.slots
+        if (opt.zIndex) this.zIndex = opt.zIndex;
+        if (opt.bgColor) this.bgColor = opt.bgColor
+        if (opt.overflow) this.overflow = opt.overflow;
 
-        this.mouseoutClose = opt.mouseoutClose,
-          this.arrows = opt.arrows;
+        this.bodyClass = opt.bodyClass;
+        this.mouseoutClose = opt.mouseoutClose;
+        this.arrows = opt.arrows;
         this.show(def !== opt.slots);
         this.style = ''
 
-        if(opt.positions) {
+        if (opt.positions) {
           this.$nextTick(() => {
             this.setPosition(opt.positions, isam)
           })
@@ -101,11 +109,10 @@
         //计算下部分的高度
         var h2 = innerHeight - pos.bottom + (pos.bottom - pos.top) / 2
 
-        if(innerHeight > height + pos.bottom || innerHeight / 2 < h2) {
+        if (innerHeight > height + pos.bottom || innerHeight / 2 < h2) {
           maxHeight = innerHeight - pos.bottom - 5
           cssText += `top:${pos.bottom}px;max-height:${maxHeight}px;`
-        }
-        else {
+        } else {
           weiyi += `bottom:-5px;transform: rotate(225deg);`
           cssText += `bottom:${innerHeight - pos.top}px;max-height:${pos.top - 5}px;`
         }
@@ -114,19 +121,17 @@
         //计算右部分宽度
         let w2 = innerWidth - pos.left + (pos.right - pos.left) / 2;
 
-        if(innerWidth > width + pos.left || innerWidth / 2 < w2) {
+        if (innerWidth > width + pos.left || innerWidth / 2 < w2) {
           maxWidth = innerWidth - pos.left - 5
           cssText += `left:${pos.left}px;max-width:${maxWidth}px;`
-        }
-        else {
+        } else {
           let maxWidth;
-          if(innerWidth > width) {
+          if (innerWidth > width) {
             maxWidth = width;
-          }
-          else {
+          } else {
             maxWidth = innerWidth - 10
           }
-          if(pos.right - width < 5) x = 5;
+          if (pos.right - width < 5) x = 5;
           else x = pos.right - width;
           cssText += `left:${innerWidth - width - 5}px;max-width:${maxWidth}px;`
 
@@ -135,11 +140,11 @@
         }
 
         //箭头位置
-        if(this.arrows) {
+        if (this.arrows) {
           let arrows = this.$refs.arrows;
           arrows.style.cssText = weiyi;
         }
-        if(!isam) {
+        if (!isam) {
 //          console.log('关闭动画')
           cssText += 'transition: none'
         }
@@ -148,11 +153,10 @@
       },
 
       _append() {
-        if(!window.document.getElementById(this.id)) {
-          if(this.$el) {
+        if (!window.document.getElementById(this.id)) {
+          if (this.$el) {
             window.document.body.appendChild(this.$el);
-          }
-          else {
+          } else {
             var menu = window.document.createElement('div');
             window.document.body.appendChild(menu);
             this.$mount(menu); //绑定
