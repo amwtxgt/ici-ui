@@ -1,486 +1,498 @@
 <template>
-  <button tabindex="0" v-focus="focus" :type="htmlType" :disabled="disabled || loading" @click="$emit('click',$event)"
-          :class="['ici-btn',sizeClass,typeClass,shapeClass,
-    {'ici-btn-plain':plain,'ici-btn-border':plain},
-    {'ici-btn-raised':relievo},
-    {'ici-btn-block':long}]">
-    <div class="flex flex-center">
-      <div v-show="loading">
-        <ici-loading size="small" :disabled="loading"></ici-loading>
-      </div>
-      <div>
-        <slot></slot>
-      </div>
-    </div>
-  </button>
+    <button tabindex="0" v-focus="focus" :type="htmlType" :disabled="disabled || loading" @click="$emit('click',$event)"
+            :class="['ici-btn',sizeClass,typeClass,shapeClass,{'ici-btn-border':plain,'ici-btn-raised':relievo,'ici-btn-block':long}]">
+        <div class="flex flex-center">
+            <div v-show="loading">
+                <ici-loading size="small" :disabled="loading"></ici-loading>
+            </div>
+            <div>
+                <slot></slot>
+            </div>
+        </div>
+    </button>
 </template>
 
 <script>
 
-  export default {
-    name: 'a-button',
-    data() {
-      return {};
-    },
+    export default {
+        name: 'a-button',
+        data() {
+            return {};
+        },
 
-    computed: {
+        computed: {
 
-      sizeClass() {
-        var size = '';
-        switch (this.size) {
-          case 'tiny':
-            size = 'ici-btn-tiny';
-            break;
-          case 'small':
-            size = 'ici-btn-small';
-            break;
-          case 'large':
-            size = 'ici-btn-large';
-            break;
-          case 'jumbo':
-            size = 'ici-btn-jumbo';
-            break;
-          case 'giant':
-            size = 'ici-btn-giant';
-            break;
-        }
-        return size;
-      },
-      typeClass() {
-        var type = '';
-        switch (this.type) {
-          case 'primary':
-            type = 'ici-btn-primary';
-            break;
-          case 'info':
-            type = 'ici-btn-action';
-            break;
-          case 'warning':
-            type = 'ici-btn-highlight';
-            break;
-          case 'error':
-            type = 'ici-btn-caution';
-            break;
-          case 'inverse':
-            type = 'ici-btn-inverse';
-            break;
-          default :
-            type = 'ici-btn-primary'
-        }
-        return type;
-      },
-      shapeClass() {
-        var shape = '';
-        switch (this.shape) {
-          case 'rounded':
-            shape = 'ici-btn-rounded';
-            break;
-          case 'pill':
-            shape = 'ici-btn-pill';
-            break;
-          case 'square':
-            shape = 'ici-btn-square';
-            break;
-          case 'box':
-            shape = 'ici-btn-box';
-            break;
-          case 'circle':
-            shape = 'ici-btn-circle';
-            break;
-        }
-        return shape;
-      },
+            sizeClass() {
+                var size = '';
+                switch (this.size) {
+                    case 'tiny':
+                        size = 'ici-btn-tiny';
+                        break;
+                    case 'small':
+                        size = 'ici-btn-small';
+                        break;
+                    case 'large':
+                        size = 'ici-btn-large';
+                        break;
+                    case 'jumbo':
+                        size = 'ici-btn-jumbo';
+                        break;
+                    case 'giant':
+                        size = 'ici-btn-giant';
+                        break;
+                }
+                return size;
+            },
+            typeClass() {
+                var type = '';
+                switch (this.type) {
+                    case 'primary':
+                        type = 'ici-btn-primary';
+                        break;
+                    case 'info':
+                        type = 'ici-btn-action';
+                        break;
+                    case 'warning':
+                        type = 'ici-btn-highlight';
+                        break;
+                    case 'error':
+                        type = 'ici-btn-caution';
+                        break;
+                    case 'inverse':
+                        type = 'ici-btn-inverse';
+                        break;
+                    default :
+                        type = ''
+                }
+                return type;
+            },
+            shapeClass() {
+                var shape = '';
+                switch (this.shape) {
+                    case 'rounded':
+                        shape = 'ici-btn-rounded';
+                        break;
+                    case 'pill':
+                        shape = 'ici-btn-pill';
+                        break;
+                    case 'square':
+                        shape = 'ici-btn-square';
+                        break;
+                    case 'box':
+                        shape = 'ici-btn-box';
+                        break;
+                    case 'circle':
+                        shape = 'ici-btn-circle';
+                        break;
+                }
+                return shape;
+            },
 
-    },
-    props: {
-      focus: Boolean,
-      disabled: Boolean,
-      //原生的type
-      htmlType: {
-        type: String,
-        default: 'button'
-      },
-      loading: Boolean,
-      //按钮大小
-      size: {
-        type: String,
-        default: ''
-      },
-      //按钮主题类型大小
-      type: {
-        type: String,
-        default: ''
-      },
-      //按钮形状
-      shape: {
-        type: String,
-        default: ''
-      },
+        },
+        props: {
+            focus: Boolean,
+            disabled: Boolean,
+            //原生的type
+            htmlType: {
+                type: String,
+                default: 'button'
+            },
+            loading: Boolean,
+            //按钮大小
+            size: {
+                type: String,
+                default: ''
+            },
+            //按钮主题类型大小
+            type: {
+                type: String,
+                default: ''
+            },
+            //按钮形状
+            shape: {
+                type: String,
+                default: ''
+            },
 
-      //按钮是否是空心的
-      plain: Boolean,
+            //按钮是否是空心的
+            plain: Boolean,
 
-      //开启浮雕
-      relievo: Boolean,
-      //开启100%长度
-      long: Boolean,
-    },
-    mounted() {
-    },
-    beforeDestroy() {
-    },
-    methods: {},
-    components: {}
-  };
+            //开启浮雕
+            relievo: Boolean,
+            //开启100%长度
+            long: Boolean,
+        },
+        mounted() {
+        },
+        beforeDestroy() {
+        },
+        methods: {},
+        components: {}
+    };
 </script>
 
 <style lang="less">
 
-  .ici-btn {
-    user-select: none;
-    color: #666;
-    background-color: #EEE;
-    font-weight: 300;
-    font-size: 16px;
-    font-family: Roboto, RobotoDraft, Helvetica, Arial, sans-serif, "Microsoft YaHei", "微软雅黑";
-    text-decoration: none;
-    text-align: center;
-    line-height: 40px;
-    height: 40px;
-    padding: 0 40px;
-    margin: 0;
-    display: inline-block;
-    appearance: none;
-    cursor: pointer;
-    border: none;
-    box-sizing: border-box;
-    transition-property: all;
-    transition-duration: .3s;
+    .ici-btn {
+        user-select: none;
+        color: #666;
+        background-color: #EEE;
+        font-weight: 300;
+        font-size: 16px;
+        font-family: Roboto, RobotoDraft, Helvetica, Arial, sans-serif, "Microsoft YaHei", "微软雅黑";
+        text-decoration: none;
+        text-align: center;
+        line-height: 40px;
+        height: 40px;
+        padding: 0 40px;
+        margin: 0;
+        display: inline-block;
+        appearance: none;
+        cursor: pointer;
+        border: none;
+        box-sizing: border-box;
+        transition-property: all;
+        transition-duration: .3s;
 
-    &:visited {
-      color: #666
-    }
-
-    &:hover, &:focus {
-      background-color: #f6f6f6;
-      text-decoration: none;
-      outline: 0;
-      box-shadow: 0 0 0 3px rgba(0, 0, 0, .2);
-    }
-
-    &:active, &.active, &.is-active {
-      text-shadow: 0 1px 0 rgba(255, 255, 255, 0.3);
-      text-decoration: none;
-      background-color: #eee;
-      border-color: #cfcfcf;
-      color: #d4d4d4;
-      -webkit-transition-duration: 0s;
-      transition-duration: 0s;
-      -webkit-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2);
-      box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2);
-    }
-
-    &.disabled, &.is-disabled, &:disabled {
-      top: 0 !important;
-      background: #EEE !important;
-      border: 1px solid #DDD !important;
-      text-shadow: 0 1px 1px white !important;
-      color: #CCC !important;
-      cursor: default !important;
-      appearance: none !important;
-      -webkit-box-shadow: none !important;
-      box-shadow: none !important;
-      opacity: .8 !important
-    }
-
-  }
-
-
-  .ici-btn-uppercase {
-    text-transform: uppercase
-  }
-
-  .ici-btn-lowercase {
-    text-transform: lowercase
-  }
-
-  .ici-btn-capitalize {
-    text-transform: capitalize
-  }
-
-  .ici-btn-small-caps {
-    font-variant: small-caps
-  }
-
-  .ici-btn-icon-txt-large {
-    font-size: 36px !important
-  }
-
-  .ici-btn-width-small {
-    padding: 0 10px !important
-  }
-
-  .ici-btn-raised {
-    border-color: #e1e1e1;
-    border-style: solid;
-    border-width: 1px;
-    line-height: 38px;
-    background: -webkit-gradient(linear, left top, left bottom, from(#f6f6f6), to(#e1e1e1));
-    -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3), 0 1px 2px rgba(0, 0, 0, 0.15);
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3), 0 1px 2px rgba(0, 0, 0, 0.15)
-  }
-
-  .ici-btn-raised:hover, .ici-btn-raised:focus {
-    background: -webkit-gradient(linear, left top, left bottom, from(white), to(gainsboro));
-  }
-
-  .ici-btn-raised:active, .ici-btn-raised.active, .ici-btn-raised.is-active {
-    background: #eee;
-    -webkit-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2), 0px 1px 0 white;
-    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2), 0px 1px 0 white
-  }
-
-  //创建标准的按钮
-  .create-type(@type,@color,@bgColor) {
-    .ici-btn-@{type}, .ici-btn-@{type}-flat {
-      background-color: @bgColor;
-      border-color: @bgColor;
-      color: @color;
-
-      &:visited {
-        color: @color
-      }
-
-      &:hover, &:focus {
-        background-color: lighten(@bgColor, 10%);
-        border-color: lighten(@bgColor, 10%);
-        color: @color;
-      }
-
-      &:active, &.active, &.is-active {
-        background-color: desaturate(@bgColor, 10%);
-        border-color: desaturate(@bgColor, 10%);
-        color: darken(@bgColor, 10%);
-      }
-    }
-
-    .ici-btn-@{type}{
-      &.ici-btn-border, &.ici-btn-border-thin, &.ici-btn-border-thick {
-        color: @bgColor;
-        &:hover,  &:focus{
-          background-color:fade(lighten(@bgColor,10%),90%);
-          color:fade(@color,90);
+        &:visited {
+            color: #666
         }
-        &:active, &.active,&.is-active{
-          background-color: fade(desaturate(@bgColor,10%),70%);
-          color: fade(@color,50);
-          opacity: .3
-        }
-      }
 
-      //浮雕效果
-      &.ici-btn-raised {
-        border-color:darken(@bgColor,5%);
-        background: -webkit-gradient(linear, left top, left bottom, from(lighten(@bgColor,5%)), to(darken(@bgColor,5%)));
         &:hover, &:focus {
-          background: -webkit-gradient(linear, left top, left bottom, from(lighten(@bgColor,8%)), to(darken(@bgColor,7%)));
+            background-color: #f6f6f6;
+            text-decoration: none;
+            outline: 0;
+            box-shadow: 0 0 0 3px rgba(0, 0, 0, .2);
         }
-        &:active, &.active,&.is-active {
-          border-color: darken(@bgColor,10%);
-          background: desaturate(@bgColor,10%)
+
+        &:active, &.active, &.is-active {
+            text-shadow: 0 1px 0 rgba(255, 255, 255, 0.3);
+            text-decoration: none;
+            background-color: #eee;
+            border-color: #cfcfcf;
+            color: #d4d4d4;
+            -webkit-transition-duration: 0s;
+            transition-duration: 0s;
+            -webkit-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2);
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2);
         }
-      }
+
+        &.disabled, &.is-disabled, &:disabled {
+            top: 0 !important;
+            background: #EEE !important;
+            border: 1px solid #DDD !important;
+            text-shadow: 0 1px 1px white !important;
+            color: #CCC !important;
+            cursor: default !important;
+            appearance: none !important;
+            -webkit-box-shadow: none !important;
+            box-shadow: none !important;
+            opacity: .8 !important
+        }
 
     }
 
 
-
-  }
-  @primaryColor:#ff7306;
-  @actionColor:#a5de37;
-  @highlightColor:#feae1b;
-  @cautionColor:#ff4351;
-
-  .create-type(~'plain', #ff7306, #FFF);
-
-  .create-type(~'inverse', #EEE, #222);
-
-  .create-type(~'primary', #FFF, @primaryColor);
-
-  .create-type(~'action', #FFF, @actionColor);
-  .create-type(~'highlight', #FFF, @highlightColor);
-  .create-type(~'caution', #FFF, @cautionColor);
-
-
-  .ici-btn-block, .ici-btn-stacked {
-    display: block
-  }
-
-  .ici-btn-square {
-    border-radius: 0
-  }
-
-  .ici-btn-box {
-    border-radius: 10px
-  }
-
-  .ici-btn-rounded {
-    border-radius: 4px
-  }
-
-  .ici-btn-pill {
-    border-radius: 200px
-  }
-
-  .ici-btn-circle {
-    border-radius: 100%
-  }
-
-  .ici-btn-circle, .ici-btn-box, .ici-btn-square {
-    padding: 0 !important;
-    width: 40px;
-
-    &.ici-btn-giant {
-      width: 70px
+    .ici-btn-uppercase {
+        text-transform: uppercase
     }
 
-    &.ici-btn-jumbo {
-      width: 60px
+    .ici-btn-lowercase {
+        text-transform: lowercase
     }
 
-    &.ici-btn-large {
-      width: 50px
+    .ici-btn-capitalize {
+        text-transform: capitalize
     }
 
-    &.ici-btn-normal {
-      width: 40px
+    .ici-btn-small-caps {
+        font-variant: small-caps
     }
 
-    &.ici-btn-small {
-      width: 30px
+    .ici-btn-icon-txt-large {
+        font-size: 36px !important
     }
 
-    &.ici-btn-tiny {
-      width: 24px
-    }
-  }
-
-
-  .ici-btn-border, .ici-btn-border-thin, .ici-btn-border-thick {
-    background: 0;
-    border-width: 2px;
-    border-style: solid;
-    line-height: 36px;
-
-    &:hover {
-      background-color: rgba(255, 255, 255, 0.9)
+    .ici-btn-width-small {
+        padding: 0 10px !important
     }
 
-    &:active, &.active, &.is-active {
-      -webkit-box-shadow: none;
-      box-shadow: none;
-      text-shadow: none;
-      -webkit-transition-property: all;
-      transition-property: all;
-      -webkit-transition-duration: .3s;
-      transition-duration: .3s
+    .ici-btn-raised {
+        border-color: #e1e1e1;
+        border-style: solid;
+        border-width: 1px;
+        line-height: 38px;
+        background: -webkit-gradient(linear, left top, left bottom, from(#f6f6f6), to(#e1e1e1));
+        -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3), 0 1px 2px rgba(0, 0, 0, 0.15);
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3), 0 1px 2px rgba(0, 0, 0, 0.15)
     }
 
-    &.ici-btn-giant{
-      line-height: 66px
+    .ici-btn-raised:hover, .ici-btn-raised:focus {
+        background: -webkit-gradient(linear, left top, left bottom, from(white), to(gainsboro));
     }
-    &.ici-btn-jumbo{
-      line-height: 56px
+
+    .ici-btn-raised:active, .ici-btn-raised.active, .ici-btn-raised.is-active {
+        background: #eee;
+        -webkit-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2), 0px 1px 0 white;
+        box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2), 0px 1px 0 white
     }
-    &.ici-btn-large{
-      line-height: 46px
+
+    @baseColor: #444;
+    @baseBgColor: #d4d4d4;
+    .ici-btn-border, .ici-btn-border-thin, .ici-btn-border-thick {
+        color: @baseColor;
+        &:hover, &:focus {
+            background-color: fade(lighten(@baseBgColor, 10%), 90%);
+            color: fade(@baseColor, 90);
+        }
+        &:active, &.active, &.is-active {
+            background-color: fade(desaturate(@baseBgColor, 10%), 70%);
+            color: fade(@baseColor, 50);
+            opacity: .3
+        }
     }
-    &.ici-btn-normal{
-      line-height: 36px
+
+    //创建标准的按钮
+    .create-type(@type,@color,@bgColor) {
+        .ici-btn-@{type}, .ici-btn-@{type}-flat {
+            background-color: @bgColor;
+            border-color: @bgColor;
+            color: @color;
+
+            &:visited {
+                color: @color
+            }
+
+            &:hover, &:focus {
+                background-color: lighten(@bgColor, 10%);
+                border-color: lighten(@bgColor, 10%);
+                color: @color;
+            }
+
+            &:active, &.active, &.is-active {
+                background-color: desaturate(@bgColor, 10%);
+                border-color: desaturate(@bgColor, 10%);
+                color: darken(@bgColor, 10%);
+            }
+        }
+
+        .ici-btn-@{type} {
+            &.ici-btn-border, &.ici-btn-border-thin, &.ici-btn-border-thick {
+                color: @bgColor;
+
+                &:hover, &:focus {
+                    background-color: fade(lighten(@bgColor, 10%), 90%);
+                    color: fade(@color, 90);
+                }
+
+                &:active, &.active, &.is-active {
+                    background-color: fade(desaturate(@bgColor, 10%), 70%);
+                    color: fade(@color, 50);
+                    opacity: .3
+                }
+            }
+
+            //浮雕效果
+            &.ici-btn-raised {
+                border-color: darken(@bgColor, 5%);
+                background: -webkit-gradient(linear, left top, left bottom, from(lighten(@bgColor, 5%)), to(darken(@bgColor, 5%)));
+
+                &:hover, &:focus {
+                    background: -webkit-gradient(linear, left top, left bottom, from(lighten(@bgColor, 8%)), to(darken(@bgColor, 7%)));
+                }
+
+                &:active, &.active, &.is-active {
+                    border-color: darken(@bgColor, 10%);
+                    background: desaturate(@bgColor, 10%)
+                }
+            }
+
+        }
+
+
     }
-    &.ici-btn-small{
-      line-height: 26px
+
+    @primaryColor: #ff7306;
+    @actionColor: #a5de37;
+    @highlightColor: #feae1b;
+    @cautionColor: #ff4351;
+
+
+
+    .create-type(~'inverse', #EEE, #222);
+
+    .create-type(~'primary', #FFF, @primaryColor);
+
+    .create-type(~'action', #FFF, @actionColor);
+    .create-type(~'highlight', #FFF, @highlightColor);
+    .create-type(~'caution', #FFF, @cautionColor);
+
+
+    .ici-btn-block, .ici-btn-stacked {
+        display: block
     }
-    &.ici-btn-tiny{
-      line-height: 20px
+
+    .ici-btn-square {
+        border-radius: 0
     }
-  }
 
-  .ici-btn-border-thin {
-    border-width: 1px
-  }
+    .ici-btn-box {
+        border-radius: 10px
+    }
 
-  .ici-btn-border-thick {
-    border-width: 3px
-  }
+    .ici-btn-rounded {
+        border-radius: 4px
+    }
+
+    .ici-btn-pill {
+        border-radius: 200px
+    }
+
+    .ici-btn-circle {
+        border-radius: 100%
+    }
+
+    .ici-btn-circle, .ici-btn-box, .ici-btn-square {
+        padding: 0 !important;
+        width: 40px;
+
+        &.ici-btn-giant {
+            width: 70px
+        }
+
+        &.ici-btn-jumbo {
+            width: 60px
+        }
+
+        &.ici-btn-large {
+            width: 50px
+        }
+
+        &.ici-btn-normal {
+            width: 40px
+        }
+
+        &.ici-btn-small {
+            width: 30px
+        }
+
+        &.ici-btn-tiny {
+            width: 24px
+        }
+    }
 
 
-  .ici-btn-group {
-    position: relative;
-    display: inline-block
-  }
+    .ici-btn-border, .ici-btn-border-thin, .ici-btn-border-thick {
+        background: 0;
+        border-width: 2px;
+        border-style: solid;
+        line-height: 36px;
 
-  .ici-btn-group:after {
-    content: " ";
-    display: block;
-    clear: both
-  }
+        &:hover {
+            background-color: rgba(255, 255, 255, 0.9)
+        }
 
-  .ici-btn-wrap {
-    border: 1px solid #e3e3e3;
-    display: inline-block;
-    padding: 9px;
-    background: -webkit-gradient(linear, left top, left bottom, from(#f2f2f2), to(#FFF));
-    border-radius: 200px;
-    -webkit-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.04);
-    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.04)
-  }
+        &:active, &.active, &.is-active {
+            -webkit-box-shadow: none;
+            box-shadow: none;
+            text-shadow: none;
+            -webkit-transition-property: all;
+            transition-property: all;
+            -webkit-transition-duration: .3s;
+            transition-duration: .3s
+        }
 
-  .ici-btn-giant {
-    font-size: 28px;
-    height: 70px;
-    line-height: 70px;
-    padding: 0 70px
-  }
+        &.ici-btn-giant {
+            line-height: 66px
+        }
 
-  .ici-btn-jumbo {
-    font-size: 24px;
-    height: 60px;
-    line-height: 60px;
-    padding: 0 60px
-  }
+        &.ici-btn-jumbo {
+            line-height: 56px
+        }
 
-  .ici-btn-large {
-    font-size: 20px;
-    height: 50px;
-    line-height: 50px;
-    padding: 0 50px
-  }
+        &.ici-btn-large {
+            line-height: 46px
+        }
 
-  .ici-btn-normal {
-    font-size: 16px;
-    height: 40px;
-    line-height: 40px;
-    padding: 0 40px
-  }
+        &.ici-btn-normal {
+            line-height: 36px
+        }
 
-  .ici-btn-small {
-    font-size: 12px;
-    height: 30px;
-    line-height: 30px;
-    padding: 0 30px
-  }
+        &.ici-btn-small {
+            line-height: 26px
+        }
 
-  .ici-btn-tiny {
-    font-size: 9.6px;
-    height: 24px;
-    line-height: 24px;
-    padding: 0 24px
-  }
+        &.ici-btn-tiny {
+            line-height: 20px
+        }
+    }
 
-  .ici-btn-block {
-    width: 100%;
-    padding: 0 !important;
-  }
+    .ici-btn-border-thin {
+        border-width: 1px
+    }
+
+    .ici-btn-border-thick {
+        border-width: 3px
+    }
+
+
+    .ici-btn-group {
+        position: relative;
+        display: inline-block
+    }
+
+    .ici-btn-group:after {
+        content: " ";
+        display: block;
+        clear: both
+    }
+
+
+    .ici-btn-giant {
+        font-size: 28px;
+        height: 70px;
+        line-height: 70px;
+        padding: 0 70px
+    }
+
+    .ici-btn-jumbo {
+        font-size: 24px;
+        height: 60px;
+        line-height: 60px;
+        padding: 0 60px
+    }
+
+    .ici-btn-large {
+        font-size: 20px;
+        height: 50px;
+        line-height: 50px;
+        padding: 0 50px
+    }
+
+    .ici-btn-normal {
+        font-size: 16px;
+        height: 40px;
+        line-height: 40px;
+        padding: 0 40px
+    }
+
+    .ici-btn-small {
+        font-size: 12px;
+        height: 30px;
+        line-height: 30px;
+        padding: 0 30px
+    }
+
+    .ici-btn-tiny {
+        font-size: 9.6px;
+        height: 24px;
+        line-height: 24px;
+        padding: 0 24px
+    }
+
+    .ici-btn-block {
+        width: 100%;
+        padding: 0 !important;
+    }
 
 </style>

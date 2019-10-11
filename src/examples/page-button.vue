@@ -10,6 +10,7 @@
 <ici-button type="warning">你好啊</ici-button>
 <ici-button type="error">你好啊</ici-button>
 <ici-button type="ici">你好啊</ici-button>'>
+
       <ici-button type="primary">你好啊</ici-button>
       <ici-button type="info">你好啊</ici-button>
       <ici-button type="warning">你好啊</ici-button>
@@ -23,6 +24,7 @@
 <ici-button type="warning" shape="square">你好</ici-button>
 <ici-button type="error" shape="box">你好</ici-button>
 <ici-button type="ici" shape="circle">你好</ici-button>'>
+      <ici-button  shape="rounded">你好啊</ici-button>
       <ici-button type="primary" shape="rounded">你好啊</ici-button>
       <ici-button type="info" shape="pill">你好啊</ici-button>
       <ici-button type="warning" shape="square">你好</ici-button>
@@ -36,6 +38,7 @@
 <ici-button type="warning" size="large">你好</ici-button>
 <ici-button type="error" size="jumbo">你好</ici-button>
 <ici-button type="ici" size="giant">你好</ici-button>'>
+      <ici-button size="tiny">你好啊</ici-button>
       <ici-button type="primary" size="tiny">你好啊</ici-button>
       <ici-button type="info" size="small">你好啊</ici-button>
       <ici-button type="warning" size="large">你好</ici-button>
@@ -49,7 +52,7 @@
 <ici-button type="warning" plain>你好</ici-button>
 <ici-button type="error" plain>你好</ici-button>
 <ici-button type="ici" plain>你好</ici-button>'>
-
+      <ici-button plain>你好啊</ici-button>
       <ici-button type="primary" plain>你好啊</ici-button>
       <ici-button type="info" plain>你好啊</ici-button>
       <ici-button type="warning" plain>你好</ici-button>
@@ -66,6 +69,7 @@
 <ici-button type="error" relievo>你好</ici-button>
 <ici-button type="ici" relievo>你好</ici-button>'>
       <div>
+        <ici-button relievo>你好啊</ici-button>
         <ici-button type="primary" relievo>你好啊</ici-button>
         <ici-button type="info" relievo>你好啊</ici-button>
         <ici-button type="warning" relievo>你好</ici-button>
