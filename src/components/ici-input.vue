@@ -222,7 +222,6 @@
       transform-origin: bottom left;
       transition: all .3s cubic-bezier(0.4, 0, 0.2, 1);
       transition-property: color, bottom, transform;
-      color: rgba(0, 0, 0, 0.38);
       font: 400 16px Roboto, RobotoDraft, Helvetica, Arial, sans-serif, "Microsoft YaHei", "微软雅黑";
       pointer-events: none;
       position: absolute;
@@ -249,7 +248,6 @@
         padding-right: 0px;
       }
 
-      color: #666 !important;
       font-size: 14px !important;
 
       * {
