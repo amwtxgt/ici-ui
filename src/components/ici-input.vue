@@ -11,7 +11,7 @@
         {{label}}
       </label>
       <div class="fms-input-status" :class="{'input-status-foucs':hasFocus}"></div>
-      <ici-hint v-model="showHint" :loading="hint===true">
+      <ici-hint v-model="showHint" :loading="hint===true" :class="hintClass">
         <!--列表头部-->
         <div v-if="showTitle" class="fms-input-hint-li fms-input-hint-li-add" @mousedown="select(-1)"
              :class="{active:selectIndex==-1}">
@@ -61,6 +61,7 @@
         type: String,
         default: ''
       },
+      hintClass:String,
       hint: {
         type: [Array, Boolean],
       },
