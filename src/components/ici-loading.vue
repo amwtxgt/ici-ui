@@ -191,7 +191,7 @@
   }
 
   .rect-red {
-    fill: #c01639;
+    fill: #ff7306;
   }
 
   .rect-black {

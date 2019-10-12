@@ -25,8 +25,8 @@
           <div class="fms-popup-handle">
             <!--slot-->
             <slot name="footer-right">
-              <ici-button v-if="hasConfirm" :loading="loading" @click="$emit('confirm')">confirm</ici-button>
-              <ici-button @click="$emit('input',false)">close</ici-button>
+              <ici-button v-if="hasConfirm" shape="pill" type="primary" :loading="loading" @click="$emit('confirm')">confirm</ici-button>
+              <ici-button type="primary" shape="pill" plain @click="$emit('input',false)">close</ici-button>
             </slot>
           </div>
         </div>

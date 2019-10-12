@@ -81,9 +81,9 @@
     transition: all .3s;
     background: #fff;
     &.active {
-      background: #C01639;
+      background: #ff7306;
       color: rgba(255,255,255,.7);
-      border: 1px solid #C01639;
+      border: 1px solid #ff7306;
 
     }
   }

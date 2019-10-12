@@ -18,7 +18,7 @@
         <ici-loading :type="6"></ici-loading>
       </baseComponent>
 
-      <baseComponent title="颜色 color 默认#c01639 " html=''>
+      <baseComponent title="颜色 color 默认#ff7306 " html=''>
         <ici-loading color="green"></ici-loading>
         <ici-loading color="blue"></ici-loading>
         <ici-loading color="pink"></ici-loading>

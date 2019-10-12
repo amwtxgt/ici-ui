@@ -30,7 +30,7 @@
   }
 </script>
 
-<style scoped lang="less">
+<style  lang="less">
   .fms-input-hint {
     position: absolute;
     left: 0;
