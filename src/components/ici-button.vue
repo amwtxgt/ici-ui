@@ -312,7 +312,7 @@
 
     }
 
-    @primaryColor: #ff7306;
+    @primaryColor: #f6764e;
     @actionColor: #a5de37;
     @highlightColor: #feae1b;
     @cautionColor: #ff4351;

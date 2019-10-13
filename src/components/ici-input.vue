@@ -236,7 +236,7 @@
       }
 
       &.input-label-foucs {
-        color: #ff7306;
+        color: #f6764e;
         transform: scale(.75) translateY(-30px);
       }
     }
@@ -293,7 +293,7 @@
       opacity: 0;
       width: 100%;
       height: 2px;
-      background: #ff7306;
+      background: #f6764e;
       bottom: 0;
       left: 0;
       transform: translate3d(0, 0, 0) scale(0, 1);
