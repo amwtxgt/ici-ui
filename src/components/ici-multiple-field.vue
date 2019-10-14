@@ -199,9 +199,9 @@
     }
 
     &.active {
-      background: #f6764e;
+      background: #ee8615;
       color: rgba(255, 255, 255, .7);
-      border: 1px solid #f6764e;
+      border: 1px solid #ee8615;
     }
   }
 
