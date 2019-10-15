@@ -157,9 +157,3 @@
     },
   }
 </script>
-
-<style scoped>
-  .s{
-    overflow: visible;
-  }
-</style>

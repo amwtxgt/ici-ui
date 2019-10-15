@@ -160,57 +160,5 @@
 </script>
 
 <style scoped lang="less">
-  div.ici-loading {
-    text-align: center;
-    display: inline-block;
-    flex-direction: column;
-    justify-content: center;
-    &.ici-block {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
-      z-index: 10;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: rgba(255, 255, 255, .6);
-      display: flex;
-      align-items: center;
-      flex-direction: row;
-      justify-content: center;
-    }
-    &.ici-disabled {
-      opacity: 0.5;
-    }
-  }
 
-  svg {
-    vertical-align: middle;
-  }
-
-  .rect-red {
-    fill: #ee8615;
-  }
-
-  .rect-black {
-    fill: #3F3F3F;
-  }
-
-  .rect-white {
-    fill: #fff !important;
-  }
-
-  .loading-enter-active, .loading-leave-active {
-    transition: opacity .3s;
-  }
-
-  .loading-leave-active {
-    position: absolute !important;
-  }
-
-  .loading-enter, .loading-leave-to {
-    opacity: 0;
-  }
 </style>

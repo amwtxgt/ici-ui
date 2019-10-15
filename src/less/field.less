@@ -1,0 +1,64 @@
+.ici-multiple-field,.ici-radio-field {
+    position: relative;
+    display: inline-block;
+    span {
+        &.addspan {
+            min-width: 70px;
+        }
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        cursor: pointer;
+        display: inline-block;
+        margin: 5px 5px 5px 0;
+        padding: 2px 15px;
+        outline: none;
+        color: #777;
+        border: 1px dashed #bbb;
+        border-radius: 50px;
+        transition: all 0.3s;
+        background: #fff;
+        &:hover + .close {
+            visibility: visible;
+        }
+
+        &.active {
+            background: #ee8615;
+            color: rgba(255, 255, 255, .7);
+            border: 1px solid #ee8615;
+        }
+    }
+    .radio-btn {
+        margin-left: 0 !important;
+    }
+
+    .read-write {
+        background: #fff !important;
+        color: #666 !important;
+        box-shadow: inset 0 3px 4px 0 rgba(0, 0, 0, .5);
+        -webkit-user-modify: read-write-plaintext-only;
+        &:after {
+            text-shadow: 1px 1px 5px #999;
+        }
+    }
+
+
+
+    .close {
+        visibility: hidden;
+        position: absolute;
+        top: 0;
+        right: 0;
+        background: rgba(0, 0, 0, .5);
+        padding: 2px;
+        &:hover {
+            visibility: visible;
+        }
+    }
+
+    .radio-btn {
+        margin-left: 0 !important;
+    }
+}

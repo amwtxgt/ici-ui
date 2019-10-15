@@ -1,0 +1,78 @@
+.ici-mask-enter-active {
+    transition: all .3s !important;
+}
+
+.ici-mask-leave-active {
+    transition: all .3s !important;
+}
+
+.ici-mask-enter, .ici-mask-leave-to {
+    opacity: 0 !important;
+}
+
+.ici-mask-enter-to {
+    opacity: 1 !important;
+}
+.ici-message-wrap {
+    position: fixed !important;
+    display: flex;
+    justify-content: center;
+    left: 25px;
+    right: 25px;
+    bottom: 30px;
+    pointer-events: none;
+    z-index: 99999;
+    &.message-top {
+        top: 30px;
+        bottom: auto;
+    }
+    &.message-center {
+        top: 50%;
+        height: 0;
+        align-items: center;
+        bottom: auto;
+    }
+    .ici-message {
+        display: flex;
+        align-items: center;
+        pointer-events: auto;
+        background: @tc-base;
+        color: @bgc-base;
+        box-shadow: 0 0 4px grey;
+        transition: all .3s;
+        font-size: 16px;
+        padding: 10px 20px;
+        border-radius: 2px 2px 0 0;
+        min-width: 290px;
+        visibility: hidden;
+        opacity: 0;
+        transform: scale(.8);
+        &.message-show {
+            visibility: visible;
+            opacity: 1;
+            transform: scale(1);
+        }
+        .ici-message-left, ici-message-right {
+            flex: none;
+        }
+
+        .ici-message-body {
+            margin: 0 10px 0 5px;
+            flex: auto;
+        }
+    }
+}
+
+.message-mask {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: rgba(0, 0, 0, .5);
+
+    pointer-events: auto;
+}
+.ici-msg-btns{
+    margin-left:5px;
+}

@@ -74,24 +74,5 @@
 </script>
 
 <style scoped lang="less">
-  .ici-tooltip {
-    max-width: 500px;
-    word-wrap: break-word;
-    word-break: break-word;
-    text-align: left;
-    z-index: 9999999;
-    pointer-events: none;
-    position: fixed;
-    padding: 5px 8px;
-    box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 4px 0px;
-    background: #444;
-    color: #fff;
-    border-radius: 5px;
-    font-size:12px;
-    opacity: 0;
-    transition: opacity .3s;
-    &.show {
-      opacity: 1;
-    }
-  }
+
 </style>

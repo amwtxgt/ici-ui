@@ -1,16 +1,16 @@
 <template>
-  <div class="scroll-loading-wrap">
-    <div class="scroll-loading-icon loading-top" :class="{toploading:loading && hasTop}">
-      <ici-loading class="scroll-loading-inner" size="small">
+  <div class="ici-scroll-wrap">
+    <div class="ici-scroll-icon loading-top" :class="{toploading:loading && hasTop}">
+      <ici-loading class="ici-scroll-inner" size="small">
         <span class="loading-Text" v-if="topText">{{topText}}</span>
       </ici-loading>
     </div>
-    <div ref="scrollLoading" class="scroll-loading" :style="{overflowY:overflow}"
+    <div ref="scrollLoading" class="ici-scroll" :style="{overflowY:overflow}"
          @mousewheel.passive="mousewheel" @DOMMouseScroll.passive="mousewheel" v-observe="_self">
       <slot></slot>
     </div>
-    <div class="scroll-loading-icon loading-bottom" :class="{toploading:loading && hasBottom}">
-      <ici-loading class="scroll-loading-inner" size="small">
+    <div class="ici-scroll-icon loading-bottom" :class="{toploading:loading && hasBottom}">
+      <ici-loading class="ici-scroll-inner" size="small">
         <span class="loading-Text" v-if="bottomText">{{bottomText}}</span>
       </ici-loading>
 
@@ -52,7 +52,7 @@
   }
   let timeout = timeoutPerform(60)
   export default {
-    name: "scroll-loading",
+    name: "ici-scroll",
     data() {
       return {
         scrollHeight: 0, //滚动区域总高度
@@ -252,75 +252,7 @@
 </script>
 
 <style scoped lang="less">
-  .scroll-loading-wrap {
-    position: relative;
-    height: 100%;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-  }
 
-  .scroll-loading {
-    height: 100%;
-    overflow-x: hidden;
-    position: relative;
-
-    &::-webkit-scrollbar {
-      width: 6px;
-      height: 10px;
-    }
-
-    &::-webkit-scrollbar-thumb, &::-webkit-scrollbar-thumb {
-      background-color: #888;
-    }
-
-    &::-webkit-scrollbar-track, &::-webkit-scrollbar-track {
-      background-color: #f0f0f0;
-    }
-  }
-
-  .scroll-loading-icon {
-    z-index: 50;
-    width: 100%;
-    position: absolute;
-    text-align: center;
-    transform: scale(.2) translate(0, 0px);
-    transition: all .3s .2s;
-    opacity: 0;
-    pointer-events: none;
-
-    &.loading-top {
-      top: 0px;
-
-      &.toploading {
-        transition: all .5s;
-        opacity: 1;
-        transform: scale(1) translate(0, 20px);
-      }
-    }
-
-    &.loading-bottom {
-      bottom: 0px;
-
-      &.toploading {
-        transition: all .5s ease-in;
-        opacity: 1;
-        transform: scale(1) translate(0, -20px);
-      }
-    }
-
-    .scroll-loading-inner {
-      border-radius: 40px;
-      padding: 4px;
-      background: rgba(255, 255, 255, .9);
-      box-shadow: 1px 1px 5px 0 rgba(50, 50, 50, .3);
-    }
-
-    .loading-Text {
-      vertical-align: middle;
-      padding: 0 7px 0 0px;
-    }
-  }
 
 
 </style>

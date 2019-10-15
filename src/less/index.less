@@ -1,0 +1,32 @@
+@import "button";
+@import "input";
+@import "bgimg";
+@import "icon";
+@import "drawer";
+@import "header";
+//主色，链接颜色
+@color-primary: #ee8615;
+
+//功能色
+@color-success: #67C23A; //功能
+@color-warning: #E6A23C; //警告
+@color-danger: #F56C6C; //危险
+@color-info: #808290; //信息
+
+//文字
+@tc-base: #303133;
+
+//边框色
+@bdc-base: #cccfd6; //一级
+
+//背景色
+@bgc-base: #f6f6f6; //一级
+
+//底副色
+.deputyColor (@color,@prm,@attribute,@percent:70%) when (lightness(@color) >= @percent) {
+        @{attribute}: darken(@color, @prm);
+}
+
+.deputyColor (@color,@prm,@attribute,@percent:70%) when (lightness(@color) < @percent) {
+        @{attribute}: lighten(@color, @prm);
+}

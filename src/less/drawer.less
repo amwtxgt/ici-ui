@@ -1,0 +1,63 @@
+
+.drawer-enter-active, .drawer-leave-active {
+    transition: opacity 333ms;
+}
+
+.drawer-enter-to, .drawer-leave {
+    .ici-drawer-mask {
+        opacity: 1;
+    }
+}
+
+.drawer-enter, .drawer-leave-to {
+    .ici-drawer-mask {
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    .drawer-right {
+        transform: translate(100%, 0, 0) !important;
+    }
+
+    .drawer-left {
+        transform: translate(-100%, 0, 0) !important;
+    }
+}
+
+.ici-drawer {
+    position: fixed;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 999;
+
+    .ici-drawer-mask {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        transform: translate3d(0);
+        transition: opacity 333ms cubic-bezier(.4, 0, .22, 1);
+    }
+
+    .ici-drawer-body {
+        max-width: 100%;
+        height: 100%;
+        position: absolute;
+        pointer-events: auto;
+        z-index: 11;
+        top: 0;
+        background: @bgc-base;
+        transform: translate3d(0);
+        transition: all 333ms cubic-bezier(.4, 0, .22, 1);
+
+        &.drawer-left {
+            left: 0;
+        }
+
+        &.drawer-right {
+            right: 0;
+        }
+    }
+}

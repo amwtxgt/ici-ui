@@ -1,19 +1,19 @@
 <template>
-  <div class="fms-input">
+  <div class="ici-input">
     <div v-if="showPrefix" class="prefix" :style="prefixStyle">
       <slot name="prefix"></slot>
     </div>
     <div class="input-inner">
-      <input @blur="blur" class="fms-input-input" :class="borderClass" :type="password?'password':'text'" @paste.stop='' :style="inputStyle"
+      <input @blur="blur" class="ici-input-input" :class="borderClass" :type="password?'password':'text'" @paste.stop='' :style="inputStyle"
              @change="$emit('change',$event)" :value="value" @input="input" v-focus="focus" @focus="focusEvent" ref="inputs"
              :placeholder="hiddenLabel?label:''" @keydown.up.down.stop.prevent="keydown" @keyup.enter.stop.prevent="enter">
-      <label v-if="!hiddenLabel" class="fms-input-label" :class="{substantial:isSubstantial,'input-label-foucs':hasFocus}">
+      <label v-if="!hiddenLabel" class="ici-input-label" :class="{substantial:isSubstantial,'input-label-foucs':hasFocus}">
         {{label}}
       </label>
-      <div class="fms-input-status" :class="{'input-status-foucs':hasFocus}"></div>
+      <div class="ici-input-status" :class="{'input-status-foucs':hasFocus}"></div>
       <ici-hint v-model="showHint" :loading="hint===true" :class="hintClass">
         <!--列表头部-->
-        <div v-if="showTitle" class="fms-input-hint-li fms-input-hint-li-add" @mousedown="select(-1)"
+        <div v-if="showTitle" class="ici-input-hint-li ici-input-hint-li-add" @mousedown="select(-1)"
              :class="{active:selectIndex==-1}">
           <slot name="title"></slot>
         </div>
@@ -22,7 +22,7 @@
         <div v-if="hint instanceof Array">
           <!--组件内部不知道，数组内的对象属性，所以需要暴露出去-->
           <div v-for="(item,index) of hint" @mousedown="select(index)"
-               class="fms-input-hint-li" :class="{active:selectIndex==index}" v-show="item">
+               class="ici-input-hint-li" :class="{active:selectIndex==index}" v-show="item">
             <slot :item="item" :index="index"></slot>
           </div>
         </div>
@@ -209,133 +209,4 @@
 
 <style scoped lang="less">
 
-  .fms-input {
-    position: relative;
-    display: flex;
-    align-items: center;
-    flex-wrap: nowrap;
-    width: 100%;
-    min-height: 48px;
-    padding-top: 3px;
-
-    label.fms-input-label {
-      text-align: left;
-      transform-origin: bottom left;
-      transition: all .3s cubic-bezier(0.4, 0, 0.2, 1);
-      transition-property: color, bottom, transform;
-      font: 400 16px Roboto, RobotoDraft, Helvetica, Arial, sans-serif, "Microsoft YaHei", "微软雅黑";
-      pointer-events: none;
-      position: absolute;
-      bottom: 6px;
-      margin-bottom: 0;
-      left: 0;
-      width: 100%;
-
-      &.substantial {
-        transform: scale(.75) translateY(-30px);
-      }
-
-      &.input-label-foucs {
-        color: #ee8615;
-        transform: scale(.75) translateY(-30px);
-      }
-    }
-
-    .prefix {
-      flex: none;
-      padding-right: 5px;
-
-      &:empty {
-        padding-right: 0px;
-      }
-
-      font-size: 14px !important;
-
-      * {
-        vertical-align: middle;
-      }
-    }
-
-    .input-inner {
-
-      position: relative;
-      flex: auto;
-    }
-
-
-    input {
-      display: block;
-      width: 100%;
-      font-size: 16px;
-      line-height: 30px;
-      flex-grow: 1;
-      flex-shrink: 1;
-      background-color: transparent;
-      margin: 0 !important;
-      outline: none;
-      padding: 0 !important;
-      box-shadow: none !important;
-      border-radius: 0 !important;
-      border-top: none !important;
-      border-left: none !important;
-      border-right: none !important;
-      border-width:1px !important;
-      border-bottom-style: solid !important;
-
-      &.default-border-color{
-        border-bottom-color:rgba(0, 0, 0, 0.2) !important
-      }
-    }
-
-    .fms-input-status {
-      position: absolute;
-      transition: all .3s cubic-bezier(0.4, 0, 0.2, 1);
-      opacity: 0;
-      width: 100%;
-      height: 2px;
-      background: #ee8615;
-      bottom: 0;
-      left: 0;
-      transform: translate3d(0, 0, 0) scale(0, 1);
-
-      &.input-status-foucs {
-        opacity: 1;
-        transform: translate3d(0, 0, 0) scale(1, 1);
-      }
-    }
-  }
-
-  .fms-input-hint-li {
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    padding: 5px 10px;
-    border-bottom: 1px solid #ddd;
-
-    &.active {
-      background: #eee;
-    }
-
-    &.fms-input-hint-li-add {
-      display: block;
-      padding: 10px 10px;
-      text-align: center;
-
-      &:hover {
-        background: #eee;
-      }
-    }
-
-    &:last-child {
-      border-width: 0px;
-    }
-
-    .fms-input-hint-icon {
-      width: 35px;
-      height: 35px;
-      flex: none;
-      background: #eee no-repeat center;
-      background-size: contain;
-    }
-  }
 </style>

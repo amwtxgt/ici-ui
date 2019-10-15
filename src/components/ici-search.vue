@@ -254,7 +254,7 @@
 
   .ici-hint-addclass {
     border-radius: 5px !important;
-    overflow: hidden;
+    overflow: auto;
   }
 
 </style>

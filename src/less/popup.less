@@ -1,0 +1,127 @@
+
+.ici-popup-enter-active, .ici-mask-enter-active {
+    transition: all .7s !important;
+}
+
+.ici-popup-leave-active, .ici-mask-leave-active {
+    transition: all .5s !important;
+}
+
+.ici-mask-enter, .ici-mask-leave-to {
+    opacity: 0 !important;
+}
+
+.ici-mask-enter-to {
+    opacity: 1 !important;
+}
+
+.ici-popup-layer {
+    bottom: 0;
+    left: 0;
+    right: 0;
+    top: 0;
+    z-index: 999;
+    padding: 5%;
+    display: flex;
+    perspective: 1000px;
+    transform-origin: 0 0 100px;
+    outline: none;
+    pointer-events: none;
+    align-items: center;
+    flex-direction: column;
+    backface-visibility: hidden;
+
+    .mark {
+        background-color: rgba(0, 0, 0, .45);
+        pointer-events: auto;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        top: 0;
+    }
+
+    &.ici-popup-enter, &.ici-popup-leave-to {
+        .ici-popup {
+            opacity: 0;
+            transform: translate3d(-0px, -50px, -100px) !important;
+        }
+    }
+    &.ici-popup-enter-to {
+        .ici-popup {
+            opacity: 1;
+            transform: translate3d(0, 0, 0) !important;
+        }
+    }
+    .ici-popup {
+        min-height: 200px;
+        pointer-events: auto;
+        width: 100%;
+        align-items: stretch;
+        display: flex;
+        flex-shrink: 1;
+        flex-direction: column;
+        transition: transform .3s cubic-bezier(.5, 0.0, 0.2, 1), opacity .3s, max-width .2s, width .2s !important;
+        position: relative;
+        background-color: @bgc-base;
+        border-radius: 2px;
+        box-shadow: 0 12px 15px 0 rgba(0, 0, 0, 0.24);
+        outline: none;
+        &.title-bg-color{
+            .deputyColor(@bgc-base,6%,~"background-color");
+        }
+        .ici-popup-title {
+            cursor: move;
+            user-select: none;
+            flex: none;
+            &:empty {
+                display: none;
+            }
+
+            padding: 15px 20px;
+            font-size: 20px;
+            align-items: center;
+            display: flex;
+            justify-content: space-between;
+            vertical-align: middle;
+            position: relative;
+            -webkit-transition: box-shadow .1s ease-in-out;
+            transition: box-shadow .1s ease-in-out;
+            width: 100%;
+            z-index: 1;
+            /*滚动效果*/
+            &.roll {
+                box-shadow: 0 0 10px silver;
+            }
+        }
+
+        .ici-popup-body {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            flex: auto;
+            display: flex;
+            .ici-popup-body-inner {
+                flex: auto;
+                overflow: auto;
+                max-height: 100%;
+                &.noscroll {
+                    overflow: visible;
+                }
+            }
+        }
+        .ici-popup-footer {
+            flex: none;
+            padding: 5px 10px;
+            display: flex;
+            .ici-popup-footer-left {
+                flex: auto
+            }
+            .ici-popup-handle {
+                flex: auto;
+                padding: 5px;
+                text-align: right;
+            }
+        }
+    }
+}

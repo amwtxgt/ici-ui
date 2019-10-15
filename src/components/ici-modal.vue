@@ -88,16 +88,6 @@
 </script>
 
 <style lang="less">
-  .ici-modal {
-    z-index: 99999 !important;
-    .ici-modal-msg {
-      font-size: 15px;
-      padding: 0px 20px 10px 50px;
 
-    }
-  }
-  .ici-modal-title{
-    background:#fff !important;
-  }
 
 </style>

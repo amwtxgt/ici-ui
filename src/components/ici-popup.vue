@@ -1,28 +1,28 @@
 <template>
   <transition name="ici-popup">
-    <div v-show="value" class="fms-popup-layer" :style="popupLayer" v-focus="value" tabindex="0"
+    <div v-show="value" class="ici-popup-layer" :style="popupLayer" v-focus="value" tabindex="0"
          @keydown.esc.stop="esc && $emit('input',false)">
       <transition name="ici-mask">
         <div class="mark" v-if="value && mask" @click.self="clickMark"></div>
       </transition>
-      <div class="fms-popup" :style="popupStyle" ref="fmsPopup">
+      <div class="ici-popup" :style="popupStyle" ref="fmsPopup">
 
-        <div ref="header" class="fms-popup-title" :class="titleClass||'title-bg-color'" @mousedown="mousedown">
+        <div ref="header" class="ici-popup-title" :class="titleClass||'title-bg-color'" @mousedown="mousedown">
           <slot name="header">{{title}}</slot>
         </div>
-        <div class="fms-popup-body" :style="popupBody" :class="bodyClass" @mousedown="bodyMousedown">
+        <div class="ici-popup-body" :style="popupBody" :class="bodyClass" @mousedown="bodyMousedown">
           <!--slot-->
-          <div class="fms-popup-body-inner" :class="{noscroll:noScroll}">
+          <div class="ici-popup-body-inner" :class="{noscroll:noScroll}">
             <slot></slot>
           </div>
           <ici-loading v-show="loading" block></ici-loading>
         </div>
-        <div ref="footer" class="fms-popup-footer" :class="bodyClass" v-if="!footerHide" @mousedown="mousedown">
-          <div v-if="$slots['footer-left']" class="fms-popup-footer-left">
+        <div ref="footer" class="ici-popup-footer" :class="bodyClass" v-if="!footerHide" @mousedown="mousedown">
+          <div v-if="$slots['footer-left']" class="ici-popup-footer-left">
             <!--slot-->
             <slot name="footer-left"></slot>
           </div>
-          <div class="fms-popup-handle">
+          <div class="ici-popup-handle">
             <!--slot-->
             <slot name="footer-right">
               <ici-button v-if="hasConfirm" shape="pill" type="primary" :loading="loading" @click="$emit('confirm')">confirm</ici-button>
@@ -205,130 +205,4 @@
 
 <style scoped lang="less">
 
-  .ici-popup-enter-active, .ici-mask-enter-active {
-    transition: all .7s !important;
-  }
-
-  .ici-popup-leave-active, .ici-mask-leave-active {
-    transition: all .5s !important;
-  }
-
-  .ici-mask-enter, .ici-mask-leave-to {
-    opacity: 0 !important;
-  }
-
-  .ici-mask-enter-to {
-    opacity: 1 !important;
-  }
-
-  .fms-popup-layer {
-    bottom: 0;
-    left: 0;
-    right: 0;
-    top: 0;
-    z-index: 999;
-    padding: 5%;
-    display: flex;
-    perspective: 1000px;
-    transform-origin: 0 0 100px;
-    outline: none;
-    pointer-events: none;
-    align-items: center;
-    flex-direction: column;
-    backface-visibility: hidden;
-
-    .mark {
-      background-color: rgba(0, 0, 0, .45);
-      pointer-events: auto;
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      top: 0;
-    }
-
-    &.ici-popup-enter, &.ici-popup-leave-to {
-      .fms-popup {
-        opacity: 0;
-        transform: translate3d(-0px, -50px, -100px) !important;
-      }
-    }
-    &.ici-popup-enter-to {
-      .fms-popup {
-        opacity: 1;
-        transform: translate3d(0, 0, 0) !important;
-      }
-    }
-    .fms-popup {
-      min-height: 200px;
-      pointer-events: auto;
-      width: 100%;
-      align-items: stretch;
-      display: flex;
-      flex-shrink: 1;
-      flex-direction: column;
-      transition: transform .3s cubic-bezier(.5, 0.0, 0.2, 1), opacity .3s, max-width .2s, width .2s !important;
-      position: relative;
-      background-color: #fff;
-      border-radius: 2px;
-      box-shadow: 0 12px 15px 0 rgba(0, 0, 0, 0.24);
-      outline: none;
-      &.title-bg-color{
-        background-color: #f7f7f7;
-      }
-      .fms-popup-title {
-        cursor: move;
-        user-select: none;
-        flex: none;
-        &:empty {
-          display: none;
-        }
-
-        padding: 15px 20px;
-        font-size: 20px;
-        align-items: center;
-        display: flex;
-        justify-content: space-between;
-        vertical-align: middle;
-        position: relative;
-        -webkit-transition: box-shadow .1s ease-in-out;
-        transition: box-shadow .1s ease-in-out;
-        width: 100%;
-        z-index: 1;
-        /*滚动效果*/
-        &.roll {
-          box-shadow: 0 0 10px silver;
-        }
-      }
-
-      .fms-popup-body {
-        position: relative;
-        width: 100%;
-        height: 100%;
-        flex: auto;
-        display: flex;
-        .fms-popup-body-inner {
-          flex: auto;
-          overflow: auto;
-          max-height: 100%;
-          &.noscroll {
-            overflow: visible;
-          }
-        }
-      }
-      .fms-popup-footer {
-        flex: none;
-        padding: 5px 10px;
-        display: flex;
-        .fms-popup-footer-left {
-          flex: auto
-        }
-        .fms-popup-handle {
-          flex: auto;
-          padding: 5px;
-          text-align: right;
-        }
-      }
-    }
-  }
 </style>

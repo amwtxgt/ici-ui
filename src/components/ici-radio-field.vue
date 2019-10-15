@@ -1,6 +1,6 @@
 <template>
-  <div class="radio_field" v-if="values && values instanceof Array">
-    <div class="radio_field" v-for="(item,index) of copyValues" :key="`radio_field${index}${item.value}`">
+  <div class="ici-radio-field" v-if="values && values instanceof Array">
+    <div class="ici-radio-field" v-for="(item,index) of copyValues" :key="`ici-radio-field${index}${item.value}`">
 			<span :style="{fontSize:size}" :class="{'read-write':editIndex===index ,'active':item.value==value}"
             :contenteditable="editIndex===index"  @blur="blur(index,$event)"
             @keydown.stop.prevent.enter="blur(index,$event)"
@@ -22,7 +22,7 @@
 <script>
   import fieldMixin from '../mixins/fieldMixin'
   export default {
-    name: "radio_field",
+    name: "ici-radio-field",
     mixins: [fieldMixin],
     props: {
       value: {
@@ -59,53 +59,3 @@
     }
   }
 </script>
-
-<style scoped lang="less">
-  span {
-    &.addspan {
-      min-width: 70px;
-    }
-    -webkit-user-select: none;
-    -khtml-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    outline: none;
-    cursor: pointer;
-    display: inline-block;
-    margin: 5px 5px 5px 0;
-    padding: 2px 15px;
-    color: #777;
-    border: 1px dashed #bbb;
-    border-radius: 50px;
-    transition: all .3s;
-    background: #fff;
-    &.active {
-      background: #ee8615;
-      color: rgba(255,255,255,.7);
-      border: 1px solid #ee8615;
-
-    }
-  }
-
-  .radio-btn {
-    margin-left: 0 !important;
-  }
-
-  .read-write {
-    background: #fff !important;
-    color: #666 !important;
-    box-shadow: inset 0 0 7px 0 rgba(0, 0, 0, .5);
-    -webkit-user-modify: read-write-plaintext-only;
-    user-modify: read-write-plaintext-only;
-  }
-
-  .read-write:after {
-    text-shadow: 1px 1px 5px #999;
-  }
-
-  .radio_field {
-    display: inline-block;
-  }
-
-</style>

@@ -1,6 +1,6 @@
 <template>
-  <div class="multiple_field" v-if="values && values.length">
-    <div class="multiple_field" v-for="(item,index) of copyValues" :key="`multiple_field${index}-${item.value}`">
+  <div class="ici-multiple-field" v-if="values && values.length">
+    <div class="ici-multiple-field" v-for="(item,index) of copyValues" :key="`ici-multiple-field${index}-${item.value}`">
 			<span :style="{fontSize:size}" :class="{'read-write':editIndex===index,'active':value.some(val=>val==item.value)}"
             :contenteditable="editIndex===index" @paste="$funs.contenteditable" v-focus="editIndex==index"
             @blur.stop.prevent="blur(index,$event)" @keydown.stop.prevent.enter="blur(index,$event)"
@@ -173,68 +173,3 @@
     }
   }
 </script>
-
-<style scoped lang="less">
-  span {
-    &.addspan {
-      min-width: 70px;
-    }
-    -webkit-user-select: none;
-    -khtml-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    cursor: pointer;
-    display: inline-block;
-    margin: 5px 5px 5px 0;
-    padding: 2px 15px;
-    outline: none;
-    color: #777;
-    border: 1px dashed #bbb;
-    border-radius: 50px;
-    transition: all 0.3s;
-    background: #fff;
-    &:hover + .close {
-      visibility: visible;
-    }
-
-    &.active {
-      background: #ee8615;
-      color: rgba(255, 255, 255, .7);
-      border: 1px solid #ee8615;
-    }
-  }
-
-  .read-write {
-    background: #fff !important;
-    color: #666 !important;
-    box-shadow: inset 0 3px 4px 0 rgba(0, 0, 0, .5);
-    -webkit-user-modify: read-write-plaintext-only;
-  }
-
-  .read-write:after {
-    text-shadow: 1px 1px 5px #999;
-  }
-
-  .multiple_field {
-    position: relative;
-    display: inline-block;
-
-  }
-
-  .close {
-    visibility: hidden;
-    position: absolute;
-    top: 0;
-    right: 0;
-    background: rgba(0, 0, 0, .5);
-    padding: 2px;
-    &:hover {
-      visibility: visible;
-    }
-  }
-
-  .radio-btn {
-    margin-left: 0 !important;
-  }
-</style>

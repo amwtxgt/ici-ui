@@ -1,0 +1,69 @@
+.ici-scroll-wrap {
+    position: relative;
+    height: 100%;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.ici-scroll {
+    height: 100%;
+    overflow-x: hidden;
+    position: relative;
+
+    &::-webkit-scrollbar {
+        width: 6px;
+        height: 10px;
+    }
+
+    &::-webkit-scrollbar-thumb, &::-webkit-scrollbar-thumb {
+        background-color: fade(@tc-base,70%);
+    }
+
+    &::-webkit-scrollbar-track, &::-webkit-scrollbar-track {
+        .deputyColor(@bgc-base,9%,~"background-color")
+    }
+}
+
+.ici-scroll-icon {
+    z-index: 50;
+    width: 100%;
+    position: absolute;
+    text-align: center;
+    transform: scale(.2) translate(0, 0px);
+    transition: all .3s .2s;
+    opacity: 0;
+    pointer-events: none;
+
+    &.loading-top {
+        top: 0px;
+
+        &.toploading {
+            transition: all .5s;
+            opacity: 1;
+            transform: scale(1) translate(0, 20px);
+        }
+    }
+
+    &.loading-bottom {
+        bottom: 0px;
+
+        &.toploading {
+            transition: all .5s ease-in;
+            opacity: 1;
+            transform: scale(1) translate(0, -20px);
+        }
+    }
+
+    .ici-scroll-inner {
+        border-radius: 40px;
+        padding: 4px;
+        .deputyColor(@bgc-base,5%,~"background-color");
+        box-shadow: 1px 1px 5px 0 rgba(50, 50, 50, .3);
+    }
+
+    .loading-Text {
+        vertical-align: middle;
+        padding: 0 7px 0 0px;
+    }
+}

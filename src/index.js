@@ -1,3 +1,4 @@
+import './less/index.less'
 import iciButton from './components/ici-button.vue'
 import iciLoading from './components/ici-loading.vue'
 import iciIcon from './components/ici-icon.vue'
