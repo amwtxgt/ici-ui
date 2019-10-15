@@ -1,3 +1,12 @@
+//底副色
+.deputyColor (@color,@prm,@attribute,@percent:70%) when (lightness(@color) >= @percent) {
+        @{attribute}: darken(@color, @prm);
+}
+
+.deputyColor (@color,@prm,@attribute,@percent:70%) when (lightness(@color) < @percent) {
+        @{attribute}: lighten(@color, @prm);
+}
+
 .ici-search-wrap {
     position: relative;
 }

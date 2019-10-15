@@ -1,3 +1,19 @@
+//底副色
+.deputyColor (@color,@prm,@attribute,@percent:70%) when (lightness(@color) >= @percent) {
+        @{attribute}: darken(@color, @prm);
+}
+
+.deputyColor (@color,@prm,@attribute,@percent:70%) when (lightness(@color) < @percent) {
+        @{attribute}: lighten(@color, @prm);
+}
+//文字
+@tc-base: #303133;
+
+//边框色
+@bdc-base: #cccfd6; //一级
+
+//背景色
+@bgc-base: #f6f6f6; //一级
 
 .ici-menu-wrap {
     position: fixed;
