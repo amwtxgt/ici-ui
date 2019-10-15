@@ -9,9 +9,9 @@
                 size="14px"
                 name="icon-shanchudelete30"/>
     </div>
-    <ici-button class="radio-btn" shape="circle" type="hollow" size="small" v-show="editIndex==-2 && editable"
+    <ici-button class="radio-btn" shape="circle" type="primary" size="small" v-show="editIndex==-2 && editable"
                 @click.native="editIndex=-1">
-      <ici-icon color="#0bb20c" name="icon-tianjia"></ici-icon>
+      <ici-icon name="icon-tianjia"></ici-icon>
     </ici-button>
     <span v-if="editIndex==-1" v-focus="editIndex==-1" class="addspan new active" :class="{'read-write':editIndex==-1}"
           @blur.stop.prevent="addblur($event)" @keydown.stop.prevent.enter="addblur($event)"></span>

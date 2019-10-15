@@ -15,8 +15,8 @@
         margin: 5px 5px 5px 0;
         padding: 2px 15px;
         outline: none;
-        color: #777;
-        border: 1px dashed #bbb;
+        color: fade(@tc-base,75);
+        border: 1px dashed @bdc-base;
         border-radius: 50px;
         transition: all 0.3s;
         background: #fff;
@@ -25,9 +25,9 @@
         }
 
         &.active {
-            background: #ee8615;
-            color: rgba(255, 255, 255, .7);
-            border: 1px solid #ee8615;
+            background: @color-primary;
+            color: fade(@tc-base,70%);
+            border: 1px solid @color-primary;
         }
     }
     .radio-btn {
