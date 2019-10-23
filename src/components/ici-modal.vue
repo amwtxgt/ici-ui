@@ -8,8 +8,8 @@
     <ici-icon v-if="option.showClose" slot="header" @click="close" color="#666" name="icon-shanchudelete30" size="20px" click-state />
     <div class="ici-modal-msg" v-html="option.content"></div>
     <div slot="footer-right">
-      <ici-button type="primary" @click="ok" shape="pill" size="small" relievo>{{option.okText||'ok'}}</ici-button>
-      <ici-button type="primary" @click="cancel" shape="pill" plain size="small">{{option.cancelText||'no'}}</ici-button>
+      <ici-button type="primary" @click.native.stop="ok" shape="pill" size="small" relievo>{{option.okText||'ok'}}</ici-button>
+      <ici-button type="primary" @click.native.stop="cancel" shape="pill" plain size="small">{{option.cancelText||'no'}}</ici-button>
     </div>
   </ici-popup>
 </template>
