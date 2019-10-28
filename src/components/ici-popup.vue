@@ -17,7 +17,7 @@
           </div>
           <ici-loading v-show="loading" block></ici-loading>
         </div>
-        <div ref="footer" class="ici-popup-footer" :class="bodyClass" v-if="!footerHide" @mousedown="mousedown">
+        <div ref="footer" class="ici-popup-footer" :class="bodyClass" v-if="!footerHide">
           <div v-if="$slots['footer-left']" class="ici-popup-footer-left">
             <!--slot-->
             <slot name="footer-left"></slot>

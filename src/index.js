@@ -11,7 +11,7 @@ import iciPopup from './components/ici-popup.vue'
 import iciModal from './components/ici-modal.vue'
 
 import iciDrawer from './components/ici-drawer'
-import iciMessage from './components/ici-message.vue'
+
 import iciSearch from './components/ici-search.vue'
 import iciHint from './components/ici-hint.vue'
 import iciHeader from './components/ici-header.vue'
@@ -28,6 +28,8 @@ import tooltipDirective from './assets/tooltip-directive'
 //悬浮窗
 import iciPoptip from './components/ici-poptip';
 import iciPoptipView from './components/ici-poptip-view';
+
+import iciMsg from './assets/icimsg'
 
 const components = {
   iciButton,
@@ -56,11 +58,9 @@ const install = function (Vue,options) {
     return Vue.component(val, components[val]);
   });
 
+  iciMsg(Vue,options)
+
   Vue.prototype.$funs = funs;
-
-  var message = new Vue({...iciMessage,...options});
-
-  Vue.prototype.$icimsg = message;
 
   //悬浮窗
   var iciPoptip  = new Vue({...iciPoptipView,...options});
