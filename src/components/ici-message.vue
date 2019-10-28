@@ -38,9 +38,10 @@
   * */
 
   var rom = Math.random();
-
+  import IciIcon from './ici-icon'
   export default {
     name: "ici-message",
+    components:{IciIcon},
     data: function () {
       return {
         rom: rom,
