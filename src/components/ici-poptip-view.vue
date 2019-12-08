@@ -76,6 +76,9 @@
         let isam = this.showtip; //是否开启过渡动画
         let def = this.$slots.default;
         if (opt.slots) this.$slots.default = opt.slots
+
+        if (opt.positions) {
+
         if (opt.zIndex) this.zIndex = opt.zIndex;
         if (opt.bgColor) this.bgColor = opt.bgColor
         if (opt.overflow) this.overflow = opt.overflow;
@@ -86,10 +89,11 @@
         this.show(def !== opt.slots);
         this.style = ''
 
-        if (opt.positions) {
           this.$nextTick(() => {
             this.setPosition(opt.positions, isam)
           })
+        }else{
+          this.close()
         }
       },
       setPosition(pos, isam) {
