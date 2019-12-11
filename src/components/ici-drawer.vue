@@ -1,7 +1,7 @@
 <template>
   <transition name="drawer">
     <div class="ici-drawer" :style="{'z-index': zIndex}" v-show="value">
-      <div class="ici-drawer-mask" @click.self="close"></div>
+      <div class="ici-drawer-mask" @click.self="close" v-if="!hideMask"></div>
       <div class="ici-drawer-body" :class="direction=='left'?'drawer-left':'drawer-right'" :style="bodyStyle">
         <slot></slot>
       </div>
@@ -20,6 +20,7 @@
     watch: {},
     props: {
       value: Boolean,
+      hideMask:Boolean,
       width: {
         type: [Number, String],
         default: 450
