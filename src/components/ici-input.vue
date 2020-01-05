@@ -1,16 +1,12 @@
 <template>
-  <div class="ici-input">
+  <div class="ici-input" :class="{'active':hasFocus}">
     <div v-if="showPrefix" class="prefix" :style="prefixStyle">
       <slot name="prefix"></slot>
     </div>
     <div class="input-inner">
       <input @blur="blur" class="ici-input-input" :class="borderClass" :type="password?'password':'text'" @paste.stop='' :style="inputStyle"
              @change="$emit('change',$event)" :value="value" @input="input" v-focus="focus" @focus="focusEvent" ref="inputs"
-             :placeholder="hiddenLabel?label:''" @keydown.up.down.stop.prevent="keydown" @keyup.enter.stop.prevent="enter">
-      <label v-if="!hiddenLabel" class="ici-input-label" :class="{substantial:isSubstantial,'input-label-foucs':hasFocus}">
-        {{label}}
-      </label>
-      <div class="ici-input-status" :class="{'input-status-foucs':hasFocus}"></div>
+             :placeholder="placeholder?placeholder:label" @keydown.up.down.stop.prevent="keydown" @keyup.enter.stop.prevent="enter">
       <ici-hint v-model="showHint" :loading="hint===true" :class="hintClass">
         <!--列表头部-->
         <div v-if="showTitle" class="ici-input-hint-li ici-input-hint-li-add" @mousedown="select(-1)"
@@ -61,18 +57,22 @@
         type: String,
         default: ''
       },
+      placeholder:{
+        type:String,
+        default:''
+      },
       hintClass:String,
       hint: {
         type: [Array, Boolean],
       },
       password: Boolean, //是否以密码方式
       focus: Boolean,
-      hiddenLabel: Boolean,
       inputStyle: [String, Object],
       prefixStyle: {
         type: [String, Object],
         default: ''
       },
+
       borderClass:{
         type:String,
         default:'default-border-color'
