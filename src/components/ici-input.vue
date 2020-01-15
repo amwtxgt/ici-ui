@@ -3,7 +3,7 @@
     <div v-if="showPrefix" class="prefix" :style="prefixStyle">
       <slot name="prefix"></slot>
     </div>
-    <label class="input-inner">
+    <div class="input-inner">
       <input @blur="blur" class="ici-input-input" :class="borderClass" :type="password?'password':'text'" @paste.stop='' :style="inputStyle"
              @change="$emit('change',$event)" :value="value" @input="input" v-focus="focus" @focus="focusEvent" ref="inputs"
              :placeholder="placeholder?placeholder:label" @keydown.up.down.stop.prevent="keydown" @keyup.enter.stop.prevent="enter">
@@ -23,7 +23,7 @@
           </div>
         </div>
       </ici-hint>
-    </label>
+    </div>
   </div>
 </template>
 
