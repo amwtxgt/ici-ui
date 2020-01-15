@@ -16,9 +16,9 @@
     position: relative;
     display: flex;
     align-items: center;
-    background: rgba(205, 205, 205, .5);
-    height: 38px;
-    border-radius: 7px;
+    background: var(--background-urlbar,rgba(205, 205, 205, .5));
+    height: 30px;
+    border-radius: 30px;
 
     .ici-font, .ici-delete {
         padding: 0 10px;
@@ -50,11 +50,11 @@
         width: 100%;
         color: #333;
         border: none;
-        font-size: 18px;
+        font-size: 16px;
         outline: none;
 
         &::placeholder {
-            color: rgba(0, 0, 0, .3) !important;
+            color: var(--text-placeholder,rgba(0, 0, 0, .3)) !important;
         }
     }
 }
