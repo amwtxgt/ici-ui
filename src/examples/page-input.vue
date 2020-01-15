@@ -68,8 +68,12 @@ data() {
       </ici-input>
     </baseComponent>
     <baseComponent title="异步提示" html=''>
-      <ici-input :hint="asyncValue" v-model="ass">
-        <div slot="title">这是提示默认选中项 index为-1</div>
+      <ici-input :hint="asyncValue" v-model="ass" hintFocusShow>
+        <div slot="title">
+          这是提示默认选中项 index为-1
+          <br>
+          <ici-input></ici-input>
+        </div>
         <div slot-scope="list">{{list}}{{list.item}}</div>
       </ici-input>
       <br><br><br>
