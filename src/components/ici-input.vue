@@ -86,14 +86,14 @@
         watch: {},
         computed: {
             showHint: {
-                get () {
+                get() {
                     if (!this.hasFocus || !this.hint) {
                         return false;
                     } else {
                         return true;
                     }
                 },
-                set(v){
+                set(v) {
                     this.hasFocus = v;
                 },
             },
@@ -145,6 +145,7 @@
             input: function (e) {
                 this.selectIndex = -2;
                 let v = e.target.value;
+                this.hasFocus = true;
 
                 if (this.filter) {
                     if (this.filter instanceof RegExp || typeof this.filter === "string") v = v.replace(this.filter, '');

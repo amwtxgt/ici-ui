@@ -56,7 +56,6 @@
                 selectIndex: -2, //选中的文字提示，-2不选，-1选中默认，>-1选中的索引,
                 showTitle: false,
                 hasFocus: false,
-
             };
         },
         props: {
@@ -118,14 +117,15 @@
 
                 if (this.selectIndex !== -2) {
                     this.$emit('select', this.selectIndex);
+                    e.target.blur();
                 }
 
-                e.target.blur();
                 this.$emit('enter', this.selectIndex);
 
             },
             input: function (e) {
                 this.selectIndex = -2;
+                this.hasFocus = true;
                 this.$emit('input', e.target.value);
             },
             focusEvent: function () {
@@ -139,8 +139,6 @@
                     this.$emit('input', val);
                     this.$emit('blur');
                 }, 1)
-
-
             },
             select: function (index) {
                 this.$emit('select', index)
