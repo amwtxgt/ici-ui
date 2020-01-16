@@ -8,14 +8,14 @@
         </div>
 
         <ici-hint ref="icihint" class="ici-hint-addclass" :class="hintClass" v-model="showHint" :loading="hint===true"
-                  max-height="600px"  :focus-show="hintFocusShow">
+                  max-height="600px" :focus-show="hintFocusShow">
             <!--列表头部-->
             <div v-if="showTitle" class="fms-input-hint-li flex-none" @mousedown="select(-1)">
                 <slot name="title"></slot>
             </div>
 
             <!--列表内容-->
-            <ici-scroll class="flex-auto" v-if="hint instanceof Array" :onReachBottom="onReachBottom">
+            <ici-scroll ref="sesarch_scroll" class="flex-auto" v-if="hint instanceof Array" :onReachBottom="onReachBottom">
                 <!--组件内部不知道，数组内的对象属性，所以需要暴露出去-->
                 <div v-for="(item,index) of hint" @mousedown="select(index)"
                      class="fms-input-hint-li" :class="{active:selectIndex==index}">
@@ -65,8 +65,8 @@
                 type: String,
                 default: 'Search'
             },
-            onReachBottom:Function, //触发底部
-            hintFocusShow:Boolean,
+            onReachBottom: Function, //触发底部
+            hintFocusShow: Boolean,
             hintClass: String,
             hint: {
                 type: [Array, Boolean],
@@ -79,13 +79,17 @@
             }
         },
         computed: {
-            showHint: function () {
-
-                if (!this.hasFocus || !this.hint) {
-                    return false;
-                } else {
-                    return true;
-                }
+            showHint: {
+                get() {
+                    if (!this.hasFocus || !this.hint) {
+                        return false;
+                    } else {
+                        return true;
+                    }
+                },
+                set(v) {
+                    this.hasFocus = v;
+                },
             },
             //是否有值
             isSubstantial: function () {
@@ -93,6 +97,11 @@
             }
         },
         methods: {
+            reachBottom() {
+                if (this.$refs.sesarch_scroll) {
+                    this.$refs.sesarch_scroll.reachBottom()
+                }
+            },
             hintClose() {
                 let hint = this.$refs.icihint;
                 if (this.$refs.icihint) {

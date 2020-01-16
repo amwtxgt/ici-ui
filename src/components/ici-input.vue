@@ -85,17 +85,17 @@
         },
         watch: {},
         computed: {
-            showHint: function () {
-
-                if (!this.hasFocus || !this.hint) {
-                    return false;
-                } else if (this.hint === true && this.hasFocus) {
-                    return true;
-                } else if (this.hint.length === 0 && !this.showTitle) {
-                    return false
-                } else {
-                    return true;
-                }
+            showHint: {
+                get () {
+                    if (!this.hasFocus || !this.hint) {
+                        return false;
+                    } else {
+                        return true;
+                    }
+                },
+                set(v){
+                    this.hasFocus = v;
+                },
             },
 
             //是否有值
