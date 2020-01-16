@@ -8,7 +8,7 @@
         </div>
 
         <ici-hint ref="icihint" class="ici-hint-addclass" :class="hintClass" v-model="showHint" :loading="hint===true"
-                  max-height="600px">
+                  max-height="600px"  :focus-show="hintFocusShow">
             <!--列表头部-->
             <div v-if="showTitle" class="fms-input-hint-li fms-input-hint-li-add" @mousedown="select(-1)"
                  :class="{active:selectIndex==-1}">
@@ -44,6 +44,7 @@
     * @prop label {string} 输入框标签
     * @prop focus {Boolean} 是否获取焦点
     * @prop hint {array|boolean} 提示信息 三种状态 false:不开启提示； true:开启提示并显示正在加载； array提示信息列表
+    * @prop hintFocusShow 提示信息窗在获取焦点的时候不关闭
     * @slot-scope props.item {Array} props.list等于hint
     * @emit select {function(index)} 当提示信息存在时，用户选中事件，index表示用户选中第几个
     * @emit enter {function(index)} 用户回车确认事件
@@ -64,6 +65,7 @@
                 type: String,
                 default: 'Search'
             },
+            hintFocusShow:Boolean,
             hintClass: String,
             hint: {
                 type: [Array, Boolean],
