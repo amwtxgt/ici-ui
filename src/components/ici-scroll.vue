@@ -13,7 +13,6 @@
       <ici-loading class="ici-scroll-inner" size="small">
         <span class="loading-Text" v-if="bottomText">{{bottomText}}</span>
       </ici-loading>
-
     </div>
   </div>
 </template>
@@ -65,7 +64,7 @@
       };
     },
     props: {
-      disabled: Boolean,
+      disabled: Boolean, //禁加载
       onReachTop: Function, //触发顶部
       onReachBottom: Function, //触发底部
       bottomText: String,

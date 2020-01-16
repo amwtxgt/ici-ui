@@ -12,7 +12,7 @@
             <p>值：{{search1}}</p>
         </baseComponent>
         <baseComponent title="输入提示 hint" html=''>
-            <ici-search v-model="search1" @select="select"  label="我是搜索提示" :hint="[1,2,3,4,5,6]" >
+            <ici-search v-model="search1" @select="select"  label="我是搜索提示" :hint="[1,2,3,4,5,6,1,2,3,4,5,6,1,2,3,4,5,6,1,2,3,4,5,6]" >
                 <div slot="title">哈哈哈</div>
                 <div slot-scope="list">
                     {{list.item}}
