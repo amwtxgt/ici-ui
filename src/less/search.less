@@ -48,7 +48,7 @@
         background: transparent;
         display: block;
         width: 100%;
-        color: #333;
+        color: var(--text-regular,@tc-base);
         border: none;
         font-size: 16px;
         outline: none;
@@ -63,17 +63,9 @@
     cursor: pointer;
     display: flex;
     align-items: center;
-    padding: 8px 10px;
-    border-bottom: 1px solid @bdc-base;
-
     &.active, &:hover {
         .deputyColor(@bgc-base,10%,~"background-color");
     }
-
-    &:last-child {
-        border-width: 0px;
-    }
-
     .fms-input-hint-icon {
         width: 35px;
         height: 35px;
