@@ -10,8 +10,7 @@
         <ici-hint ref="icihint" class="ici-hint-addclass" :class="hintClass" v-model="showHint" :loading="hint===true"
                   max-height="600px"  :focus-show="hintFocusShow">
             <!--列表头部-->
-            <div v-if="showTitle" class="fms-input-hint-li fms-input-hint-li-add" @mousedown="select(-1)"
-                 :class="{active:selectIndex==-1}">
+            <div v-if="showTitle" class="fms-input-hint-li" @mousedown="select(-1)">
                 <slot name="title"></slot>
             </div>
 

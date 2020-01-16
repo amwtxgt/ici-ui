@@ -70,16 +70,6 @@
         .deputyColor(@bgc-base,10%,~"background-color");
     }
 
-    &.fms-input-hint-li-add {
-        display: block;
-        padding: 10px 10px;
-        text-align: center;
-
-        &:hover {
-            .deputyColor(@bgc-base,10%,~"background-color");
-        }
-    }
-
     &:last-child {
         border-width: 0px;
     }
@@ -96,4 +86,6 @@
 .ici-hint-addclass {
     border-radius: 5px !important;
     overflow: auto;
+    display: flex;
+    flex-direction: column;
 }
