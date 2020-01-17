@@ -115,10 +115,11 @@
             },
             enter: function (e) {
 
-                if (this.selectIndex !== -2) {
+                if (this.selectIndex > -1) {
                     this.$emit('select', this.selectIndex);
                     e.target.blur();
                 }
+
 
                 this.$emit('enter', this.selectIndex);
 
