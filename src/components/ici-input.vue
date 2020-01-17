@@ -1,5 +1,5 @@
 <template>
-    <div class="ici-input" :class="[size,{'active':hasFocus}]">
+    <div class="ici-input" :class="[size,hasFocus?'active':'']">
         <div v-if="showPrefix" class="prefix" :style="prefixStyle">
             <slot name="prefix"></slot>
         </div>
@@ -7,7 +7,7 @@
             <input @blur="blur" class="ici-input-input" :type="password?'password':'text'" @paste.stop=''
                    :style="inputStyle"
                    @change="$emit('change',$event)" :value="value" @input="input" v-focus="focus" @focus="focusEvent" ref="inputs"
-                   :placeholder="placeholder?placeholder:label" @keydown.up.down.stop.prevent="keydown"
+                   :placeholder="placeholder?placeholder:label" @keydown.up.down.stop.prevent="keydown" @keydown="hasFocus = true"
                    @keyup.enter.stop.prevent="enter">
             <ici-hint ref="icihint" v-model="showHint" :loading="hint===true" :class="hintClass" :focus-show="hintFocusShow">
                 <!--列表头部-->
@@ -57,9 +57,9 @@
         props: {
             value: [String, Number],
             hintFocusShow: Boolean,
-            size:{
-              type:String,
-              default:''
+            size: {
+                type: String,
+                default: ''
             },
             label: {
                 type: String,
@@ -103,11 +103,13 @@
             }
         },
         mounted() {
-
+            setTimeout(()=>{
+                console.log(this.hasFocus);
+            },1000)
             if (this.$slots.title) {
                 this.showTitle = true;
             }
-
+            console.log(this.hasFocus)
             if (this.$slots.prefix) {
                 this.showPrefix = true
             }
@@ -142,9 +144,10 @@
             },
 
             input: function (e) {
+
                 this.selectIndex = -2;
                 let v = e.target.value;
-                this.hasFocus = true;
+
 
                 if (this.filter) {
                     if (this.filter instanceof RegExp || typeof this.filter === "string") v = v.replace(this.filter, '');
