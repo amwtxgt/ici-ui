@@ -3,8 +3,7 @@
     margin:5px 0;
     position: relative;
     display: flex;
-    align-items: center;
-    line-height: 40px;
+    align-items: stretch;
     flex-wrap: nowrap;
     width: 100%;
     border: 1px solid @bdc-base;
@@ -20,14 +19,15 @@
     }
 
     .prefix {
+        vertical-align: middle;
         flex: none;
+        display: flex;
+        align-items: center;
         padding-left: 5px;
         margin-right:-10px;
-        font-size: 14px !important;
         &:empty {
             padding-right: 0px;
         }
-
     }
 
     .input-inner {
@@ -35,11 +35,20 @@
         flex: auto;
     }
 
+    &.medium{
+        height: 36px;
+    }
+
+    &.small{
+        height: 32px;
+    }
+    &.mini{
+        height: 28px;
+    }
+
     input {
         display: block;
         width: 100%;
-        font-size: 16px;
-        line-height: 30px;
         flex-grow: 1;
         flex-shrink: 1;
         background-color: transparent;
@@ -51,11 +60,7 @@
         border-width: 0 !important;
         border-bottom-style: solid !important;
         color: fade(@tc-base, 90%);
-
-        &.default-border-color {
-            border-bottom-color: rgba(0, 0, 0, 0.2) !important
-        }
-
+        height: 100%;
         &::placeholder {
             color: fade(@tc-base, 50%);
         }

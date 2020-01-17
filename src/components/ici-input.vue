@@ -1,10 +1,10 @@
 <template>
-    <div class="ici-input" :class="{'active':hasFocus}">
+    <div class="ici-input" :class="[size,{'active':hasFocus}]">
         <div v-if="showPrefix" class="prefix" :style="prefixStyle">
             <slot name="prefix"></slot>
         </div>
         <div class="input-inner">
-            <input @blur="blur" class="ici-input-input" :class="borderClass" :type="password?'password':'text'" @paste.stop=''
+            <input @blur="blur" class="ici-input-input" :type="password?'password':'text'" @paste.stop=''
                    :style="inputStyle"
                    @change="$emit('change',$event)" :value="value" @input="input" v-focus="focus" @focus="focusEvent" ref="inputs"
                    :placeholder="placeholder?placeholder:label" @keydown.up.down.stop.prevent="keydown"
@@ -57,6 +57,10 @@
         props: {
             value: [String, Number],
             hintFocusShow: Boolean,
+            size:{
+              type:String,
+              default:''
+            },
             label: {
                 type: String,
                 default: ''
@@ -75,11 +79,6 @@
             prefixStyle: {
                 type: [String, Object],
                 default: ''
-            },
-
-            borderClass: {
-                type: String,
-                default: 'default-border-color'
             },
             filter: [Boolean, RegExp, String, Function],
         },

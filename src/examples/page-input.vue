@@ -38,9 +38,15 @@
       <br>
       <div>name 值：<b>{{name4}}</b></div>
     </baseComponent>
-    <baseComponent title="带输入提示 label 有value是隐藏 hidden-label"
-                   html='<ici-input v-model="name5" label="这是提示输入信息" hidden-label></ici-input>'>
-      <ici-input v-model="name5" label="这是提示输入信息" hidden-label></ici-input>
+    <baseComponent title="大小"
+                   html='<ici-input v-model="name5"  label="size=default"></ici-input>
+<ici-input v-model="name5" size="medium" label="size=medium" ></ici-input>
+<ici-input v-model="name5" size="small" label="size=small"></ici-input>
+<ici-input v-model="name5" size="mini" label="size=mini"></ici-input>'>
+      <ici-input v-model="name5"  label="size=default"></ici-input>
+      <ici-input v-model="name5" size="medium" label="size=medium" ></ici-input>
+      <ici-input v-model="name5" size="small" label="size=small"></ici-input>
+      <ici-input v-model="name5" size="mini" label="size=mini"></ici-input>
       <br>
       <div>name 值：<b>{{name5}}</b></div>
     </baseComponent>
