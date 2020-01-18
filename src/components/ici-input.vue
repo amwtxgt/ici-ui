@@ -103,13 +103,11 @@
             }
         },
         mounted() {
-            setTimeout(()=>{
-                console.log(this.hasFocus);
-            },1000)
+
             if (this.$slots.title) {
                 this.showTitle = true;
             }
-            console.log(this.hasFocus)
+
             if (this.$slots.prefix) {
                 this.showPrefix = true
             }

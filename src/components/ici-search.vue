@@ -1,10 +1,14 @@
 <template>
     <div class="ici-search-wrap">
         <div class="ici-search">
-            <ici-icon class="ici-font" name="icon-sousuo" size="16px" color="rgba(0, 0, 0, .3)"></ici-icon>
+            <slot name="left">
+                <ici-icon class="ici-font" name="icon-sousuo" size="16px" color="rgba(0, 0, 0, .3)"></ici-icon>
+            </slot>
             <input type="text" :value="value" @blur="blur" @input="input" v-focus="focus" @focus="focusEvent" @paste="paste"
-                   @keydown.up.down.stop.prevent="keydown" @keyup.enter.stop.prevent="enter" :placeholder="label">
+                   @keydown.up.down.stop.prevent="keydown" @keyup.enter.stop.prevent="enter" :placeholder="label"
+                   @keyup.esc.stop.prevent="$emit('esc')">
             <ici-icon class="ici-delete" :class="{show:value}" name="icon-shanchudelete30" size="16px" @click="reset"/>
+            <slot name="right"></slot>
         </div>
 
         <ici-hint ref="icihint" class="ici-hint-addclass" :class="hintClass" v-model="showHint" :loading="hint===true"

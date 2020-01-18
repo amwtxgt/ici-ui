@@ -53,7 +53,7 @@
       },
       confirm(option) {
         this._append();
-        console.log(option);
+
         this.option = Object.assign(this.initOption(),option);
         this.show = true;
       },
