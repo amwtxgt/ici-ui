@@ -5,9 +5,9 @@
         <slot name="left">
           <ici-icon class="ici-font" name="icon-sousuo" size="16px" color="rgba(0, 0, 0, .3)"></ici-icon>
         </slot>
-        <input type="text" :value="value" @blur="blur" @input="input" v-focus="focus" @focus="focusEvent" @paste="paste"
+        <input type="text" :value="value" @blur="blur" @input="input" @focus="focusEvent" @paste="paste"
                @keydown.up.down.stop.prevent="keydown" @keyup.enter.stop.prevent="enter" :placeholder="label"
-               @keyup.esc.stop.prevent="$emit('esc')" ref="input">
+               @keyup.esc.stop.prevent="$emit('esc')" ref="input" @mouseup.stop="onmouseup">
         <ici-icon class="ici-delete" :class="{show:value}" name="icon-shanchudelete30" size="16px" @click="reset"/>
         <slot name="right"></slot>
       </div>
@@ -64,6 +64,7 @@
         selectIndex: -2, //选中的文字提示，-2不选，-1选中默认，>-1选中的索引,
         showTitle: false,
         hasFocus: false,
+        justFocus:false,//是否刚刚获取焦点
       };
     },
     props: {
@@ -104,6 +105,14 @@
       }
     },
     methods: {
+      onmouseup() {
+        if(this.justFocus && this.focusSelectAll && this.$refs.input){
+          setTimeout(()=>{
+            this.$refs.input.select();
+          },1)
+        }
+        this.justFocus = false;
+      },
       toFocus() {
         if (this.$refs.input && this.$refs.input.focus) {
           this.$refs.input.focus();
@@ -133,7 +142,6 @@
           e.target.blur();
         }
 
-
         this.$emit('enter', this.selectIndex);
 
       },
@@ -144,6 +152,7 @@
       },
       focusEvent: function () {
         this.hasFocus = true;
+        this.justFocus = true;
         if (this.focusSelectAll && this.$refs.input) {
           this.$refs.input.select()
         }
