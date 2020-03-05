@@ -6,6 +6,7 @@
   "license": "ISC",
   "private": false,
   "main": "lib/ici-ui.min.js",
+  "typings": "index.d.ts",
   "scripts": {
     "dev": "cross-env NODE_ENV=development webpack-dev-server --hot",
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules"
