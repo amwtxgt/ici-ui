@@ -3,7 +3,7 @@
             :class="['ici-btn',sizeClass,typeClass,shapeClass,{'ici-btn-border':plain,'ici-btn-raised':relievo,'ici-btn-block':long}]">
         <div class="flex flex-center">
             <div v-show="loading">
-                <ici-loading size="small" :disabled="loading"></ici-loading>
+                <ici-loading :size="loadingSize" :disabled="loading" />&nbsp;
             </div>
             <div>
                 <slot></slot>
@@ -17,11 +17,26 @@
     export default {
         name: 'a-button',
         data() {
-            return {};
+            return {
+              loadingSizes:{
+                tiny:'mintiny',
+                small:'tiny',
+                large:'',
+                jumbo:'',
+                giant:'big',
+              }
+
+            };
         },
 
         computed: {
-
+            loadingSize(){
+              if(this.size && this.loadingSizes[this.size]){
+                return this.loadingSizes[this.size];
+              }else{
+                return 'small'
+              }
+            },
             sizeClass() {
                 var size = '';
                 switch (this.size) {
@@ -43,6 +58,7 @@
                 }
                 return size;
             },
+
             typeClass() {
                 var type = '';
                 switch (this.type) {

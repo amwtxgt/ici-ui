@@ -114,10 +114,17 @@
     </baseComponent>
 
     <baseComponent title="加载中按钮 loading"
-                   html='<ici-button type="primary"  relievo longshadow loading>你好啊</ici-button>
-<ici-button type="error" relievo long :loading="loading" @click="loading = true">点我加载</ici-button>'>
+                   html='<ici-button type="primary" size="jumbo" relievo longshadow loading>你好啊</ici-button>
+<ici-button type="primary" relievo longshadow loading>你好啊</ici-button>
+<ici-button type="primary" size="small" relievo longshadow loading>你好啊</ici-button>
+<ici-button type="primary" size="tiny" relievo longshadow loading>你好啊</ici-button>'>
       <div>
+        <ici-button type="primary" size="giant" relievo longshadow loading>你好啊</ici-button>
+        <ici-button type="primary" size="jumbo" relievo longshadow loading>你好啊</ici-button>
         <ici-button type="primary" relievo longshadow loading>你好啊</ici-button>
+        <ici-button type="primary" size="small" relievo longshadow loading>你好啊</ici-button>
+        <ici-button type="primary" size="tiny" relievo longshadow loading>你好啊</ici-button>
+
         <ici-button type="error" relievo long :loading="loading" @click="loading = true">点我加载</ici-button>
       </div>
     </baseComponent>

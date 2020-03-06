@@ -1,5 +1,5 @@
 import Vue from 'vue'
-interface Interface {
+interface iciUi {
   iciButton:Vue.Component,
   iciLoading:Vue.Component,
   iciIcon:Vue.Component,
@@ -17,8 +17,11 @@ interface Interface {
   iciScroll:Vue.Component,
   iciPoptip:Vue.Component,
   iciColorIcon:Vue.Component,
-  install:Vue.PluginObject<any>,
+  install (vue: typeof Vue, options: {locale: any, i18n: any, size: string,store:any}): void
   funs:any,
 }
 
-export default Interface
+
+let d:iciUi;
+
+export default d

@@ -1,12 +1,12 @@
 {
   "name": "ici-ui",
   "description": "ici通用组件",
-  "version": "1.0.9",
+  "version": "1.0.13",
   "author": "huangmin",
   "license": "ISC",
   "private": false,
   "main": "lib/ici-ui.min.js",
-  "typings": "index.d.ts",
+  "typings": "index.ts",
   "scripts": {
     "dev": "cross-env NODE_ENV=development webpack-dev-server --hot",
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules"
