@@ -3,7 +3,7 @@
     <div class="flex flex-center">
       <div class="ici-search flex-auto">
         <slot name="left">
-          <ici-icon class="ici-font" name="icon-sousuo" size="16px" color="rgba(0, 0, 0, .3)"></ici-icon>
+          <ici-icon class="ici-font" name="icon-sousuo" size="16px" color="rgba(0, 0, 0, .3)"/>
         </slot>
         <input type="text" :value="value" @blur="blur" @input="input" @focus="focusEvent" @paste="paste"
                @keydown.up.down.stop.prevent="keydown" @keyup.enter.stop.prevent="enter" :placeholder="label"
