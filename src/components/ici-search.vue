@@ -64,7 +64,7 @@
         selectIndex: -2, //选中的文字提示，-2不选，-1选中默认，>-1选中的索引,
         showTitle: false,
         hasFocus: false,
-        justFocus:false,//是否刚刚获取焦点
+        justFocus: false,//是否刚刚获取焦点
       };
     },
     props: {
@@ -106,10 +106,10 @@
     },
     methods: {
       onmouseup() {
-        if(this.justFocus && this.focusSelectAll && this.$refs.input){
-          setTimeout(()=>{
+        if (this.justFocus && this.focusSelectAll && this.$refs.input) {
+          setTimeout(() => {
             this.$refs.input.select();
-          },1)
+          }, 1)
         }
         this.justFocus = false;
       },

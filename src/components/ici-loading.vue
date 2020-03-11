@@ -129,7 +129,7 @@
             obj = ['22px', '22px'];
             break;
           case 'big':
-            obj = ['50px', '50px'];
+            obj = ['36px', '36px'];
             break;
         }
         return obj;

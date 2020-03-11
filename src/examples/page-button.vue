@@ -38,9 +38,10 @@
 <ici-button type="warning" size="large">你好</ici-button>
 <ici-button type="error" size="jumbo">你好</ici-button>
 <ici-button type="ici" size="giant">你好</ici-button>'>
-      <ici-button size="tiny">你好啊</ici-button>
+
       <ici-button type="primary" size="tiny">你好啊</ici-button>
       <ici-button type="info" size="small">你好啊</ici-button>
+      <ici-button type="info">你好啊</ici-button>
       <ici-button type="warning" size="large">你好</ici-button>
       <ici-button type="error" size="jumbo">你好</ici-button>
       <ici-button type="inverse" size="giant">你好</ici-button>
