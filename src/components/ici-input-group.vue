@@ -18,7 +18,7 @@
 		props:{
 		  height:{
 		    type:[Number,String],
-        default:48
+        default:40
       },
       iconStyle:[String,Object],
       handleStyle:[String,Object],
