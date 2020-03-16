@@ -1,5 +1,5 @@
 <template>
-    <div class="ici-input" :class="[size,hasFocus?'active':'']">
+    <div class="ici-input" :class="[hasFocus?'active':'']">
         <div v-if="showPrefix" class="prefix" :style="prefixStyle">
             <slot name="prefix"></slot>
         </div>
@@ -34,7 +34,6 @@
     * 输入框组件
     * @v-model {string} 输入框值
     * @prop label {string} 输入框标签
-    * @prop fontsize {string} 文字大小
     * @prop focus {Boolean} 是否获取焦点
     * @prop password {Boolean} 是否是密码
     * @prop filter {String|RegExp|function} 过滤value, 当filter是一个函数时，函数的第一个参数为input的value值，函数需要return 一个新值
@@ -57,10 +56,7 @@
         props: {
             value: [String, Number],
             hintFocusShow: Boolean,
-            size: {
-                type: String,
-                default: ''
-            },
+
             label: {
                 type: String,
                 default: ''

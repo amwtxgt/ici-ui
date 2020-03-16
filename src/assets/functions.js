@@ -9,8 +9,8 @@ export const getMd5 = MD5;
 * */
 export function trim(str, s) {
   if (typeof str == 'string') {
-    var l = ltrim(str, s)
-    var r = rtrim(l, s)
+    let l = ltrim(str, s)
+    let r = rtrim(l, s)
     return r;
   }
   else {

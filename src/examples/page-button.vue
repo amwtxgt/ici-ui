@@ -3,6 +3,8 @@
     <div class="title">button 按钮</div>
     <baseComponent title="基本按钮" html='<ici-button>你好啊</ici-button>'>
       <ici-button>你好啊</ici-button>
+      <ici-button size="small"><ici-icon name="icon-qq" size="20px"></ici-icon></ici-button>
+      <ici-button type="ici" shape="circle"><ici-icon name="icon-qq" size="16px"></ici-icon></ici-button>
     </baseComponent>
     <baseComponent title="按钮主题类型 type"
                    html='<ici-button type="primary">你好啊</ici-button>
