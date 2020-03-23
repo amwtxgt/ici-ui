@@ -2,7 +2,7 @@
   <transition name="drawer">
     <div class="ici-drawer" :style="{'z-index': zIndex}" v-show="value">
       <div class="ici-drawer-mask" @click.self="close" v-if="!hideMask"></div>
-      <div class="ici-drawer-body" :class="direction=='left'?'drawer-left':'drawer-right'" :style="bodyStyle">
+      <div class="ici-drawer-body" :class="directionClass" :style="bodyStyle">
         <slot></slot>
       </div>
     </div>
@@ -14,13 +14,19 @@
     name: "ici-drawer",
     data() {
       return {
-        translate3d: ''
+        translate3d: '',
+        des: {
+          left: 'drawer-left',
+          right: 'drawer-right',
+          top: 'drawer-top',
+          bottom: 'drawer-bottom',
+        }
       };
     },
     watch: {},
     props: {
       value: Boolean,
-      hideMask:Boolean,
+      hideMask: Boolean,
       width: {
         type: [Number, String],
         default: 450
@@ -37,10 +43,26 @@
     },
 
     computed: {
-      bodyStyle() {
-        let style = {
-          width: `${this.width}px`,
+      directionClass() {
+
+        if (this.des[this.direction]) {
+          return this.des[this.direction]
+        } else {
+          return this.des.right
         }
+      },
+      bodyStyle() {
+        let width = this.width + 'px'
+        if (typeof this.width === "string" && parseInt(this.width).toString() !== this.width) {
+          width = this.width;
+        }
+        let style = {}
+        if(this.direction==='top' || this.direction ==='bottom'){
+            style.height =  width;
+        }else{
+          style.width =  width;
+        }
+
         return style
       },
     },

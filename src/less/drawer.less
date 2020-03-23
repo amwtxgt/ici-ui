@@ -1,67 +1,93 @@
 
-
 .ici-drawer {
-    position: fixed;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    z-index: 999;
-    color:fade(@tc-base,80%);
-    pointer-events: none;
+  position: fixed;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 999;
+  color: fade(@tc-base, 80%);
+  pointer-events: none;
+
+  .ici-drawer-mask {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    transform: translate3d(0);
+    transition: opacity 333ms cubic-bezier(.4, 0, .22, 1);
+    pointer-events: visible;
+  }
+
+  .ici-drawer-body {
+    position: absolute;
+    pointer-events: visible;
+    z-index: 11;
+    background: @bgc-base;
+    transform: translate3d(0);
+    transition: all 333ms cubic-bezier(.4, 0, .22, 1);
+
+    &.drawer-left, &.drawer-right {
+      max-width: 100%;
+      height: 100%;
+      top: 0;
+    }
+
+    &.drawer-bottom, &.drawer-top {
+      max-height: 100%;
+      width: 100%;
+      left: 0;
+      top: initial;
+    }
+
+    &.drawer-left {
+      left: 0;
+    }
+
+    &.drawer-right {
+      right: 0;
+    }
+
+    &.drawer-bottom {
+      bottom: 0;
+    }
+
+    &.drawer-top {
+      top: 0;
+    }
+  }
+
+
+  &.drawer-enter-active, &.drawer-leave-active {
+    transition: opacity 333ms;
+  }
+
+  &.drawer-enter-to, &.drawer-leave {
     .ici-drawer-mask {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.5);
-        transform: translate3d(0);
-        transition: opacity 333ms cubic-bezier(.4, 0, .22, 1);
-        pointer-events: visible;
+      opacity: 1;
+    }
+  }
+
+  &.drawer-enter, &.drawer-leave-to {
+    .ici-drawer-mask {
+      opacity: 0;
+      pointer-events: none;
     }
 
-    .ici-drawer-body {
-        max-width: 100%;
-        height: 100%;
-        position: absolute;
-        pointer-events: visible;
-        z-index: 11;
-        top: 0;
-        background: @bgc-base;
-        transform: translate3d(0);
-        transition: all 333ms cubic-bezier(.4, 0, .22, 1);
-
-        &.drawer-left {
-            left: 0;
-        }
-
-        &.drawer-right {
-            right: 0;
-        }
+    .drawer-right.ici-drawer-body {
+      transform: translate(100%, 0) !important;
     }
 
-
-    &.drawer-enter-active, &.drawer-leave-active {
-        transition: opacity 333ms;
+    .drawer-left.ici-drawer-body {
+      transform: translate(-100%, 0) !important;
     }
 
-    &.drawer-enter-to, &.drawer-leave {
-        .ici-drawer-mask {
-            opacity: 1;
-        }
+    .drawer-bottom.ici-drawer-body {
+      transform: translate(0, 100%) !important;
     }
 
-    &.drawer-enter, &.drawer-leave-to {
-        .ici-drawer-mask {
-            opacity: 0;
-            pointer-events: none;
-        }
-
-        .drawer-right.ici-drawer-body {
-            transform: translate(100%, 0) !important;
-        }
-
-        .drawer-left.ici-drawer-body {
-            transform: translate(-100%, 0) !important;
-        }
+    .drawer-top.ici-drawer-body {
+      transform: translate(0, -100%) !important;
     }
+  }
 }
