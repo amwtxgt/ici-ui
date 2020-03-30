@@ -93,13 +93,13 @@ data() {
   <ici-icon slot="handle" name="icon-qq"></ici-icon>
   <ici-icon slot="handle" name="icon-qq"></ici-icon>
 </ici-input-group>'>
-      <ici-input-group>
+      <ici-input-group >
         <ici-icon slot="icon" name="icon-qq"></ici-icon>
         <ici-input label="asdasd"></ici-input>
         <ici-icon slot="handle" name="icon-qq"></ici-icon>
         <ici-icon slot="handle" name="icon-qq"></ici-icon>
       </ici-input-group>
-      <ici-input-group  height="auto" overflow="unset">
+      <ici-input-group >
         <ici-icon slot="icon" name="icon-qq"></ici-icon>
         <ici-input label="asdasd"></ici-input>
 

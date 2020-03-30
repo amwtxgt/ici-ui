@@ -1,121 +1,118 @@
 
 .ici-input {
-    margin:3px 0;
-    position: relative;
+  margin: 3px 0;
+  position: relative;
+  display: flex;
+  align-items: stretch;
+  flex-wrap: nowrap;
+  width: 100%;
+  height: 24px;
+  transition: all .3s;
+
+  .prefix {
+    vertical-align: middle;
+    flex: none;
     display: flex;
-    align-items: stretch;
-    flex-wrap: nowrap;
-    width: 100%;
-    border: 1px solid @bdc-base;
-    border-radius: 4px;
+    align-items: center;
+    padding-left: 5px;
+    margin-right: 5px;
+
+    &:empty {
+      padding-right: 0px;
+    }
+  }
+
+  .input-inner {
+    position: relative;
+    flex: auto;
+  }
+
+  &.medium {
+    height: 36px;
+  }
+
+  &.small {
     height: 32px;
-    transition: all .3s;
+  }
 
-    &:hover {
-        border: 1px solid darken(@bdc-base, 10%);
+  &.mini {
+    height: 28px;
+  }
+
+  input {
+    display: block;
+    width: 100%;
+    flex-grow: 1;
+    flex-shrink: 1;
+    background-color: transparent;
+    margin: 0 !important;
+    outline: none;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    border-top: none !important;
+    border-left: none !important;
+    border-right: none !important;
+    border-width: 1px !important;
+    border-bottom:1px solid @bdc-base;
+
+    color: fade(@tc-base, 90%);
+    height: 100%;
+
+    &::placeholder {
+      color: fade(@tc-base, 50%);
     }
 
-    &.active {
-        border: 1px solid @color-primary;
-    }
+  }
 
-    .prefix {
-        vertical-align: middle;
-        flex: none;
-        display: flex;
-        align-items: center;
-        padding-left: 5px;
-        margin-right:-10px;
-        &:empty {
-            padding-right: 0px;
-        }
-    }
+  .ici-input-status {
+    position: absolute;
+    transition: all .3s cubic-bezier(0.4, 0, 0.2, 1);
+    opacity: 0;
+    width: 100%;
+    height: 2px;
+    background: @color-primary;
+    bottom: 0px;
+    left: 0;
+    transform: translate3d(0, 0, 0) scale(0, 1);
 
-    .input-inner {
-        position: relative;
-        flex: auto;
+    &.input-status-foucs {
+      opacity: 1;
+      transform: translate3d(0, 0, 0) scale(1, 1);
     }
-
-    &.medium{
-        height: 36px;
-    }
-
-    &.small{
-        height: 32px;
-    }
-    &.mini{
-        height: 28px;
-    }
-
-    input {
-        display: block;
-        width: 100%;
-        flex-grow: 1;
-        flex-shrink: 1;
-        background-color: transparent;
-        margin: 0 !important;
-        outline: none;
-        padding: 0 15px !important;
-        box-shadow: none !important;
-        border-radius: 0 !important;
-        border-width: 0 !important;
-        border-bottom-style: solid !important;
-        color: fade(@tc-base, 90%);
-        height: 100%;
-        &::placeholder {
-            color: fade(@tc-base, 50%);
-        }
-    }
-
-    .ici-input-status {
-        position: absolute;
-        transition: all .3s cubic-bezier(0.4, 0, 0.2, 1);
-        opacity: 0;
-        width: 100%;
-        height: 2px;
-        background: @color-primary;
-        bottom: 0;
-        left: 0;
-        transform: translate3d(0, 0, 0) scale(0, 1);
-
-        &.input-status-foucs {
-            opacity: 1;
-            transform: translate3d(0, 0, 0) scale(1, 1);
-        }
-    }
+  }
 }
 
 .ici-input-hint-li {
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    padding: 5px 10px;
-    border-bottom: 1px solid @bdc-base;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  padding: 5px 10px;
+  border-bottom: 1px solid @bdc-base;
 
-    &.active {
+  &.active {
+    .deputyColor(@bgc-base, 10%, ~"background-color");
+  }
+
+  &.ici-input-hint-li-add {
+    display: block;
+    padding: 10px 10px;
+    text-align: center;
+
+    &:hover {
       .deputyColor(@bgc-base, 10%, ~"background-color");
     }
+  }
 
-    &.ici-input-hint-li-add {
-        display: block;
-        padding: 10px 10px;
-        text-align: center;
+  &:last-child {
+    border-width: 0px;
+  }
 
-        &:hover {
-            .deputyColor(@bgc-base, 10%, ~"background-color");
-        }
-    }
-
-    &:last-child {
-        border-width: 0px;
-    }
-
-    .ici-input-hint-icon {
-        width: 35px;
-        height: 35px;
-        flex: none;
-        .deputyColor(@bgc-base, 10%, ~"background-color");
-        background: no-repeat center;
-        background-size: contain;
-    }
+  .ici-input-hint-icon {
+    width: 35px;
+    height: 35px;
+    flex: none;
+    .deputyColor(@bgc-base, 10%, ~"background-color");
+    background: no-repeat center;
+    background-size: contain;
+  }
 }
