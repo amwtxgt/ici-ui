@@ -61,7 +61,7 @@
     name: "header-saerch",
     data() {
       return {
-        selectIndex: -2, //选中的文字提示，-2不选，-1选中默认，>-1选中的索引,
+        selectIndex: -1, //选中的文字提示，-2不选，-1选中默认，>-1选中的索引,
         showTitle: false,
         hasFocus: false,
         justFocus: false,//是否刚刚获取焦点
@@ -146,7 +146,7 @@
 
       },
       input: function (e) {
-        this.selectIndex = -2;
+        this.selectIndex = -1;
         this.hasFocus = true;
         this.$emit('input', e.target.value);
       },
@@ -171,10 +171,10 @@
       },
       keydown(e) {
         if (!this.hint || !this.hint.length) return false;
-        var min = 0, max = this.hint.length;
-        if (this.showTitle) {
-          min = -1
-        }
+        var min = -1, max = this.hint.length;
+        // if (this.showTitle) {
+        //   min = -1
+        // }
 
         if (e.key == 'ArrowUp') {
           if (this.selectIndex > min) {
@@ -184,7 +184,7 @@
           }
         } else {
           if (this.selectIndex < max - 1) {
-            if (this.selectIndex == -2 && !this.showTitle) {
+            if (this.selectIndex == -1) {
               this.selectIndex = 0;
             } else {
               this.selectIndex++
