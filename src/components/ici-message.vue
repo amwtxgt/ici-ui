@@ -50,7 +50,7 @@
                 rom: rom,
                 message: '',
                 timeout: 0,
-                msec: 2000,
+                msec: 4000,
                 show: false,
                 showClose: false,
                 btns: null, //按钮
