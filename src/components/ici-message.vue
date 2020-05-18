@@ -148,7 +148,7 @@
                 let showClose = opt && typeof opt.showClose === 'boolean' ? opt.showClose : true
                 this.open({
                     type: 'success',
-                    duration: opt && opt.duration || 2000,
+                    duration: opt && opt.duration || 3000,
                     position: opt && opt.position,
                     msg: val,
                     showClose: showClose,
@@ -160,7 +160,7 @@
                 let showClose = opt && typeof opt.showClose === 'boolean' ? opt.showClose : true
                 this.open({
                     type: 'error',
-                    duration: opt && opt.duration || 2000,
+                    duration: opt && opt.duration || 4000,
                     position: opt && opt.position,
                     msg: val,
                     showClose: showClose,
@@ -172,7 +172,7 @@
                 let showClose = opt && typeof opt.showClose === 'boolean' ? opt.showClose : true
                 this.open({
                     type: 'message',
-                    duration: opt && opt.duration || 2000,
+                    duration: opt && opt.duration || 4000,
                     position: opt && opt.position,
                     msg: val,
                     showClose: showClose,
