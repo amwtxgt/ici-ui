@@ -6,12 +6,12 @@ export default function (Vue) {
   var previewMain = function (obj) {
     var winHeight = window.innerHeight;
     var winWidth = window.innerWidth;
-    if(obj.nativeHeight > winHeight * 0.95) {
+    if (obj.nativeHeight > winHeight * 0.95) {
 
       obj.nativeWidth = (winHeight * 0.95 / obj.nativeHeight) * obj.nativeWidth;
       obj.nativeHeight = winHeight * 0.95;
     }
-    if(obj.nativeWidth > winWidth * 0.95) {
+    if (obj.nativeWidth > winWidth * 0.95) {
       obj.nativeHeight = (winWidth * 0.95 / obj.nativeWidth) * obj.nativeHeight;
       obj.nativeWidth = winWidth * 0.95;
 
@@ -33,7 +33,7 @@ export default function (Vue) {
 
     let el = this;
     let reg = /url\("(.+)"\)/.exec(el.style.backgroundImage);
-    if(reg) {
+    if (reg) {
       var imgUrl = reg[1];
       var img = document.createElement('img')
       img.src = imgUrl;
@@ -44,12 +44,11 @@ export default function (Vue) {
         var height = el.offsetHeight;
         var x = e.x - e.offsetX, y = e.y - e.offsetY
 
-        if(nativeWidth / nativeHeight > width / height) {
+        if (nativeWidth / nativeHeight > width / height) {
           //取宽
           width = height / nativeHeight * nativeWidth;
           x = x + (el.offsetWidth - width) / 2
-        }
-        else {
+        } else {
           //取高
           height = width / nativeWidth * nativeHeight;
           y = y + (el.offsetHeight - height) / 2
@@ -65,7 +64,7 @@ export default function (Vue) {
 
   Vue.directive('bgpreview', {
     inserted: function (el, binding) {
-      if(binding.value === false) {
+      if (binding.value === false) {
         return
       }
       el.addEventListener('click', bgpreview)
@@ -77,6 +76,11 @@ export default function (Vue) {
 
   function imgpreview() {
     let el = this;
+    if (el.nodeName !== 'IMG') {
+      el = el.querySelector('img')
+    }
+    if (!el) return;
+
     var width = el.width, height = el.height, x = el.x, y = el.y, nativeWidth = el.naturalWidth,
       nativeHeight = el.naturalHeight;
     previewMain({width, height, x, y, nativeWidth, nativeHeight, src: el.src})
@@ -85,10 +89,10 @@ export default function (Vue) {
 
   Vue.directive('imgpreview', {
     inserted: function (el, binding) {
-      if(binding.value === false) {
+      if (binding.value === false) {
         return
       }
-      el.addEventListener('click',imgpreview)
+      el.addEventListener('click', imgpreview)
     }
   })
 }

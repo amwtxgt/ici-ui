@@ -1,5 +1,6 @@
 <template>
   <div class="bg-img" :style="style">
+    <img class="img-fit" :src="url" :style="{'object-fit':showType}" alt="">
     <div class="bg-img-inner">
       <slot></slot>
     </div>
@@ -48,7 +49,7 @@
         var style = {}
         style.width = this.width;
         style.height = this.height ? this.height : this.width;
-        style.backgroundSize = this.showType;
+
 
         if(this.bgColor){
           style.backgroundColor = this.bgColor;
@@ -57,12 +58,11 @@
         if(this.margin){
           style.margin = this.margin;
         }
+
         if(this.circle){
           style.borderRadius = '50%'
         }
-        if(this.url){
-          style.backgroundImage = `url(${this.url})`
-        }
+
         return style;
       },
     },
