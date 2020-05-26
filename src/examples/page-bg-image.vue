@@ -6,8 +6,11 @@
       <ici-bgimg :url="null"/>
     </baseComponent>
     <baseComponent title="图片 url" html='<ici-bgimg url="https://ici.oss-cn-hongkong.aliyuncs.com/uploads/user/20190710/201907102155025323.png-face.jpg" />'>
-
       <ici-bgimg url="https://ici.oss-cn-hongkong.aliyuncs.com/uploads/user/20190710/201907102155025323.png-face.jpg"/>
+    </baseComponent>
+
+    <baseComponent title="图片大小 showSize" html='<ici-bgimg url="https://ici.oss-cn-hongkong.aliyuncs.com/uploads/user/20190710/201907102155025323.png-face.jpg" />'>
+      <ici-bgimg show-size url="https://ici.oss-cn-hongkong.aliyuncs.com/uploads/user/20190710/201907102155025323.png-face.jpg"/>
     </baseComponent>
     <baseComponent title="显示类型 showtype" html='<ici-bgimg show-type="contain" url="https://ici.oss-cn-hongkong.aliyuncs.com/uploads/user/20190710/201907102155025323.png-face.jpg" />
 <ici-bgimg show-type="cover" url="https://ici.oss-cn-hongkong.aliyuncs.com/uploads/user/20190710/201907102155025323.png-face.jpg" />'>
