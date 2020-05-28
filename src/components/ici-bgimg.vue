@@ -1,6 +1,6 @@
 <template>
   <div class="bg-img" :style="style">
-    <img @load="loaded" class="img-fit" :src="url" :style="{'object-fit':showType}" :alt="alt">
+    <img v-if="url" @load="loaded" class="img-fit" :src="url" :style="{'object-fit':showType}" :alt="alt">
     <div class="size tc-base" v-if="showSize">{{naturalWidth+'×'+naturalHeight}}</div>
     <div class="bg-img-inner">
       <slot></slot>
