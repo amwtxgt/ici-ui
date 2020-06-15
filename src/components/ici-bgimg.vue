@@ -1,6 +1,6 @@
 <template>
-  <div class="bg-img" :style="style">
-    <img v-if="url" @load="loaded" class="img-fit" :src="url" :style="{'object-fit':showType}" :alt="alt">
+  <div class="bg-img" :style="style.body">
+    <img v-if="url" @load="loaded" class="img-fit" :src="url" :style="style.img" :alt="alt">
     <div class="size tc-base" v-if="showSize">{{naturalWidth+'×'+naturalHeight}}</div>
     <div class="bg-img-inner">
       <slot></slot>
@@ -59,24 +59,32 @@
     },
     computed: {
       style() {
-        var style = {}
-        style.width = this.width;
-        style.height = this.height ? this.height : this.width;
+        let body = {
+          width: this.width,
+          height:this.height ? this.height : this.width
+        }
+
+        let img = {
+          'object-fit':this.showType
+        }
 
 
         if (this.bgColor) {
-          style.backgroundColor = this.bgColor;
+          body.backgroundColor = this.bgColor;
         }
 
         if (this.margin) {
-          style.margin = this.margin;
+          body.margin = this.margin;
         }
 
         if (this.circle) {
-          style.borderRadius = '50%'
+          body.borderRadius = '50%'
+          img.borderRadius = '50%'
         }
 
-        return style;
+        return {
+          body,img
+        };
       },
     },
     methods: {
