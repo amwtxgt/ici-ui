@@ -71,7 +71,8 @@
         document.addEventListener('click', this.dispatchEvent);
       },
 
-      open(menuList, e) {
+      open(menuList, e = window.event) {
+
         this._append()
         if (menuList) {
           this.menuList = menuList;
@@ -96,7 +97,7 @@
         //x坐标的位置,超过右边界时，移动刚好右边界
         var rightMargin = innerWidth - (clientX + width);
         if (rightMargin < 15) {
-          clientX = clientX + rightMargin-15;
+          clientX = clientX + rightMargin - 15;
         }
 
         //y坐标的位置，超过下边界时，向上显示
@@ -117,8 +118,7 @@
 
               //二级菜单移动到左边
               left = -el.offsetWidth + 'px'
-            }
-            else {
+            } else {
               //移动到右边
               left = (width - 1) + 'px';
             }
@@ -126,8 +126,7 @@
             if (innerHeight - clientY - parent.offsetTop - el.offsetHeight < 0) {
               //二级菜单移动到上边
               top = (parent.offsetHeight - el.offsetHeight + 1) + 'px'
-            }
-            else {
+            } else {
               //移动到下边
               top = '-1px';
             }
@@ -152,8 +151,7 @@
 
           if (this.$el) {
             window.document.body.appendChild(this.$el);
-          }
-          else {
+          } else {
             var menu = window.document.createElement('div');
             window.document.body.appendChild(menu);
             this.$mount(menu); //绑定

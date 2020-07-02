@@ -4,13 +4,13 @@ export default function (Vue){
   //右键菜单
   let rightMenu = new Vue(iciMenu);
   Vue.prototype.$rightMenu = rightMenu;
+  Vue.prototype.$menu = rightMenu;
   Vue.directive('rightmenu', {
     inserted: function (el, binding) {
 
       el.oncontextmenu = (e) => {
         if (binding.value) {
           if (typeof binding.value === 'function') {
-
             rightMenu.open(binding.value(), e)
           }
           else if (binding.value instanceof Array) {
