@@ -50,6 +50,7 @@
                 rom: rom,
                 message: '',
                 timeout: 0,
+                openTimeout: 0,
                 msec: 4000,
                 show: false,
                 showClose: false,
@@ -95,7 +96,7 @@
                 clearTimeout(this.timeout);
                 if (this.show) {
                     this.show = false;
-                    setTimeout(() => {
+                    this.openTimeout = setTimeout(() => {
                         this._openOption(obj)
                     }, 100);
                 } else {
@@ -182,6 +183,8 @@
             close() {
                 this.isLoading = false;
                 this.show = false;
+                clearTimeout(this.timeout)
+                clearTimeout(this.openTimeout)
             }
         }
     }
