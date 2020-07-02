@@ -54,23 +54,7 @@
     },
     watch: {
       value(v) {
-        if (!v) {
-          document.body.removeEventListener('mousemove', this.mousemove)
-          document.body.removeEventListener('mouseup', this.mouseup)
-          document.body.removeEventListener('mouseleave', this.mouseup)
-          setTimeout(() => {
-            var el = this.$refs.fmsPopup;
-            el.style.left = '0px'
-            el.style.top = '0px'
-          }, 300)
-          this.drag.open = false;
-        }
-        else {
-
-          document.body.addEventListener('mousemove', this.mousemove)
-          document.body.addEventListener('mouseup', this.mouseup)
-          document.body.addEventListener('mouseleave', this.mouseup)
-        }
+        this.init()
       },
     },
     props: {
@@ -123,7 +107,7 @@
       if (this._events.confirm) {
         this.hasConfirm = true;
       }
-
+      this.init()
     },
     computed: {
       popupStyle() {
@@ -160,6 +144,25 @@
       }
     },
     methods: {
+      init(){
+        if (!this.value) {
+          document.body.removeEventListener('mousemove', this.mousemove)
+          document.body.removeEventListener('mouseup', this.mouseup)
+          document.body.removeEventListener('mouseleave', this.mouseup)
+          setTimeout(() => {
+            var el = this.$refs.fmsPopup;
+            el.style.left = '0px'
+            el.style.top = '0px'
+          }, 300)
+          this.drag.open = false;
+        }
+        else {
+
+          document.body.addEventListener('mousemove', this.mousemove)
+          document.body.addEventListener('mouseup', this.mouseup)
+          document.body.addEventListener('mouseleave', this.mouseup)
+        }
+      },
       bodyMousedown(e) {
         if (this.fullDrag) {
           this.mousedown(e)
@@ -177,12 +180,13 @@
           left: parseFloat(styles.left),
           top: parseFloat(styles.top)
         };
-
+        console.log(this.drag)
       },
       mouseup() {
         this.drag.open = false;
       },
       mousemove(e) {
+        console.log('mousemove')
         var el = this.$refs.fmsPopup;
         let d = this.drag;
         if (this.drag.open) {

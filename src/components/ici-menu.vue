@@ -71,23 +71,36 @@
         document.addEventListener('click', this.dispatchEvent);
       },
 
-      open(menuList, e = window.event) {
-
+      open(menuList, position) {
+        if(!position){
+          //如果没传坐标，用事件的鼠标位置
+          if(window.event && window.event.clientX){
+            position = {
+              x:window.event.clientX ,
+              y:window.event.clientY,
+            }
+          }else{
+            position = {
+              x:0,
+              y:0,
+            }
+          }
+        }
         this._append()
         if (menuList) {
           this.menuList = menuList;
           this.show = true;
           this.$nextTick(() => {
             if (!this.$refs['icimenu']) return;
-            this.setPosition(e);
+            this.setPosition(position);
           })
         }
       },
 
       setPosition(e) {
 
-        var clientX = e.clientX,
-          clientY = e.clientY,
+        let clientX = e.x,
+          clientY = e.y,
           innerWidth = window.innerWidth,
           innerHeight = window.innerHeight
 
