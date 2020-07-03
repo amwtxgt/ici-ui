@@ -180,13 +180,11 @@
           left: parseFloat(styles.left),
           top: parseFloat(styles.top)
         };
-        console.log(this.drag)
       },
       mouseup() {
         this.drag.open = false;
       },
       mousemove(e) {
-        console.log('mousemove')
         var el = this.$refs.fmsPopup;
         let d = this.drag;
         if (this.drag.open) {
