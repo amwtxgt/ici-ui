@@ -163,6 +163,32 @@ methods: {
     </baseComponent>
 
 
+    <baseComponent title="快捷键 key" html='<div class="rightmenu" v-rightmenu="menu1">
+  右键点我
+</div>
+
+methods: {
+   menu4() {
+        return [
+          {
+            name: "我是菜单一",
+            click() {alert("你点了菜单一")},
+            key:"a",
+          }, {
+            name: "我是菜单二",
+            click(){alert("你点了菜单二")},
+             key:"b",
+          }
+        ]
+      },
+}'>
+
+      <div class="rightmenu" v-rightmenu="menu4">
+        右键点我
+      </div>
+
+    </baseComponent>
+
 
     <baseComponent title="上划线 topLine:true,下划线 bottomLine:true,不可用disabled:true" html='<div class="rightmenu" v-rightmenu="menu1">
   右键点我
@@ -356,29 +382,13 @@ methods: {
       menu4() {
         return [
           {
-            name: "我是菜单一",
+            name: "我是菜单一sssssssssssssssssssssssssssssssssssss",
             click() {alert("你点了菜单一")},
-            btns:[{
-              icon:"icon-htmal5icon18",
-              click(){
-                alert("一个图标按钮")
-              }
-            }]
+            key:"a",
           }, {
             name: "我是菜单二",
             click(){alert("你点了菜单二")},
-            btns:[{
-              icon:"icon-telephone",
-              iconColor:"blue",
-              click(){
-                alert("一个图标按钮")
-              }
-            },{
-              icon:"icon-htmal5icon18",
-              click(){
-                alert("一个图标按钮")
-              }
-            },]
+            key:"b",
           }
         ]
       },

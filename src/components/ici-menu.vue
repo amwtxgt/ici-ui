@@ -6,9 +6,13 @@
           :class="{topline:item.topLine,bottomline:item.bottomLine,disabled:item.disabled}"
           @click="click($event,item.click,item.disabled)">
         <div>
-          <ici-icon v-if="item.icon" :name="item.icon" :color="item.iconColor||'#666'" size="17px"></ici-icon>
+          <ici-icon v-if="item.icon" :name="item.icon" :color="item.iconColor||'var(--text-regular,#666)'"
+                    size="17px"></ici-icon>
         </div>
-        <div :title="item.name" class="menu-name"><span>{{item.name}}</span></div>
+        <div :title="item.name" class="menu-name">
+          <span v-html="item.name"></span>
+          <span v-if="item.key" style="text-transform:uppercase;">({{item.key}})</span>
+        </div>
         <div v-if="item.btns" class="flex-none">
           <ici-icon click-state v-for="(btn,index) of item.btns" :name="btn.icon" :key="'btn'+index"
                     @click="click($event,btn.click)" :color="btn.iconColor" size="16px"/>
@@ -23,7 +27,7 @@
               <div>
                 <ici-icon v-if="child.icon" :name="child.icon" :color="child.iconColor" size="14px"></ici-icon>
               </div>
-              <div class="menu-name"><span>{{child.name}}</span></div>
+              <div class="menu-name"><span v-html="child.name"></span></div>
               <div v-if="child.btns" class="flex-none">
                 <ici-icon click-state v-for="(btn,index) of child.btns" :name="btn.icon" :key="'btn'+index"
                           @click="click($event,btn.click)" :color="btn.iconColor" size="16px"/>
@@ -37,7 +41,37 @@
 </template>
 
 <script>
-  var rom = Math.random();
+  /*
+  [
+    {
+      name: "我是菜单一",
+      icon?: "icon-qq",
+      iconColor?: "green",
+      bottomLine?:true, //底部画分隔线
+      key?:'c', //快捷键
+      disabled?: true,
+      click: (e) => {
+        alert("你点了菜单一")
+      },
+      btns: [{
+        icon: "icon-tianjia",
+        iconColor: "red",
+        click() {
+          console.log("你点击了一个btn")
+        },
+      }, {
+        topLine:true,
+        icon: "icon-tianjia",
+        iconColor: "red",
+        click() {
+          console.log("你点击了一个btn")
+        },
+      }],
+      children: [],
+    },
+  ]
+  */
+  let rom = Math.random();
   export default {
     components: {},
     name: "ici-right-click-menu",
@@ -49,13 +83,52 @@
         menuList: []
       };
     },
-
+    watch: {
+      show() {
+        this.init();
+      },
+    },
+    created() {
+      this.init();
+    },
     methods: {
+      init() {
+        if (this.show) {
+          document.addEventListener('keydown', this.shortcutKey)
+        } else {
+          document.removeEventListener('keydown', this.shortcutKey)
+        }
+      },
+
+      shortcutKey(e) {
+        let key = e.key.toUpperCase();
+        this.menuList.some((v) => {
+          if (v.key && v.key.toUpperCase() === key && v.click) {
+            v.click();
+            this.show = false
+            return true;
+          }
+          if (v.children) {
+            return v.children.some((v) => {
+              if (v.key && v.key.toUpperCase() === key && v.click) {
+                v.click();
+                this.show = false
+                return true;
+              }
+
+            })
+          }
+        })
+        console.log(e)
+
+        e.stopPropagation()
+        return false;
+      },
       //主动事件
       dispatchEvent(e) {
-        var x = e.clientX, y = e.clientY
-        var el = document.elementFromPoint(x, y);
-        var ev = document.createEvent("HTMLEvents");
+        let x = e.clientX, y = e.clientY;
+        let el = document.elementFromPoint(x, y);
+        let ev = document.createEvent("HTMLEvents");
         ev.initEvent('click', false, true);
         el.dispatchEvent(ev);
         document.removeEventListener('click', this.dispatchEvent)
@@ -66,23 +139,25 @@
         this.show = false;
       },
 
+      //点击外面消失
       mousedown() {
+
         this.show = false;
         document.addEventListener('click', this.dispatchEvent);
       },
 
       open(menuList, position) {
-        if(!position){
+        if (!position) {
           //如果没传坐标，用事件的鼠标位置
-          if(window.event && window.event.clientX){
+          if (window.event && window.event.clientX) {
             position = {
-              x:window.event.clientX ,
-              y:window.event.clientY,
+              x: window.event.clientX,
+              y: window.event.clientY,
             }
-          }else{
+          } else {
             position = {
-              x:0,
-              y:0,
+              x: 0,
+              y: 0,
             }
           }
         }
@@ -126,14 +201,14 @@
           this.$refs['icimenuchild'].forEach((el) => {
             var parent = el.parentNode
 
-            var left, top;
+            let left, top;
             if (rightMargin - el.offsetWidth < 15) {
 
               //二级菜单移动到左边
               left = -el.offsetWidth + 'px'
             } else {
               //移动到右边
-              left = (width - 1) + 'px';
+              left = (width - 2) + 'px';
             }
 
             if (innerHeight - clientY - parent.offsetTop - el.offsetHeight < 0) {
