@@ -14,9 +14,13 @@
           <span v-if="item.key" style="text-transform:uppercase;">({{item.key}})</span>
         </div>
         <div v-if="item.btns" class="flex-none">
-          <ici-icon click-state v-for="(btn,index) of item.btns" :name="btn.icon" :key="'btn'+index"
-                    @click="click($event,btn.click)" :color="btn.iconColor" size="16px"/>
+          <template v-for="(btn,index) of item.btns">
+            <div class="html-btn" v-if="btn.html" @click="click($event,btn.click)" v-html="btn.html"></div>
+            <ici-icon v-else click-state :name="btn.icon" :key="'btn'+index"
+                      @click="click($event,btn.click)" :color="btn.iconColor" size="16px"/>
+          </template>
         </div>
+        <div class="flex-none" style="padding-left:10px;" v-if="item.rightName">{{item.rightName}}</div>
 
         <!--二级菜单-->
         <template v-if="item.children && item.children.length">
@@ -45,6 +49,7 @@
   [
     {
       name: "我是菜单一",
+      rightName: '菜单右侧name'
       icon?: "icon-qq",
       iconColor?: "green",
       bottomLine?:true, //底部画分隔线
@@ -54,6 +59,7 @@
         alert("你点了菜单一")
       },
       btns: [{
+        html:'<div>自定义html</div>'
         icon: "icon-tianjia",
         iconColor: "red",
         click() {

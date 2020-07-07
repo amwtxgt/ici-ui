@@ -7,14 +7,14 @@
     </div>
     <br><br>
     <div class="title">左右键菜单 v-rightmenu v-leftmenu</div>
-    <baseComponent title="基本" html='<div class="rightmenu" v-rightmenu="[{name: "我是菜单一"},{name: "我是菜单二"}]">
+    <baseComponent title="基本" html='<div class="rightmenu" v-rightmenu="[{name: "我是菜单一"},{name: "我是菜单二",rightName:"F2"}]">
   右键点我
 </div>
 <br>
 <div class="rightmenu" v-leftmenu="[{name: "我是菜单一"},{name: "我是菜单二"}]">
   左键点我
 </div>'>
-      <div class="rightmenu" v-rightmenu="[{name: '我是菜单一'},{name: '我是菜单二'}]">
+      <div class="rightmenu" v-rightmenu="[{name: '我是菜单一'},{name: '我是菜单二',rightName:'F2'}]">
         右键点我
       </div>
       <br>
@@ -125,38 +125,31 @@ methods: {
 </div>
 
 methods: {
-   menu4() {
-        return [
-          {
-            name: "我是菜单一",
-            click() {alert("你点了菜单一")},
-            btns:[{
-              icon:"icon-htmal5icon18",
-              click(){
-                alert("一个图标按钮")
+   menu4(){
+        {
+          name: "我是菜单一sssssssssssssssssssssssssssssssssssss",
+          click() {alert("你点了菜单一")},
+          key:"a",
+        }, {
+          name: "我是菜单二",
+          click(){alert("你点了菜单二")},
+          key:"b",
+          btns:[{
+            icon:"icon-htmal5icon18",
+            click(){
+              alert("一个图标按钮")
+            }
+          },
+            {
+              html:“<div>自定义html按钮</div>”,
+            click(){
+              alert("自定义html按钮")
               }
-            }]
-          }, {
-            name: "我是菜单二",
-            click(){alert("你点了菜单二")},
-            btns:[{
-              icon:"icon-telephone",
-              iconColor:"blue",
-              click(){
-                alert("一个图标按钮")
-              }
-            },{
-              icon:"icon-htmal5icon18",
-              click(){
-                alert("一个图标按钮")
-              }
-            },]
-          }
-        ]
-      },
-}'>
+          }]
+        }
+  }'>
 
-      <div class="rightmenu" v-rightmenu="menu4">
+      <div class="rightmenu" v-rightmenu="menu5">
         右键点我
       </div>
 
@@ -389,6 +382,32 @@ methods: {
             name: "我是菜单二",
             click(){alert("你点了菜单二")},
             key:"b",
+
+          }
+        ]
+      },
+      menu5() {
+        return [
+          {
+            name: "我是菜单一sssssssssssssssssssssssssssssssssssss",
+            click() {alert("你点了菜单一")},
+            key:"a",
+          }, {
+            name: "我是菜单二",
+            click(){alert("你点了菜单二")},
+            key:"b",
+            btns:[{
+              icon:"icon-htmal5icon18",
+              click(){
+                alert("一个图标按钮")
+              }
+            },
+              {
+                html:'<div>自定义html按钮</div>',
+                click(){
+                  alert("自定义html按钮")
+                }
+              }]
           }
         ]
       },
