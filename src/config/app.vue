@@ -2,57 +2,57 @@
   <div class="components flex">
     <div class="flex-none">
       <Menu theme="light" :active-name="active" @on-select="onselect">
-        <MenuItem name="pageBgImg">
+        <menu-item name="pageBgImg">
           背景图 ici-bg-img
-        </MenuItem>
-        <MenuItem name="pageField">
+        </menu-item>
+        <menu-item name="pageField">
           数据选择 ici-Field
-        </MenuItem>
-        <MenuItem name="pageImagePreview">
+        </menu-item>
+        <menu-item name="pageImagePreview">
           图片查看器 ici-image-preview
-        </MenuItem>
-        <MenuItem name="pageButton">
+        </menu-item>
+        <menu-item name="pageButton">
           按钮 ici-button
-        </MenuItem>
-        <MenuItem name="pageLoading">
+        </menu-item>
+        <menu-item name="pageLoading">
           加载 ici-loading
-        </MenuItem>
-        <MenuItem name="pageIcon">
+        </menu-item>
+        <menu-item name="pageIcon">
           图标 ici-icon
-        </MenuItem>
-        <MenuItem name="pageColorIcon">
+        </menu-item>
+        <menu-item name="pageColorIcon">
           彩色图标 ici-color-icon
-        </MenuItem>
-        <MenuItem name="pageInput">
+        </menu-item>
+        <menu-item name="pageInput">
           输入 ici-input
-        </MenuItem>
-        <MenuItem name="pagePopup">
+        </menu-item>
+        <menu-item name="pagePopup">
           弹窗 ici-popup
-        </MenuItem>
-        <MenuItem name="pageDrawer">
+        </menu-item>
+        <menu-item name="pageDrawer">
           抽屉弹窗 ici-drawer
-        </MenuItem>
-        <MenuItem name="pageMessage">
+        </menu-item>
+        <menu-item name="pageMessage">
           消息 ici-msg
-        </MenuItem>
-        <MenuItem name="pageMenu">
+        </menu-item>
+        <menu-item name="pageMenu">
           左右键菜单 ici-menu
-        </MenuItem>
-        <MenuItem name="pageScroll">
+        </menu-item>
+        <menu-item name="pageScroll">
           滚动 ici-scroll
-        </MenuItem>
-        <MenuItem name="pageSearch">
+        </menu-item>
+        <menu-item name="pageSearch">
           搜索 ici-search
-        </MenuItem>
-        <MenuItem name="pageHeader">
+        </menu-item>
+        <menu-item name="pageHeader">
           导航头部 ici-header
-        </MenuItem>
-        <MenuItem name="pagePoptip">
+        </menu-item>
+        <menu-item name="pagePoptip">
           函数库 ici-poptip
-        </MenuItem>
-        <MenuItem name="pageFuns">
+        </menu-item>
+        <menu-item name="pageFuns">
           函数库 $funs
-        </MenuItem>
+        </menu-item>
       </Menu>
     </div>
     <div class="flex-auto" style="overflow-y: scroll;overflow-x: visible">
@@ -62,6 +62,7 @@
 </template>
 
 <script>
+  import Vue from 'vue'
   import pageButton from '../examples/page-button.vue';
   import pageLoading from '../examples/page-loading.vue';
   import pageIcon from '../examples/page-icon.vue';
@@ -104,7 +105,7 @@
     name: 'app',
     data() {
       return {
-        active: 'pageScroll'
+        active: 'pageMenu'
       };
     },
     computed: {
@@ -116,6 +117,8 @@
       open: Boolean,
     },
     mounted() {
+      console.log(pageButton)
+      console.log(pageButton instanceof Vue)
     },
     beforeDestroy() {
 

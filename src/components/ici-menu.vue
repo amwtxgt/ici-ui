@@ -1,57 +1,23 @@
-<template>
-  <div :id="id" v-show="show" class="ici-menu-wrap" @mousedown="mousedown('mousedown',$event)" ref="menuwrap"
-       @mousewheel.passive.self="mousewheel" @contextmenu.stop.prevent>
-    <ul class="ici-menu" ref="icimenu" v-if="menuList && menuList.length" :style="position" @mousedown.stop="">
-      <li v-for="(item,i) of menuList" :key="'menu'+i"
-          :class="{topline:item.topLine,bottomline:item.bottomLine,disabled:item.disabled}"
-          @click="click($event,item.click,item.disabled)">
-        <div>
-          <ici-icon v-if="item.icon" :name="item.icon" :color="item.iconColor||'var(--text-regular,#666)'"
-                    size="17px"></ici-icon>
-        </div>
-        <div :title="item.name" class="menu-name">
-          <span v-html="item.name"></span>
-          <span v-if="item.key" style="text-transform:uppercase;">({{item.key}})</span>
-        </div>
-        <div v-if="item.btns" class="flex-none">
-          <template v-for="(btn,index) of item.btns">
-            <div class="html-btn" v-if="btn.html" @click="click($event,btn.click)" v-html="btn.html"></div>
-            <ici-icon v-else click-state :name="btn.icon" :key="'btn'+index"
-                      @click="click($event,btn.click)" :color="btn.iconColor" size="16px"/>
-          </template>
-        </div>
-        <div class="flex-none" style="padding-left:10px;" v-if="item.rightName">{{item.rightName}}</div>
+<!--<template>-->
 
-        <!--二级菜单-->
-        <template v-if="item.children && item.children.length">
-          &nbsp; &nbsp;<ici-icon name="icon-yduiqianjin"></ici-icon>
-          <ul class="ici-menu-child" ref="icimenuchild">
-            <li v-for="(child,i2) of item.children" :key="'child'+i2" @click="click($event,child.click,child.disabled)"
-                :class="{topline:child.topLine,bottomline:child.bottomLine,disabled:child.disabled}">
-              <div>
-                <ici-icon v-if="child.icon" :name="child.icon" :color="child.iconColor" size="14px"></ici-icon>
-              </div>
-              <div class="menu-name"><span v-html="child.name"></span></div>
-              <div v-if="child.btns" class="flex-none">
-                <ici-icon click-state v-for="(btn,index) of child.btns" :name="btn.icon" :key="'btn'+index"
-                          @click="click($event,btn.click)" :color="btn.iconColor" size="16px"/>
-              </div>
-            </li>
-          </ul>
-        </template>
-      </li>
-    </ul>
-  </div>
-</template>
+<!--  <ul @blur="blur" class="ici-menu" ref="icimenu" v-if="menuList && menuList.length && show" :style="position"-->
+<!--      tabindex="0"-->
+<!--      @mousedown.stop="" @contextmenu.stop.prevent>-->
+<!--    <menu-item v-for="(item,i) of menuList" :item="item" :key="'menu'+i"/>-->
+<!--  </ul>-->
+
+<!--</template>-->
 
 <script>
   /*
   [
+    //两种方式传入，一种菜单方式，一种组件方式
     {
       name: "我是菜单一",
       rightName: '菜单右侧name'
       icon?: "icon-qq",
       iconColor?: "green",
+      topLine?:true //顶部画线
       bottomLine?:true, //底部画分隔线
       key?:'c', //快捷键
       disabled?: true,
@@ -75,11 +41,21 @@
       }],
       children: [],
     },
+    {
+      component:vue component //当有传入组件 属性name、rightName、key、disabled、click将失效
+      props?://要传入component的props
+      icon?: "icon-qq",
+      iconColor?: "green",
+      topLine?:true //顶部画线
+      bottomLine?:true, //底部画分隔线
+    }
   ]
   */
+  import MenuItem from './menu/menu-item'
+
   let rom = Math.random();
   export default {
-    components: {},
+    components: {MenuItem},
     name: "ici-right-click-menu",
     data() {
       return {
@@ -130,26 +106,9 @@
         e.stopPropagation()
         return false;
       },
-      //主动事件
-      dispatchEvent(e) {
-        let x = e.clientX, y = e.clientY;
-        let el = document.elementFromPoint(x, y);
-        let ev = document.createEvent("HTMLEvents");
-        ev.initEvent('click', false, true);
-        el.dispatchEvent(ev);
-        document.removeEventListener('click', this.dispatchEvent)
-      },
 
-      //滚轮
-      mousewheel(e) {
+      blur() {
         this.show = false;
-      },
-
-      //点击外面消失
-      mousedown() {
-
-        this.show = false;
-        document.addEventListener('click', this.dispatchEvent);
       },
 
       open(menuList, position) {
@@ -173,6 +132,7 @@
           this.show = true;
           this.$nextTick(() => {
             if (!this.$refs['icimenu']) return;
+            this.$refs['icimenu'].focus()
             this.setPosition(position);
           })
         }
@@ -253,5 +213,70 @@
         }
       },
     },
+    render(createElement) {
+
+      if (!this.menuList || !this.menuList.length || !this.show) {
+        return null
+      }
+
+      return createElement('ul', {
+          class: 'ici-menu',
+          ref: 'icimenu',
+          style: this.position,
+          attrs: {
+            tabindex: '0'
+          },
+          on: {
+            mousedown: (e) => {
+              e.stopPropagation()
+            },
+            contextmenu: (e) => {
+              e.stopPropagation()
+              e.preventDefault()
+            },
+            // blur: this.blur
+          }
+        },
+        this.menuList.map((item) => {
+
+          let porps={
+            value: this.show
+          }
+          if(item.props){
+            Object.assign(porps,item.props)
+          }
+
+          if (item.component) {
+            return createElement('li', {
+              class: {
+                topline: item.topLine,
+                bottomline: item.bottomLine,
+              }
+            }, [
+
+              createElement('div', {class: 'menu-icon'}, [
+                item.icon ? createElement('ici-icon', {
+                  props: {
+                    name: item.icon,
+                    color: item.iconColor || 'var(--text-regular,#666)',
+                    size: '17px'
+                  }
+                }) : ''
+              ]),
+              createElement(item.component, {props: porps})
+            ])
+          } else {
+            return createElement(MenuItem, {
+
+              props: {item: item, value: this.show}, on: {
+                input: (v) => {
+                  this.show = v
+                }
+              }
+            })
+          }
+        })
+      )
+    }
   }
 </script>

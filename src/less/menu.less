@@ -26,6 +26,8 @@
 }
 
 .ici-menu, .ici-menu-child {
+  outline: none;
+  z-index: 99999999;
   user-select: none;
   position: absolute;
   font-size: 13px;
@@ -43,7 +45,7 @@
     color: @tc-base;
     line-height: 20px;
 
-    > :first-child {
+    > .menu-icon {
       color: fade(@tc-base, 80%);
       width: 25px;
       flex: none;
@@ -87,7 +89,7 @@
     }
 
     &.disabled {
-      color: fade(@tc-base, 80%);
+      color: fade(@tc-base, 60%);
       .deputyColor(@bgc-base, 6%, ~"background-color");
     }
   }

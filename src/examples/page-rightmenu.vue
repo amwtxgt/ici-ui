@@ -304,7 +304,7 @@ methods: {
 </template>
 
 <script>
-
+  import MenuTest from './menu-test'
   export default {
     name: 'page-rightmenu',
     data() {
@@ -328,6 +328,9 @@ methods: {
           }, {
             name: '我是菜单二',
             click(){alert('你点了菜单二')},
+          },
+          {
+            component:MenuTest,
           }
         ]
       },
