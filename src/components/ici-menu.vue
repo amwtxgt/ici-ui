@@ -234,7 +234,7 @@
               e.stopPropagation()
               e.preventDefault()
             },
-            // blur: this.blur
+            blur: this.blur
           }
         },
         this.menuList.map((item) => {
