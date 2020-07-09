@@ -118,8 +118,11 @@
         if (this.fullscreen) {
           css = {width: '100%', height: '100vh'}
           var el = this.$refs.fmsPopup;
-          el.style.left = '0px'
-          el.style.top = '0px'
+          if(el){
+            el.style.left = '0px'
+            el.style.top = '0px'
+          }
+
         }
         return css;
       },
@@ -151,8 +154,10 @@
           document.body.removeEventListener('mouseleave', this.mouseup)
           setTimeout(() => {
             var el = this.$refs.fmsPopup;
-            el.style.left = '0px'
-            el.style.top = '0px'
+            if(el){
+              el.style.left = '0px'
+              el.style.top = '0px'
+            }
           }, 300)
           this.drag.open = false;
         }

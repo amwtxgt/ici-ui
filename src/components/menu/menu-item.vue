@@ -2,7 +2,8 @@
   <li :class="{topline:item.topLine,bottomline:item.bottomLine,disabled:item.disabled}"
       @click="click($event,item.click,item.disabled)">
     <div class="menu-icon">
-      <ici-icon v-if="item.icon" :name="item.icon" :color="item.iconColor||'var(--text-regular,#666)'"
+      <ici-color-icon v-if="item.colorIcon" :name="item.colorIcon" size="17px" />
+      <ici-icon v-else-if="item.icon" :name="item.icon" :color="item.iconColor||'var(--text-regular,#666)'"
                 size="17px"></ici-icon>
     </div>
     <div :title="item.name" class="menu-name">

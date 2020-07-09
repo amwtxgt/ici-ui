@@ -16,6 +16,7 @@
       name: "我是菜单一",
       rightName: '菜单右侧name'
       icon?: "icon-qq",
+      colorIcon:'icon-qq' //直接使用彩色的icon,iconColor将失败
       iconColor?: "green",
       topLine?:true //顶部画线
       bottomLine?:true, //底部画分隔线
@@ -242,6 +243,26 @@
           let porps={
             value: this.show
           }
+
+          let icon = ''
+
+         if(item.colorIcon){
+           icon = createElement('ici-color-icon', {
+             props: {
+               name: item.colorIcon,
+               size: '17px'
+             }
+           })
+         }else if(item.icon){
+           icon = createElement('ici-icon', {
+             props: {
+               name: item.icon,
+               color: item.iconColor || 'var(--text-regular,#666)',
+               size: '17px'
+             }
+           })
+         }
+
           if(item.props){
             Object.assign(porps,item.props)
           }
@@ -253,15 +274,8 @@
                 bottomline: item.bottomLine,
               }
             }, [
-
               createElement('div', {class: 'menu-icon'}, [
-                item.icon ? createElement('ici-icon', {
-                  props: {
-                    name: item.icon,
-                    color: item.iconColor || 'var(--text-regular,#666)',
-                    size: '17px'
-                  }
-                }) : ''
+                icon
               ]),
               createElement(item.component, {props: porps})
             ])
