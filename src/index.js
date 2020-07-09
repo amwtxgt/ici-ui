@@ -63,7 +63,7 @@ const install = function (Vue,options) {
   Vue.prototype.$funs = funs;
 
   //悬浮窗
-  var iciPoptip  = new Vue({...iciPoptipView,...options});
+  let iciPoptip  = new Vue({...iciPoptipView,...options});
   Vue.prototype.$icitip = iciPoptip;
 
   var modal  = new Vue(iciModal);
@@ -92,7 +92,7 @@ const install = function (Vue,options) {
   imgViewDirective(Vue)
 
   //右键菜单
-  menuDirective(Vue);
+  menuDirective(Vue,options);
 
   //提示窗
   tooltipDirective(Vue);

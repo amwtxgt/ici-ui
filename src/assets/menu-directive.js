@@ -1,8 +1,8 @@
 import iciMenu from '../components/ici-menu.vue'
 
-export default function (Vue){
+export default function (Vue, options) {
   //右键菜单
-  let rightMenu = new Vue(iciMenu);
+  let rightMenu = new Vue({...iciMenu, ...options});
   Vue.prototype.$menu = rightMenu;
   Vue.directive('rightmenu', {
     inserted: function (el, binding) {
@@ -10,33 +10,31 @@ export default function (Vue){
       el.oncontextmenu = (e) => {
         if (binding.value) {
           if (typeof binding.value === 'function') {
-            rightMenu.open(binding.value(), {x:e.clientX,y:e.clientY})
-          }
-          else if (binding.value instanceof Array) {
-            rightMenu.open(binding.value, {x:e.clientX,y:e.clientY})
+            rightMenu.open(binding.value(), {x: e.clientX, y: e.clientY})
+          } else if (binding.value instanceof Array) {
+            rightMenu.open(binding.value, {x: e.clientX, y: e.clientY})
           }
         }
         window.event.returnValue = false;
         return false;
       }
     },
-    componentUpdated:function (el, binding) {
+    componentUpdated: function (el, binding) {
       el.oncontextmenu = (e) => {
 
         if (binding.value) {
           if (typeof binding.value === 'function') {
 
-            rightMenu.open(binding.value(), {x:e.clientX,y:e.clientY})
-          }
-          else if (binding.value instanceof Array) {
-            rightMenu.open(binding.value, {x:e.clientX,y:e.clientY})
+            rightMenu.open(binding.value(), {x: e.clientX, y: e.clientY})
+          } else if (binding.value instanceof Array) {
+            rightMenu.open(binding.value, {x: e.clientX, y: e.clientY})
           }
         }
         window.event.returnValue = false;
         return false;
       }
     },
-    unbind(el){
+    unbind(el) {
       el.oncontextmenu = null;
     },
   })
@@ -46,13 +44,12 @@ export default function (Vue){
     inserted: function (el, binding) {
 
       el.onmouseup = (e) => {
-        if(e.button !==0) return;
+        if (e.button !== 0) return;
         if (binding.value) {
           if (typeof binding.value === 'function') {
-            rightMenu.open(binding.value(), {x:e.clientX,y:e.clientY})
-          }
-          else if (binding.value instanceof Array) {
-            rightMenu.open(binding.value, {x:e.clientX,y:e.clientY})
+            rightMenu.open(binding.value(), {x: e.clientX, y: e.clientY})
+          } else if (binding.value instanceof Array) {
+            rightMenu.open(binding.value, {x: e.clientX, y: e.clientY})
           }
         }
         window.event.returnValue = false;
@@ -62,20 +59,19 @@ export default function (Vue){
     componentUpdated: function (el, binding) {
 
       el.onmouseup = (e) => {
-        if(e.button !==0) return;
+        if (e.button !== 0) return;
         if (binding.value) {
           if (typeof binding.value === 'function') {
-            rightMenu.open(binding.value(), {x:e.clientX,y:e.clientY})
-          }
-          else if (binding.value instanceof Array) {
-            rightMenu.open(binding.value, {x:e.clientX,y:e.clientY})
+            rightMenu.open(binding.value(), {x: e.clientX, y: e.clientY})
+          } else if (binding.value instanceof Array) {
+            rightMenu.open(binding.value, {x: e.clientX, y: e.clientY})
           }
         }
         window.event.returnValue = false;
         return false;
       }
     },
-    unbind(el){
+    unbind(el) {
       el.onmouseup = null;
     },
   })
