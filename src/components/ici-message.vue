@@ -87,10 +87,9 @@
 
             open(obj) { //obj = {type:loading|success|error|message,duration:显示时间，showClose:显示关闭按钮,msg:显示内容}
                 if(obj.type==='loading') {
-
                     this.isLoading = true;
                 }else{
-                    this.isLoading = true;
+                    this.isLoading = false;
                 }
                 this._append();
                 clearTimeout(this.timeout);
