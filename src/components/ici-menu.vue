@@ -53,7 +53,7 @@
   ]
   */
   import MenuItem from './menu/menu-item'
-
+  let downTiem = 0;
   let rom = Math.random();
   export default {
     components: {MenuItem},
@@ -108,8 +108,16 @@
         return false;
       },
 
-      blur() {
-        this.show = false;
+      blur(e) {
+
+        if(Date.now()-downTiem>50){
+          this.show = false;
+        }
+
+      },
+      mousedown(e) {
+        downTiem = Date.now()
+        e.stopPropagation()
       },
 
       open(menuList, position) {
@@ -228,14 +236,12 @@
             tabindex: '0'
           },
           on: {
-            mousedown: (e) => {
-              e.stopPropagation()
-            },
+            mousedown:  this.mousedown,
             contextmenu: (e) => {
               e.stopPropagation()
               e.preventDefault()
             },
-            blur: this.blur
+            '!blur': this.blur,
           }
         },
         this.menuList.map((item) => {
