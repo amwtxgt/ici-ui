@@ -16,18 +16,9 @@
 //背景色
 @bgc-base: #f6f6f6; //一级
 
-.ici-menu-wrap {
-  position: fixed;
-  z-index: 99998;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-}
-
 .ici-menu, .ici-menu-child {
   outline: none;
-  z-index: 99999999;
+  z-index: 99990;
   user-select: none;
   position: absolute;
   font-size: 13px;
@@ -62,6 +53,7 @@
         max-width: 250px;
       }
     }
+
     .html-btn{
       display: inline-block;
       position: relative;
@@ -92,6 +84,9 @@
       color: fade(@tc-base, 60%);
       .deputyColor(@bgc-base, 6%, ~"background-color");
     }
+  }
+  .btn-icon{
+      margin-left:7px;
   }
 }
 

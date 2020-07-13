@@ -13,7 +13,7 @@
     <div v-if="item.btns" class="flex-none">
       <template v-for="(btn,index) of item.btns">
         <div class="html-btn" v-if="btn.html" @click="click($event,btn.click)" v-html="btn.html"></div>
-        <ici-icon v-else click-state :name="btn.icon" :key="'btn'+index"
+        <ici-icon v-else click-state :name="btn.icon" :key="'btn'+index" class="btn-icon"
                   @click="click($event,btn.click)" :color="btn.iconColor" size="16px"/>
       </template>
     </div>

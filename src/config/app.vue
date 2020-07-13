@@ -139,7 +139,7 @@
     right: 0;
     bottom: 0;
     left: 0;
-    z-index: 99998;
+    z-index: 100;
     background: #fff;
     > div:first-child {
       width: 240px;

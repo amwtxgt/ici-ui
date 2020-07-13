@@ -8,10 +8,14 @@ export default function (Vue, options) {
     inserted: function (el, binding) {
 
       el.oncontextmenu = (e) => {
+
         if (binding.value) {
           if (typeof binding.value === 'function') {
+            console.log('1111111',binding)
             rightMenu.open(binding.value(), {x: e.clientX, y: e.clientY})
           } else if (binding.value instanceof Array) {
+
+            console.log('22222',binding)
             rightMenu.open(binding.value, {x: e.clientX, y: e.clientY})
           }
         }
