@@ -149,15 +149,16 @@
 
       setPosition(e) {
 
-        let clientX = e.x,
-          clientY = e.y,
-          innerWidth = window.innerWidth,
-          innerHeight = window.innerHeight
+        let clientX = e.x,    //鼠标x
+          clientY = e.y,      //鼠标y
+          innerWidth = window.innerWidth, //浏览器宽
+          innerHeight = window.innerHeight //浏览器高
 
-        var width = this.$refs['icimenu'].offsetWidth,
-          height = this.$refs['icimenu'].offsetHeight
+        var width = this.$refs['icimenu'].offsetWidth, //菜单宽
+          height = this.$refs['icimenu'].offsetHeight   //菜单高
 
         //x坐标的位置,超过右边界时，移动刚好右边界
+        //15是滚动条的宽度
         var rightMargin = innerWidth - (clientX + width);
         if (rightMargin < 15) {
           clientX = clientX + rightMargin - 15;
@@ -166,7 +167,12 @@
         //y坐标的位置，超过下边界时，向上显示
         var bottomMargin = innerHeight - (clientY + height)
         if (bottomMargin < 0) {
-          clientY = clientY - height;
+          if(clientY - height>0){
+            clientY = clientY - height;
+          }else{
+            clientY = 0;
+          }
+
         }
 
         this.position = {left: clientX + 'px', top: clientY + 'px'}

@@ -1,5 +1,6 @@
 <template>
   <li :class="{topline:item.topLine,bottomline:item.bottomLine,disabled:item.disabled}"
+      class="hover"
       @click="click($event,item.click,item.disabled)">
     <div class="menu-icon">
       <ici-color-icon v-if="item.colorIcon" :name="item.colorIcon" size="17px"/>

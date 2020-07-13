@@ -1,7 +1,7 @@
 <template>
   <div>
     <div style="float:right">
-      <div class="rightmenu" v-rightmenu="[{name: '我是菜单一'},{name: '我是菜单二'}]">
+      <div class="rightmenu" v-rightmenu="[{name: '我是菜单一'},{name: '我是菜单二'},{name: '我是菜单一'},{name: '我是菜单二'},{name: '我是菜单二'},{name: '我是菜单一'},{name: '我是菜单二'},{name: '我是菜单二'},{name: '我是菜单一'},{name: '我是菜单二'},{name: '我是菜单二'},{name: '我是菜单一'},{name: '我是菜单二'},{name: '我是菜单二'},{name: '我是菜单二'},{name: '我是菜单一'},{name: '我是菜单二'},{name: '我是菜单二'},{name: '我是菜单一'},{name: '我是菜单二'},{name: '我是菜单二'},{name: '我是菜单一'},{name: '我是菜单二'},{name: '我是菜单一'},{name: '我是菜单二'},{name: '我是菜单二'},{name: '我是菜单一'},{name: '我是菜单二'}]">
         右键点我
       </div>
     </div>
@@ -14,7 +14,7 @@
 <div class="rightmenu" v-leftmenu="[{name: "我是菜单一"},{name: "我是菜单二"}]">
   左键点我
 </div>'>
-      <div class="rightmenu" v-rightmenu="[{name: '我是菜单一'},{name: '我是菜单二',rightName:'F2'}]">
+      <div class="rightmenu" v-rightmenu="[{name: '我是菜单一'},{name: '我是菜单二'},{name: '我是菜单一'},{name: '我是菜单二'},{name: '我是菜单二'},{name: '我是菜单一'},{name: '我是菜单二'},{name: '我是菜单二'},{name: '我是菜单一'},{name: '我是菜单二'},{name: '我是菜单二'},{name: '我是菜单一'},{name: '我是菜单二'},{name: '我是菜单二'},{name: '我是菜单二'},{name: '我是菜单一'},{name: '我是菜单二'},{name: '我是菜单二'},{name: '我是菜单一'},{name: '我是菜单二'},{name: '我是菜单二'},{name: '我是菜单一'},{name: '我是菜单二'},{name: '我是菜单一'},{name: '我是菜单二'},{name: '我是菜单二'},{name: '我是菜单一'},{name: '我是菜单二'}]">
         右键点我
       </div>
       <br>

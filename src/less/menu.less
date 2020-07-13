@@ -25,7 +25,8 @@
   background: @bgc-base;
   border: 1px solid @bdc-base;
   box-shadow: 0 0.5em 1em 0 rgba(0, 0, 0, .1);
-
+  max-height:100%;
+  overflow: auto;
   li {
     position: relative;
     display: flex;
@@ -71,7 +72,8 @@
       border-bottom: 1px solid var(--border-base,#eee);
     }
 
-    &:hover {
+
+    &.hover:hover {
       .deputyColor(@bgc-base, 10%, ~"background-color");
       color: @tc-base;
 
