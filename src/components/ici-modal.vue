@@ -1,5 +1,5 @@
 <template>
-  <ici-popup :id="id" class="ici-modal" :value="show" @input="close" :width="450" mask :esc="option.showClose" :body-class="option.bodyClass"
+  <ici-popup :id="id" class="ici-modal" :value="show" @input="close" :width="450" mask  :esc="option.showClose" :body-class="option.bodyClass"
              :position="option.position" :mask-close="option.showClose" :title-class="option.titleClass||'ici-modal-title'">
     <div slot="header">
       <ici-icon name="icon-msnui-alarm-circle" size="22px" @></ici-icon>
@@ -36,7 +36,24 @@
         }
       };
     },
+    watch:{
+      show(e){
+        if(e){
+          document.addEventListener('keypress',this.enter)
+        }else{
+          document.addEventListener('keypress',this.enter)
+        }
+      },
+    },
     methods: {
+      enter(e){
+        if(e.key === 'Enter'){
+          this.ok();
+          e.stopPropagation();
+          e.preventDefault();
+        }
+
+      },
       initOption(){
         return {
           title: '',
