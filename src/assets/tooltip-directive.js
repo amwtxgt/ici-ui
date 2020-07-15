@@ -46,6 +46,7 @@ export default function (Vue) {
         el.addEventListener('mouseout', events.mouseout);
         el.addEventListener('mousewheel', events.mouseout,{passive: true});
         el.addEventListener('mousedown', events.mouseout);
+        document.addEventListener('click', events.mouseout);
       }
     },
     update: function (el, binding){
@@ -58,6 +59,7 @@ export default function (Vue) {
       el.removeEventListener('mouseout', events.mouseout);
       el.removeEventListener('mousewheel', events.mouseout,{passive: true});
       el.removeEventListener('mousedown', events.mouseout);
+      document.removeEventListener('click', events.mouseout);
     }
   })
 }

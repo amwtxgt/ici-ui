@@ -48,10 +48,10 @@
           导航头部 ici-header
         </menu-item>
         <menu-item name="pagePoptip">
-          函数库 ici-poptip
+          title提示 ici-poptip
         </menu-item>
-        <menu-item name="pageFuns">
-          函数库 $funs
+        <menu-item name="pageTour">
+          操作导航 ici-tour
         </menu-item>
       </Menu>
     </div>
@@ -81,6 +81,7 @@
   import pagePoptip from '../examples/page-poptip'
   import pageTitle from '../examples/page-title'
   import pageColorIcon from '../examples/page-color-icon'
+  import pageTour from '../examples/page-tour'
   var components = {
     pageButton,
     pageLoading,
@@ -99,13 +100,14 @@
     pagePoptip,
     pageTitle,
     pageMenu,
-    pageColorIcon
+    pageColorIcon,
+    pageTour
   };
   export default {
     name: 'app',
     data() {
       return {
-        active: 'pageMenu'
+        active: 'pageTour'
       };
     },
     computed: {

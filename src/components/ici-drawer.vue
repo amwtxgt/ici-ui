@@ -1,7 +1,7 @@
 <template>
   <transition name="drawer">
-    <div class="ici-drawer" :style="{'z-index': zIndex}" v-show="value">
-      <div class="ici-drawer-mask" @click.self="close" v-if="!hideMask"></div>
+    <div class="ici-drawer" :style="{'z-index': zIndex}" v-show="value" @click.stop="">
+      <div class="ici-drawer-mask" @click.self.stop="close" v-if="!hideMask"></div>
       <div class="ici-drawer-body" :class="directionClass" :style="bodyStyle">
         <slot></slot>
       </div>
