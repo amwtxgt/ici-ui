@@ -20,37 +20,28 @@ export default function (Vue, options) {
   *   content:'内容或html代码',
   *   position?:'right|left|top|bottom'
   *   width?:number
+  *   x?:number,
+  *   y?:number,
   *   buttons?:[{type:'primary',name:'按钮',click(){}}], //按钮，最多3个
   * }] //执行顺序数组
   * }
   * */
   let tourMap = {};
   Vue.prototype.$tourMap = tourMap
-  /*
-  * value参数
-  * {
-  *  content:'内容或html代码',
-  *  index?:number //索引值在，第几个执行，默认最后一个追加
-  *  position?:'right|left|top|bottom'
-  *  width?:number
-  *  buttons?:[{type:'primary'，name:'按钮名称',click:'单击事件'}]
-  * }
-  *
-  * */
-  Vue.directive('tour', {
-    bind: function (el, binding) {
-      console.log(el);
+
+
+  let tourFunc = function (el, binding) {
       if (!binding.value) {
         console.warn('v-tour的值是必填的,没有填写时功能无效')
         return;
       }
-
       if (!binding.arg) {
         console.warn('在v-tour中必须传入name参数，用于表示操作导航的名称，格式v-tour:name="" name可以是任何str')
         return;
       }
 
       let name = binding.arg;
+
       let d;
       if (typeof binding.value === 'string') {
 
@@ -84,11 +75,15 @@ export default function (Vue, options) {
       if (d.index) {
         tourMap[name][d.index] = tour;
       } else {
-        tourMap[name].push(tour);
+        tourMap[name] = [tour];
       }
-    },
+    };
+  Vue.directive('tour', {
+    bind: tourFunc,
+    componentUpdated: tourFunc,
 
     unbind(el) {
+
       for (let i in tourMap) {
         if (tourMap[i]) {
           tourMap[i].forEach((v, index) => {

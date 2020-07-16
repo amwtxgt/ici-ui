@@ -23,14 +23,21 @@
 </template>
 
 <script>
+
   /*
-  * [{
-  *   position?:'right'
-  *   dom:'绑定的dom对象',
-  *   content:'内容或html代码',
-  *   buttons?:[{type:'primary',name:'按钮',click(){}}], //按钮，最多3个
-  * }]
-  * */
+ * tours数组的对象参数
+ * {
+ *  content:'内容或html代码',
+ *  index?:number //索引值在，第几个执行，如果不填，那只会有一个0索引
+ *  position?:'right|left|top|bottom'
+ *  width?:number
+ *  x?:number,
+ *  y?:number,
+ *  buttons?:[{type:'primary'，name:'按钮名称',click:'单击事件'}]
+ * }
+ *
+ * */
+
   let arrow = 16
   export default {
     name: "ici-tour",
@@ -80,8 +87,8 @@
 
       setPosition() {
 
-
-        if (!this.currentTour || !this.$refs.tour) return;
+        let tour = this.currentTour;
+        if (!tour || !this.$refs.tour) return;
 
         this.arrowStyle.transform = `translate(0,0)`
         //浏览器大小
@@ -90,12 +97,26 @@
 
         let rou = getComputedStyle(this.$refs.tour);
         //提示窗大小
-        let rWidth = parseInt(rou.width)
-        let rHeight = parseInt(rou.height)
+        let rWidth = parseInt(rou.width);
+        let rHeight = parseInt(rou.height);
+        let rect
+        //如果有传坐标按坐标位置，向四周扩散22大小
+        if (typeof tour.x === "number" && typeof tour.y === "number") {
+          let offset = 22;
+          rect = {
+            width: offset * 2,
+            height: offset * 2,
+            left: tour.x - offset,
+            right: tour.x + offset,
+            top: tour.y - offset,
+            bottom: tour.y + offset,
+          }
+        } else {
+          rect = this.currentTour.dom.getBoundingClientRect().toJSON();
 
-        let rect = this.currentTour.dom.getBoundingClientRect();
+        }
         // console.log(rect)
-        rect = rect.toJSON();
+
         rect.width += arrow * 2
         rect.height += arrow * 2
         rect.left -= arrow

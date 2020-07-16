@@ -15,9 +15,23 @@
   console.log("关闭导航")
   })
   },'>
-      <ici-button  type="primary" v-tour:导航1="{content:'这是一条有意思的内容4',width:1000,index:4}">这里</ici-button>
+      <ici-button  type="primary" v-tour:导航1="{content:'这是一条有意思的内容4',width:1000,index:4,x:500,y:500}">这里</ici-button>
         <ici-button type="primary" v-tour:导航1="{content:'这是一条有意思的内容2',width:200,index:1}">这里</ici-button>
         <ici-bgimg style="float: right;background:#ddd" v-tour:导航1="{content:'这是一条有意思的内容3',width:1000,index:3}">传值</ici-bgimg>
+        <br><br><br><br><br><br><br>
+        <br><br><br><br><br><br><br>
+        <br><br><br><br><br><br><br>
+        <br><br><br><br><br><br><br>
+        <br><br><br><br><br><br><br>
+        <br><br><br><br><br><br><br>
+        <br><br><br><br><br><br><br>
+        <br><br><br><br><br><br><br>
+        <br><br><br><br><br><br><br>
+        <br><br><br><br><br><br><br>
+        <br><br><br><br><br><br><br>
+        <br><br><br><br><br><br><br>
+        <br><br><br><br><br><br><br>
+        <br><br><br><br><br><br><br>
         <br><br><br><br><br><br><br>
         <br><br><br><br><br><br><br>
         <ici-bgimg style="float: right;background:#ddd"  v-tour:导航1="{content:'这是一条有意思的内容2',width:1000,index:2}">传值1</ici-bgimg>
