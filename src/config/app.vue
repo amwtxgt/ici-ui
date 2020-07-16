@@ -119,8 +119,7 @@
       open: Boolean,
     },
     mounted() {
-      console.log(pageButton)
-      console.log(pageButton instanceof Vue)
+
     },
     beforeDestroy() {
 

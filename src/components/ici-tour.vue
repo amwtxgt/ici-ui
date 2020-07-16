@@ -81,9 +81,23 @@
     mounted() {
       document.addEventListener('scroll', () => {
         this.setPosition()
-      }, true)
+      }, true);
     },
     methods: {
+      updateTours(name){
+        this.resetTours(name);
+        this.$nextTick(()=>{
+          this.setPosition()
+        })
+      },
+      //获取当前正在执行的导航名称，如果没有正在执行的导航，返回null
+      getCurrentName() {
+        if (this.currentTour) {
+          return this.cName
+        } else {
+          return null;
+        }
+      },
 
       setPosition() {
 
@@ -100,9 +114,10 @@
         let rWidth = parseInt(rou.width);
         let rHeight = parseInt(rou.height);
         let rect
-        //如果有传坐标按坐标位置，向四周扩散22大小
+        //如果有传坐标按坐标位置，向四周扩散18大小
+        // console.log(tour)
         if (typeof tour.x === "number" && typeof tour.y === "number") {
-          let offset = 22;
+          let offset = 18;
           rect = {
             width: offset * 2,
             height: offset * 2,
@@ -112,7 +127,7 @@
             bottom: tour.y + offset,
           }
         } else {
-          rect = this.currentTour.dom.getBoundingClientRect().toJSON();
+          rect = tour.dom.getBoundingClientRect().toJSON();
 
         }
         // console.log(rect)
@@ -134,7 +149,7 @@
         //最终要定位的位置
         let x = 0, y = 0
 
-        let position = this.currentTour.position || 'right'; //方向默认右边
+        let position = tour.position || 'right'; //方向默认右边
         let oCenterY = rect.bottom - (rect.height / 2);
         let oCenterX = rect.right - (rect.width / 2);
         //该分支用于改变，postion
@@ -236,19 +251,21 @@
         this.x = x + 'px';
         this.y = y + 'px';
 
+      },
+
+      resetTours(name){
+        if (this._tourMap[name]) {
+          this.tours = this._tourMap[name].filter((v) => Boolean(v));
+        }
 
       },
 
       //开始操作导航
       start(name) {
         this.cName = '';
-        if (this.$tourMap[name]) {
-          this.cName = name
-          this.cIndex = 0;
-          this.tours = this.$tourMap[name].filter((v) => Boolean(v));
-        } else {
-          this.$icimsg.error('不存在操作导航：' + name)
-        }
+        this.cName = name
+        this.cIndex = 0;
+        this.resetTours(name)
         let _this = this;
         let d = {
           finish(cb) {
