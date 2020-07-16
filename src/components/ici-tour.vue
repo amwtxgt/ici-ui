@@ -113,7 +113,7 @@
         //最终要定位的位置
         let x = 0, y = 0
 
-        let position = this.currentTour.position || 'left'; //方向默认右边
+        let position = this.currentTour.position || 'right'; //方向默认右边
         let oCenterY = rect.bottom - (rect.height / 2);
         let oCenterX = rect.right - (rect.width / 2);
         //该分支用于改变，postion
