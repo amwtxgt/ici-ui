@@ -1,6 +1,8 @@
 .ici-tour {
-  position: relative;
-  min-height: 200px;
+  position: absolute;
+  min-height: 100px;
+  max-height:40%;
+  max-width:40%;
   background-color: #50596c;
   color: #fff;
   border-radius: 3px;
@@ -16,7 +18,6 @@
     position: absolute;
     margin: .5rem;
     border-color: #50596c;
-
   }
 
   &.tour-right {
@@ -73,10 +74,18 @@
 
 
   .tour-content {
-
+      margin-bottom:10px;
   }
 
   .tour-handler {
 
   }
+}
+
+.tour-enter-active, .tour-leave-active {
+  transition: opacity 200ms;
+}
+
+.tour-enter, .tour-leave-to {
+  opacity: 0;
 }

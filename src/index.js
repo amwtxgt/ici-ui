@@ -25,6 +25,7 @@ import * as funs from './assets/functions'
 import menuDirective from './assets/menu-directive'
 import imgViewDirective from './assets/imgView-directive'
 import tooltipDirective from './assets/tooltip-directive'
+import tourDirective from './assets/tour-directive'
 
 
 //悬浮窗
@@ -96,6 +97,8 @@ const install = function (Vue,options) {
 
   //右键菜单
   menuDirective(Vue,options);
+
+  tourDirective(Vue,options);
 
   //提示窗
   tooltipDirective(Vue);

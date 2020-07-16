@@ -1,15 +1,25 @@
-import iciTour from '../components/ici-tour'
+import IciTour from '../components/ici-tour'
+
+let id = 'tour_' + Date.now();
+
 
 export default function (Vue, options) {
-  //右键菜单
-  let rightMenu = new Vue({...iciTour, ...options});
+
+  //操作导航
+  let iciTour = new Vue({...IciTour, ...options});
+  iciTour.id = id;
+  iciTour.$mount();
+  document.body.appendChild(iciTour.$el);
   Vue.prototype.$tour = iciTour;
+
   /*
   * tourMap的格式
   * {
   * '导航名称':[{
   *   dom:'绑定的dom对象',
   *   content:'内容或html代码',
+  *   position?:'right|left|top|bottom'
+  *   width?:number
   *   buttons?:[{type:'primary',name:'按钮',click(){}}], //按钮，最多3个
   * }] //执行顺序数组
   * }
@@ -19,14 +29,17 @@ export default function (Vue, options) {
   /*
   * value参数
   * {
-  *  index?:number //索引值在，第几个执行，默认最后一个追加
   *  content:'内容或html代码',
+  *  index?:number //索引值在，第几个执行，默认最后一个追加
+  *  position?:'right|left|top|bottom'
+  *  width?:number
   *  buttons?:[{type:'primary'，name:'按钮名称',click:'单击事件'}]
   * }
   *
   * */
   Vue.directive('tour', {
     bind: function (el, binding) {
+      console.log(el);
       if (!binding.value) {
         console.warn('v-tour的值是必填的,没有填写时功能无效')
         return;
@@ -60,8 +73,7 @@ export default function (Vue, options) {
 
       let tour = {
         dom: el,
-        content: d.content,
-        buttons: d.buttons, //按钮，最多3个
+        ...d
       }
 
       //如果对应的还没有内容，给一个空数组
