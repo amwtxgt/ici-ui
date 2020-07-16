@@ -26,7 +26,7 @@ export default function (Vue, options) {
   *
   * */
   Vue.directive('tour', {
-    inserted: function (el, binding) {
+    bind: function (el, binding) {
       if (!binding.value) {
         console.warn('v-tour的值是必填的,没有填写时功能无效')
         return;
@@ -74,11 +74,6 @@ export default function (Vue, options) {
       } else {
         tourMap[name].push(tour);
       }
-
-    },
-
-    componentUpdated: function (el, binding) {
-
     },
 
     unbind(el) {

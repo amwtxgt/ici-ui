@@ -19,11 +19,13 @@ import iciHeader from './components/ici-header.vue'
 import iciBgimg from './components/ici-bgimg.vue'
 import iciScroll from './components/ici-scroll.vue'
 import iciColorIcon from './components/ici-color-icon'
+import IciTour from './components/ici-tour'
 
 import * as funs from './assets/functions'
 import menuDirective from './assets/menu-directive'
 import imgViewDirective from './assets/imgView-directive'
 import tooltipDirective from './assets/tooltip-directive'
+
 
 //悬浮窗
 import iciPoptip from './components/ici-poptip';
@@ -49,6 +51,7 @@ const components = {
   iciScroll,
   iciPoptip,
   iciColorIcon,
+  IciTour,
 }
 
 const install = function (Vue,options) {

@@ -2,9 +2,7 @@
   <div>
     <div class="title">button 按钮</div>
     <baseComponent title="基本按钮" html='<ici-button>你好啊</ici-button>'>
-      <ici-button>你好啊</ici-button>
-      <ici-button size="small"><ici-icon name="icon-qq" size="20px"></ici-icon></ici-button>
-      <ici-button type="ici" shape="circle"><ici-icon name="icon-qq" size="16px"></ici-icon></ici-button>
+      <ici-tour></ici-tour>
     </baseComponent>
   </div>
 </template>
