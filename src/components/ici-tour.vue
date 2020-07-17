@@ -88,12 +88,12 @@
     },
     methods: {
       update(name){
+        if(name !== this.cName) return;
         this.updateTours(name);
-        this.updatePosition(name);
+        this.updatePosition();
       },
-      updatePosition(name) {
+      updatePosition() {
 
-        if(name && name!==this.cName) return;
         console.log('开始更新')
         let tour = this.currentTour;
 
@@ -253,6 +253,7 @@
       },
 
       updateTours(name) {
+
         if (this._tourMap[name]) {
           this.tours = this._tourMap[name].filter((v) => Boolean(v));
         }else{

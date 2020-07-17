@@ -34,11 +34,9 @@ export default function (Vue, options) {
   let updateData = function(name,data,el,component){
     let d;
     if (typeof data === 'string') {
-
       d = {
         content: data
       }
-
     } else if (typeof data === "function") {
 
       let func = data.bind(component)
