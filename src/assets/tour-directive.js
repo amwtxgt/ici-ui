@@ -29,11 +29,51 @@ export default function (Vue, options) {
   * }
   * */
   let tourMap = {};
-  Vue.prototype._tourMap = tourMap
+  Vue.prototype._tourMap = tourMap;
+
+  let updateData = function(name,data,el,component){
+    let d;
+    if (typeof data === 'string') {
+
+      d = {
+        content: data
+      }
+
+    } else if (typeof data === "function") {
+
+      let func = data.bind(component)
+      d = func()
+      d.func = func;
+
+    } else if (typeof data === 'object' && data.content) {
+      d = data;
+    }
+
+
+    if (d.buttons && d.buttons.length > 3) {
+      d.buttons.splice(3, d.buttons.length);
+      console.warn('buttons最多3个，后面的将会忽略')
+    }
+
+    let tour = {
+      dom: el,
+      ...d
+    }
+
+    //如果对应的还没有内容，给一个空数组
+    if (!tourMap[name]) {
+      tourMap[name] = [];
+    }
+
+    if (typeof d.index === "number") {
+      tourMap[name][d.index] = tour;
+    } else {
+      tourMap[name] = [tour];
+    }
+  }
 
   Vue.directive('tour', {
     bind: function (el, binding, vNode) {
-
 
       if (!binding.value) {
         console.warn('v-tour的值是必填的,没有填写时功能无效')
@@ -46,22 +86,8 @@ export default function (Vue, options) {
 
       let name = binding.arg;
 
-      let d;
-      if (typeof binding.value === 'string') {
+      updateData(name,binding.value,el,vNode.context)
 
-        d = {
-          content: binding.value
-        }
-
-      } else if (typeof binding.value === "function") {
-
-        let func = binding.value.bind(vNode.context)
-        d = func()
-        d.func = func;
-
-      } else if (typeof binding.value === 'object' && binding.value.content) {
-        d = binding.value;
-      }
       let key
       for (let a in vNode.context) {
         if (vNode.context[a] === binding.value) {
@@ -71,37 +97,20 @@ export default function (Vue, options) {
       }
       if (key) {
 
-        el.unwatch = vNode.context.$watch(key, () => {
-
+        el.unwatch = vNode.context.$watch(key, (data) => {
+          updateData(name,data,el,vNode.context)
+          console.log(tourMap[name]);
+          iciTour.update(name)
         }, {deep: true})
       }
 
 
-      if (d.buttons && d.buttons.length > 3) {
-        d.buttons.splice(3, d.buttons.length);
-        console.warn('buttons最多3个，后面的将会忽略')
-      }
 
-      let tour = {
-        dom: el,
-        ...d
-      }
-
-      //如果对应的还没有内容，给一个空数组
-      if (!tourMap[name]) {
-        tourMap[name] = [];
-      }
-
-      if (d.index) {
-        tourMap[name][d.index] = tour;
-      } else {
-        tourMap[name] = [tour];
-      }
     },
     unbind(el) {
 
       if(el.unwatch && typeof el.unwatch === "function"){
-        console.log('取消监听')
+
         el.unwatch()
       }
 

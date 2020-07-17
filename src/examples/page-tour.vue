@@ -45,7 +45,7 @@
     name: 'page-button',
     data() {
       return {
-        aaa:{content:'这是一条有意思的内容4',width:1000,index:0,x:500,y:500}
+        abc:{content:'这是一条有意思的内容4',width:1000,index:0,x:500,y:500}
       };
     },
     mounted() {
@@ -53,9 +53,9 @@
     },
 
     methods: {
-      abc(){
-        return this.aaa
-      },
+      // abc(){
+      //   return this.aaa
+      // },
 
       start(){
         this.$tour.start('导航1').finish(()=>{
@@ -65,9 +65,9 @@
         })
         setTimeout(()=>{
           console.log(' this.t.x = 50')
-          this.aaa.x = 50
-          this.aaa.y = 50
-          this.$tour.updatePosition()
+          this.abc.x = 50
+          this.abc.y = 50
+
         },2000)
 
       }

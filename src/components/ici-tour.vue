@@ -80,14 +80,21 @@
     },
     mounted() {
       document.addEventListener('scroll', () => {
-        this.updatePosition()
+        if(this.cName){
+          this.updatePosition()
+        }
+
       }, true);
     },
     methods: {
+      update(name){
+        this.updateTours(name);
+        this.updatePosition(name);
+      },
       updatePosition(name) {
 
         if(name && name!==this.cName) return;
-
+        console.log('开始更新')
         let tour = this.currentTour;
 
         if (!tour || !this.$refs.tour) return;
@@ -245,7 +252,7 @@
 
       },
 
-      resetTours(name) {
+      updateTours(name) {
         if (this._tourMap[name]) {
           this.tours = this._tourMap[name].filter((v) => Boolean(v));
         }else{
@@ -258,7 +265,7 @@
         this.cName = '';
         this.cName = name
         this.cIndex = 0;
-        this.resetTours(name)
+        this.updateTours(name)
         let _this = this;
         let d = {
           finish(cb) {
@@ -298,6 +305,7 @@
           }
         } else {
           this.cIndex = 0;
+          this.cName = ''
           this.tours = null;
         }
       },
