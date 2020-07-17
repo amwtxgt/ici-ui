@@ -13,7 +13,7 @@
         <ici-button size="small" v-if="cIndex<tours.length-1" type="info" plain @click="cIndex++" v-title="'Next'">
           <ici-icon name="icon-forward"/>
         </ici-button>
-        <ici-button size="small" v-if="tours.length-1===cIndex" type="info" plain @click="finish">Finish</ici-button>
+        <ici-button size="small" v-if="tours.length-1===cIndex" type="info" plain @click="finish()">Finish</ici-button>
         <ici-button size="small" v-else type="warning" plain @click="notRemind" v-title="'Do not remind again'">
           <ici-icon name="icon-shanchudelete30"/>
         </ici-button>
@@ -60,7 +60,7 @@
       currentTour() {
         if (this.tours && this.tours[this.cIndex]) {
           this.$nextTick().then(() => {
-            this.setPosition()
+            this.updatePosition()
           })
 
           return this.tours[this.cIndex]
@@ -80,29 +80,21 @@
     },
     mounted() {
       document.addEventListener('scroll', () => {
-        this.setPosition()
+        this.updatePosition()
       }, true);
     },
     methods: {
-      updateTours(name){
-        this.resetTours(name);
-        this.$nextTick(()=>{
-          this.setPosition()
-        })
-      },
-      //获取当前正在执行的导航名称，如果没有正在执行的导航，返回null
-      getCurrentName() {
-        if (this.currentTour) {
-          return this.cName
-        } else {
-          return null;
-        }
-      },
+      updatePosition(name) {
 
-      setPosition() {
+        if(name && name!==this.cName) return;
 
         let tour = this.currentTour;
+
         if (!tour || !this.$refs.tour) return;
+
+        if(tour.func){
+          Object.assign(tour,tour.func())
+        }
 
         this.arrowStyle.transform = `translate(0,0)`
         //浏览器大小
@@ -253,11 +245,12 @@
 
       },
 
-      resetTours(name){
+      resetTours(name) {
         if (this._tourMap[name]) {
           this.tours = this._tourMap[name].filter((v) => Boolean(v));
+        }else{
+          console.log('没有找到导航对象：'+name)
         }
-
       },
 
       //开始操作导航
@@ -280,7 +273,8 @@
         return d
       },
 
-      finish() {
+      finish(name) {
+        if (name && name !== this.cName) return;
         this.stop()
 
         if (this.finishCB && typeof this.finishCB === "function") {
@@ -306,8 +300,6 @@
           this.cIndex = 0;
           this.tours = null;
         }
-
-
       },
     },
   }
