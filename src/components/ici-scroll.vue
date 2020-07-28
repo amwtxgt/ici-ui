@@ -5,8 +5,8 @@
         <span class="loading-Text" v-if="topText">{{topText}}</span>
       </ici-loading>
     </div>
-    <div ref="scrollLoading" class="ici-scroll" :style="{overflowY:overflow}"
-         @mousewheel.passive="mousewheel" @DOMMouseScroll.passive="mousewheel" v-observe="_self">
+    <div ref="scrollLoading" class="ici-scroll" :style="{overflowY:overflow}" v-observe="_self"
+         @mousewheel.passive="mousewheel" @DOMMouseScroll.passive="mousewheel">
       <slot></slot>
     </div>
     <div class="ici-scroll-icon loading-bottom" :class="{toploading:loading && hasBottom}">
@@ -28,10 +28,10 @@
         clearTimeout(timeoutId);
 
         timeoutId = setTimeout(() => {
-          if(typeof cb == 'function') {
+          if (typeof cb == 'function') {
             let cbs = cb();
             //执行cb后可能有promise的返回值
-            if(cbs instanceof Promise) {
+            if (cbs instanceof Promise) {
               cbs.then((d) => {
                 resolve(d);
               }).catch(reject)
@@ -39,8 +39,7 @@
             }
             resolve();
 
-          }
-          else {
+          } else {
             resolve()
           }
 
@@ -49,6 +48,7 @@
       })
     }
   }
+
   let timeout = timeoutPerform(60)
   export default {
     name: "ici-scroll",
@@ -61,6 +61,7 @@
         hasTop: false,//是否触顶，
         hasBottom: false,//是否触底
         loading: false, //正在加载中
+        currentScrollHeight: 0,
       };
     },
     props: {
@@ -79,12 +80,21 @@
         default: 'auto'
       }
     },
+    mounted() {
+
+      if (this.$refs.scrollLoading) {
+
+        this.currentScrollHeight = this.$refs.scrollLoading.scrollHeight
+        console.log(this.currentScrollHeight)
+      }
+
+    },
     directives: {
       observe: {
         // 指令的定义
         inserted: function (el, binding) {
           let _this = binding.value;
-          if(!_this.onReachTop) return;
+          if (!_this.onReachTop) return;
 
 
           //浏览器兼容
@@ -92,34 +102,23 @@
 
           let config = {childList: true, 'subtree': true}//配置对象
 
-          let observer = new MutationObserver(function (mutations) {//构造函数回调
-            let top = 0
-            if(_this.direction == 'top') {
-              mutations.forEach(function (record) {
+          let observer = new MutationObserver(function () {//构造函数回调
 
-                if(record.type == 'childList') {
-                  //监听结构发生变化
-                  if(record.addedNodes && record.addedNodes.length) {
-                    record.addedNodes.forEach(v => {
-                      if(v.clientHeight) {
-                        top += v.clientHeight
-                      }
-                    })
-                  }
-                  //do any code`
-                }
-              });
+              if (_this.direction == 'top') {
+                el.scrollTop = el.scrollHeight - _this.currentScrollHeight
+              }
 
-              el.scrollTop += top;
+              _this.currentScrollHeight = el.scrollHeight
 
-            }
+
           });
+
           observer.observe(el, config);
         }
       }
     },
     created() {
-      if(this.onReachTop) {
+      if (this.onReachTop) {
         this.hasTop = true;
         this.scrollTop = 0;
       }
@@ -144,26 +143,24 @@
       },
 
       mousewheel(e) {
-        timeout(()=>{
-          if(e.deltaY < 0) {
+        timeout(() => {
+          if (e.deltaY < 0) {
             this.onScroll('top')
-          }
-          else {
+          } else {
             this.onScroll('bottom')
           }
 
-          if(this.loading || this.disabled || (!this.hasTop && !this.hasBottom)) return;
+          if (this.loading || this.disabled || (!this.hasTop && !this.hasBottom)) return;
 
-          if(e.deltaY < 0) {
+          if (e.deltaY < 0) {
 
-            if(this.hasTop) {
+            if (this.hasTop) {
 
               this.startLoad('top');
             }
-          }
-          else {
+          } else {
 
-            if(this.hasBottom) {
+            if (this.hasBottom) {
               this.startLoad('bottom');
             }
           }
@@ -175,26 +172,24 @@
         this.direction = type;
         let reachFun;
 
-        if(type == 'top') {
+        if (type == 'top') {
           this.hasTop = true;
           this.hasBottom = false;
           reachFun = this.onReachTop;
-        }
-        else {
+        } else {
           this.hasTop = false;
           this.hasBottom = true;
           reachFun = this.onReachBottom;
         }
 
-        if(reachFun) {
+        if (reachFun) {
           this.loading = true
           reachFun(() => {
             this.loading = false;
             this.hasTop = false;
             this.hasBottom = false;
           });
-        }
-        else {
+        } else {
           this.loading = false;
           this.hasTop = false;
           this.hasBottom = false;
@@ -204,11 +199,11 @@
       },
       onScroll(direction) {
 
-        if(this.loading) return false;
+        if (this.loading) return false;
 
         let t = this.$refs.scrollLoading;
 
-        if(!t) return;
+        if (!t) return;
 
         let tStyle = window.getComputedStyle(t)
 
@@ -217,26 +212,24 @@
         this.scrollTop = t.scrollTop;
 
         let offsetTop, offsetBottom
-        if(this.offset instanceof Array && this.offset.length >= 2) {
+        if (this.offset instanceof Array && this.offset.length >= 2) {
           offsetTop = ~~this.offset[0];
           offsetBottom = ~~this.offset[1];
-        }
-        else {
+        } else {
           offsetTop = ~~this.offset;
           offsetBottom = ~~this.offset;
         }
-        if(direction === 'top') {
+        if (direction === 'top') {
 
-          if(this.scrollTop <= offsetTop) {
+          if (this.scrollTop <= offsetTop) {
             this.hasTop = true
             this.hasBottom = false;
             return
           }
 
-        }
-        else {
+        } else {
 
-          if(this.scrollHeight <= this.height + this.scrollTop + offsetBottom) {
+          if (this.scrollHeight <= this.height + this.scrollTop + offsetBottom) {
             this.hasTop = false
             this.hasBottom = true
             return

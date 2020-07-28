@@ -162,11 +162,18 @@ reachTop(cb){
 </template>
 
 <script>
+  function ar(index){
+    let arr = []
+    for(let a = index ;a<index+15;a++){
+      arr.push(`我是第${a}行`)
+    }
+    return arr;
+  }
   export default {
     name: 'page-popup',
     data() {
       return {
-        data:['我是一行','我是一行','我是一行','我是一行','我是一行','我是一行','我是一行','我是一行','我是一行','我是一行','我是一行']
+        data:ar(1)
       };
     },
     mounted() {
@@ -186,8 +193,10 @@ reachTop(cb){
 
       reachTop(cb){
         setTimeout(()=>{
+          let length =  this.data.length;
           //等待3秒
-          this.data.unshift(...this.data)
+          this.data.unshift(...ar(length))
+
           cb()
         },3000)
       },
